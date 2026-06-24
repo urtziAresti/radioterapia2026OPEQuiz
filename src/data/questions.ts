@@ -1302,4 +1302,122 @@ export const QUESTIONS: Question[] = [
     },
     correct: "a",
   },
+  {
+    id: 111,
+    question:
+      "Al recibir una nueva fuente en braquiterapia, ¿qué dato del bulto debe verificarse comparándolo con el certificado de calibración?",
+    options: {
+      a: "El peso total del embalaje.",
+      b: "El código identificativo de la fuente.",
+      c: "La fecha de fabricación del contenedor.",
+      d: "Todas las opciones son correctas.",
+    },
+    correct: "d",
+  },
+  {
+    id: 112,
+    question:
+      "La interrupción brusca, accidental, inesperada y potencialmente reversible de la circulación y respiración espontáneas recibe el nombre de:",
+    options: {
+      a: "Infarto agudo de miocardio.",
+      b: "Angina de pecho.",
+      c: "Hemorragia pulmonar.",
+      d: "Parada cardiorrespiratoria.",
+    },
+    correct: "d",
+  },
+  {
+    id: 113,
+    question: "En referencia al tubo de rayos X convencional, es cierto que:",
+    options: {
+      a: "Los tubos de ánodo fijo o estacionario se utilizan cada vez más hoy en día, sobre todo en equipos generadores de radiación de alta energía.",
+      b: "Los tubos de ánodo giratorio disipan mejor el calor que los tubos de ánodo fijo.",
+      c: "El mecanismo de disipación de calor en tubos de ánodo fijo y en tubos de ánodo giratorio es el mismo.",
+      d: "El calor que se pueda producir no es un factor a tener en cuenta en el tubo de rayos X.",
+    },
+    correct: "b",
+  },
+  {
+    id: 114,
+    question: "Respecto al Schwannoma vestibular es FALSO que:",
+    options: {
+      a: "La principal prueba diagnóstica es la TC.",
+      b: "Es más frecuente en mujeres que en hombres.",
+      c: "Para radiocirugía, el GTV es igual que el PTV.",
+      d: "Entre los órganos de riesgo se encuentran los ojos y las vías oculares.",
+    },
+    correct: "a",
+  },
+  {
+    id: 115,
+    question:
+      "¿Cuál es el material usado habitualmente en la cápsula de las fuentes de braquiterapia?",
+    options: {
+      a: "Níquel.",
+      b: "Plomo o wolframio.",
+      c: "Oro o platino.",
+      d: "Cromo hexavalente.",
+    },
+    correct: "c",
+  },
+  {
+    id: 116,
+    question:
+      "Entre los inconvenientes de los detectores de semiconductor NO encontramos:",
+    options: {
+      a: "Están limitados a grandes tamaños.",
+      b: "Se degradan por efecto de la radiación.",
+      c: "Los empleados para dosimetría presentan dependencia angular.",
+      d: "Los empleados para dosimetría presentan dependencia con la temperatura.",
+    },
+    correct: "a",
+  },
+  {
+    id: 117,
+    question:
+      "¿Cómo se define el PTV en braquiterapia de mama tras cirugía conservadora con bordes libres?",
+    options: {
+      a: "Todo el volumen pulmonar.",
+      b: "Un margen de 15-20 mm de tejido sano alrededor del lecho tumoral.",
+      c: "Queda definido por el GTV con 5-10 mm de margen.",
+      d: "La mama completa sin márgenes.",
+    },
+    correct: "b",
+  },
+  {
+    id: 118,
+    question:
+      "¿Cuál es la dosis utilizada para el tratamiento de urgencia en el síndrome de compresión medular?",
+    options: {
+      a: "10 fracciones de 3 Gy.",
+      b: "5 fracciones de 4 Gy.",
+      c: "Dosis única de 8 Gy.",
+      d: "3 fracciones de 3 Gy.",
+    },
+    correct: "c",
+  },
+  {
+    id: 119,
+    question:
+      "En referencia a la teoría de la dualidad onda-corpúsculo, es cierto que:",
+    options: {
+      a: "Afirma que la luz puede comportarse como onda y como partícula a la vez.",
+      b: "Afirma que la luz, en determinadas circunstancias, puede comportarse como si estuviera compuesta por pequeñas partículas.",
+      c: "Afirma que la luz, en determinadas circunstancias, interacciona de determinada forma con la materia.",
+      d: "Ninguna de las respuestas es correcta.",
+    },
+    correct: "a",
+  },
+  {
+    id: 120,
+    question:
+      "Según el R.D. 1029/2022, aquellas personas que, por las condiciones en las que se realiza su trabajo, puedan recibir una dosis efectiva superior a 6 mSv por año oficial o una dosis equivalente superior a 15 mSv por año oficial al cristalino o superior a 150 mSv para la piel y las extremidades pertenecen a la categoría de:",
+    options: {
+      a: "Miembros del público.",
+      b: "Trabajadores expuestos de categoría A.",
+      c: "Trabajadores expuestos de categoría B.",
+      d: "Las respuestas b) y c) son correctas.",
+    },
+    correct: "b",
+  },
 ];
