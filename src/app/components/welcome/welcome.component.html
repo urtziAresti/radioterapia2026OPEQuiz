@@ -1,6 +1,6 @@
 <div class="welcome-container">
   <div class="welcome-card">
-    <h1>🚀 Test de Radioterapia </h1>
+    <h1>🚀 Test de Radioterapia</h1>
     <p class="subtitle">Pon a prueba tus conocimientos antes del examen oficial</p>
 
     <div class="form-group">
@@ -14,35 +14,20 @@
       />
     </div>
 
-    <div class="mode-selection">
-      <p class="section-title">Selecciona el modo de juego:</p>
-
-      <div class="modes-grid">
-        <div
-          class="mode-card"
-          [class.active]="selectedMode === 'study'"
-          (click)="selectMode('study')"
-        >
-          <div class="icon">📖</div>
-          <h3>Modo Estudio</h3>
-          <p>Ideal para repasar. Verás la respuesta correcta inmediatamente después de responder cada pregunta.</p>
-        </div>
-
-        <div
-          class="mode-card"
-          [class.active]="selectedMode === 'exam'"
-          (click)="selectMode('exam')"
-        >
-          <div class="icon">⏱️</div>
-          <h3>Modo Examen</h3>
-          <p>Simulación real. No sabrás tus aciertos ni fallos hasta que termines todo el cuestionario.</p>
-        </div>
-      </div>
+    <div class="form-group">
+      <label for="questionCount">Número de preguntas para el test:</label>
+      <select id="questionCount" [(ngModel)]="selectedQuestionCount">
+        <option [ngValue]="25">25 preguntas</option>
+        <option [ngValue]="50">50 preguntas</option>
+        <option [ngValue]="100">100 preguntas</option>
+        <option [ngValue]="200">200 preguntas</option>
+        <option [ngValue]="300">300 preguntas (Por defecto)</option>
+      </select>
     </div>
 
     <button
       class="btn-start"
-      [disabled]="!playerName.trim() || !selectedMode"
+      [disabled]="!playerName.trim() || !selectedQuestionCount"
       (click)="startQuiz()"
     >
       Comenzar Cuestionario

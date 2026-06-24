@@ -1,7 +1,6 @@
 import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { QuizConfig, QuizMode } from '../../../models/quiz.config.model';
 import { Router } from '@angular/router';
 
 @Component({
@@ -13,30 +12,28 @@ import { Router } from '@angular/router';
 })
 export class WelcomeComponent {
   playerName: string = '';
-  selectedMode: QuizMode | null = null;
+  // Inicializamos por defecto en 300 preguntas
+  selectedQuestionCount: number = 300; 
+  
   private router = inject(Router);
-  // Emitimos un evento al componente padre (Appomponent o tu enrutador) cuando todo esté listo
-  @Output() configSubmitted = new EventEmitter<QuizConfig>();
-
-  selectMode(mode: QuizMode) {
-    this.selectedMode = mode;
-  }
+  
+  @Output() configSubmitted = new EventEmitter<{ playerName: string, count: number }>();
 
   startQuiz() {
-    if (this.playerName.trim() && this.selectedMode) {
-      const config: QuizConfig = {
+    if (this.playerName.trim() && this.selectedQuestionCount) {
+      const config = {
         playerName: this.playerName.trim(),
-        mode: this.selectedMode
+        count: this.selectedQuestionCount
       };
 
-      // 1. Sigues emitiendo el evento por si tu AppComponent lo necesita
+      // Emitimos el evento con la nueva configuración
       this.configSubmitted.emit(config);
 
-      // 2. Navegamos a la ruta '/quiz' enviando los datos como parámetros de consulta (?mode=...&name=...)
+      // Redirigimos pasando el nombre y la cantidad elegida
       this.router.navigate(['/questions'], {
         queryParams: {
-          mode: config.mode,
-          name: config.playerName
+          name: config.playerName,
+          count: config.count
         }
       });
     }
