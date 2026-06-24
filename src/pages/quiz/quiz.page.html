@@ -28,10 +28,23 @@
   <div *ngIf="currentIndex < questions.length" class="quiz-box">
 
     <ion-card class="question-card">
-      <ion-card-content>
-        <h3>{{ questions[currentIndex].question }}</h3>
-      </ion-card-content>
-    </ion-card>
+  <ion-card-content style="display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+    <h3 style="margin: 0; flex: 1;">
+      {{ questions[currentIndex].question }}
+    </h3>
+
+    <!-- 🪄 VARITA -->
+    <ion-button
+      *ngIf="false"
+      fill="clear"
+      size="small"
+      (click)="useMagic(questions[currentIndex].question)"
+    >
+    <ion-icon name="sparkles-outline"></ion-icon>
+
+    </ion-button>
+    </ion-card-content>
+</ion-card>
 
     <!-- 🔥 OPCIONES -->
     <div class="options-container">

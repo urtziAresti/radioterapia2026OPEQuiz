@@ -4,7 +4,12 @@ import { Question } from '../../models/question.model';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
+import { addIcons } from 'ionicons';
+import { sparklesOutline } from 'ionicons/icons';
 
+addIcons({
+  'sparkles-outline': sparklesOutline
+});
 @Component({
   selector: 'app-quiz',
   templateUrl: './quiz.page.html',
@@ -21,7 +26,8 @@ export class QuizPage implements OnInit {
   questions: Question[] = [];
   currentIndex = 0;
   correctAnswers = 0;
-
+  magicAnswer: string | null = null;
+  loadingMagic = false;
   mode: 'study' | 'exam' = 'study';
   playerName: string = '';
   count = 0;
@@ -124,4 +130,22 @@ export class QuizPage implements OnInit {
   goToHome() {
     this.router.navigate(['/']);
   }
+
+  useMagic(question: string) {
+    this.loadingMagic = true;
+    this.magicAnswer = null;
+  
+    this.quizService.ask(question).subscribe({
+      next: (res) => {
+        this.magicAnswer = res;
+        this.loadingMagic = false;
+      },
+      error: (err) => {
+        console.error(err);
+        this.magicAnswer = 'Error consultando la magia 😅';
+        this.loadingMagic = false;
+      }
+    });
+  }
+
 }
