@@ -1,5 +1,6 @@
 # Radioterapia Quiz PWA
 
+- rama deloy publica ci/cd 
 
 # PROXIMOS DESARROLLOS
 
