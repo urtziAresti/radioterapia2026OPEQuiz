@@ -26,7 +26,5 @@
 
  # preguntas
 
- dudas 
-
- 7
+ 90 OK preguntas y respuestas 
 

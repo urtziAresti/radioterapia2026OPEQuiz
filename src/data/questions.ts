@@ -1066,4 +1066,240 @@ export const QUESTIONS: Question[] = [
     },
     correct: "a",
   },
+  {
+    id: 91,
+    question:
+      "En referencia a los equipos de simulación mediante TC (Tomografía Computarizada), indica qué opción es FALSA:",
+    options: {
+      a: "Su funcionamiento se basa en que la estructura interna de un objeto puede ser reconstruida a partir de múltiples proyecciones de dicho objeto.",
+      b: "La adquisición de información en el modo de trabajo secuencial se realiza con la mesa en continuo movimiento.",
+      c: "Utiliza dos tipos de colimación: el prepaciente y el pospaciente.",
+      d: "Para aumentar la eficiencia de detección, los detectores convierten la radiación X incidente en luz visible y, después, esta luz visible en señal eléctrica.",
+    },
+    correct: "b",
+  },
+  {
+    id: 92,
+    question: "¿Cómo se tratan los astrocitomas en niños/as menores de 3 años?",
+    options: {
+      a: "Cirugía y radioterapia.",
+      b: "Solo radioterapia.",
+      c: "Cirugía y quimioterapia.",
+      d: "Solo quimioterapia.",
+    },
+    correct: "c",
+  },
+  {
+    id: 93,
+    question:
+      "En referencia al filamento del tubo de rayos X convencional, es cierto que:",
+    options: {
+      a: "El filamento grande proporciona peor resolución en la imagen y permite emplear cargas menores que el filamento pequeño.",
+      b: "El filamento grande proporciona mejor resolución en la imagen y permite emplear cargas menores que el filamento pequeño.",
+      c: "El filamento grande proporciona peor resolución en la imagen y permite emplear cargas mayores que el filamento pequeño.",
+      d: "El filamento grande proporciona mejor resolución en la imagen y permite emplear cargas mayores que el filamento pequeño.",
+    },
+    correct: "c",
+  },
+  {
+    id: 94,
+    question:
+      "Identifique la energía media de emisión de fotones característica del Iridio-192:",
+    options: {
+      a: "0,66 MeV.",
+      b: "1,25 MeV.",
+      c: "0,38 MeV.",
+      d: "0,028 MeV.",
+    },
+    correct: "c",
+  },
+  {
+    id: 95,
+    question:
+      "¿Cómo se le llama al fenómeno que sufre una persona paciente inmediatamente después de recibir una noticia impactante sobre su salud y que dificulta procesar más información?",
+    options: {
+      a: "Secuestro emocional.",
+      b: "Negación adaptativa.",
+      c: "Ansiedad reactiva.",
+      d: "Catastrofización.",
+    },
+    correct: "a",
+  },
+  {
+    id: 96,
+    question:
+      "En referencia a la admisión de la persona paciente, ¿qué profesionales están involucrados en el registro de entrada del/de la paciente en la red radioterápica?",
+    options: {
+      a: "Médicos/médicas y administrativos/administrativas.",
+      b: "Médicos/médicas y técnico/técnica especialista en radioterapia.",
+      c: "Técnico/técnica especialista en radioterapia y administrativos/administrativas.",
+      d: "Técnico/técnica especialista en radioterapia, médicos/médicas y administrativos/administrativas.",
+    },
+    correct: "d",
+  },
+  {
+    id: 97,
+    question:
+      "En referencia al uso del delantal plomado con fuentes de alta energía, es cierto que:",
+    options: {
+      a: "Es la medida de protección más importante y obligatoria.",
+      b: "No es efectivo, ya que apenas atenúa la radiación.",
+      c: "Protege al 100% de la radiación gamma emitida.",
+      d: "Solo debe usarse si el delantal plomado tiene un espesor de 0,1 mm.",
+    },
+    correct: "b",
+  },
+  {
+    id: 98,
+    question:
+      "¿Cuál de los siguientes tipos de ondas NO pertenece al espectro electromagnético?",
+    options: {
+      a: "Sonido.",
+      b: "Infrarrojos.",
+      c: "Rayos X.",
+      d: "Microondas.",
+    },
+    correct: "a",
+  },
+  {
+    id: 99,
+    question: "Según el R.D. 1029/2022, de 20 de diciembre, es cierto que:",
+    options: {
+      a: "No podrán asignarse a las personas menores de dieciséis años tareas que pudieran convertirlos en trabajadores/as expuestos/as.",
+      b: "No podrán asignarse a las personas menores de dieciocho años tareas que pudieran convertirlos en trabajadores/as expuestos/as.",
+      c: "No podrán asignarse a las personas menores de veintiún años tareas que pudieran convertirlos en trabajadores/as expuestos/as.",
+      d: "Las personas trabajadoras podrán realizar tareas propias de trabajadores/as expuestos/as independientemente de su edad.",
+    },
+    correct: "b",
+  },
+  {
+    id: 100,
+    question:
+      "¿Qué principio de protección radiológica establece que no se realizará ninguna actividad con radiaciones ionizantes si su beneficio no es superior a los riesgos?",
+    options: {
+      a: "Optimización.",
+      b: "Justificación.",
+      c: "Limitación de dosis.",
+      d: "Ninguna respuesta es correcta.",
+    },
+    correct: "b",
+  },
+  {
+    id: 101,
+    question: "¿Qué tipo de tumor se encuentra en la zona infratentorial?",
+    options: {
+      a: "Meduloblastoma.",
+      b: "Craneofaringioma.",
+      c: "Oligodendroglioma.",
+      d: "Glioma de bajo grado.",
+    },
+    correct: "a",
+  },
+  {
+    id: 102,
+    question: "¿Qué característica cumplen los isótopos?",
+    options: {
+      a: "Tienen distinto número másico y distinto número atómico.",
+      b: "Tienen mismo número másico y distinto número atómico.",
+      c: "Tienen distinto número másico y mismo número atómico.",
+      d: "Tienen mismo número másico y mismo número atómico.",
+    },
+    correct: "c",
+  },
+  {
+    id: 103,
+    question:
+      "Indique el periodo de semidesintegración (T1/2) exacto del radionúclido Iridio-192:",
+    options: {
+      a: "73,83 días.",
+      b: "63,83 días.",
+      c: "37,17 días.",
+      d: "17,17 días.",
+    },
+    correct: "a",
+  },
+  {
+    id: 104,
+    question:
+      "Según el informe ICRU 83, ¿qué volumen se define como la extensión y localización demostrable del tumor maligno?",
+    options: {
+      a: "Volumen Tumoral Macroscópico (GTV).",
+      b: "Volumen Blanco Clínico (CTV).",
+      c: "Volumen Blanco Interno (ITV).",
+      d: "Volumen Blanco de Planificación (PTV).",
+    },
+    correct: "a",
+  },
+  {
+    id: 105,
+    question:
+      "En referencia a la infección nosocomial, ¿en qué se diferencia la transmisión por gotas de la transmisión aérea?",
+    options: {
+      a: "Las gotas son partículas pequeñas (menores de 5 micras) que permanecen suspendidas en el aire por largos periodos.",
+      b: "Las gotas son partículas pequeñas (menores de 5 micras) y no quedan suspendidas en el aire.",
+      c: "La transmisión por gotas no requiere un contacto estrecho, ya que las partículas (menores de 5 micras) se quedan suspendidas en el aire.",
+      d: "La transmisión por gotas requiere un contacto estrecho, ya que las partículas (mayores de 5 micras) no quedan suspendidas.",
+    },
+    correct: "d",
+  },
+  {
+    id: 106,
+    question:
+      "¿Qué instrumento es obligatorio utilizar para la manipulación manual de fuentes de baja tasa de dosis?",
+    options: {
+      a: "Guantes de plomo de gran espesor.",
+      b: "Pinzas magnéticas.",
+      c: "Ventosas de vacío.",
+      d: "Pinzas de mango largo.",
+    },
+    correct: "d",
+  },
+  {
+    id: 107,
+    question:
+      "¿Cuál de las siguientes etapas del proceso radioterápico es la última que se realiza?",
+    options: {
+      a: "Tratamiento.",
+      b: "Simulación.",
+      c: "Aceptación médica.",
+      d: "Planificación dosimétrica.",
+    },
+    correct: "a",
+  },
+  {
+    id: 108,
+    question:
+      "¿Con qué frecuencia deben realizarse los controles de hermeticidad de las fuentes selladas?",
+    options: {
+      a: "Cada 3 meses.",
+      b: "Cada 6 meses.",
+      c: "Cada año.",
+      d: "Cada vez que se use una fuente con un paciente.",
+    },
+    correct: "b",
+  },
+  {
+    id: 109,
+    question:
+      "¿Qué técnica de inmovilización se usa para tratar tumores óseos en la columna?",
+    options: {
+      a: "Decúbito prono.",
+      b: "Decúbito supino.",
+      c: "Bipedestación.",
+      d: "Las opciones a) y b) son correctas.",
+    },
+    correct: "d",
+  },
+  {
+    id: 110,
+    question:
+      "Uno de los requerimientos para poder evacuar los residuos radiactivos líquidos por la red de alcantarillado general es que la actividad total evacuada debe ser inferior a:",
+    options: {
+      a: "1 GBq al mes.",
+      b: "3 GBq al mes.",
+      c: "1 GBq al año.",
+      d: "3 GBq al año.",
+    },
+    correct: "a",
+  },
 ];
