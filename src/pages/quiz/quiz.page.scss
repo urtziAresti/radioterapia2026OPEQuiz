@@ -2,6 +2,11 @@
   --background: #f8f9fa; // Fondo suave estilo app premium
 }
 
+ion-toolbar {
+  --background: #3880ff !important; /* El azul 'primary' clásico de Ionic */
+  --color: #ffffff !important;      /* Texto en blanco */
+}
+
 .step-text {
   font-weight: 600;
   color: #5f6368;
