@@ -1,3 +1,47 @@
-<p>
-  login works!
-</p>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Acceso al Cuestionario</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding ion-text-center">
+  <div class="login-container">
+    
+    <div class="logo-section">
+      <ion-icon name="lock-closed-outline" color="primary" style="font-size: 64px;"></ion-icon>
+      <h2>Radioterapia OPE 2026</h2>
+      <p>Introduce tus credenciales para comenzar</p>
+    </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+      
+      <ion-item lines="full" class="ion-margin-bottom">
+        <ion-input 
+          label="Usuario" 
+          labelPlacement="floating" 
+          type="text" 
+          formControlName="username"
+          placeholder="Tu nombre de usuario">
+        </ion-input>
+      </ion-item>
+
+      <ion-item lines="full" class="ion-margin-bottom">
+        <ion-input 
+          label="Código de Acceso" 
+          labelPlacement="floating" 
+          type="password" 
+          formControlName="code"
+          placeholder="Introduce el código">
+        </ion-input>
+      </ion-item>
+
+      <div class="ion-padding-top">
+        <ion-button type="submit" expand="block" [disabled]="loginForm.invalid">
+          Entrar
+          <ion-icon slot="end" name="log-in-outline"></ion-icon>
+        </ion-button>
+      </div>
+
+    </form>
+  </div>
+</ion-content>
