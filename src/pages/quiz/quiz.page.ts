@@ -5,10 +5,11 @@ import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { addIcons } from 'ionicons';
-import { sparklesOutline } from 'ionicons/icons';
+import { sparklesOutline,chevronForwardCircleOutline } from 'ionicons/icons';
 
 addIcons({
-  'sparkles-outline': sparklesOutline
+  'sparkles-outline': sparklesOutline,
+  'chevron-forward-outline': chevronForwardCircleOutline
 });
 @Component({
   selector: 'app-quiz',
@@ -22,13 +23,14 @@ export class QuizPage implements OnInit {
   private quizService = inject(QuizService);
   private route = inject(ActivatedRoute);
   private router = inject(Router);
-  private readonly QUESTION_TIME = 3000;
+  private readonly FAIL_QUESTION_TIME = 3000;
+  private readonly OK_QUESTION_TIME = 1500;
+  nextVisible = false;
   questions: Question[] = [];
   currentIndex = 0;
   correctAnswers = 0;
   magicAnswer: string | null = null;
   loadingMagic = false;
-  mode: 'study' | 'exam' = 'study';
   playerName: string = '';
   count = 0;
 
@@ -54,32 +56,32 @@ export class QuizPage implements OnInit {
   }
 
   answer(option: string) {
-    if (this.isAnswered && this.mode === 'study') return;
-
     this.selectedOption = option;
     const currentQuestion = this.questions[this.currentIndex];
     const isCorrect = option === currentQuestion.correct;
 
     if (isCorrect) {
       this.correctAnswers++;
+      this.slideError(this.OK_QUESTION_TIME);
     } else {
+      this.nextVisible = true;
       // 🔥 Guardar fallo por ID
       const id = currentQuestion.id;
       this.wrongAnswersMap[id] = (this.wrongAnswersMap[id] || 0) + 1;
     }
+    this.slideError(this.FAIL_QUESTION_TIME);
+    this.isAnswered = true;      
+  }
 
-    if (this.mode === 'study') {
-      this.isAnswered = true;
-      setTimeout(() => {
-        this.nextQuestion();
-      }, this.QUESTION_TIME);
-    } else {
+  slideError(slideTime : number){
+    setTimeout(() => {
       this.nextQuestion();
-    }
+    }, slideTime);
   }
 
   nextQuestion() {
     this.currentIndex++;
+    this.nextVisible = false;
 
     if (this.currentIndex >= this.questions.length) {
       this.finishQuiz();
@@ -112,7 +114,7 @@ export class QuizPage implements OnInit {
   }
 
   getOptionColor(optionKey: string): string {
-    if (this.mode !== 'study' || !this.isAnswered) {
+    if (!this.isAnswered) {
       return this.selectedOption === optionKey ? 'selected-option' : '';
     }
 

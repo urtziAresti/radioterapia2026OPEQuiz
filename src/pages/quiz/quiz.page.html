@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
-    <ion-title>Radioterapia 2026</ion-title>
+    <ion-title>RADIOTERAPIA 2026</ion-title>
     <ion-buttons slot="end" *ngIf="currentIndex >= questions.length">
       <ion-button (click)="goToHome()">Salir</ion-button>
     </ion-buttons>
@@ -15,8 +15,7 @@
       <ion-note class="step-text">
         Pregunta {{ currentIndex + 1 }} de {{ questions.length }}
       </ion-note>
-
-      <ion-badge color="success" *ngIf="mode !== 'exam'">
+      <ion-badge color="success">
         Correctas: {{ correctAnswers }}
       </ion-badge>
     </div>
@@ -28,10 +27,10 @@
   <div *ngIf="currentIndex < questions.length" class="quiz-box">
 
     <ion-card class="question-card">
-  <ion-card-content style="display: flex; justify-content: space-between; align-items: center; gap: 10px;">
-    <h3 style="margin: 0; flex: 1;">
-      {{ questions[currentIndex].question }}
-    </h3>
+      <ion-card-content style="display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+      <h3 style="margin: 0; flex: 1;">
+        {{ questions[currentIndex].question }}
+      </h3>
 
     <!-- 🪄 VARITA -->
     <ion-button
@@ -95,5 +94,13 @@
     </ion-button>
 
   </div>
+
+
+
+<ion-fab vertical="center" horizontal="end" slot="fixed" (click)="nextQuestion()" *ngIf="nextVisible">
+  <ion-fab-button>
+    <ion-icon name="chevron-forward-outline"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
 
 </ion-content>
