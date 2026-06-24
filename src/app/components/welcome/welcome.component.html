@@ -1,0 +1,51 @@
+<div class="welcome-container">
+  <div class="welcome-card">
+    <h1>🚀 Test de Radioterapia</h1>
+    <p class="subtitle">Pon a prueba tus conocimientos antes del examen oficial</p>
+
+    <div class="form-group">
+      <label for="name">Introduce tu nombre:</label>
+      <input
+        type="text"
+        id="name"
+        [(ngModel)]="playerName"
+        placeholder="Ej. Alejandro"
+        autocomplete="off"
+      />
+    </div>
+
+    <div class="mode-selection">
+      <p class="section-title">Selecciona el modo de juego:</p>
+
+      <div class="modes-grid">
+        <div
+          class="mode-card"
+          [class.active]="selectedMode === 'study'"
+          (click)="selectMode('study')"
+        >
+          <div class="icon">📖</div>
+          <h3>Modo Estudio</h3>
+          <p>Ideal para repasar. Verás la respuesta correcta inmediatamente después de responder cada pregunta.</p>
+        </div>
+
+        <div
+          class="mode-card"
+          [class.active]="selectedMode === 'exam'"
+          (click)="selectMode('exam')"
+        >
+          <div class="icon">⏱️</div>
+          <h3>Modo Examen</h3>
+          <p>Simulación real. No sabrás tus aciertos ni fallos hasta que termines todo el cuestionario.</p>
+        </div>
+      </div>
+    </div>
+
+    <button
+      class="btn-start"
+      [disabled]="!playerName.trim() || !selectedMode"
+      (click)="startQuiz()"
+    >
+      Comenzar Cuestionario
+    </button>
+  </div>
+</div>

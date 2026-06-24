@@ -1,0 +1,7 @@
+{
+  "name": "radioterapiaQuiz",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}

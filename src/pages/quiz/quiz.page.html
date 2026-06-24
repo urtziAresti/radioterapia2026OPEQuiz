@@ -1,0 +1,66 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>{{ mode === 'exam' ? '📝 Modo Examen' : '📖 Modo Estudio' }}</ion-title>
+    <ion-buttons slot="end" *ngIf="currentIndex >= questions.length">
+      <ion-button (click)="goToHome()">Salir</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="questions.length" class="ion-padding app-quiz-content">
+
+  <div class="progress-container ion-margin-bottom">
+    <div style="display: flex; justify-content: space-between; margin-bottom: 8px; align-items: center;">
+      <ion-note class="step-text">Pregunta {{ currentIndex + 1 }} de {{ questions.length }}</ion-note>
+      <ion-badge color="success" *ngIf="mode !== 'exam'">Correctas: {{ correctAnswers }}</ion-badge>
+    </div>
+    <ion-progress-bar color="secondary" [value]="progress"></ion-progress-bar>
+  </div>
+
+  <div *ngIf="currentIndex < questions.length" class="quiz-box">
+
+    <ion-card class="question-card">
+      <ion-card-content>
+        <h3>{{ questions[currentIndex].question }}</h3>
+      </ion-card-content>
+    </ion-card>
+
+    <div class="options-container">
+      <div
+        *ngFor="let opt of ['a', 'b', 'c', 'd']"
+        class="custom-option-button"
+        [ngClass]="getOptionColor(opt)"
+        (click)="answer(opt)"
+      >
+        <div class="option-letter">{{ opt.toUpperCase() }}</div>
+        <div class="option-text">{{ $any(questions[currentIndex].options)[opt] }}</div>      </div>
+    </div>
+
+  </div>
+
+  <div *ngIf="currentIndex >= questions.length" class="result-box ion-text-center ion-padding">
+    <div class="trophy-wrapper">
+      <ion-icon name="trophy" class="trophy-icon"></ion-icon>
+    </div>
+    <h2>¡Buen trabajo, {{ playerName || 'Aspirante' }}!</h2>
+    <p class="subtitle-result">Has finalizado el cuestionario.</p>
+
+    <ion-card class="score-card">
+      <ion-card-content>
+        <p>Aciertos totales</p>
+        <h1>{{ correctAnswers }} / {{ questions.length }}</h1>
+        <div class="percentage-bar">
+          <span class="percentage-text">Puntuación final:</span>
+          <ion-badge [color]="(correctAnswers/questions.length) >= 0.5 ? 'success' : 'danger'">
+            {{ (correctAnswers / questions.length) * 100 | number:'1.0-0' }}%
+          </ion-badge>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-button expand="block" shape="round" color="primary" class="ion-margin-top" (click)="goToHome()">
+      Volver al Inicio
+    </ion-button>
+  </div>
+
+</ion-content>
