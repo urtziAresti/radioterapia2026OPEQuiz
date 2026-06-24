@@ -52,3 +52,12 @@
 
 /* Tu archivo de variables con los colores */
 @import "./theme/variables.scss";
+
+ion-header {
+    display: block !important;
+    position: relative !important;
+    -ms-flex-order: -1 !important;
+    order: -1 !important;
+    width: 100% !important;
+    z-index: 10 !important;
+}
