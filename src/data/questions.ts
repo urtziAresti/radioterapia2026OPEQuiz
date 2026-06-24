@@ -595,4 +595,122 @@ export const QUESTIONS: Question[] = [
     },
     correct: "d",
   },
+  {
+    id: 51,
+    question: "Respecto a las características del dolor es FALSO que:",
+    options: {
+      a: "Existe una correlación entre la intensidad de un dolor y el grado de lesión.",
+      b: "La ansiedad hace que la sensibilidad al dolor aumente.",
+      c: "Está asociado a sentimientos negativos.",
+      d: "La percepción del dolor varía entre todas las personas.",
+    },
+    correct: "a",
+  },
+  {
+    id: 52,
+    question: "¿Cuál es la unidad de energía utilizada a nivel atómico?",
+    options: {
+      a: "Julio (J).",
+      b: "Voltio (V).",
+      c: "Electronvoltio (eV).",
+      d: "Sievert (Sv).",
+    },
+    correct: "c",
+  },
+  {
+    id: 53,
+    question:
+      "Además del inmovilizador Belly-Board, ¿qué otra maniobra ayuda a reducir el volumen del intestino delgado a la hora de irradiar la pelvis?",
+    options: {
+      a: "Distensión vesical.",
+      b: "Defecación previa al tratamiento.",
+      c: "Inspiración profunda mantenida.",
+      d: "Uso de medicamentos previos al tratamiento.",
+    },
+    correct: "a",
+  },
+  {
+    id: 54,
+    question: "En referencia a los detectores Geiger-Müller, es cierto que:",
+    options: {
+      a: "Sirven para detectar haces de radiación poco intensos, pero no permiten distinguir la energía de la radiación incidente.",
+      b: "Sirven para detectar haces de radiación poco intensos y permiten distinguir la energía de la radiación incidente.",
+      c: "No permiten detectar haces de radiación poco intensos ni distinguir la energía de la radiación incidente.",
+      d: "No permiten detectar haces de radiación poco intensos, pero sí permiten distinguir la energía de la radiación incidente.",
+    },
+    correct: "a",
+  },
+  {
+    id: 55,
+    question: "¿Qué ventajas tienen las cuñas dinámicas frente a las físicas?",
+    options: {
+      a: "El espectro del haz de radiación no se modifica.",
+      b: "Requieren que el técnico o la técnica intervenga solo para cambiar la orientación.",
+      c: "Producen un mayor endurecimiento del haz.",
+      d: "Todas las opciones son correctas.",
+    },
+    correct: "a",
+  },
+  {
+    id: 56,
+    question:
+      "En un trasplante de médula ósea en los tumores hematológicos, es FALSO que:",
+    options: {
+      a: "La ICT con dosis bajas de radiación elimina completamente la médula ósea del paciente.",
+      b: "El donante del injerto puede ser el propio paciente.",
+      c: "El paciente requiere aislamiento.",
+      d: "El donante del injerto puede ser un individuo con idéntica genética.",
+    },
+    correct: "a",
+  },
+  {
+    id: 57,
+    question:
+      "En braquiterapia, ¿cuál es el límite de velocidad de emisión para considerar un tratamiento como Baja Tasa de Dosis (LDR)?",
+    options: {
+      a: "Hasta 2 Gy/h.",
+      b: "Hasta 5 Gy/h.",
+      c: "Entre 2 y 12 Gy/h.",
+      d: "Más de 12 Gy/h.",
+    },
+    correct: "a",
+  },
+  {
+    id: 58,
+    question:
+      "La función del zócalo o sistema focalizador del tubo de rayos X convencional es:",
+    options: {
+      a: "Evitar que los electrones se dispersen para lograr que incidan en un único punto del blanco.",
+      b: "Lograr que los electrones se dispersen para que incidan en la mayor superficie del blanco posible.",
+      c: "Controlar la emisión de electrones para evitar que la temperatura aumente bruscamente.",
+      d: "Disipar el calor producido cuando los electrones chocan con el blanco.",
+    },
+    correct: "a",
+  },
+  {
+    id: 59,
+    question:
+      "¿Cuál de las siguientes frases NO es correcta si hablamos de los colimadores multiláminas?",
+    options: {
+      a: "Generalmente disponen de 120 láminas.",
+      b: "Los extremos de las láminas están diseñados para limitar la zona de penumbra.",
+      c: "El campo de radiación máximo es de 50 x 50 cm2.",
+      d: "Constan de láminas enfrentadas que permiten formar campos de forma irregular.",
+    },
+    correct: "c",
+  },
+  {
+    id: 60,
+    question:
+      "En referencia al síndrome general de irradiación aguda, tras pocas horas de la exposición aparece una etapa inicial que se denomina:",
+    options: {
+      a: "Latente.",
+      b: "Prodrómica.",
+      c: "Etapa de enfermedad manifiesta.",
+      d: "Ninguna de las respuestas es correcta.",
+    },
+    correct: "b",
+  },
+
+  
 ];
