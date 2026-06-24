@@ -41,6 +41,22 @@
           },
           "configurations": {
             "production": {
+
+              "production": {
+  "optimization": {
+    "scripts": true,
+    "styles": {
+      "minify": false,
+      "inlineCritical": false
+    },
+    "fonts": true
+  },
+  "sourceMap": false,
+  "namedChunks": false,
+  "extractLicenses": true,
+  "vendorChunk": false,
+  "buildOptimizer": false
+},
               "budgets": [
                 {
                   "type": "initial",
