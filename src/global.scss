@@ -61,3 +61,23 @@ ion-header {
     width: 100% !important;
     z-index: 10 !important;
 }
+
+
+/* Forzar estilos de éxito para producción en Netlify */
+:root {
+    --ion-color-success: #2dd55b !important;
+    --ion-color-success-rgb: 45, 213, 91 !important;
+    --ion-color-success-contrast: #000000 !important;
+    --ion-color-success-contrast-rgb: 0, 0, 0 !important;
+    --ion-color-success-shade: #28bb50 !important;
+    --ion-color-success-tint: #42d96b !important;
+  }
+  
+  .ion-color-success {
+    --ion-color-base: var(--ion-color-success) !important;
+    --ion-color-base-rgb: var(--ion-color-success-rgb) !important;
+    --ion-color-contrast: var(--ion-color-success-contrast) !important;
+    --ion-color-contrast-rgb: var(--ion-color-success-contrast-rgb) !important;
+    --ion-color-shade: var(--ion-color-success-shade) !important;
+    --ion-color-tint: var(--ion-color-success-tint) !important;
+  }
