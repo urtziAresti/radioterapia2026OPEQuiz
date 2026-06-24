@@ -25,9 +25,6 @@ export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   usuariosPermitidos: any[] = [];
 
-  
-
- 
   constructor(
     private fb: FormBuilder,
     private router: Router,
