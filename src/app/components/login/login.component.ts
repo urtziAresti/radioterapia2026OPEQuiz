@@ -3,8 +3,17 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IonicModule, ToastController } from '@ionic/angular';
-import usersData from '../../../assets/users.json'; // Ajusta la ruta según dónde guardes el JSON
+import usersData from '../../../assets/users.json';
+import { addIcons } from 'ionicons';
+import {
+  lockClosedOutline,
+  logInOutline
+} from 'ionicons/icons';
 
+addIcons({
+  'lock-closed-outline': lockClosedOutline,
+  'log-in-outline': logInOutline
+});
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -16,6 +25,9 @@ export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   usuariosPermitidos: any[] = [];
 
+  
+
+ 
   constructor(
     private fb: FormBuilder,
     private router: Router,

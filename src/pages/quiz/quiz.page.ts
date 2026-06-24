@@ -22,7 +22,7 @@ export class QuizPage implements OnInit {
   private quizService = inject(QuizService);
   private route = inject(ActivatedRoute);
   private router = inject(Router);
-
+  private readonly QUESTION_TIME = 3000;
   questions: Question[] = [];
   currentIndex = 0;
   correctAnswers = 0;
@@ -72,7 +72,7 @@ export class QuizPage implements OnInit {
       this.isAnswered = true;
       setTimeout(() => {
         this.nextQuestion();
-      }, 1400);
+      }, this.QUESTION_TIME);
     } else {
       this.nextQuestion();
     }
@@ -128,7 +128,7 @@ export class QuizPage implements OnInit {
   }
 
   goToHome() {
-    this.router.navigate(['/']);
+    this.router.navigate(['/welcome']);
   }
 
   useMagic(question: string) {

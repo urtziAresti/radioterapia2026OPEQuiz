@@ -206,7 +206,7 @@ export const QUESTIONS: Question[] = [
       c: "La OMS (Organización Mundial de la Salud) los divide en: benignos, intermedios agresivos localmente, intermedios con bajo potencial metastásico y malignos.",
       d: "Representan el 13% de los tumores malignos en personas adultas.",
     },
-    correct: "c",
+    correct: "d",
   },
   {
     id: 18,
@@ -839,7 +839,7 @@ export const QUESTIONS: Question[] = [
       c: "Tratamiento de carcinoma de células escamosas.",
       d: "Tratamiento de melanomas uveales.",
     },
-    correct: "d",
+    correct: "a",
   },
   {
     id: 72,
@@ -1053,7 +1053,7 @@ export const QUESTIONS: Question[] = [
       c: "El técnico o la técnica de radiodiagnóstico.",
       d: "Las opciones a) y b) son correctas.",
     },
-    correct: "d",
+    correct: "b",
   },
   {
     id: 90,
@@ -1135,7 +1135,7 @@ export const QUESTIONS: Question[] = [
       c: "Técnico/técnica especialista en radioterapia y administrativos/administrativas.",
       d: "Técnico/técnica especialista en radioterapia, médicos/médicas y administrativos/administrativas.",
     },
-    correct: "d",
+    correct: "a",
   },
   {
     id: 97,
@@ -1276,7 +1276,7 @@ export const QUESTIONS: Question[] = [
       c: "Cada año.",
       d: "Cada vez que se use una fuente con un paciente.",
     },
-    correct: "b",
+    correct: "c",
   },
   {
     id: 109,
@@ -1300,7 +1300,7 @@ export const QUESTIONS: Question[] = [
       c: "1 GBq al año.",
       d: "3 GBq al año.",
     },
-    correct: "a",
+    correct: "c",
   },
   {
     id: 111,
@@ -1312,7 +1312,7 @@ export const QUESTIONS: Question[] = [
       c: "La fecha de fabricación del contenedor.",
       d: "Todas las opciones son correctas.",
     },
-    correct: "d",
+    correct: "b",
   },
   {
     id: 112,
@@ -1394,7 +1394,7 @@ export const QUESTIONS: Question[] = [
       c: "Dosis única de 8 Gy.",
       d: "3 fracciones de 3 Gy.",
     },
-    correct: "c",
+    correct: "a",
   },
   {
     id: 119,
@@ -1406,7 +1406,7 @@ export const QUESTIONS: Question[] = [
       c: "Afirma que la luz, en determinadas circunstancias, interacciona de determinada forma con la materia.",
       d: "Ninguna de las respuestas es correcta.",
     },
-    correct: "a",
+    correct: "b",
   },
   {
     id: 120,
@@ -1561,7 +1561,7 @@ export const QUESTIONS: Question[] = [
       c: "Energía media entre 0,050 y 0,100 MeV.",
       d: "Energía media > 0,050 MeV.",
     },
-    correct: "a",
+    correct: "b",
   },
   {
     id: 133,
@@ -1705,7 +1705,7 @@ export const QUESTIONS: Question[] = [
       c: "Mucositis.",
       d: "Dermitis.",
     },
-    correct: "d",
+    correct: "a",
   },
   {
     id: 145,
@@ -1741,7 +1741,7 @@ export const QUESTIONS: Question[] = [
       c: "La atenuación del haz por los átomos del medio.",
       d: "Todas las respuestas son correctas.",
     },
-    correct: "a",
+    correct: "d",
   },
   {
     id: 148,
@@ -1777,6 +1777,6 @@ export const QUESTIONS: Question[] = [
       c: "Un trébol sobre un campo punteado enmarcado por una orla rectangular del mismo color que el símbolo.",
       d: "Las respuestas b) y c) son correctas.",
     },
-    correct: "a",
+    correct: "b",
   },
 ];
