@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 export class WelcomeComponent {
   playerName: string = '';
   // Inicializamos por defecto en 300 preguntas
-  selectedQuestionCount: number = 300; 
+  selectedQuestionCount: number = 50; 
   
   private router = inject(Router);
   

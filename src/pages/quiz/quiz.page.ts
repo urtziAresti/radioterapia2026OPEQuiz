@@ -3,12 +3,12 @@ import { QuizService } from '../../services/quiz.service';
 import { Question } from '../../models/question.model';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router'; // Añadidos para navegación y lectura de parámetros
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-quiz',
   templateUrl: './quiz.page.html',
-  styleUrls: ['./quiz.page.scss'], // Asegúrate de tener este archivo de estilos vinculado
+  styleUrls: ['./quiz.page.scss'],
   standalone: true,
   imports: [IonicModule, CommonModule]
 })
@@ -22,21 +22,23 @@ export class QuizPage implements OnInit {
   currentIndex = 0;
   correctAnswers = 0;
 
-  // Variables de configuración de modo
   mode: 'study' | 'exam' = 'study';
   playerName: string = '';
+  count = 0;
 
-  // Control visual para Modo Estudio
   selectedOption: string | null = null;
   isAnswered: boolean = false;
 
-  ngOnInit() {
-    this.questions = this.quizService.getQuestions();
+  // 🔥 NUEVO: mapa de fallos
+  wrongAnswersMap: Record<number, number> = {};
 
-    // Capturamos el modo y el nombre desde la URL
+  ngOnInit() {
     this.route.queryParams.subscribe(params => {
-      if (params['mode']) this.mode = params['mode'];
       if (params['name']) this.playerName = params['name'];
+      if (params['count']) {
+        this.count = +params['count'];
+        this.questions = this.quizService.getQuestions(this.count);
+      }
     });
   }
 
@@ -46,47 +48,76 @@ export class QuizPage implements OnInit {
   }
 
   answer(option: string) {
-    if (this.isAnswered && this.mode === 'study') return; // Evita doble clic en modo estudio
+    if (this.isAnswered && this.mode === 'study') return;
 
     this.selectedOption = option;
-    const isCorrect = option === this.questions[this.currentIndex].correct;
+    const currentQuestion = this.questions[this.currentIndex];
+    const isCorrect = option === currentQuestion.correct;
 
     if (isCorrect) {
       this.correctAnswers++;
+    } else {
+      // 🔥 Guardar fallo por ID
+      const id = currentQuestion.id;
+      this.wrongAnswersMap[id] = (this.wrongAnswersMap[id] || 0) + 1;
     }
 
     if (this.mode === 'study') {
-      // En modo estudio, congelamos la pantalla un segundo para que el alumno vea la corrección en verde/rojo
       this.isAnswered = true;
       setTimeout(() => {
         this.nextQuestion();
       }, 1400);
     } else {
-      // En modo examen avanza instantáneamente sin feedback
       this.nextQuestion();
     }
   }
 
   nextQuestion() {
     this.currentIndex++;
-    // Reseteamos estados para la siguiente pregunta
+
+    if (this.currentIndex >= this.questions.length) {
+      this.finishQuiz();
+      return;
+    }
+
     this.selectedOption = null;
     this.isAnswered = false;
   }
 
-  // Clases dinámicas para pintar las opciones en Modo Estudio
+  finishQuiz() {
+    const userId = this.playerName || 'anonymous';
+
+    const result = {
+      user: userId,
+      date: new Date().toISOString(),
+      totalQuestions: this.questions.length,
+      correctAnswers: this.correctAnswers,
+      wrongAnswers: this.wrongAnswersMap
+    };
+
+    const existing = sessionStorage.getItem(userId);
+    const history = existing ? JSON.parse(existing) : [];
+
+    history.push(result);
+
+    sessionStorage.setItem(userId, JSON.stringify(history));
+
+    console.log('RESULT SAVED', result);
+  }
+
   getOptionColor(optionKey: string): string {
     if (this.mode !== 'study' || !this.isAnswered) {
       return this.selectedOption === optionKey ? 'selected-option' : '';
     }
 
     const correctKey = this.questions[this.currentIndex].correct;
-    if (optionKey === correctKey) {
-      return 'correct-option'; // Verde si es la correcta
-    }
+
+    if (optionKey === correctKey) return 'correct-option';
+
     if (this.selectedOption === optionKey && optionKey !== correctKey) {
-      return 'incorrect-option'; // Rojo si el usuario falló aquí
+      return 'incorrect-option';
     }
+
     return 'disabled-option';
   }
 

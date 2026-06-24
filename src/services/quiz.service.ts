@@ -5,8 +5,11 @@ import { Question } from '../models/question.model';
 @Injectable({ providedIn: 'root' })
 export class QuizService {
 
-  getQuestions(): Question[] {
-    return QUESTIONS;
+  getQuestions(count: number): Question[] {
+    const randomQuestions = [...QUESTIONS].sort(() => Math.random() - 0.5);
+
+    // devuelve solo el número pedido
+    return randomQuestions.slice(0, count);
   }
 
   checkAnswer(question: Question, answer: string): boolean {
