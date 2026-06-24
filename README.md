@@ -24,3 +24,9 @@
 - METER TEORIA EN CADA PREGUNTA con IA 
 
 
+ # preguntas
+
+ dudas 
+
+ 7
+
