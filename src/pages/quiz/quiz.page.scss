@@ -182,13 +182,11 @@ ion-toolbar {
 .ion-badge {
     background: #e8a258;
     color: black;
-  
     border: 1px solid #bbf7d0;
-  
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
-  
     backdrop-filter: blur(6px);
-  
+    border-radius: 20px;
+    padding: 5px;
 }
 
 .icon-size{
