@@ -2,7 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { IonicModule, ToastController } from '@ionic/angular';
+import {
+  IonContent,
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonItem,
+  IonInput,
+  IonButton,
+  IonIcon,
+  ToastController
+} from '@ionic/angular/standalone';
 import usersData from '../../../assets/users.json';
 import { addIcons } from 'ionicons';
 import {
@@ -19,7 +29,18 @@ addIcons({
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
   standalone: true,
-  imports: [CommonModule, IonicModule, ReactiveFormsModule]
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonContent,
+    IonItem,
+    IonInput,
+    IonButton,
+    IonIcon
+  ]
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
