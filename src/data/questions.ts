@@ -20,7 +20,7 @@ export const QUESTIONS: Question[] = [
       c: "Para su correcta medida, hay que tener en cuenta el concepto de “equilibrio electrónico”.",
       d: "La ICRU recomienda utilizar las unidades de medida del Sistema Internacional, que es el Roentgen (R)."
     },
-    correct: "a"
+    correct: "c"
   },
   {
     id: 2,
@@ -42,7 +42,7 @@ export const QUESTIONS: Question[] = [
       c: "Exclusión, que se aplica a residuos de largo periodo de semidesintegración.",
       d: "Gestión convencional, que es la que suele realizarse mediante una empresa autorizada."
     },
-    correct: "a"
+    correct: "b"
   },
   {
     id: 4,
@@ -53,7 +53,7 @@ export const QUESTIONS: Question[] = [
       c: "El oxígeno es un radiosensibilizador.",
       d: "El efecto del oxígeno se cuantifica mediante el “factor de potenciación del oxígeno” (OER)."
     },
-    correct: "a"
+    correct: "b"
   },
   {
     id: 5,
@@ -64,7 +64,7 @@ export const QUESTIONS: Question[] = [
       c: "Pueden interaccionar con los electrones de la corteza del átomo, pero solo provocando ionizaciones.",
       d: "Pueden interaccionar con los electrones de la corteza del átomo, provocando excitaciones e ionizaciones."
     },
-    correct: "a"
+    correct: "d"
   },
   {
     id: 6,
@@ -75,7 +75,7 @@ export const QUESTIONS: Question[] = [
       c: "Dalton.",
       d: "Ninguno de los anteriores."
     },
-    correct: "a"
+    correct: "d"
   },
   {
     id: 7,
@@ -97,7 +97,7 @@ export const QUESTIONS: Question[] = [
       c: "Decúbito lateral.",
       d: "Posición de litotomía."
     },
-    correct: "a"
+    correct: "b"
   },
   {
     id: 9,
@@ -108,7 +108,7 @@ export const QUESTIONS: Question[] = [
       c: "Cuando uno de sus electrones absorbe energía y pasa a la capa más interna.",
       d: "Cuando uno de sus electrones absorbe energía, pero no cambia de capa."
     },
-    correct: "a"
+    correct: "b"
   },
   {
     id: 10,
@@ -119,7 +119,7 @@ export const QUESTIONS: Question[] = [
       c: "Exactitud.",
       d: "Precisión."
     },
-    correct: "a"
+    correct: "d"
   },
   {
     id: 11,
@@ -130,7 +130,7 @@ export const QUESTIONS: Question[] = [
       c: "La radiación es la transmisión de partículas a través de un medio o del vacío.",
       d: "La radiación es la transmisión de energía por medio de ondas o de partículas a través de un medio o del vacío."
     },
-    correct: "a"
+    correct: "d"
   },
   {
     id: 12,
@@ -141,7 +141,7 @@ export const QUESTIONS: Question[] = [
       c: "Están expuestas directamente al haz de radiación.",
       d: "No estará expuesto directamente al haz de radiación."
     },
-    correct: "a"
+    correct: "d"
   },
   {
     id: 13,
@@ -152,7 +152,7 @@ export const QUESTIONS: Question[] = [
       c: "Mediastino medio.",
       d: "Mediastino superior."
     },
-    correct: "a"
+    correct: "b"
   },
   {
     id: 14,
@@ -163,7 +163,7 @@ export const QUESTIONS: Question[] = [
       c: "Utilizar un grosor de corte de 6-8 mm.",
       d: "Instruir al paciente en el protocolo sobre el vaciado del recto."
     },
-    correct: "a"
+    correct: "c"
   },
   {
     id: 15,
@@ -174,7 +174,7 @@ export const QUESTIONS: Question[] = [
       c: "Unas pinzas de disección.",
       d: "Una sonda Foley."
     },
-    correct: "a"
+    correct: "b"
   },
   {
     id: 16,
@@ -185,7 +185,7 @@ export const QUESTIONS: Question[] = [
       c: "Ausencia de respuesta emocional y negación de los hechos.",
       d: "Asimilación de la realidad y preparación para el futuro."
     },
-    correct: "a"
+    correct: "b"
   },
   {
     id: 17,
@@ -196,7 +196,7 @@ export const QUESTIONS: Question[] = [
       c: "La OMS (Organización Mundial de la Salud) los divide en: benignos, intermedios agresivos localmente, intermedios con bajo potencial metastásico y malignos.",
       d: "Representan el 13% de los tumores malignos en personas adultas."
     },
-    correct: "a"
+    correct: "d"
   },
   {
     id: 18,
@@ -207,7 +207,7 @@ export const QUESTIONS: Question[] = [
       c: "Cuando interaccionan partículas ligeras con núcleos pesados.",
       d: "Cuando interaccionan partículas ligeras con núcleos ligeros."
     },
-    correct: "a"
+    correct: "c"
   },
   {
     id: 19,
@@ -218,7 +218,7 @@ export const QUESTIONS: Question[] = [
       c: "Realizar la aplicación de los tratamientos de radioterapia autorizados por el médico especialista o la médico especialista en oncología radioterápica.",
       d: "Colaborar en los procesos de dosimetría clínica de cada paciente y de todas las tareas asociadas a su gestión."
     },
-    correct: "a"
+    correct: "b"
   },
   {
     id: 20,
@@ -251,7 +251,7 @@ export const QUESTIONS: Question[] = [
       c: "Totalmente lleno con contraste.",
       d: "No influye el estado."
     },
-    correct: "a"
+    correct: "b"
   },
   {
     id: 23,
@@ -273,7 +273,7 @@ export const QUESTIONS: Question[] = [
       c: "Dirigir el cuerpo hasta la persona interlocutora y mirarle a los ojos.",
       d: "Utilizar el lenguaje no verbal."
     },
-    correct: "a"
+    correct: "b"
   },
   {
     id: 25,
@@ -284,7 +284,7 @@ export const QUESTIONS: Question[] = [
       c: "Efecto termoelectrónico.",
       d: "Efecto emisor."
     },
-    correct: "a"
+    correct: "b"
   },
   {
     id: 26,
