@@ -306,7 +306,7 @@ export const QUESTIONS: Question[] = [
       c: "Aparece solo a los 6 meses de finalizar la irradiación.",
       d: "En caso de aparecer síntomas, se administran corticoides y antibióticos."
     },
-    correct: "a"
+    correct: "c"
   },
   {
     id: 28,
@@ -317,7 +317,7 @@ export const QUESTIONS: Question[] = [
       c: "15-20 mm.",
       d: "30 mm."
     },
-    correct: "a"
+    correct: "c"
   },
   {
     id: 29,
@@ -328,7 +328,7 @@ export const QUESTIONS: Question[] = [
       c: "Trabajan a distancia foco-superficie de 90 cm.",
       d: "Trabajan a distancia foco-superficie de 100 cm."
     },
-    correct: "a"
+    correct: "b"
   },
   {
     id: 30,
@@ -339,7 +339,7 @@ export const QUESTIONS: Question[] = [
       c: "Dosis efectiva.",
       d: "Las tres magnitudes anteriores tienen en cuenta ese factor."
     },
-    correct: "a"
+    correct: "c"
   },
   {
     id: 31,
@@ -372,7 +372,7 @@ export const QUESTIONS: Question[] = [
       c: "Es un dolor real sin causa orgánica que lo justifique.",
       d: "Es un dolor irreal que es provocado por la enfermedad sin causa aparente."
     },
-    correct: "a"
+    correct: "c"
   },
   {
     id: 34,
@@ -383,7 +383,7 @@ export const QUESTIONS: Question[] = [
       c: "Pérdida de peso.",
       d: "Ictericia."
     },
-    correct: "a"
+    correct: "c"
   },
   {
     id: 35,
@@ -394,7 +394,7 @@ export const QUESTIONS: Question[] = [
       c: "Dos fracciones al día separadas por 6 horas.",
       d: "Dos sesiones por semana de entre 5 y 6,25 Gy durante 8 semanas."
     },
-    correct: "a"
+    correct: "b"
   },
   {
     id: 36,
@@ -405,7 +405,7 @@ export const QUESTIONS: Question[] = [
       c: "Cirugía.",
       d: "Inmunoterapia."
     },
-    correct: "a"
+    correct: "c"
   },
   {
     id: 37,
@@ -416,7 +416,7 @@ export const QUESTIONS: Question[] = [
       c: "Disociación de la materia debida a que la radiación ionizante rompe enlaces químicos.",
       d: "Todas las respuestas son correctas."
     },
-    correct: "a"
+    correct: "d"
   },
   {
     id: 38,
@@ -427,7 +427,7 @@ export const QUESTIONS: Question[] = [
       c: "R50 (alcance 50%).",
       d: "Rp (alcance práctico)."
     },
-    correct: "a"
+    correct: "b"
   },
   {
     id: 39,
@@ -438,7 +438,7 @@ export const QUESTIONS: Question[] = [
       c: "Trabajan con potenciales eléctricos de hasta 500 kV.",
       d: "La profundidad de tratamiento puede llegar hasta los 5 cm."
     },
-    correct: "a"
+    correct: "d"
   },
   {
     id: 40,
@@ -460,7 +460,7 @@ export const QUESTIONS: Question[] = [
       c: "Ocurre con energías del fotón menores que la energía de ligadura del electrón con el que interacciona.",
       d: "El fotón incidente desaparece tras la interacción."
     },
-    correct: "a"
+    correct: "d"
   },
   {
     id: 42,
@@ -471,7 +471,7 @@ export const QUESTIONS: Question[] = [
       c: "Para la verificación del volumen irradiado se pueden comparar las cobaltografías con las DDR.",
       d: "El desplazamiento de la fuente radiactiva desde la posición de parada hasta la de irradiación se realiza mediante una bomba hidráulica."
     },
-    correct: "a"
+    correct: "b"
   },
   {
     id: 43,
@@ -482,7 +482,7 @@ export const QUESTIONS: Question[] = [
       c: "Es una dispersión inelástica en la que no se excita el átomo.",
       d: "Es una dispersión inelástica en la que se excita el átomo."
     },
-    correct: "a"
+    correct: "b"
   },
   {
     id: 44,
@@ -493,7 +493,7 @@ export const QUESTIONS: Question[] = [
       c: "Determinar la profundidad a la que se absorbe la dosis máxima del haz.",
       d: "Las respuestas b) y c) son correctas."
     },
-    correct: "a"
+    correct: "b"
   },
   {
     id: 45,
@@ -504,7 +504,7 @@ export const QUESTIONS: Question[] = [
       c: "Hace referencia a una dosis que se administra a tejidos tumorales o sanos y se mide en Sv.",
       d: "Hace referencia a una dosis que se administra a tejidos tumorales o sanos y se mide en Gy."
     },
-    correct: "a"
+    correct: "d"
   },
   {
     id: 46,
@@ -515,7 +515,7 @@ export const QUESTIONS: Question[] = [
       c: "Marcadores fiduciales.",
       d: "Clips de hemostasia."
     },
-    correct: "a"
+    correct: "b"
   },
   {
     id: 47,
@@ -537,7 +537,7 @@ export const QUESTIONS: Question[] = [
       c: "Ecografía vesical.",
       d: "Cistoscopia."
     },
-    correct: "a"
+    correct: "d"
   },
   {
     id: 49,
@@ -548,7 +548,7 @@ export const QUESTIONS: Question[] = [
       c: "SRT.",
       d: "IMARC."
     },
-    correct: "a"
+    correct: "b"
   },
   {
     id: 50,
