@@ -38,4 +38,14 @@ export class WelcomeComponent {
       });
     }
   }
+
+  sendSuggestionsMail() {
+    const email = 'urtzi.aresti+OPEAPP@gmail.com'; // cámbialo por el que quieras recibir
+    const subject = encodeURIComponent('Sugerencias OPE - Test Radioterapia');
+    const body = encodeURIComponent(
+      `Hola,\n\nQuería enviar las siguientes sugerencias sobre el test:\n\n`
+    );
+  
+    window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+  }
 }
