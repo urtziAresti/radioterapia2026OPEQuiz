@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { QUESTIONS } from '../data/questions';
+import { ALL_QUESTIONS } from '../data/questions';
 import { Question } from '../models/question.model';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
@@ -21,7 +21,7 @@ export class QuizService {
   }
 
   getQuestions(count: number): Question[] {
-    const randomQuestions = [...QUESTIONS].sort(() => Math.random() - 0.5);
+    const randomQuestions = [...ALL_QUESTIONS].sort(() => Math.random() - 0.5);
     return randomQuestions.slice(0, count);
   }
 
