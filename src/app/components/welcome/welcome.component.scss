@@ -1,12 +1,11 @@
 .welcome-container {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: start;
   min-height: 90vh;
   padding: 20px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   overflow: scroll;
-  padding-top: 10em;
 }
 
 .welcome-card {
@@ -108,7 +107,7 @@ h1 {
 }
 
 .btn-start {
-  background-color: #2ecc71;
+  background-color: #a67aca;
   color: white;
   border: none;
   padding: 14px 40px;
@@ -164,4 +163,11 @@ h1 {
   &:focus {
     outline: none;
   }
+}
+
+.logo {
+  display: block;
+  width: 75px;
+  max-width: 80%;
+  margin: 0 auto 24px;
 }

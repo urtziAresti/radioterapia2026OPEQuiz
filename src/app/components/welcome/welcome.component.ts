@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Output, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -10,29 +10,34 @@ import { Router } from '@angular/router';
   templateUrl: './welcome.component.html',
   styleUrls: ['./welcome.component.scss']
 })
-export class WelcomeComponent {
-  playerName: string = '';
-  // Inicializamos por defecto en 300 preguntas
-  selectedQuestionCount: number = 25; 
-  
+export class WelcomeComponent implements OnInit {
+  username: string = '';
+  selectedQuestionCount: number = 25;
+
   private router = inject(Router);
-  
-  @Output() configSubmitted = new EventEmitter<{ playerName: string, count: number }>();
+
+  @Output() configSubmitted = new EventEmitter<{ username: string, count: number }>();
+
+  ngOnInit() {
+    const session = localStorage.getItem('userSession');
+    if (session) {
+      const user = JSON.parse(session);
+      this.username = user.username;
+    }
+  }
 
   startQuiz() {
-    if (this.playerName.trim() && this.selectedQuestionCount) {
+    if (this.username && this.selectedQuestionCount) {
       const config = {
-        playerName: this.playerName.trim(),
+        username: this.username,
         count: this.selectedQuestionCount
       };
 
-      // Emitimos el evento con la nueva configuración
       this.configSubmitted.emit(config);
 
-      // Redirigimos pasando el nombre y la cantidad elegida
       this.router.navigate(['/questions'], {
         queryParams: {
-          name: config.playerName,
+          name: config.username,
           count: config.count
         }
       });
@@ -40,12 +45,12 @@ export class WelcomeComponent {
   }
 
   sendSuggestionsMail() {
-    const email = 'urtzi.aresti+OPEAPP@gmail.com'; // cámbialo por el que quieras recibir
+    const email = 'urtzi.aresti+OPEAPP@gmail.com';
     const subject = encodeURIComponent('Sugerencias OPE - Test Radioterapia');
     const body = encodeURIComponent(
       `Hola,\n\nQuería enviar las siguientes sugerencias sobre el test:\n\n`
     );
-  
+
     window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
   }
 }

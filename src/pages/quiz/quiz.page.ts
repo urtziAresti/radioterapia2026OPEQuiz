@@ -23,13 +23,11 @@ addIcons({
   imports: [IonicModule, CommonModule]
 })
 export class QuizPage implements OnInit {
+  private readonly OK_QUESTION_TIME = 1500;
 
   private quizService = inject(QuizService);
   private route = inject(ActivatedRoute);
   private router = inject(Router);
-
-  private readonly FAIL_QUESTION_TIME = 3000;
-  private readonly OK_QUESTION_TIME = 1500;
 
   questions: Question[] = [];
   currentIndex = 0;
@@ -39,9 +37,7 @@ export class QuizPage implements OnInit {
 
   selectedOption: string | null = null;
   isAnswered = false;
-
   nextVisible = false;
-
   magicAnswer: string | null = null;
   loadingMagic = false;
 
@@ -95,20 +91,15 @@ export class QuizPage implements OnInit {
       this.slideError(this.OK_QUESTION_TIME);
     } else {
       this.nextVisible = true;
-
       const id = currentQuestion.id;
       this.wrongAnswersMap[id] = (this.wrongAnswersMap[id] || 0) + 1;
-
-      this.slideError(this.FAIL_QUESTION_TIME);
     }
   }
 
   slideError(slideTime: number) {
-
     if (this.questionTimeout) {
       clearTimeout(this.questionTimeout);
     }
-
     this.questionTimeout = setTimeout(() => {
       this.nextQuestion();
     }, slideTime);
@@ -200,9 +191,7 @@ export class QuizPage implements OnInit {
     if (this.navigationLocked) {
       return;
     }
-
     this.navigationLocked = true;
-
     this.router.navigate(['/welcome']);
   }
 

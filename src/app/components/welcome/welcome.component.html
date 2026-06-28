@@ -1,44 +1,35 @@
 <div class="welcome-container">
   <div class="welcome-card">
-    <h1>🚀 Test de Radioterapia</h1>
-    <p class="subtitle">Pon a prueba tus conocimientos antes del examen oficial</p>
-
-    <div class="form-group">
-      <label for="name">Introduce tu nombre:</label>
-      <input
-        type="text"
-        id="name"
-        [(ngModel)]="playerName"
-        placeholder="Nombre"
-        autocomplete="off"
-      />
-    </div>
-
+    <h1>Test de Radioterapia</h1>
+    <img src="assets/icon/radio.svg" alt="Radioterapia" class="logo" />
     <div class="form-group">
       <label for="questionCount">Número de preguntas para el test:</label>
       <select id="questionCount" [(ngModel)]="selectedQuestionCount">
+        <option [ngValue]="10">10 preguntas</option>
         <option [ngValue]="25">25 preguntas</option>
         <option [ngValue]="50">50 preguntas</option>
         <option [ngValue]="110">110 preguntas</option>
         <option [ngValue]="150">150 preguntas</option>
+        <option [ngValue]="200">200 preguntas</option>
       </select>
     </div>
-    
-    <span >de momento solo tenemos 150 preguntas verificadas, pronto mas...</span>
+
+    <p>De momento solo tenemos 200 preguntas verificadas, pronto mas...</p>
 
     <button
       class="btn-start"
-      [disabled]="!playerName.trim() || !selectedQuestionCount"
+      [disabled]="!selectedQuestionCount"
       (click)="startQuiz()"
     >
       Comenzar Cuestionario
     </button>
 
-      <button
-    class="btn-suggestions"
-    type="button"
-    (click)="sendSuggestionsMail()">
-    ENVIA SUGERENCIAS
-  </button>
+    <button
+      class="btn-suggestions"
+      type="button"
+      (click)="sendSuggestionsMail()"
+    >
+      ENVIA SUGERENCIAS
+    </button>
   </div>
 </div>

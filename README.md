@@ -10,8 +10,6 @@
 
 # features 
 
-- quitar nombre
-- ajustar pantall welcome espacios
 - BOTON NEXT PAGE - FLECHA - STYLO 
 - SI PREGUNTA FAIL, SOLO AVANZAR CON FLECHA 
 - mas espacio entre titulo y preguntas
