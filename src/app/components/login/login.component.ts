@@ -65,49 +65,61 @@ export class LoginComponent implements OnInit {
 
   // 🔐 DEVICE ID
   getDeviceId(): string {
-    let deviceId = localStorage.getItem('deviceId');
-
-    if (!deviceId) {
-      deviceId = crypto.randomUUID();
-      localStorage.setItem('deviceId', deviceId);
+    let id = localStorage.getItem('deviceId');
+  
+    if (!id) {
+      id = crypto.randomUUID();
+      localStorage.setItem('deviceId', id);
     }
-
-    return deviceId;
+  
+    return id;
   }
 
   async onLogin() {
     if (this.loginForm.invalid) return;
-
+  
     const { username, code } = this.loginForm.value;
-
+  
     const usuarioValido = this.usuariosPermitidos.find(
       user =>
         user.username.toLowerCase() === username.trim().toLowerCase() &&
         user.code === code.trim()
     );
-
+  
     if (!usuarioValido) {
       await this.presentErrorToast();
       return;
     }
-
+  
     const deviceId = this.getDeviceId();
-
-    // 🔐 SESIÓN PROTEGIDA
-    const session = {
+  
+    // 🔐 CONTROL GLOBAL DE USUARIOS
+    const activeUsers = JSON.parse(localStorage.getItem('activeUsers') || '{}');
+  
+    const existingDevice = activeUsers[usuarioValido.username];
+  
+    // 🚫 SI YA ESTÁ EN OTRO DISPOSITIVO → BLOQUEAR
+    if (existingDevice && existingDevice !== deviceId) {
+      await this.presentErrorToast('Este usuario ya está activo en otro dispositivo');
+      return;
+    }
+  
+    // ✔ registrar sesión global
+    activeUsers[usuarioValido.username] = deviceId;
+    localStorage.setItem('activeUsers', JSON.stringify(activeUsers));
+  
+    // ✔ guardar sesión local
+    localStorage.setItem('userSession', JSON.stringify({
       username: usuarioValido.username,
-      deviceId,
-      loginTime: Date.now()
-    };
-
-    localStorage.setItem('userSession', JSON.stringify(session));
-
+      deviceId
+    }));
+  
     this.router.navigate(['/welcome']);
   }
 
-  async presentErrorToast() {
+  async presentErrorToast(message? :string) {
     const toast = await this.toastController.create({
-      message: 'Usuario o código incorrectos. Inténtalo de nuevo.',
+      message: message ? message : 'Usuario o código incorrectos. Inténtalo de nuevo.',
       duration: 3000,
       position: 'bottom',
       color: 'danger',
