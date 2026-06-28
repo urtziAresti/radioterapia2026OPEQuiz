@@ -12,7 +12,7 @@ import { filter } from 'rxjs/operators';
   standalone: true,
   imports: [IonApp, IonRouterOutlet, FooterComponent, CommonModule],
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
 
   private router = inject(Router);
   private activatedRoute = inject(ActivatedRoute);
@@ -34,38 +34,4 @@ export class AppComponent implements OnInit {
       });
   }
 
-  ngOnInit() {
-    this.validateSession();
-  }
-
-  validateSession() {
-    const session = JSON.parse(localStorage.getItem('userSession') || '{}');
-    const deviceId = localStorage.getItem('deviceId');
-  
-    if (!session.username) return;
-  
-    const activeUsers = JSON.parse(localStorage.getItem('activeUsers') || '{}');
-  
-    const serverDevice = activeUsers[session.username];
-  
-    if (serverDevice && serverDevice !== deviceId) {
-      alert('Tu sesión ha sido cerrada desde otro dispositivo');
-  
-      this.logout();
-    }
-  }
-
-  logout() {
-    const session = JSON.parse(localStorage.getItem('userSession') || '{}');
-  
-    const activeUsers = JSON.parse(localStorage.getItem('activeUsers') || '{}');
-  
-    delete activeUsers[session.username];
-  
-    localStorage.setItem('activeUsers', JSON.stringify(activeUsers));
-  
-    localStorage.removeItem('userSession');
-  
-    this.router.navigate(['/login']);
-  }
 }

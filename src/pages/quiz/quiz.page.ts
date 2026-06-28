@@ -9,6 +9,7 @@ import {
   sparklesOutline,
   chevronForwardCircleOutline
 } from 'ionicons/icons';
+import { LogService } from '../../services/log.service';
 
 addIcons({
   'sparkles-outline': sparklesOutline,
@@ -29,6 +30,7 @@ export class QuizPage implements OnInit {
   private quizService = inject(QuizService);
   private route = inject(ActivatedRoute);
   private router = inject(Router);
+  private logService = inject(LogService)
 
   // ===== DATA =====
   questions: Question[] = [];
@@ -120,6 +122,11 @@ export class QuizPage implements OnInit {
       const id = currentQuestion.id;
       this.wrongAnswersMap[id] = (this.wrongAnswersMap[id] || 0) + 1;
     }
+
+    this.logService.log('ANSWER_SELECTED', {
+      questionId: currentQuestion.id,
+      correct: isCorrect
+    });
   }
 
   // ===== AUTO NEXT =====
@@ -186,6 +193,10 @@ export class QuizPage implements OnInit {
     history.push(result);
 
     sessionStorage.setItem(userId, JSON.stringify(history));
+    this.logService.log('QUIZ_FINISHED', {
+      correct: this.correctAnswers,
+      total: this.questions.length
+    });
   }
 
   // ===== UI HELP =====

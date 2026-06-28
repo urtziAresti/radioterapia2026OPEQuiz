@@ -64,15 +64,12 @@ ion-header {
 
 /* Forzar estilos de éxito para producción en Netlify */
 :root {
-    --ion-color-success: #e8a258 !important;
+    --ion-color-success: #a67aca !important;
     --ion-color-success-rgb: 45, 213, 91 !important;
     --ion-color-success-contrast: #000000 !important;
     --ion-color-success-contrast-rgb: 0, 0, 0 !important;
-    --ion-color-success-shade: #28bb50 !important;
-    --ion-color-success-tint: #42d96b !important;
-
-
-    
+    --ion-color-success-shade: #a67aca !important;
+    --ion-color-success-tint: #a67aca !important;
   }
 
   

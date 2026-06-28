@@ -25,7 +25,6 @@ export class WelcomeComponent implements OnInit {
 
 
   ngOnInit() {
-    this.validateSession();
     const session = localStorage.getItem("userSession");
     if (session) {
       const user = JSON.parse(session);
@@ -40,19 +39,6 @@ export class WelcomeComponent implements OnInit {
 
   get areFailedQuestions(): boolean {
     return this.failedQuestions.length > 1;
-  }
-  
-  validateSession() {
-    const session = JSON.parse(localStorage.getItem('userSession') || '{}');
-    const deviceId = localStorage.getItem('deviceId');
-  
-    const activeUsers = JSON.parse(localStorage.getItem('activeUsers') || '{}');
-  
-    if (activeUsers[session.username] !== deviceId) {
-      alert('Sesión inválida');
-      localStorage.clear();
-      location.href = '/login';
-    }
   }
   
   getFailedQuestions(): number[] {

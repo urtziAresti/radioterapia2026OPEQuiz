@@ -19,6 +19,7 @@ import {
   lockClosedOutline,
   logInOutline
 } from 'ionicons/icons';
+import { LogService } from '../../../services/log.service';
 
 addIcons({
   'lock-closed-outline': lockClosedOutline,
@@ -51,7 +52,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private logService: LogService
   ) {
     this.loginForm = this.fb.group({
       username: ['', [Validators.required, Validators.minLength(3)]],
@@ -86,37 +88,20 @@ export class LoginComponent implements OnInit {
         user.code === code.trim()
     );
   
-    if (!usuarioValido) {
+    if (usuarioValido) {
+      // Login correcto: Guardamos sesión en LocalStorage
+      localStorage.setItem('userSession', JSON.stringify(usuarioValido));
+      
+      // Navegamos a welcome
+      this.router.navigate(['/welcome']);
+    } else {
+      // Login incorrecto
       await this.presentErrorToast();
-      return;
     }
-  
-    const deviceId = this.getDeviceId();
-  
-    // 🔐 CONTROL GLOBAL DE USUARIOS
-    const activeUsers = JSON.parse(localStorage.getItem('activeUsers') || '{}');
-  
-    const existingDevice = activeUsers[usuarioValido.username];
-  
-    // 🚫 SI YA ESTÁ EN OTRO DISPOSITIVO → BLOQUEAR
-    if (existingDevice && existingDevice !== deviceId) {
-      await this.presentErrorToast('Este usuario ya está activo en otro dispositivo');
-      return;
-    }
-  
-    // ✔ registrar sesión global
-    activeUsers[usuarioValido.username] = deviceId;
-    localStorage.setItem('activeUsers', JSON.stringify(activeUsers));
-  
-    // ✔ guardar sesión local
-    localStorage.setItem('userSession', JSON.stringify({
-      username: usuarioValido.username,
-      deviceId
-    }));
-  
-    this.router.navigate(['/welcome']);
+    this.logService.log('LOGIN_SUCCESS', {
+      username: usuarioValido.username
+    });
   }
-
   async presentErrorToast(message? :string) {
     const toast = await this.toastController.create({
       message: message ? message : 'Usuario o código incorrectos. Inténtalo de nuevo.',
