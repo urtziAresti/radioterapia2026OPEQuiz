@@ -10,8 +10,6 @@
 
 # features 
 
-- BOTON NEXT PAGE - FLECHA - STYLO 
-- SI PREGUNTA FAIL, SOLO AVANZAR CON FLECHA 
 - mas espacio entre titulo y preguntas
 - Resultado X / sobre Y mas %
 - quitar boton salir
