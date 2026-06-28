@@ -24,6 +24,7 @@ addIcons({
   'lock-closed-outline': lockClosedOutline,
   'log-in-outline': logInOutline
 });
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -43,6 +44,7 @@ addIcons({
   ]
 })
 export class LoginComponent implements OnInit {
+
   loginForm!: FormGroup;
   usuariosPermitidos: any[] = [];
 
@@ -51,7 +53,6 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private toastController: ToastController
   ) {
-    // Inicializamos el formulario reactivo
     this.loginForm = this.fb.group({
       username: ['', [Validators.required, Validators.minLength(3)]],
       code: ['', [Validators.required]]
@@ -59,8 +60,19 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    // Cargamos el JSON estático en el array
     this.usuariosPermitidos = usersData;
+  }
+
+  // 🔐 DEVICE ID
+  getDeviceId(): string {
+    let deviceId = localStorage.getItem('deviceId');
+
+    if (!deviceId) {
+      deviceId = crypto.randomUUID();
+      localStorage.setItem('deviceId', deviceId);
+    }
+
+    return deviceId;
   }
 
   async onLogin() {
@@ -68,21 +80,29 @@ export class LoginComponent implements OnInit {
 
     const { username, code } = this.loginForm.value;
 
-    // Buscamos si existe el usuario con ese código (pasamos todo a minúsculas para evitar fallos de mayúsculas)
     const usuarioValido = this.usuariosPermitidos.find(
-      user => user.username.toLowerCase() === username.trim().toLowerCase() && user.code === code.trim()
+      user =>
+        user.username.toLowerCase() === username.trim().toLowerCase() &&
+        user.code === code.trim()
     );
 
-    if (usuarioValido) {
-      // Login correcto: Guardamos sesión en LocalStorage por si quieres proteger rutas después
-      localStorage.setItem('userSession', JSON.stringify(usuarioValido));
-      
-      // Navegamos a la pantalla de bienvenida
-      this.router.navigate(['/welcome']);
-    } else {
-      // Login incorrecto: Mostramos error con un Toast nativo de Ionic
+    if (!usuarioValido) {
       await this.presentErrorToast();
+      return;
     }
+
+    const deviceId = this.getDeviceId();
+
+    // 🔐 SESIÓN PROTEGIDA
+    const session = {
+      username: usuarioValido.username,
+      deviceId,
+      loginTime: Date.now()
+    };
+
+    localStorage.setItem('userSession', JSON.stringify(session));
+
+    this.router.navigate(['/welcome']);
   }
 
   async presentErrorToast() {
@@ -90,7 +110,7 @@ export class LoginComponent implements OnInit {
       message: 'Usuario o código incorrectos. Inténtalo de nuevo.',
       duration: 3000,
       position: 'bottom',
-      color: 'danger', // Rojo de Ionic para errores
+      color: 'danger',
       buttons: [
         {
           text: 'Cerrar',
@@ -98,6 +118,7 @@ export class LoginComponent implements OnInit {
         }
       ]
     });
+
     await toast.present();
   }
 }

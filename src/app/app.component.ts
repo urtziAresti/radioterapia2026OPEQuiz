@@ -1,20 +1,36 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
 import { FooterComponent } from './components/footer/footer.component';
-import { inject } from '@angular/core';
-import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+
+import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
-  imports: [IonApp, IonRouterOutlet,FooterComponent,CommonModule],
+  standalone: true,
+  imports: [IonApp, IonRouterOutlet, FooterComponent, CommonModule],
 })
 export class AppComponent {
-  private router = inject(Router);
 
-  showFooter(): boolean {
-    const url = this.router.url;
-    return url.includes('/login') || url.includes('/welcome');
+  private router = inject(Router);
+  private activatedRoute = inject(ActivatedRoute);
+
+  showFooter = false;
+
+  constructor() {
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(() => {
+
+        let route = this.activatedRoute;
+
+        while (route.firstChild) {
+          route = route.firstChild;
+        }
+
+        this.showFooter = route.snapshot.data['showFooter'] ?? false;
+      });
   }
 }
