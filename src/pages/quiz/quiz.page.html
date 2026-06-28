@@ -8,10 +8,16 @@
 </ion-header>
 
 <ion-content *ngIf="questions.length" class="ion-padding app-quiz-content">
-
   <!-- 🔥 PROGRESO -->
   <div class="progress-container ion-margin-bottom">
-    <div style="display: flex; justify-content: space-between; margin-bottom: 8px; align-items: center;">
+    <div
+      style="
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 8px;
+        align-items: center;
+      "
+    >
       <ion-note class="step-text">
         Pregunta {{ currentIndex + 1 }} de {{ questions.length }}
       </ion-note>
@@ -21,32 +27,37 @@
     </div>
 
     <ion-progress-bar
-    *ngIf="questions.length > 0"
-    color="secondary"
-    [value]="progress">
-  </ion-progress-bar>  </div>
+      *ngIf="questions.length > 0"
+      color="secondary"
+      [value]="progress"
+    >
+    </ion-progress-bar>
+  </div>
 
   <!-- 🔥 PREGUNTA -->
   <div *ngIf="currentIndex < questions.length" class="quiz-box">
-
     <ion-card class="question-card">
-      <ion-card-content style="display: flex; justify-content: space-between; align-items: center; gap: 10px;">
-      <h3 class="question">
-        {{ questions[currentIndex].question }}
-      </h3>
+      <ion-card-content
+        style="
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 10px;
+        "
+      >
+        <h3 class="question">{{ questions[currentIndex].question }}</h3>
 
-    <!-- 🪄 VARITA -->
-    <ion-button
-      *ngIf="false"
-      fill="clear"
-      size="small"
-      (click)="useMagic(questions[currentIndex].question)"
-    >
-    <ion-icon name="sparkles-outline"></ion-icon>
-
-    </ion-button>
-    </ion-card-content>
-</ion-card>
+        <!-- 🪄 VARITA -->
+        <ion-button
+          *ngIf="false"
+          fill="clear"
+          size="small"
+          (click)="useMagic(questions[currentIndex].question)"
+        >
+          <ion-icon name="sparkles-outline"></ion-icon>
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
 
     <!-- 🔥 OPCIONES -->
     <div class="options-container">
@@ -62,14 +73,15 @@
         </div>
       </div>
     </div>
-
   </div>
 
   <!-- 🔥 RESULTADOS -->
-  <div *ngIf="currentIndex >= questions.length" class="result-box ion-text-center ion-padding">
-
+  <div
+    *ngIf="currentIndex >= questions.length"
+    class="result-box ion-text-center ion-padding"
+  >
     <h2>{{ playerName || 'Aspirante' }}!</h2>
-    
+
     <p class="subtitle-result">Has finalizado el cuestionario.</p>
 
     <ion-card class="score-card">
@@ -79,7 +91,9 @@
 
         <div class="percentage-bar">
           <span class="percentage-text">Puntuación final:</span>
-          <ion-badge [color]="(correctAnswers/questions.length) >= 0.5 ? 'success' : 'danger'">
+          <ion-badge
+            [color]="(correctAnswers/questions.length) >= 0.5 ? 'success' : 'danger'"
+          >
             {{ (correctAnswers / questions.length) * 100 | number:'1.0-0' }}%
           </ion-badge>
         </div>
@@ -95,13 +109,11 @@
     >
       Volver al Inicio
     </ion-button>
-
   </div>
 
-<ion-fab class="floating-next" (click)="nextQuestion()" *ngIf="nextVisible">
-  <ion-fab-button class="icon-size">
-    <ion-icon name="chevron-forward-outline"></ion-icon>
-  </ion-fab-button>
-</ion-fab>
-
+  <ion-fab class="floating-next" (click)="nextQuestion()" *ngIf="nextVisible">
+    <ion-fab-button class="icon-size">
+      <ion-icon name="chevron-forward-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
