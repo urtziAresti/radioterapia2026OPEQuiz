@@ -10,14 +10,21 @@
 
 # features 
 
-- INCONOS TS EXPORTADO 
-- BOTON NEXT PAGE STYLO 
-- RECICLAR CUANDO INICIA DE NUEVO QUIZ 
+- quitar nombre
+- ajustar pantall welcome espacios
+- BOTON NEXT PAGE - FLECHA - STYLO 
+- SI PREGUNTA FAIL, SOLO AVANZAR CON FLECHA 
+- mas espacio entre titulo y preguntas
+- Resultado X / sobre Y mas %
+- quitar boton salir
+- Volver a inicio 
 - MODO REPASO CON ERRORES GUARDADOS
+- METER TEORIA EN CADA PREGUNTA con IA 
+
+
 
 - TEMARIO COMUN - AÑADIR PREGUNTAS 
 - 3 OPCIONES DE PREGUNTAS (RADIO,COMUN O MIX 80/20), 
-- METER TEORIA EN CADA PREGUNTA con IA 
 
 
  # preguntas
