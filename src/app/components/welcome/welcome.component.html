@@ -24,6 +24,14 @@
       Comenzar Cuestionario
     </button>
 
+
+    <button
+      class="btn-repaso"
+      *ngIf="false"
+      (click)="startRepasoMode()">
+      Repasar fallidas ({{ failedCount }})
+    </button>
+
     <button
       class="btn-suggestions"
       type="button"

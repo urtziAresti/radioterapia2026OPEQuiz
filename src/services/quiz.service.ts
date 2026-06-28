@@ -28,4 +28,12 @@ export class QuizService {
   checkAnswer(question: Question, answer: string): boolean {
     return question.correct === answer;
   }
+
+  getQuestionsByIds(ids: number[]): Question[] {
+    if (!Array.isArray(ids) || ids.length === 0) return [];
+  
+    const idSet = new Set(ids.map(id => Number(id)));
+  
+    return ALL_QUESTIONS.filter(q => idSet.has(Number(q.id)));
+  }
 }

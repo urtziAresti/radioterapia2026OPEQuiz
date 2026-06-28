@@ -10,10 +10,6 @@
 
 # features 
 
-- mas espacio entre titulo y preguntas
-- Resultado X / sobre Y mas %
-- quitar boton salir
-- Volver a inicio 
 - MODO REPASO CON ERRORES GUARDADOS
 - METER TEORIA EN CADA PREGUNTA con IA 
 

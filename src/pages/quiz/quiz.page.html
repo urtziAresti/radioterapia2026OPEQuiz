@@ -1,9 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
-    <ion-title>RADIOTERAPIA 2026</ion-title>
-    <ion-buttons slot="end" *ngIf="currentIndex >= questions.length">
-      <ion-button (click)="goToHome()">Salir</ion-button>
-    </ion-buttons>
+    <ion-title class="theme-title">RADIOTERAPIA 2026</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -91,10 +88,8 @@
 
         <div class="percentage-bar">
           <span class="percentage-text">Puntuación final:</span>
-          <ion-badge
-            [color]="(correctAnswers/questions.length) >= 0.5 ? 'success' : 'danger'"
-          >
-            {{ (correctAnswers / questions.length) * 100 | number:'1.0-0' }}%
+          <ion-badge [color]="(correctAnswers/questions.length) >= 0.5 ? 'success' : 'danger'">
+          {{correctAnswers }}/{{questions.length}} 
           </ion-badge>
         </div>
       </ion-card-content>

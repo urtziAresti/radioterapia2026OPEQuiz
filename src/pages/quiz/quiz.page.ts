@@ -23,62 +23,87 @@ addIcons({
   imports: [IonicModule, CommonModule]
 })
 export class QuizPage implements OnInit {
+
   private readonly OK_QUESTION_TIME = 1500;
 
   private quizService = inject(QuizService);
   private route = inject(ActivatedRoute);
   private router = inject(Router);
 
+  // ===== DATA =====
   questions: Question[] = [];
   currentIndex = 0;
   correctAnswers = 0;
+
   playerName = '';
   count = 0;
 
+  // ===== UI STATE =====
   selectedOption: string | null = null;
   isAnswered = false;
   nextVisible = false;
+
   magicAnswer: string | null = null;
   loadingMagic = false;
 
-  // Control de navegación y clicks
+  // ===== CONTROL =====
   private navigationLocked = false;
   private answerLocked = false;
   private quizFinished = false;
   private questionTimeout: any = null;
 
-  // Mapa de errores
   wrongAnswersMap: Record<number, number> = {};
 
+  // ===== MODE =====
+  mode: 'normal' | 'failed' = 'normal';
+  failedIds: number[] = [];
+
   ngOnInit() {
+
     this.route.queryParams.subscribe(params => {
+
+      // usuario
       if (params['name']) {
         this.playerName = params['name'];
       }
 
+      // 🧠 MODO REPASO
+      if (params['mode'] === 'failed') {
+        this.mode = 'failed';
+
+        this.failedIds = JSON.parse(params['ids'] || '[]');
+
+        this.questions = this.quizService.getQuestionsByIds(this.failedIds);
+        return;
+      }
+
+      // 🎯 MODO NORMAL
       if (params['count']) {
+        this.mode = 'normal';
+
         this.count = +params['count'];
         this.questions = this.quizService.getQuestions(this.count);
       }
     });
   }
 
+  // ===== PROGRESS =====
   get progress(): number {
     if (!this.questions || this.questions.length === 0) {
       return 0;
     }
+
     const value = this.currentIndex / this.questions.length;
+
     return Number.isFinite(value) ? value : 0;
   }
 
+  // ===== ANSWER =====
   answer(option: string) {
 
-    if (this.answerLocked || this.isAnswered) {
-      return;
-    }
+    if (this.answerLocked || this.isAnswered) return;
 
     this.answerLocked = true;
-
     this.selectedOption = option;
 
     const currentQuestion = this.questions[this.currentIndex];
@@ -91,15 +116,19 @@ export class QuizPage implements OnInit {
       this.slideError(this.OK_QUESTION_TIME);
     } else {
       this.nextVisible = true;
+
       const id = currentQuestion.id;
       this.wrongAnswersMap[id] = (this.wrongAnswersMap[id] || 0) + 1;
     }
   }
 
+  // ===== AUTO NEXT =====
   slideError(slideTime: number) {
+
     if (this.questionTimeout) {
       clearTimeout(this.questionTimeout);
     }
+
     this.questionTimeout = setTimeout(() => {
       this.nextQuestion();
     }, slideTime);
@@ -107,16 +136,13 @@ export class QuizPage implements OnInit {
 
   nextQuestion() {
 
-    if (this.navigationLocked) {
-      return;
-    }
+    if (this.navigationLocked) return;
 
     this.navigationLocked = true;
 
     this.currentIndex++;
     this.nextVisible = false;
 
-    // Limpiar ayuda IA de la pregunta anterior
     this.magicAnswer = null;
     this.loadingMagic = false;
 
@@ -134,13 +160,15 @@ export class QuizPage implements OnInit {
     }, 100);
   }
 
+  // ===== FINISH =====
   finishQuiz() {
 
-    if (this.quizFinished) {
-      return;
-    }
+    if (this.quizFinished) return;
 
     this.quizFinished = true;
+
+    // 🚫 NO guardar si es repaso
+    if (this.mode === 'failed') return;
 
     const userId = this.playerName || 'anonymous';
 
@@ -158,10 +186,9 @@ export class QuizPage implements OnInit {
     history.push(result);
 
     sessionStorage.setItem(userId, JSON.stringify(history));
-
-    console.log('RESULT SAVED', result);
   }
 
+  // ===== UI HELP =====
   getOptionColor(optionKey: string): string {
 
     if (!this.isAnswered) {
@@ -176,30 +203,22 @@ export class QuizPage implements OnInit {
       return 'correct-option';
     }
 
-    if (
-      this.selectedOption === optionKey &&
-      optionKey !== correctKey
-    ) {
+    if (this.selectedOption === optionKey && optionKey !== correctKey) {
       return 'incorrect-option';
     }
 
     return 'disabled-option';
   }
 
+  // ===== NAV =====
   goToHome() {
-
-    if (this.navigationLocked) {
-      return;
-    }
-    this.navigationLocked = true;
     this.router.navigate(['/welcome']);
   }
 
+  // ===== MAGIC HELP =====
   useMagic(question: string) {
 
-    if (this.loadingMagic) {
-      return;
-    }
+    if (this.loadingMagic) return;
 
     this.loadingMagic = true;
     this.magicAnswer = null;
@@ -211,12 +230,11 @@ export class QuizPage implements OnInit {
       },
       error: (err) => {
         console.error(err);
-
-        this.magicAnswer =
-          'Error consultando la magia 😅';
-
+        this.magicAnswer = 'Error consultando la magia 😅';
         this.loadingMagic = false;
       }
     });
   }
+
+  
 }
