@@ -6,7 +6,7 @@
 
 <ion-content *ngIf="questions.length" class="ion-padding app-quiz-content">
   <!-- 🔥 PROGRESO -->
-  <div class="progress-container ion-margin-bottom">
+  <div class="progress-container ion-margin-bottom" *ngIf="resultsPage">
     <div
       style="
         display: flex;
@@ -15,7 +15,7 @@
         align-items: center;
       "
     >
-      <ion-note class="step-text">
+      <ion-note class="step-text" *ngIf="resultsPage">
         Pregunta {{ currentIndex + 1 }} de {{ questions.length }}
       </ion-note>
       <ion-badge color="success" class="ion-badge">
@@ -85,7 +85,6 @@
       <ion-card-content>
         <p>Aciertos totales</p>
         <h1>{{ correctAnswers }} / {{ questions.length }}</h1>
-
         <div class="percentage-bar">
           <span class="percentage-text">Puntuación final:</span>
           <ion-badge [color]="(correctAnswers/questions.length) >= 0.5 ? 'success' : 'danger'">

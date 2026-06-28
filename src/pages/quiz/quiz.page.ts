@@ -1,46 +1,40 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { QuizService } from '../../services/quiz.service';
-import { Question } from '../../models/question.model';
-import { IonicModule } from '@ionic/angular';
-import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
-import { addIcons } from 'ionicons';
-import {
-  sparklesOutline,
-  chevronForwardCircleOutline
-} from 'ionicons/icons';
-import { LogService } from '../../services/log.service';
+import { Component, OnInit, inject } from "@angular/core";
+import { QuizService } from "../../services/quiz.service";
+import { Question } from "../../models/question.model";
+import { IonicModule } from "@ionic/angular";
+import { CommonModule } from "@angular/common";
+import { ActivatedRoute, Router } from "@angular/router";
+import { addIcons } from "ionicons";
+import { LogService } from "../../services/log.service";
+import { sparklesOutline, chevronForwardCircleOutline } from "ionicons/icons";
 
 addIcons({
-  'sparkles-outline': sparklesOutline,
-  'chevron-forward-outline': chevronForwardCircleOutline
+  "sparkles-outline": sparklesOutline,
+  "chevron-forward-outline": chevronForwardCircleOutline,
 });
 
 @Component({
-  selector: 'app-quiz',
-  templateUrl: './quiz.page.html',
-  styleUrls: ['./quiz.page.scss'],
+  selector: "app-quiz",
+  templateUrl: "./quiz.page.html",
+  styleUrls: ["./quiz.page.scss"],
   standalone: true,
-  imports: [IonicModule, CommonModule]
+  imports: [IonicModule, CommonModule],
 })
 export class QuizPage implements OnInit {
-
   private readonly OK_QUESTION_TIME = 1500;
 
   private quizService = inject(QuizService);
   private route = inject(ActivatedRoute);
   private router = inject(Router);
-  private logService = inject(LogService)
+  private logService = inject(LogService);
 
-  // ===== DATA =====
   questions: Question[] = [];
   currentIndex = 0;
   correctAnswers = 0;
 
-  playerName = '';
+  playerName = "";
   count = 0;
 
-  // ===== UI STATE =====
   selectedOption: string | null = null;
   isAnswered = false;
   nextVisible = false;
@@ -48,7 +42,6 @@ export class QuizPage implements OnInit {
   magicAnswer: string | null = null;
   loadingMagic = false;
 
-  // ===== CONTROL =====
   private navigationLocked = false;
   private answerLocked = false;
   private quizFinished = false;
@@ -56,53 +49,68 @@ export class QuizPage implements OnInit {
 
   wrongAnswersMap: Record<number, number> = {};
 
-  // ===== MODE =====
-  mode: 'normal' | 'failed' = 'normal';
+  mode: "normal" | "failed" = "normal";
   failedIds: number[] = [];
 
   ngOnInit() {
-
-    this.route.queryParams.subscribe(params => {
-
-      // usuario
-      if (params['name']) {
-        this.playerName = params['name'];
+    this.route.queryParams.subscribe((params) => {
+      if (params["name"]) {
+        this.playerName = params["name"];
       }
 
-      // 🧠 MODO REPASO
-      if (params['mode'] === 'failed') {
-        this.mode = 'failed';
+      if (params["mode"] === "failed") {
+        this.mode = "failed";
+        this.failedIds = JSON.parse(params["ids"] || "[]");
 
-        this.failedIds = JSON.parse(params['ids'] || '[]');
-
-        this.questions = this.quizService.getQuestionsByIds(this.failedIds);
+        this.resetQuizState();
+        this.loadFailedQuestions();
         return;
       }
 
-      // 🎯 MODO NORMAL
-      if (params['count']) {
-        this.mode = 'normal';
+      if (params["count"]) {
+        this.mode = "normal";
+        this.count = +params["count"];
 
-        this.count = +params['count'];
+        this.resetQuizState();
         this.questions = this.quizService.getQuestions(this.count);
       }
     });
   }
 
-  // ===== PROGRESS =====
-  get progress(): number {
-    if (!this.questions || this.questions.length === 0) {
-      return 0;
-    }
+  private resetQuizState() {
+    this.currentIndex = 0;
+    this.correctAnswers = 0;
 
-    const value = this.currentIndex / this.questions.length;
+    this.selectedOption = null;
+    this.isAnswered = false;
+    this.nextVisible = false;
 
-    return Number.isFinite(value) ? value : 0;
+    this.magicAnswer = null;
+    this.loadingMagic = false;
+
+    this.answerLocked = false;
+    this.navigationLocked = false;
+    this.quizFinished = false;
+
+    this.wrongAnswersMap = {};
+    this.questionTimeout = null;
   }
 
-  // ===== ANSWER =====
-  answer(option: string) {
+  private loadFailedQuestions() {
+    this.questions = this.quizService.getQuestionsByIds(this.failedIds);
+    this.currentIndex = 0;
 
+    this.selectedOption = null;
+    this.isAnswered = false;
+    this.nextVisible = false;
+  }
+
+  get progress(): number {
+    if (!this.questions.length) return 0;
+    return this.currentIndex / this.questions.length;
+  }
+
+  answer(option: string) {
     if (this.answerLocked || this.isAnswered) return;
 
     this.answerLocked = true;
@@ -115,6 +123,14 @@ export class QuizPage implements OnInit {
 
     if (isCorrect) {
       this.correctAnswers++;
+
+      if (this.mode === "failed") {
+        this.removeQuestionFromWrongAnswers(currentQuestion.id);
+        this.failedIds = this.failedIds.filter(
+          (id) => id !== currentQuestion.id
+        );
+      }
+
       this.slideError(this.OK_QUESTION_TIME);
     } else {
       this.nextVisible = true;
@@ -123,18 +139,14 @@ export class QuizPage implements OnInit {
       this.wrongAnswersMap[id] = (this.wrongAnswersMap[id] || 0) + 1;
     }
 
-    this.logService.log('ANSWER_SELECTED', {
+    this.logService.log("ANSWER_SELECTED", {
       questionId: currentQuestion.id,
-      correct: isCorrect
+      correct: isCorrect,
     });
   }
 
-  // ===== AUTO NEXT =====
   slideError(slideTime: number) {
-
-    if (this.questionTimeout) {
-      clearTimeout(this.questionTimeout);
-    }
+    if (this.questionTimeout) clearTimeout(this.questionTimeout);
 
     this.questionTimeout = setTimeout(() => {
       this.nextQuestion();
@@ -142,7 +154,6 @@ export class QuizPage implements OnInit {
   }
 
   nextQuestion() {
-
     if (this.navigationLocked) return;
 
     this.navigationLocked = true;
@@ -167,68 +178,65 @@ export class QuizPage implements OnInit {
     }, 100);
   }
 
-  // ===== FINISH =====
   finishQuiz() {
-
     if (this.quizFinished) return;
-
+  
     this.quizFinished = true;
-
-    // 🚫 NO guardar si es repaso
-    if (this.mode === 'failed') return;
-
-    const userId = this.playerName || 'anonymous';
-
-    const result = {
-      user: userId,
+  
+    const userId = this.playerName || "anonymous";
+  
+    const attempt = {
+      id: crypto.randomUUID(),
       date: new Date().toISOString(),
       totalQuestions: this.questions.length,
       correctAnswers: this.correctAnswers,
       wrongAnswers: this.wrongAnswersMap
     };
-
-    const existing = sessionStorage.getItem(userId);
-    const history = existing ? JSON.parse(existing) : [];
-
-    history.push(result);
-
-    sessionStorage.setItem(userId, JSON.stringify(history));
-    this.logService.log('QUIZ_FINISHED', {
+  
+    const raw = sessionStorage.getItem("quiz_history");
+  
+    const history = raw ? JSON.parse(raw) : [];
+  
+    const userIndex = history.findIndex((h: any) => h.user === userId);
+  
+    if (userIndex === -1) {
+      history.push({
+        user: userId,
+        attempts: [attempt]
+      });
+    } else {
+      history[userIndex].attempts.push(attempt);
+    }
+  
+    sessionStorage.setItem("quiz_history", JSON.stringify(history));
+  
+    this.logService.log("QUIZ_FINISHED", {
       correct: this.correctAnswers,
-      total: this.questions.length
+      total: this.questions.length,
     });
   }
 
-  // ===== UI HELP =====
   getOptionColor(optionKey: string): string {
-
     if (!this.isAnswered) {
-      return this.selectedOption === optionKey
-        ? 'selected-option'
-        : '';
+      return this.selectedOption === optionKey ? "selected-option" : "";
     }
 
     const correctKey = this.questions[this.currentIndex].correct;
 
-    if (optionKey === correctKey) {
-      return 'correct-option';
-    }
+    if (optionKey === correctKey) return "correct-option";
 
     if (this.selectedOption === optionKey && optionKey !== correctKey) {
-      return 'incorrect-option';
+      return "incorrect-option";
     }
 
-    return 'disabled-option';
+    return "disabled-option";
   }
 
-  // ===== NAV =====
   goToHome() {
-    this.router.navigate(['/welcome']);
+    this.router.navigate(["/welcome"]);
   }
 
-  // ===== MAGIC HELP =====
   useMagic(question: string) {
-
     if (this.loadingMagic) return;
 
     this.loadingMagic = true;
@@ -239,13 +247,37 @@ export class QuizPage implements OnInit {
         this.magicAnswer = res;
         this.loadingMagic = false;
       },
-      error: (err) => {
-        console.error(err);
-        this.magicAnswer = 'Error consultando la magia 😅';
+      error: () => {
+        this.magicAnswer = "Error consultando la magia 😅";
         this.loadingMagic = false;
-      }
+      },
     });
   }
 
+  get resultsPage(): boolean {
+    return this.currentIndex !== this.questions.length;
+  }
+
+  private removeQuestionFromWrongAnswers(questionId: number): void {
+    const session = localStorage.getItem("userSession");
+    if (!session) return;
   
+    const username = JSON.parse(session).username;
+  
+    const raw = sessionStorage.getItem("quiz_history");
+    if (!raw) return;
+  
+    const history = JSON.parse(raw);
+  
+    const user = history.find((u: any) => u.user === username);
+    if (!user) return;
+  
+    user.attempts.forEach((attempt: any) => {
+      if (attempt.wrongAnswers) {
+        delete attempt.wrongAnswers[questionId];
+      }
+    });
+  
+    sessionStorage.setItem("quiz_history", JSON.stringify(history));
+  }
 }

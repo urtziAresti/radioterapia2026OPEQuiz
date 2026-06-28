@@ -1,9 +1,9 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
 import { FooterComponent } from './components/footer/footer.component';
 import { CommonModule } from '@angular/common';
 
-import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 
 @Component({
@@ -15,23 +15,30 @@ import { filter } from 'rxjs/operators';
 export class AppComponent {
 
   private router = inject(Router);
-  private activatedRoute = inject(ActivatedRoute);
 
   showFooter = false;
+
+  /**
+   * 🔐 Whitelist de rutas donde quieres mostrar el footer
+   */
+  private whiteListUrls: string[] = [
+    '/login',
+    '/welcome'
+  ];
 
   constructor() {
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
-      .subscribe(() => {
+      .subscribe((event: any) => {
 
-        let route = this.activatedRoute;
+        const url: string = event.urlAfterRedirects;
 
-        while (route.firstChild) {
-          route = route.firstChild;
-        }
+        // 🔎 Control de whitelist
+        this.showFooter = this.whiteListUrls.some(path =>
+          url.startsWith(path)
+        );
 
-        this.showFooter = route.snapshot.data['showFooter'] ?? false;
+        console.log('[Router]', url, 'showFooter:', this.showFooter);
       });
   }
-
 }

@@ -21,9 +21,6 @@ export class WelcomeComponent implements OnInit {
     count: number;
   }>();
 
-
-
-
   ngOnInit() {
     const session = localStorage.getItem("userSession");
     if (session) {
@@ -38,29 +35,31 @@ export class WelcomeComponent implements OnInit {
   }
 
   get areFailedQuestions(): boolean {
-    return this.failedQuestions.length > 1;
+    return this.getFailedQuestions().length > 0;
   }
   
   getFailedQuestions(): number[] {
     const session = localStorage.getItem("userSession");
     if (!session) return [];
   
-    const user = JSON.parse(session);
-    const userId = user?.username || "anonymous";
+    const currentUser = JSON.parse(session);
+    const username = currentUser?.username || "anonymous";
   
-    const data = sessionStorage.getItem(userId);
-    if (!data) return [];
+    const raw = sessionStorage.getItem("quiz_history");
+    if (!raw) return [];
   
-    const history = JSON.parse(data);
+    const history: any[] = JSON.parse(raw);
   
-    const failedQuestions = history.flatMap((h: any) =>
-      Object.entries(h.wrongAnswers || {})
+    const userHistory = history.find(u => u.user === username);
+    if (!userHistory) return [];
+  
+    const failedQuestions: number[] = userHistory.attempts.flatMap((attempt: any) =>
+      Object.entries(attempt.wrongAnswers || {})
         .filter(([_, count]) => Number(count) > 0)
         .map(([id]) => Number(id))
     );
   
-    return Array.from(new Set<number>(failedQuestions));  
-  
+    return [...new Set(failedQuestions)];
   }
 
   startQuiz() {

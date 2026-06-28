@@ -27,7 +27,7 @@
 
     <button
       class="btn-repaso"
-      *ngIf="false"
+      *ngIf="areFailedQuestions"
       (click)="startRepasoMode()">
       Repasar fallidas ({{ failedCount }})
     </button>

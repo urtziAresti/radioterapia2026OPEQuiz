@@ -9,6 +9,9 @@ export class LogService {
   constructor(private http: HttpClient) {}
 
   log(event: string, data?: any) {
+
+    //TODO
+    return;
     const payload = {
       event,
       data,

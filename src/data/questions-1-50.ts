@@ -86,7 +86,7 @@ export const QUESTIONS_1_50: Question[] = [
       c: "Cuando se detecta una contaminación radiactiva, el primer paso es la protección adecuada de la persona que realizará la descontaminación.",
       d: "Todo el material utilizado durante el proceso de descontaminación se gestionará como residuo radiactivo."
     },
-    correct: "a"
+    correct: "c"
   },
   {
     id: 8,
