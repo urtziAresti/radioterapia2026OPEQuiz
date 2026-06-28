@@ -20,8 +20,11 @@
       </ion-badge>
     </div>
 
-    <ion-progress-bar color="secondary" [value]="progress"></ion-progress-bar>
-  </div>
+    <ion-progress-bar
+    *ngIf="questions.length > 0"
+    color="secondary"
+    [value]="progress">
+  </ion-progress-bar>  </div>
 
   <!-- 🔥 PREGUNTA -->
   <div *ngIf="currentIndex < questions.length" class="quiz-box">

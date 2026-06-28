@@ -64,11 +64,11 @@ export class QuizPage implements OnInit {
   }
 
   get progress(): number {
-    if (!this.questions.length) {
+    if (!this.questions || this.questions.length === 0) {
       return 0;
     }
-
-    return this.currentIndex / this.questions.length;
+    const value = this.currentIndex / this.questions.length;
+    return Number.isFinite(value) ? value : 0;
   }
 
   answer(option: string) {
