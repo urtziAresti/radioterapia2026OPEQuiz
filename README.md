@@ -22,4 +22,5 @@
 
  # preguntas
 
-150 OK preguntas y respuestas 
+200 OK preguntas y respuestas 
+  

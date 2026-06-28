@@ -21,7 +21,7 @@ export const QUESTIONS_151_200: Question[] = [
       c: "Sarcomas de extremidades.",
       d: "Todas las opciones son correctas.",
     },
-    correct: "X",
+    correct: "d",
   },
   {
     id: 152,
@@ -33,7 +33,7 @@ export const QUESTIONS_151_200: Question[] = [
       c: "Miembros del público.",
       d: "Ninguno de los anteriores.",
     },
-    correct: "X",
+    correct: "c",
   },
   {
     id: 153,
@@ -45,7 +45,7 @@ export const QUESTIONS_151_200: Question[] = [
       c: "Ecografía.",
       d: "Radiología convencional.",
     },
-    correct: "X",
+    correct: "a",
   },
   {
     id: 154,
@@ -57,7 +57,7 @@ export const QUESTIONS_151_200: Question[] = [
       c: "Bolus.",
       d: "Colimador multiláminas.",
     },
-    correct: "X",
+    correct: "c",
   },
   {
     id: 155,
@@ -69,7 +69,7 @@ export const QUESTIONS_151_200: Question[] = [
       c: "GTV.",
       d: "OAR.",
     },
-    correct: "X",
+    correct: "b",
   },
   {
     id: 156,
@@ -81,7 +81,7 @@ export const QUESTIONS_151_200: Question[] = [
       c: "Detectores de termoluminiscencia.",
       d: "Detectores de semiconductor.",
     },
-    correct: "X",
+    correct: "c",
   },
   {
     id: 157,
@@ -93,7 +93,7 @@ export const QUESTIONS_151_200: Question[] = [
       c: "Hipervigilancia adaptativa.",
       d: 'Sensación de "espada de Damocles".',
     },
-    correct: "X",
+    correct: "d",
   },
   {
     id: 158,
@@ -105,7 +105,7 @@ export const QUESTIONS_151_200: Question[] = [
       c: "El klystron puede montarse en el brazo y trabaja a menor voltaje que el magnetrón.",
       d: "El klystron puede montarse en el brazo y trabaja a mayor voltaje que el magnetrón.",
     },
-    correct: "X",
+    correct: "a",
   },
   {
     id: 159,
@@ -117,7 +117,7 @@ export const QUESTIONS_151_200: Question[] = [
       c: "Tumores de laringe y parótida.",
       d: "Tumores de la médula espinal y angiofibroma nasofaríngeos.",
     },
-    correct: "X",
+    correct: "c",
   },
   {
     id: 160,
@@ -129,7 +129,7 @@ export const QUESTIONS_151_200: Question[] = [
       c: "Sistema gastrointestinal.",
       d: "Sistema nervioso central.",
     },
-    correct: "X",
+    correct: "d",
   },
   {
     id: 161,
@@ -141,7 +141,7 @@ export const QUESTIONS_151_200: Question[] = [
       c: "Todo el cuerpo con una dosis con una diferencia máxima de 8% de la prescrita.",
       d: "Todo el cuerpo con una dosis con una diferencia máxima de 10% de la prescrita.",
     },
-    correct: "X",
+    correct: "d",
   },
   {
     id: 162,
@@ -153,7 +153,7 @@ export const QUESTIONS_151_200: Question[] = [
       c: "Uretra y fémur.",
       d: "Recto, vejiga e intestino delgado.",
     },
-    correct: "X",
+    correct: "d",
   },
   {
     id: 163,
@@ -165,7 +165,7 @@ export const QUESTIONS_151_200: Question[] = [
       c: "Helio.",
       d: "Nitrógeno.",
     },
-    correct: "X",
+    correct: "a",
   },
   {
     id: 164,
@@ -177,7 +177,7 @@ export const QUESTIONS_151_200: Question[] = [
       c: "Fraccionamiento acelerado.",
       d: "Hiperfraccionamiento acelerado.",
     },
-    correct: "X",
+    correct: "b",
   },
   {
     id: 165,
@@ -189,7 +189,7 @@ export const QUESTIONS_151_200: Question[] = [
       c: "El recto inferior.",
       d: "La glándula prostática.",
     },
-    correct: "X",
+    correct: "d",
   },
   {
     id: 166,
@@ -201,7 +201,7 @@ export const QUESTIONS_151_200: Question[] = [
       c: "Equipos de estereotaxia extracraneal.",
       d: "Ninguna de las respuestas es correcta.",
     },
-    correct: "X",
+    correct: "a",
   },
   {
     id: 167,
@@ -213,7 +213,7 @@ export const QUESTIONS_151_200: Question[] = [
       c: "Utiliza siempre protones de energía fija, facilitando la dosimetría.",
       d: "Ninguna opción es correcta.",
     },
-    correct: "X",
+    correct: "a",
   },
   {
     id: 168,
@@ -225,7 +225,7 @@ export const QUESTIONS_151_200: Question[] = [
       c: "Rayos X de frenado.",
       d: "Rayos X característicos.",
     },
-    correct: "X",
+    correct: "c",
   },
   {
     id: 169,
@@ -236,7 +236,7 @@ export const QUESTIONS_151_200: Question[] = [
       c: "Las opciones a) y b) son correctas.",
       d: "Ninguna opción es correcta.",
     },
-    correct: "X",
+    correct: "c",
   },
   {
     id: 170,
@@ -248,7 +248,7 @@ export const QUESTIONS_151_200: Question[] = [
       c: "Un equipo de medida rápida.",
       d: "Ninguna de las respuestas es correcta.",
     },
-    correct: "X",
+    correct: "a",
   },
   {
     id: 171,
@@ -260,7 +260,7 @@ export const QUESTIONS_151_200: Question[] = [
       c: "Elevación del miembro – presión directa – compresión arterial – inmovilización de fracturas – aplicación de un torniquete.",
       d: "Inmovilización de fracturas – elevación del miembro – presión directa – compresión arterial – aplicación de un torniquete.",
     },
-    correct: "X",
+    correct: "a",
   },
   {
     id: 172,
@@ -272,7 +272,7 @@ export const QUESTIONS_151_200: Question[] = [
       c: "Terciario.",
       d: "Ningún colimador del acelerador lineal tiene forma cónica.",
     },
-    correct: "X",
+    correct: "a",
   },
   {
     id: 173,
@@ -284,7 +284,7 @@ export const QUESTIONS_151_200: Question[] = [
       c: "Únicamente de factores externos como la presión o la temperatura.",
       d: "Ninguna opción es correcta.",
     },
-    correct: "X",
+    correct: "b",
   },
   {
     id: 174,
@@ -296,7 +296,7 @@ export const QUESTIONS_151_200: Question[] = [
       c: "Un menor tamaño de campo produce una mayor generación de radiación dispersa.",
       d: "A mayor grosor de la persona paciente, mayor generación de radiación dispersa.",
     },
-    correct: "X",
+    correct: "c",
   },
   {
     id: 175,
@@ -308,7 +308,7 @@ export const QUESTIONS_151_200: Question[] = [
       c: "Despersonalización.",
       d: "Hipomanía.",
     },
-    correct: "X",
+    correct: "c",
   },
   {
     id: 176,
@@ -320,7 +320,7 @@ export const QUESTIONS_151_200: Question[] = [
       c: "Radiación ondulatoria.",
       d: "Radiación corpuscular.",
     },
-    correct: "X",
+    correct: "d",
   },
   {
     id: 177,
@@ -332,7 +332,7 @@ export const QUESTIONS_151_200: Question[] = [
       c: "La dosis dentro del PTV debe estar entre el 90% y el 110% de la dosis prescrita.",
       d: "La dosis dentro del PTV debe estar entre el 95% y el 110% de la dosis prescrita.",
     },
-    correct: "X",
+    correct: "b",
   },
   {
     id: 178,
@@ -344,7 +344,7 @@ export const QUESTIONS_151_200: Question[] = [
       c: "7 mm.",
       d: "5 mm.",
     },
-    correct: "X",
+    correct: "d",
   },
   {
     id: 179,
@@ -356,7 +356,7 @@ export const QUESTIONS_151_200: Question[] = [
       c: "Aumento de la producción de rayos X de frenado.",
       d: "Aumento de la dosis absorbida en la superficie del paciente.",
     },
-    correct: "X",
+    correct: "a",
   },
   {
     id: 180,
@@ -368,7 +368,7 @@ export const QUESTIONS_151_200: Question[] = [
       c: "Exposición del trabajador.",
       d: "Exposición de miembros del público.",
     },
-    correct: "X",
+    correct: "a",
   },
   {
     id: 181,
@@ -380,7 +380,7 @@ export const QUESTIONS_151_200: Question[] = [
       c: "Gráficas de isoefecto.",
       d: "Gráficas de dosis-tejido.",
     },
-    correct: "X",
+    correct: "c",
   },
   {
     id: 182,
@@ -392,7 +392,7 @@ export const QUESTIONS_151_200: Question[] = [
       c: "Porque la irradiación se realiza con campos magnéticos.",
       d: "Todas las opciones son falsas.",
     },
-    correct: "X",
+    correct: "b",
   },
   {
     id: 183,
@@ -404,7 +404,7 @@ export const QUESTIONS_151_200: Question[] = [
       c: "Isocentro.",
       d: "Punto de cruce.",
     },
-    correct: "X",
+    correct: "c",
   },
   {
     id: 184,
@@ -416,7 +416,7 @@ export const QUESTIONS_151_200: Question[] = [
       c: "80ºC.",
       d: "85ºC.",
     },
-    correct: "X",
+    correct: "b",
   },
   {
     id: 185,
@@ -428,7 +428,7 @@ export const QUESTIONS_151_200: Question[] = [
       c: "El tamaño de campo.",
       d: "Todas las opciones son correctas.",
     },
-    correct: "X",
+    correct: "d",
   },
   {
     id: 186,
@@ -440,7 +440,7 @@ export const QUESTIONS_151_200: Question[] = [
       c: "Sumisa.",
       d: "Encubierta.",
     },
-    correct: "X",
+    correct: "b",
   },
   {
     id: 187,
@@ -452,7 +452,7 @@ export const QUESTIONS_151_200: Question[] = [
       c: "La filtración añadida consiste en unas láminas de aluminio o cobre que se colocan a la salida del haz.",
       d: "Permite disminuir la calidad del haz.",
     },
-    correct: "X",
+    correct: "d",
   },
   {
     id: 188,
@@ -464,7 +464,7 @@ export const QUESTIONS_151_200: Question[] = [
       c: "No requieren personal de radiofísica.",
       d: "Todas las opciones son correctas.",
     },
-    correct: "X",
+    correct: "a",
   },
   {
     id: 189,
@@ -476,7 +476,7 @@ export const QUESTIONS_151_200: Question[] = [
       c: "Efecto Compton.",
       d: "Pico de Bragg.",
     },
-    correct: "X",
+    correct: "d",
   },
   {
     id: 190,
@@ -488,7 +488,7 @@ export const QUESTIONS_151_200: Question[] = [
       c: "El/La especialista en radiofísica hospitalaria.",
       d: "La persona que primero detecte la anomalía.",
     },
-    correct: "X",
+    correct: "c",
   },
   {
     id: 191,
@@ -500,7 +500,7 @@ export const QUESTIONS_151_200: Question[] = [
       c: "Tanto el diferencial como el acumulativo.",
       d: "Ninguna de las respuestas es correcta.",
     },
-    correct: "X",
+    correct: "b",
   },
   {
     id: 192,
@@ -512,7 +512,7 @@ export const QUESTIONS_151_200: Question[] = [
       c: "Las rejillas antidifusoras solo eliminan radiación dispersa.",
       d: "Su uso supone una mayor dosis al paciente para lograr una mejor calidad de imagen.",
     },
-    correct: "X",
+    correct: "d",
   },
   {
     id: 193,
@@ -524,7 +524,7 @@ export const QUESTIONS_151_200: Question[] = [
       c: "En el lóbulo occipital.",
       d: "En el lóbulo frontal.",
     },
-    correct: "X",
+    correct: "c",
   },
   {
     id: 194,
@@ -536,7 +536,7 @@ export const QUESTIONS_151_200: Question[] = [
       c: "Es el tratamiento de elección post-cirugía y debe iniciarse 48 horas tras la cirugía.",
       d: "Es el tratamiento de elección a pacientes candidatos a cirugía y debe iniciarse de manera urgente.",
     },
-    correct: "X",
+    correct: "b",
   },
   {
     id: 195,
@@ -547,7 +547,7 @@ export const QUESTIONS_151_200: Question[] = [
       c: "Una herramienta de edición y configuración de haces de electrones.",
       d: "Una herramienta de edición y configuración de haces de fotones.",
     },
-    correct: "X",
+    correct: "b",
   },
   {
     id: 196,
@@ -559,7 +559,7 @@ export const QUESTIONS_151_200: Question[] = [
       c: "Es el elemento en el que se colocará el paciente durante el tratamiento.",
       d: "Debe de ser de un material lo más radiopaco posible.",
     },
-    correct: "X",
+    correct: "d",
   },
   {
     id: 197,
@@ -571,7 +571,7 @@ export const QUESTIONS_151_200: Question[] = [
       c: "PRV.",
       d: "RVR.",
     },
-    correct: "X",
+    correct: "a",
   },
   {
     id: 198,
@@ -583,7 +583,7 @@ export const QUESTIONS_151_200: Question[] = [
       c: "50%.",
       d: "99%.",
     },
-    correct: "X",
+    correct: "a",
   },
   {
     id: 199,
@@ -595,7 +595,7 @@ export const QUESTIONS_151_200: Question[] = [
       c: "Una fracción diaria de 1,8-2,5 Gy, 3 días por semana.",
       d: "Una fracción diaria de 1,8-2 Gy, 3 días por semana.",
     },
-    correct: "X",
+    correct: "b",
   },
   {
     id: 200,
@@ -607,6 +607,6 @@ export const QUESTIONS_151_200: Question[] = [
       c: "Se trata de evitar siempre el enfrentamiento con los/las demás.",
       d: "Se transmite la información necesaria sin profundizar en las preocupaciones personales de la persona paciente.",
     },
-    correct: "X",
+    correct: "a",
   },
 ];
