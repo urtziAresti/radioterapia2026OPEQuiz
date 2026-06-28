@@ -1,16 +1,5 @@
-export interface Question {
-    id: number;
-    question: string;
-    options: {
-      a: string;
-      b: string;
-      c: string;
-      d: string;
-    };
-    correct: "a" | "b" | "c" | "d";
-  }
-
-  export const QUESTIONS_51_100: Question[] = [
+import { Question } from "../interfaces/question";
+export const QUESTIONS_51_100: Question[] = [
 {
     id: 51,
     question: "Respecto a las características del dolor es FALSO que:",

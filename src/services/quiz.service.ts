@@ -8,9 +8,7 @@ import { map } from 'rxjs/operators';
 export class QuizService {
 
   constructor(private http: HttpClient) {}
-
-  // 🔥 Netlify function (NO OpenAI directo)
-  private apiUrl = '/.netlify/functions/ask';
+  private apiUrl = '';
 
   ask(question: string) {
     return this.http.post<any>(this.apiUrl, {

@@ -1,16 +1,6 @@
-export interface Question {
-    id: number;
-    question: string;
-    options: {
-      a: string;
-      b: string;
-      c: string;
-      d: string;
-    };
-    correct: "a" | "b" | "c" | "d";
-  }
+import { Question } from "../interfaces/question";
 
-  export const QUESTIONS_101_150: Question[] = [
+export const QUESTIONS_101_150: Question[] = [
 {
     id: 101,
     question: "¿Qué tipo de tumor se encuentra en la zona infratentorial?",

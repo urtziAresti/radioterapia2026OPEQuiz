@@ -1,15 +1,4 @@
-export interface Question {
-  id: number;
-  question: string;
-  options: {
-    a: string;
-    b: string;
-    c: string;
-    d: string;
-  };
-  correct: "a" | "b" | "c" | "d";
-}
-
+import { Question } from "../interfaces/question";
 export const QUESTIONS_1_50: Question[] = [
   {
     id: 1,
