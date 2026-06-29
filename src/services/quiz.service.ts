@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ALL_QUESTIONS } from '../data/questions';
+import { RADIO_QUESTIONS } from '../data/radio_questions';
 import { Question } from '../models/question.model';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
@@ -19,7 +19,7 @@ export class QuizService {
   }
 
   getQuestions(count: number): Question[] {
-    const randomQuestions = [...ALL_QUESTIONS].sort(() => Math.random() - 0.5);
+    const randomQuestions = [...RADIO_QUESTIONS].sort(() => Math.random() - 0.5);
     return randomQuestions.slice(0, count);
   }
 
@@ -32,6 +32,6 @@ export class QuizService {
   
     const idSet = new Set(ids.map(id => Number(id)));
   
-    return ALL_QUESTIONS.filter(q => idSet.has(Number(q.id)));
+    return RADIO_QUESTIONS.filter(q => idSet.has(Number(q.id)));
   }
 }
