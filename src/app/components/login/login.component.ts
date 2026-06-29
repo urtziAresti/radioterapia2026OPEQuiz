@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http'; // 👈 Añadido para conectar con Vercel
+import { firstValueFrom } from 'rxjs';
 import {
   IonContent,
   IonHeader,
@@ -13,12 +15,8 @@ import {
   IonIcon,
   ToastController
 } from '@ionic/angular/standalone';
-import usersData from '../../../assets/users.json';
 import { addIcons } from 'ionicons';
-import {
-  lockClosedOutline,
-  logInOutline
-} from 'ionicons/icons';
+import { lockClosedOutline, logInOutline } from 'ionicons/icons';
 import { LogService } from '../../../services/log.service';
 
 addIcons({
@@ -47,11 +45,12 @@ addIcons({
 export class LoginComponent implements OnInit {
 
   loginForm!: FormGroup;
-  usuariosPermitidos: any[] = [];
+  // 💡 Ya no necesitamos la variable usuariosPermitidos aquí localmente
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
+    private http: HttpClient, // 👈 Inyectamos HttpClient
     private toastController: ToastController,
     private logService: LogService
   ) {
@@ -62,7 +61,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.usuariosPermitidos = usersData;
+    // Limpio el OnInit ya que no cargamos datos locales
   }
 
   // 🔐 DEVICE ID
@@ -82,27 +81,46 @@ export class LoginComponent implements OnInit {
   
     const { username, code } = this.loginForm.value;
   
-    const usuarioValido = this.usuariosPermitidos.find(
-      user =>
-        user.username.toLowerCase() === username.trim().toLowerCase() &&
-        user.code === code.trim()
-    );
+    try {
+      // 🚀 Hacemos la validación segura en el Backend de Vercel
+      const respuesta: any = await firstValueFrom(
+        this.http.post('/api/login', { 
+          username: username.trim(), 
+          code: code.trim() 
+        })
+      );
   
-    if (usuarioValido) {
-      // Login correcto: Guardamos sesión en LocalStorage
-      localStorage.setItem('userSession', JSON.stringify(usuarioValido));
+      if (respuesta && respuesta.ok) {
+        // Login correcto: Guardamos la sesión (sin contraseñas) devuelta por la API
+        localStorage.setItem('userSession', JSON.stringify({
+          username: respuesta.username,
+          deviceId: this.getDeviceId()
+        }));
+        
+        // Registramos el log de éxito de forma segura
+        await this.logService.log('LOGIN_SUCCESS', {
+          username: respuesta.username
+        });
+
+        // Navegamos a welcome
+        this.router.navigate(['/welcome']);
+      } else {
+        await this.presentErrorToast();
+      }
+
+    } catch (error: any) {
+      // Si la API devuelve un 401 (Credenciales inválidas) o falla el servidor
+      await this.presentErrorToast(error.error?.error || 'Error al iniciar sesión. Inténtalo de nuevo.');
       
-      // Navegamos a welcome
-      this.router.navigate(['/welcome']);
-    } else {
-      // Login incorrecto
-      await this.presentErrorToast();
+      // Dejamos registro del fallo en el LogService
+      await this.logService.log('LOGIN_FAILED', {
+        username: username,
+        error: error.message
+      });
     }
-    this.logService.log('LOGIN_SUCCESS', {
-      username: usuarioValido.username
-    });
   }
-  async presentErrorToast(message? :string) {
+
+  async presentErrorToast(message?: string) {
     const toast = await this.toastController.create({
       message: message ? message : 'Usuario o código incorrectos. Inténtalo de nuevo.',
       duration: 3000,
