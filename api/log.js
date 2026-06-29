@@ -9,30 +9,23 @@ export default function handler(req, res) {
   }
 
   if (req.method !== 'POST') {
-    return res.status(405).json({
-      ok: false,
-      error: 'Method not allowed'
-    });
+    return res.status(405).json({ ok: false, error: 'Method not allowed' });
   }
 
   try {
+    // IMPORTANTE: Si req.body viene como String, lo parseamos.
+    const body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
+
     console.log('========== APP LOG ==========');
     console.log('Timestamp:', new Date().toISOString());
     console.log('IP:', req.headers['x-forwarded-for'] || req.socket?.remoteAddress);
     console.log('Headers:', req.headers);
-    console.log('Body:', req.body);
+    console.log('Body:', body); // Usamos el body parseado
     console.log('=============================');
 
-    return res.status(200).json({
-      ok: true
-    });
+    return res.status(200).json({ ok: true });
   } catch (err) {
-    console.error('LOG API ERROR');
-    console.error(err);
-
-    return res.status(500).json({
-      ok: false,
-      error: err.message
-    });
+    console.error('LOG API ERROR', err);
+    return res.status(500).json({ ok: false, error: err.message });
   }
 }
