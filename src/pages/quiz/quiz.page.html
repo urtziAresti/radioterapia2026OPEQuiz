@@ -57,16 +57,34 @@
         </h3>
 
         <!-- 🪄 VARITA -->
-        <ion-button
-          *ngIf="true"
-          fill="clear"
-          size="small"
-          (click)="useMagic(questions[currentIndex])"
-        >
-          <ion-icon name="sparkles-outline"></ion-icon>
-        </ion-button>
+      
       </ion-card-content>
     </ion-card>
+
+    <!-- 🪄 MAGIC ANSWER -->
+
+    <ion-button
+    *ngIf="false"
+    class="robot-button"
+    fill="clear"
+    size="small"
+    (click)="useMagic(questions[currentIndex])"
+  >
+    <img src="assets/icon/robot.svg" alt="IA"  />
+  </ion-button>
+<div *ngIf="magicAnswer" class="magic-answer-box ion-margin-bottom">
+  <ion-card color="tertiary">
+    <ion-card-content>
+      <div style="display:flex; align-items:center; gap:10px;">
+        <ion-icon name="sparkles-outline"></ion-icon>
+
+        <div>
+          <strong>La IA cree que la respuesta es la : {{ magicAnswer }}</strong>
+        </div>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</div>
 
     <!-- 🔥 OPCIONES -->
     <div class="options-container">
