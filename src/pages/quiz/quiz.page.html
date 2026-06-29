@@ -7,6 +7,15 @@
 <ion-content *ngIf="questions.length" class="ion-padding app-quiz-content">
   <!-- 🔥 PROGRESO -->
   <div class="progress-container ion-margin-bottom" *ngIf="resultsPage">
+
+    <!-- ⏱ CRONÓMETRO -->
+    <div class="timer-container">
+      <ion-chip color="warning">
+        <ion-icon name="time-outline"></ion-icon>
+        <ion-label class="timer-color">{{ elapsedTime }}</ion-label>
+      </ion-chip>
+    </div>
+
     <div
       style="
         display: flex;
@@ -18,6 +27,7 @@
       <ion-note class="step-text" *ngIf="resultsPage">
         Pregunta {{ currentIndex + 1 }} de {{ questions.length }}
       </ion-note>
+
       <ion-badge color="success" class="ion-badge">
         Correctas: {{ correctAnswers }}
       </ion-badge>
@@ -42,7 +52,9 @@
           gap: 10px;
         "
       >
-        <h3 class="question">{{ questions[currentIndex].question }}</h3>
+        <h3 class="question">
+          {{ questions[currentIndex].question }}
+        </h3>
 
         <!-- 🪄 VARITA -->
         <ion-button
@@ -64,7 +76,10 @@
         [ngClass]="getOptionColor(opt)"
         (click)="answer(opt)"
       >
-        <div class="option-letter">{{ opt.toUpperCase() }}</div>
+        <div class="option-letter">
+          {{ opt.toUpperCase() }}
+        </div>
+
         <div class="option-text">
           {{ $any(questions[currentIndex].options)[opt] }}
         </div>
@@ -75,22 +90,42 @@
   <!-- 🔥 RESULTADOS -->
   <div
     *ngIf="currentIndex >= questions.length"
-    class="result-box ion-text-center ion-padding"
-  >
-    <h2>{{ playerName || 'Aspirante' }}!</h2>
+    class="result-box ion-text-center ion-padding">
+    <h2>¡{{ playerName || 'Aspirante' }}!</h2>
 
-    <p class="subtitle-result">Has finalizado el cuestionario.</p>
+    <p class="subtitle-result">
+      Has finalizado el test.
+    </p>
 
     <ion-card class="score-card">
       <ion-card-content>
+
         <p>Aciertos totales</p>
-        <h1>{{ correctAnswers }} / {{ questions.length }}</h1>
+
+        <h1>
+          {{ correctAnswers }} / {{ questions.length }}
+        </h1>
+
         <div class="percentage-bar">
-          <span class="percentage-text">Puntuación final:</span>
-          <ion-badge [color]="(correctAnswers/questions.length) >= 0.5 ? 'success' : 'danger'">
-          {{correctAnswers }}/{{questions.length}} 
+          <span class="percentage-text">
+            Puntuación final:
+          </span>
+
+          <ion-badge
+            [color]="(correctAnswers/questions.length) >= 0.5 ? 'success' : 'danger'"
+          >
+            {{ correctAnswers }}/{{ questions.length }}
           </ion-badge>
         </div>
+
+        <div class="ion-margin-top">
+          <p><strong>Duración</strong></p>
+          <ion-chip color="primary">
+            <ion-icon name="time-outline"></ion-icon>
+            <ion-label>{{ elapsedTime }}</ion-label>
+          </ion-chip>
+        </div>
+
       </ion-card-content>
     </ion-card>
 
@@ -105,7 +140,11 @@
     </ion-button>
   </div>
 
-  <ion-fab class="floating-next" (click)="nextQuestion()" *ngIf="nextVisible">
+  <ion-fab
+    class="floating-next"
+    (click)="nextQuestion()"
+    *ngIf="nextVisible"
+  >
     <ion-fab-button class="icon-size">
       <ion-icon name="chevron-forward-outline"></ion-icon>
     </ion-fab-button>

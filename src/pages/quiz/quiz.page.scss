@@ -197,3 +197,39 @@ ion-toolbar {
   display: flex;
   text-align: -webkit-center;
 }
+
+.timer-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.timer-container ion-chip {
+  background-color: white;
+
+  height: 40px;
+  padding: 0 14px;
+  border-radius: 20px;
+
+  font-size: 18px;
+  font-weight: 700;
+
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+}
+
+.timer-container ion-icon {
+  font-size: 20px;
+  margin-right: 6px;
+  color:#1c7d36
+}
+
+.timer-container ion-label {
+  font-family: monospace;
+  letter-spacing: 1px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.timer-color{
+  color:#a67aca;
+}

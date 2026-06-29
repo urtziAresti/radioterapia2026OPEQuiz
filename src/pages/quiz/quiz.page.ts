@@ -6,11 +6,12 @@ import { CommonModule } from "@angular/common";
 import { ActivatedRoute, Router } from "@angular/router";
 import { addIcons } from "ionicons";
 import { LogService } from "../../services/log.service";
-import { sparklesOutline, chevronForwardCircleOutline } from "ionicons/icons";
+import { sparklesOutline, chevronForwardCircleOutline,timeOutline } from "ionicons/icons";
 
 addIcons({
   "sparkles-outline": sparklesOutline,
   "chevron-forward-outline": chevronForwardCircleOutline,
+  "time-outline": timeOutline,
 });
 
 @Component({
@@ -41,6 +42,10 @@ export class QuizPage implements OnInit {
 
   magicAnswer: string | null = null;
   loadingMagic = false;
+
+  elapsedTime = "00:00";
+  private timer: any = null;
+  private elapsedSeconds = 0;
 
   private navigationLocked = false;
   private answerLocked = false;
@@ -80,21 +85,25 @@ export class QuizPage implements OnInit {
   private resetQuizState() {
     this.currentIndex = 0;
     this.correctAnswers = 0;
-
+  
     this.selectedOption = null;
     this.isAnswered = false;
     this.nextVisible = false;
-
+  
     this.magicAnswer = null;
     this.loadingMagic = false;
-
+  
     this.answerLocked = false;
     this.navigationLocked = false;
     this.quizFinished = false;
-
+  
     this.wrongAnswersMap = {};
     this.questionTimeout = null;
+  
+    this.stopTimer();
+    this.startTimer();
   }
+
 
   private loadFailedQuestions() {
     this.questions = this.quizService.getQuestionsByIds(this.failedIds);
@@ -181,39 +190,10 @@ export class QuizPage implements OnInit {
   finishQuiz() {
     if (this.quizFinished) return;
   
+    this.stopTimer();
+  
     this.quizFinished = true;
   
-    const userId = this.playerName || "anonymous";
-  
-    const attempt = {
-      id: crypto.randomUUID(),
-      date: new Date().toISOString(),
-      totalQuestions: this.questions.length,
-      correctAnswers: this.correctAnswers,
-      wrongAnswers: this.wrongAnswersMap
-    };
-  
-    const raw = sessionStorage.getItem("quiz_history");
-  
-    const history = raw ? JSON.parse(raw) : [];
-  
-    const userIndex = history.findIndex((h: any) => h.user === userId);
-  
-    if (userIndex === -1) {
-      history.push({
-        user: userId,
-        attempts: [attempt]
-      });
-    } else {
-      history[userIndex].attempts.push(attempt);
-    }
-  
-    sessionStorage.setItem("quiz_history", JSON.stringify(history));
-  
-    this.logService.log("QUIZ_FINISHED", {
-      correct: this.correctAnswers,
-      total: this.questions.length,
-    });
   }
 
   getOptionColor(optionKey: string): string {
@@ -279,5 +259,45 @@ export class QuizPage implements OnInit {
     });
   
     sessionStorage.setItem("quiz_history", JSON.stringify(history));
+  }
+
+  private startTimer() {
+    this.stopTimer();
+  
+    this.elapsedSeconds = 0;
+    this.updateElapsedTime();
+  
+    this.timer = setInterval(() => {
+      this.elapsedSeconds++;
+      this.updateElapsedTime();
+    }, 1000);
+  }
+  
+  private stopTimer() {
+    if (this.timer) {
+      clearInterval(this.timer);
+      this.timer = null;
+    }
+  }
+  
+  private updateElapsedTime() {
+    const hours = Math.floor(this.elapsedSeconds / 3600);
+    const minutes = Math.floor((this.elapsedSeconds % 3600) / 60);
+    const seconds = this.elapsedSeconds % 60;
+  
+    this.elapsedTime =
+      (hours > 0 ? hours.toString().padStart(2, "0") + ":" : "") +
+      minutes.toString().padStart(2, "0") +
+      ":" +
+      seconds.toString().padStart(2, "0");
+  }
+  
+  ngOnDestroy(): void {
+    this.stopTimer();
+  
+    if (this.questionTimeout) {
+      clearTimeout(this.questionTimeout);
+      this.questionTimeout = null;
+    }
   }
 }
