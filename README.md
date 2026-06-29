@@ -23,4 +23,7 @@
 
 200 - 300 preguntas - sin revisar 
 
-  
+
+# groq IA
+
+https://console.groq.com

@@ -24,16 +24,6 @@ export default function handler(req, res) {
     // Extraemos la metadata de red básica
     const ip = req.headers['x-forwarded-for'] || req.socket?.remoteAddress;
 
-    console.log('========== 🚀 VERCEL APP LOG ==========');
-    console.log('Recibido el:', new Date().toISOString());
-    console.log('IP del Cliente:', ip);
-    console.log('---------------------------------------');
-    
-    // Imprime TODO el objeto estructurado que envió Angular (evento, data, user, url, timestamp)
-    console.log('Payload Completo:', JSON.stringify(payload, null, 2));
-    
-    console.log('=======================================');
-
     // Respondemos éxito al cliente (Angular)
     return res.status(200).json({
       ok: true,

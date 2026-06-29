@@ -7,7 +7,10 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { addIcons } from "ionicons";
 import { LogService } from "../../services/log.service";
 import { sparklesOutline, chevronForwardCircleOutline,timeOutline } from "ionicons/icons";
-
+interface MagicAnswer {
+  answer: string;
+  explanation?: string;
+}
 addIcons({
   "sparkles-outline": sparklesOutline,
   "chevron-forward-outline": chevronForwardCircleOutline,
@@ -40,7 +43,8 @@ export class QuizPage implements OnInit {
   isAnswered = false;
   nextVisible = false;
 
-  magicAnswer: string | null = null;
+  magicAnswer: MagicAnswer | null = null;
+  errorMessage: string | null = null;
   loadingMagic = false;
 
   elapsedTime = "00:00";
@@ -223,12 +227,14 @@ export class QuizPage implements OnInit {
     this.magicAnswer = null;
 
     this.quizService.ask(allquestion).subscribe({
-      next: (res) => {
+      next: (res: MagicAnswer) => {
         this.magicAnswer = res;
+        this.errorMessage = null;
         this.loadingMagic = false;
       },
       error: () => {
-        this.magicAnswer = "Error consultando la magia 😅";
+        this.magicAnswer = null;
+        this.errorMessage = "Error consultando la magia 😅";
         this.loadingMagic = false;
       },
     });
