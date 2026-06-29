@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
 
@@ -9,7 +9,7 @@ export class LogService {
 
   private readonly apiUrl = '/api/log';
 
-  constructor(private http: HttpClient) {}
+  private http = inject(HttpClient);
 
   async log(event: string, data?: any): Promise<void> {
 

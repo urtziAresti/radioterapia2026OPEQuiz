@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { RADIO_QUESTIONS } from '../data/radio-questions/radio_questions';
 import { Question } from '../models/question.model';
 import { HttpClient } from '@angular/common/http';
@@ -13,8 +13,8 @@ export interface MagicAnswer {
 export class QuizService {
 
   private apiUrl = 'http://localhost:3000/api/GPT';
+  private http = inject(HttpClient);
 
-  constructor(private http: HttpClient) {}
 
   /**
    * Envía una pregunta al backend para que GPT devuelva JSON estructurado

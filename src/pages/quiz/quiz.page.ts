@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from "@angular/core";
+import { Component, OnInit, inject, OnDestroy } from "@angular/core";
 import { QuizService } from "../../services/quiz.service";
 import { Question } from "../../models/question.model";
 import { IonicModule } from "@ionic/angular";
@@ -24,7 +24,7 @@ addIcons({
   standalone: true,
   imports: [IonicModule, CommonModule],
 })
-export class QuizPage implements OnInit {
+export class QuizPage implements OnInit, OnDestroy {
   private readonly OK_QUESTION_TIME = 1500;
 
   private quizService = inject(QuizService);
