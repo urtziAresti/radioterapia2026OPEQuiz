@@ -1,36 +1,56 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { firstValueFrom } from 'rxjs';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({
+  providedIn: 'root'
+})
 export class LogService {
 
-  private apiUrl = '/api/log';
+  private readonly apiUrl = '/api/log';
 
   constructor(private http: HttpClient) {}
 
-  log(event: string, data?: any) {
+  async log(event: string, data?: any): Promise<void> {
 
-    //TODO
-    return;
     const payload = {
       event,
-      data,
+      data: this.clean(data),
       user: this.getUser(),
-      url: window.location.href,
-      userAgent: navigator.userAgent
+      url: window.location.pathname,
+      timestamp: new Date().toISOString()
     };
 
-    this.http.post(this.apiUrl, payload).subscribe({
-      next: () => {},
-      error: () => {}
-    });
+    try {
+      await firstValueFrom(
+        this.http.post(this.apiUrl, payload)
+      );
+    } catch (error) {
+      console.error('[LogService]', error);
+    }
   }
 
-  private getUser() {
+  private getUser(): string | null {
     try {
-      return JSON.parse(localStorage.getItem('userSession') || '{}')?.username;
+      const session = JSON.parse(localStorage.getItem('userSession') || '{}');
+      return session?.username ?? null;
     } catch {
       return null;
+    }
+  }
+
+  /**
+   * Evita enviar objetos enormes o con referencias circulares.
+   */
+  private clean(data: any): any {
+    if (data == null) {
+      return null;
+    }
+
+    try {
+      return JSON.parse(JSON.stringify(data));
+    } catch {
+      return String(data);
     }
   }
 }
