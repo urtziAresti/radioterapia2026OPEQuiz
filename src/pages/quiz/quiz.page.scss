@@ -14,7 +14,7 @@ ion-toolbar {
 
 // Estilo de la tarjeta de la pregunta
 .question-card {
-  margin: 10px 0 25px 0;
+  margin: 10px 0 0px 0;
   border-radius: 14px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
   background: #ffffff;
@@ -240,4 +240,8 @@ ion-toolbar {
 
 .robot-button{
   width: 20%;
+}
+
+.razon{
+  padding-top: 32px;
 }

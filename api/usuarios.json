@@ -1,7 +1,7 @@
 [
-    { "username": "ADMIN", "code": "ADMIN1234" },
-    { "username": "NAVIS", "code": "NAVIS" },
-    { "username": "TEST", "code": "TEST" },
-    { "username": "ANE1", "code": "ANE1" }
+    { "username": "ADMIN", "code": "ADMIN" },
+    { "username": "navis", "code": "navis" },
+    { "username": "test", "code": "test" },
+    { "username": "ane1", "code": "ane1" }
   ]
   

@@ -64,7 +64,7 @@
     <!-- 🪄 MAGIC ANSWER -->
 
     <ion-button
-    *ngIf="false"
+    *ngIf="true"
     class="robot-button"
     fill="clear"
     size="small"
@@ -79,13 +79,13 @@
         <ion-icon name="sparkles-outline"></ion-icon>
 
         <div *ngIf="magicAnswer?.answer as answer">
-          <strong>La IA cree que la respuesta es: {{ answer }}</strong>
+          <strong>La IA cree que la respuesta es:<br/> {{ answer }}</strong>
         </div>
-  <!-- 
-          <div *ngIf="magicAnswer?.explanation as explanation">
-            <strong>razonamiento {{ explanation }}</strong>
-          </div>
-  -->
+  
+      </div>
+
+      <div class="razon" *ngIf="magicAnswer?.explanation as explanation">
+        <strong>Razonamiento: <br/> {{ explanation }}</strong>
       </div>
     </ion-card-content>
   </ion-card>
