@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { RADIO_QUESTIONS } from '../data/radio_questions';
+import { RADIO_QUESTIONS } from '../data/radio-questions/radio_questions';
 import { Question } from '../models/question.model';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
