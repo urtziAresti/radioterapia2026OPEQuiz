@@ -75,7 +75,7 @@ export class LoginComponent {
 
     try {
       const respuesta: any = await firstValueFrom(
-        this.http.post('http://localhost:3000/api/login', {
+        this.http.post('/api/login', {
           username: username!.trim(),
           code: code!.trim(),
           deviceId

@@ -12,7 +12,7 @@ export interface MagicAnswer {
 @Injectable({ providedIn: 'root' })
 export class QuizService {
 
-  private apiUrl = 'http://localhost:3000/api/GPT';
+  private apiUrl = '/api/GPT';
   private http = inject(HttpClient);
 
 

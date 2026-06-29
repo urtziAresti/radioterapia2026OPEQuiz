@@ -23,7 +23,7 @@ export class LogService {
 
     try {
       await firstValueFrom(
-        this.http.post('http://localhost:3000/api/log', payload)      );
+        this.http.post('/api/log', payload)      );
     } catch (error) {
       console.error('[LogService]', error);
     }
