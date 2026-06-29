@@ -6,8 +6,7 @@ function run(cmd) {
 }
 
 // 1. bump minor version
-run('npm version minor --no-git-tag-version');
-
+run('npm version patch --no-git-tag-version');
 // 2. read version
 const pkg = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
 const version = pkg.version;
