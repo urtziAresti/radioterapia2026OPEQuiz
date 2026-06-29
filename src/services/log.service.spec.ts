@@ -34,7 +34,7 @@ describe('LogService', () => {
 
     const promise = service.log('TEST_EVENT', { foo: 'bar' });
 
-    const req = httpMock.expectOne('http://localhost:3000/api/log');
+    const req = httpMock.expectOne('/api/log');
 
     expect(req.request.method).toBe('POST');
 
@@ -55,7 +55,7 @@ describe('LogService', () => {
   it('should handle missing userSession gracefully', async () => {
     const promise = service.log('EVENT_NO_USER', { a: 1 });
 
-    const req = httpMock.expectOne('http://localhost:3000/api/log');
+    const req = httpMock.expectOne('/api/log');
 
     expect(req.request.body.user).toBeNull();
 
@@ -67,7 +67,7 @@ describe('LogService', () => {
   it('should clean null data', async () => {
     const promise = service.log('EVENT_NULL', null);
 
-    const req = httpMock.expectOne('http://localhost:3000/api/log');
+    const req = httpMock.expectOne('/api/log');
 
     expect(req.request.body.data).toBeNull();
 
@@ -82,7 +82,7 @@ describe('LogService', () => {
 
     const promise = service.log('EVENT_CIRCULAR', circular);
 
-    const req = httpMock.expectOne('http://localhost:3000/api/log');
+    const req = httpMock.expectOne('/api/log');
 
     expect(typeof req.request.body.data).toBe('string');
 
@@ -96,7 +96,7 @@ describe('LogService', () => {
 
     const promise = service.log('EVENT_FAIL', { test: true });
 
-    const req = httpMock.expectOne('http://localhost:3000/api/log');
+    const req = httpMock.expectOne('/api/log');
 
     req.error(new ProgressEvent('Network error'));
 

@@ -57,7 +57,7 @@ describe('QuizService', () => {
       result = res;
     });
 
-    const req = httpMock.expectOne('http://localhost:3000/api/GPT');
+    const req = httpMock.expectOne('/api/GPT');
 
     expect(req.request.method).toBe('POST');
     expect(req.request.body.question).toContain('Test question');
@@ -84,7 +84,7 @@ describe('QuizService', () => {
       result = res;
     });
 
-    const req = httpMock.expectOne('http://localhost:3000/api/GPT');
+    const req = httpMock.expectOne('/api/GPT');
 
     req.flush({
       ok: true,

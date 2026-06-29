@@ -62,7 +62,7 @@ describe('LoginComponent', () => {
 
     await component.onLogin();
 
-    httpMock.expectNone('http://localhost:3000/api/login');
+    httpMock.expectNone('/api/login');
   });
 
   it('should login successfully and navigate to welcome', fakeAsync(async () => {
@@ -73,7 +73,7 @@ describe('LoginComponent', () => {
 
     const promise = component.onLogin();
 
-    const req = httpMock.expectOne('http://localhost:3000/api/login');
+    const req = httpMock.expectOne('/api/login');
     expect(req.request.method).toBe('POST');
 
     req.flush({
@@ -98,7 +98,7 @@ describe('LoginComponent', () => {
 
     const promise = component.onLogin();
 
-    const req = httpMock.expectOne('http://localhost:3000/api/login');
+    const req = httpMock.expectOne('/api/login');
     req.flush({ ok: false }, { status: 200, statusText: 'OK' });
 
     tick();
@@ -117,7 +117,7 @@ describe('LoginComponent', () => {
 
     const promise = component.onLogin();
 
-    const req = httpMock.expectOne('http://localhost:3000/api/login');
+    const req = httpMock.expectOne('/api/login');
     req.error(new ProgressEvent('Network error'), { status: 500 });
 
     tick();
