@@ -3,18 +3,47 @@ import { RADIO_QUESTIONS } from '../data/radio_questions';
 import { Question } from '../models/question.model';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class QuizService {
 
-  constructor(private http: HttpClient) {}
-  private apiUrl = '';
+  private apiUrl = 'http://localhost:3000/api/GPT';
 
-  ask(question: string) {
-    return this.http.post<any>(this.apiUrl, {
-      question
-    }).pipe(
-      map(res => res.answer) // lo que devuelve Netlify
+  constructor(private http: HttpClient) {}
+
+  /**
+   * Envía una pregunta al backend de Vercel para que este consulte con GPT
+   * @param question Texto de la pregunta
+   */
+  ask(question: Question): Observable<string> {
+
+    const formattedPrompt = `
+  Responde únicamente con la letra correcta (a, b, c o d).
+  No expliques nada.
+  
+  Pregunta:
+  ${question.question}
+  
+  Opciones:
+  a) ${question.options.a}
+  b) ${question.options.b}
+  c) ${question.options.c}
+  d) ${question.options.d}
+  `;
+  
+    return this.http.post<{ ok: boolean; answer: string }>(
+      this.apiUrl,
+      {
+        question: formattedPrompt
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+    ).pipe(
+      map(res => res?.answer?.trim().toLowerCase() ?? '')
     );
   }
 

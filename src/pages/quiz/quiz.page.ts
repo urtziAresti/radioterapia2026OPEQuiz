@@ -216,13 +216,13 @@ export class QuizPage implements OnInit {
     this.router.navigate(["/welcome"]);
   }
 
-  useMagic(question: string) {
+  useMagic(allquestion: any) {
     if (this.loadingMagic) return;
 
     this.loadingMagic = true;
     this.magicAnswer = null;
 
-    this.quizService.ask(question).subscribe({
+    this.quizService.ask(allquestion).subscribe({
       next: (res) => {
         this.magicAnswer = res;
         this.loadingMagic = false;
