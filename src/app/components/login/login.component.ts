@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core'; // 👈 Añadimos NgZone
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -50,6 +50,7 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private http: HttpClient,
+    private ngZone: NgZone, // 👈 Inyectamos ngZone
     private toastController: ToastController,
     private logService: LogService
   ) {
@@ -61,15 +62,12 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {}
 
-  // 🔐 DEVICE ID: Genera y recupera un ID único para este navegador/dispositivo
   getDeviceId(): string {
     let id = localStorage.getItem('deviceId');
-  
     if (!id) {
       id = crypto.randomUUID();
       localStorage.setItem('deviceId', id);
     }
-  
     return id;
   }
 
@@ -77,12 +75,11 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.invalid) return;
   
     const { username, code } = this.loginForm.value;
-    const deviceId = this.getDeviceId(); // 👈 Obtenemos el ID único del cliente
+    const deviceId = this.getDeviceId();
   
     try {
-      // Enviamos las credenciales junto con el identificador del dispositivo
       const respuesta: any = await firstValueFrom(
-        this.http.post('/api/login', { 
+        this.http.post('http://localhost:3000/api/login', { 
           username: username.trim(), 
           code: code.trim(),
           deviceId: deviceId 
@@ -90,34 +87,34 @@ export class LoginComponent implements OnInit {
       );
   
       if (respuesta && respuesta.ok) {
-        // Guardamos la sesión limpia en LocalStorage
+        // 1. Guardamos los datos de sesión primero
         localStorage.setItem('userSession', JSON.stringify({
           username: respuesta.username,
           deviceId: deviceId
         }));
         
-        // Log de éxito
-        await this.logService.log('LOGIN_SUCCESS', {
-          username: respuesta.username
+        // 2. 🚀 FORZAMOS la navegación dentro de la Zona de Angular
+        this.ngZone.run(() => {
+          this.router.navigate(['/welcome']);
         });
 
-        // Redirección
-        this.router.navigate(['/welcome']);
+        // 3. El log se ejecuta de fondo sin retrasar la app
+        this.logService.log('LOGIN_SUCCESS', {
+          username: respuesta.username
+        }).catch(e => console.error(e));
+
       } else {
         await this.presentErrorToast();
       }
 
     } catch (error: any) {
-      // Extraemos el error del backend (por ejemplo: "Esta cuenta ya está siendo utilizada...")
-      const mensajeError = error.error?.error || 'Usuario o código incorrectos. Inténtalo de nuevo.';
-      
+      const mensajeError = error.error?.error || 'Usuario o código incorrectos.';
       await this.presentErrorToast(mensajeError);
       
-      // Enviamos el log del intento fallido
-      await this.logService.log('LOGIN_FAILED', {
+      this.logService.log('LOGIN_FAILED', {
         username: username,
         error: mensajeError
-      });
+      }).catch(e => console.error(e));
     }
   }
 
@@ -127,14 +124,8 @@ export class LoginComponent implements OnInit {
       duration: 3000,
       position: 'bottom',
       color: 'danger',
-      buttons: [
-        {
-          text: 'Cerrar',
-          role: 'cancel'
-        }
-      ]
+      buttons: [{ text: 'Cerrar', role: 'cancel' }]
     });
-
     await toast.present();
   }
 }
