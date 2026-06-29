@@ -10,6 +10,7 @@
 
 # features 
 - LOGS mas completos 
+- Test
 - TEMARIO COMUN - AÑADIR PREGUNTAS 
 - 3 OPCIONES DE PREGUNTAS (RADIO,COMUN O MIX 80/20),
 

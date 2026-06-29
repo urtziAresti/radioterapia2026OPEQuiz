@@ -1,24 +1,132 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { IonicModule } from '@ionic/angular';
+import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { Router } from '@angular/router';
+import { NgZone } from '@angular/core';
+import { ToastController } from '@ionic/angular';
 
 import { LoginComponent } from './login.component';
+import { LogService } from '../../../services/log.service';
 
 describe('LoginComponent', () => {
-  let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
+  let component: LoginComponent;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ LoginComponent ],
-      imports: [IonicModule.forRoot()]
+  let httpMock: HttpTestingController;
+
+  let routerMock: jasmine.SpyObj<Router>;
+  let logServiceMock: jasmine.SpyObj<LogService>;
+  let toastControllerMock: jasmine.SpyObj<ToastController>;
+  let ngZone: NgZone;
+
+  beforeEach(async () => {
+    routerMock = jasmine.createSpyObj('Router', ['navigate']);
+    logServiceMock = jasmine.createSpyObj('LogService', ['log']);
+    logServiceMock.log.and.returnValue(Promise.resolve());
+
+    toastControllerMock = jasmine.createSpyObj('ToastController', ['create']);
+
+    await TestBed.configureTestingModule({
+      imports: [
+        LoginComponent,
+        HttpClientTestingModule
+      ],
+      providers: [
+        { provide: Router, useValue: routerMock },
+        { provide: LogService, useValue: logServiceMock },
+        { provide: ToastController, useValue: toastControllerMock }
+      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
+
+    httpMock = TestBed.inject(HttpTestingController);
+    ngZone = TestBed.inject(NgZone);
+
     fixture.detectChanges();
-  }));
+  });
+
+  afterEach(() => {
+    httpMock.verify();
+  });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should NOT call API if form is invalid', async () => {
+    component.loginForm.setValue({
+      username: '',
+      code: ''
+    });
+
+    await component.onLogin();
+
+    httpMock.expectNone('http://localhost:3000/api/login');
+  });
+
+  it('should login successfully and navigate to welcome', fakeAsync(async () => {
+    component.loginForm.setValue({
+      username: 'test',
+      code: '1234'
+    });
+
+    const promise = component.onLogin();
+
+    const req = httpMock.expectOne('http://localhost:3000/api/login');
+    expect(req.request.method).toBe('POST');
+
+    req.flush({
+      ok: true,
+      username: 'test'
+    });
+
+    tick();
+    await promise;
+
+    expect(routerMock.navigate).toHaveBeenCalledWith(['/welcome']);
+    expect(logServiceMock.log).toHaveBeenCalledWith('LOGIN_SUCCESS', jasmine.any(Object));
+  }));
+
+  it('should show error toast on failed login', fakeAsync(async () => {
+    component.loginForm.setValue({
+      username: 'test',
+      code: 'wrong'
+    });
+
+    spyOn(component, 'presentErrorToast').and.resolveTo();
+
+    const promise = component.onLogin();
+
+    const req = httpMock.expectOne('http://localhost:3000/api/login');
+    req.flush({ ok: false }, { status: 200, statusText: 'OK' });
+
+    tick();
+    await promise;
+
+    expect(component.presentErrorToast).toHaveBeenCalled();
+  }));
+
+  it('should handle HTTP error response', fakeAsync(async () => {
+    component.loginForm.setValue({
+      username: 'test',
+      code: 'wrong'
+    });
+
+    spyOn(component, 'presentErrorToast').and.resolveTo();
+
+    const promise = component.onLogin();
+
+    const req = httpMock.expectOne('http://localhost:3000/api/login');
+    req.error(new ProgressEvent('Network error'), { status: 500 });
+
+    tick();
+    await promise;
+
+    expect(component.presentErrorToast).toHaveBeenCalled();
+    expect(logServiceMock.log).toHaveBeenCalledWith(
+      'LOGIN_FAILED',
+      jasmine.any(Object)
+    );
+  }));
 });
