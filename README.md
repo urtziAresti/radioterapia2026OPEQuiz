@@ -5,12 +5,11 @@
 
 # PROXIMOS DESARROLLOS
 
-# funcionales
-- FORZAR ACTUALIZACIONES(RECARGA) SI ESTA DESACTUALIZADO
-
-# features 
 - poner fuestas de datos, PDF preguntas, respuestas CCOO 
 - PWA
+- E2E
+
+
 - TEMARIO COMUN - AÑADIR PREGUNTAS 
 - 3 OPCIONES DE PREGUNTAS (RADIO,COMUN O MIX 80/20),
 
