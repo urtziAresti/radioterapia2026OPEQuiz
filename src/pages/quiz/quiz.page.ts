@@ -70,7 +70,6 @@ export class QuizPage implements OnInit, OnDestroy {
       if (params["mode"] === "failed") {
         this.mode = "failed";
         this.failedIds = JSON.parse(params["ids"] || "[]");
-
         this.resetQuizState();
         this.loadFailedQuestions();
         return;
@@ -136,7 +135,7 @@ export class QuizPage implements OnInit, OnDestroy {
 
     if (isCorrect) {
       this.correctAnswers++;
-
+debugger;
       if (this.mode === "failed") {
         this.removeQuestionFromWrongAnswers(currentQuestion.id);
         this.failedIds = this.failedIds.filter(
@@ -147,9 +146,10 @@ export class QuizPage implements OnInit, OnDestroy {
       this.slideError(this.OK_QUESTION_TIME);
     } else {
       this.nextVisible = true;
-
+    
       const id = currentQuestion.id;
       this.wrongAnswersMap[id] = (this.wrongAnswersMap[id] || 0) + 1;
+      this.saveWrongAnswer(id);
     }
 
     this.logService.log("ANSWER_SELECTED", {
@@ -256,15 +256,18 @@ export class QuizPage implements OnInit, OnDestroy {
     const history = JSON.parse(raw);
   
     const user = history.find((u: any) => u.user === username);
-    if (!user) return;
+    if (!user || !user.attempts.length) return;
   
-    user.attempts.forEach((attempt: any) => {
-      if (attempt.wrongAnswers) {
-        delete attempt.wrongAnswers[questionId];
-      }
-    });
+    const lastAttempt = user.attempts[user.attempts.length - 1];
   
-    sessionStorage.setItem("quiz_history", JSON.stringify(history));
+    if (lastAttempt.wrongAnswers) {
+      delete lastAttempt.wrongAnswers[questionId];
+    }
+  
+    sessionStorage.setItem(
+      "quiz_history",
+      JSON.stringify(history)
+    );
   }
 
   private startTimer() {
@@ -305,5 +308,50 @@ export class QuizPage implements OnInit, OnDestroy {
       clearTimeout(this.questionTimeout);
       this.questionTimeout = null;
     }
+  }
+  private saveWrongAnswer(questionId: number): void {
+    const session = localStorage.getItem("userSession");
+    if (!session) return;
+  
+    const username = JSON.parse(session).username;
+  
+    let history: any[] = [];
+  
+    const raw = sessionStorage.getItem("quiz_history");
+    if (raw) {
+      history = JSON.parse(raw);
+    }
+  
+    let user = history.find((u: any) => u.user === username);
+  
+    if (!user) {
+      user = {
+        user: username,
+        attempts: []
+      };
+      history.push(user);
+    }
+  
+    let attempt = user.attempts[user.attempts.length - 1];
+  
+    if (!attempt) {
+      attempt = {
+        date: new Date().toISOString(),
+        wrongAnswers: {}
+      };
+  
+      user.attempts.push(attempt);
+    }
+  
+    if (!attempt.wrongAnswers) {
+      attempt.wrongAnswers = {};
+    }
+  
+    attempt.wrongAnswers[questionId] = true;
+  
+    sessionStorage.setItem(
+      "quiz_history",
+      JSON.stringify(history)
+    );
   }
 }
