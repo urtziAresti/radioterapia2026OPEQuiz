@@ -20,5 +20,10 @@ export class DataComponent {
   openFile(path: string): void {
     window.open(path, '_blank');
   }
+  openPDF(): void {
+    const fileUrl = new URL('/assets/docs/preguntas.pdf', document.baseURI).href;
+    const googleViewer = `https://docs.google.com/gview?embedded=true&url=${encodeURIComponent(fileUrl)}`;
+    window.open(googleViewer, '_blank');
+  }
 
 }
