@@ -9,7 +9,9 @@
 - FORZAR ACTUALIZACIONES(RECARGA) SI ESTA DESACTUALIZADO
 
 # features 
-- LOGS mas completos 
+- Progresso 
+- poner fuestas de datos, PDF preguntas, respuestas CCOO 
+- PWA
 - TEMARIO COMUN - AÑADIR PREGUNTAS 
 - 3 OPCIONES DE PREGUNTAS (RADIO,COMUN O MIX 80/20),
 

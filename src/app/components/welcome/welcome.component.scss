@@ -202,3 +202,34 @@ h1 {
   max-width: 80%;
   margin: 0 auto 24px;
 }
+
+.progress-card {
+  margin: 16px;
+  border-radius: 18px;
+
+  ion-progress-bar {
+    margin: 16px 0;
+    height: 10px;
+    border-radius: 10px;
+  }
+
+  .progress-info {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    margin-top: 20px;
+
+    h2 {
+      margin: 0;
+      font-size: 2rem;
+      font-weight: bold;
+      color: var(--ion-color-primary);
+    }
+
+    p {
+      margin-top: 4px;
+      color: var(--ion-color-medium);
+      font-size: 0.9rem;
+    }
+  }
+}

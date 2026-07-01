@@ -2,11 +2,14 @@ import { Component, EventEmitter, inject, Output, OnInit } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { Router } from "@angular/router";
+import { QuizService } from "../../../services/quiz.service";
+import { QuestionProgress } from "../../../interfaces/progress";
+import { IonicModule } from "@ionic/angular";
 
 @Component({
   selector: "app-welcome",
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule,IonicModule],
   templateUrl: "./welcome.component.html",
   styleUrls: ["./welcome.component.scss"],
 })
@@ -15,6 +18,8 @@ export class WelcomeComponent implements OnInit {
   selectedQuestionCount: number = 25;
   failedQuestions: number[] = [];
   private router = inject(Router);
+  private quizService = inject(QuizService);
+  progress!: QuestionProgress;
 
   @Output() configSubmitted = new EventEmitter<{
     username: string;
@@ -27,6 +32,10 @@ export class WelcomeComponent implements OnInit {
       const user = JSON.parse(session);
       this.username = user.username;
     }
+    
+   this.progress = this.quizService.getProgress();
+
+    console.log(this.progress);
     this.failedQuestions = this.getFailedQuestions();
   }
 

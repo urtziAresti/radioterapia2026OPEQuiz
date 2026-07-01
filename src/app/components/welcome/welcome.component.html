@@ -16,15 +16,41 @@
 
     <p>De momento solo tenemos 200 preguntas verificadas, pronto mas...</p>
 
+    <ion-card class="progress-card">
+      <ion-card-header>
+        <ion-card-title>📚 Progreso</ion-card-title>
+        <ion-card-subtitle>
+          {{ progress.answered }} de {{ progress.total }} preguntas
+        </ion-card-subtitle>
+      </ion-card-header>
+    
+      <ion-card-content>
+    
+        <ion-progress-bar
+          [value]="progress.answered / progress.total">
+        </ion-progress-bar>
+    
+        <div class="progress-info">
+          <div>
+            <h2>{{ progress.percentage }}%</h2>
+            <p>Completado</p>
+          </div>
+    
+          <div>
+            <h2>{{ progress.remaining }}</h2>
+            <p>Restantes</p>
+          </div>
+        </div>
+    
+      </ion-card-content>
+    </ion-card>
     <button
       class="btn-start"
       [disabled]="!selectedQuestionCount"
       (click)="startQuiz()"
     >
-      Comenzar Cuestionario
+      Test
     </button>
-
-
     <button
       class="btn-repaso"
       *ngIf="areFailedQuestions"

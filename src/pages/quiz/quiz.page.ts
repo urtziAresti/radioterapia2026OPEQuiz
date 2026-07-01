@@ -135,7 +135,6 @@ export class QuizPage implements OnInit, OnDestroy {
 
     if (isCorrect) {
       this.correctAnswers++;
-debugger;
       if (this.mode === "failed") {
         this.removeQuestionFromWrongAnswers(currentQuestion.id);
         this.failedIds = this.failedIds.filter(
