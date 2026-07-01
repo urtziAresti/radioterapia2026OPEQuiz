@@ -23,6 +23,15 @@ export const routes: Routes = [
         (m) => m.WelcomeComponent
       ),
   },
+
+  {
+    path: 'data',
+    canActivate: [authGuard], 
+    loadComponent: () =>
+      import('../app/components/data/data.component').then(
+        (m) => m.DataComponent
+      ),
+  },
   {
     path: '',
     redirectTo: 'login',

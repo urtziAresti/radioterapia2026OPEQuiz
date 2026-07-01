@@ -111,4 +111,10 @@ export class WelcomeComponent implements OnInit {
         ids: JSON.stringify(failedIds)
       }
     });
-  }}
+    
+  }
+  viewData(){
+    this.router.navigate(["/data"])
+  }
+
+}

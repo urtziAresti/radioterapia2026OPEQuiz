@@ -9,7 +9,6 @@
 - FORZAR ACTUALIZACIONES(RECARGA) SI ESTA DESACTUALIZADO
 
 # features 
-- Progresso 
 - poner fuestas de datos, PDF preguntas, respuestas CCOO 
 - PWA
 - TEMARIO COMUN - AÑADIR PREGUNTAS 
