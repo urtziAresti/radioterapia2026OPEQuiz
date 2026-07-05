@@ -1,23 +1,36 @@
 import { Routes } from '@angular/router';
 import { authGuard } from './guards/auth-guard';
+import { loginGuard } from './guards/login.guard';
+import { inject } from '@angular/core';
+import { Router } from '@angular/router';
+
+const rootRedirect = () => {
+  const router = inject(Router);
+
+  return localStorage.getItem('userSession')
+    ? router.createUrlTree(['/welcome'])
+    : router.createUrlTree(['/login']);
+};
 
 export const routes: Routes = [
   {
+    path: '',
+    canActivate: [rootRedirect],
+    component: class {}
+  },
+
+  {
     path: 'login',
+    canActivate: [loginGuard],
     loadComponent: () =>
       import('../app/components/login/login.component').then(
         (m) => m.LoginComponent
       ),
   },
-  {
-    path: 'questions',
-    canActivate: [authGuard], // 🔐 Protegido
-    loadComponent: () =>
-      import('../pages/quiz/quiz.page').then((m) => m.QuizPage),
-  },
+
   {
     path: 'welcome',
-    canActivate: [authGuard], // 🔐 Protegido
+    canActivate: [authGuard],
     loadComponent: () =>
       import('../app/components/welcome/welcome.component').then(
         (m) => m.WelcomeComponent
@@ -25,20 +38,23 @@ export const routes: Routes = [
   },
 
   {
+    path: 'questions',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('../pages/quiz/quiz.page').then((m) => m.QuizPage),
+  },
+
+  {
     path: 'data',
-    canActivate: [authGuard], 
+    canActivate: [authGuard],
     loadComponent: () =>
       import('../app/components/data/data.component').then(
         (m) => m.DataComponent
       ),
   },
-  {
-    path: '',
-    redirectTo: 'login',
-    pathMatch: 'full',
-  },
+
   {
     path: '**',
-    redirectTo: 'login',
+    redirectTo: '',
   },
 ];
