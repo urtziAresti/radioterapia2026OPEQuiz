@@ -13,7 +13,7 @@ import { IonicModule } from "@ionic/angular";
   templateUrl: "./welcome.component.html",
   styleUrls: ["./welcome.component.scss"],
 })
-export class WelcomeComponent implements OnInit,OnDestroy {
+export class WelcomeComponent implements OnInit {
   username: string = "";
   selectedQuestionCount: number = 25;
   failedQuestions: number[] = [];
@@ -31,16 +31,25 @@ export class WelcomeComponent implements OnInit,OnDestroy {
     inject(Router).events.subscribe(event => {
   
       if (event instanceof NavigationEnd) {
-  
-        alert("entra en NavigationEnd");
-  
+
+          this.loadData();
       }
   
     });
   
   }
-  ngOnDestroy() {
-    alert("destroy");
+  loadData(){
+    alert("load data")
+    const session = localStorage.getItem("userSession");
+    if (session) {
+      const user = JSON.parse(session);
+      this.username = user.username;
+    }
+    
+   this.progress = this.quizService.getProgress();
+
+    console.log(this.progress);
+    this.failedQuestions = this.getFailedQuestions();
   }
 
   ngOnInit() {
