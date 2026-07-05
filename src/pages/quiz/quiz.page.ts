@@ -247,7 +247,15 @@ export class QuizPage implements OnInit, OnDestroy {
   }
 
   goToHome(): void {
-    this.router.navigate(["/welcome"]);
+
+    this.router.navigateByUrl("/", {
+      skipLocationChange: true
+    }).then(() => {
+  
+      this.router.navigateByUrl("/welcome", {
+        replaceUrl: true
+      });
+    });
   }
 
   useMagic(question: Question): void {

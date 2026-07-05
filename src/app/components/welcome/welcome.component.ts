@@ -1,82 +1,44 @@
-import { Component, EventEmitter, inject, Output, OnInit, OnDestroy } from "@angular/core";
+import { Component, EventEmitter, inject, Output, OnInit } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { Router } from "@angular/router";
-import { IonicModule } from "@ionic/angular";
-
 import { QuizService } from "../../../services/quiz.service";
 import { QuestionProgress } from "../../../interfaces/progress";
+import { IonicModule } from "@ionic/angular";
 
 @Component({
   selector: "app-welcome",
   standalone: true,
-  imports: [CommonModule, FormsModule, IonicModule],
+  imports: [CommonModule, FormsModule,IonicModule],
   templateUrl: "./welcome.component.html",
   styleUrls: ["./welcome.component.scss"],
 })
-export class WelcomeComponent implements OnInit, OnDestroy {
-
+export class WelcomeComponent implements OnInit {
   username: string = "";
-
-  selectedQuestionCount = 25;
-
+  selectedQuestionCount: number = 25;
   failedQuestions: number[] = [];
-
+  private router = inject(Router);
+  private quizService = inject(QuizService);
   progress!: QuestionProgress;
 
-  private router = inject(Router);
-
-  private quizService = inject(QuizService);
-
-  @Output()
-  configSubmitted = new EventEmitter<{
+  @Output() configSubmitted = new EventEmitter<{
     username: string;
     count: number;
   }>();
 
-  ngOnInit(): void {
-
-    this.loadData();
-
-    document.addEventListener(
-      "visibilitychange",
-      this.onVisibilityChange
-    );
-
-  }
-
-  ngOnDestroy(): void {
-
-    document.removeEventListener(
-      "visibilitychange",
-      this.onVisibilityChange
-    );
-
-  }
-
-  private onVisibilityChange = (): void => {
-
-    if (document.visibilityState === "visible") {
-      this.loadData();
-    }
-
-  };
-
-  private loadData(): void {
-
+  ngOnInit() {
+    alert("entra en el init wel");
+    debugger;
     const session = localStorage.getItem("userSession");
-
     if (session) {
       const user = JSON.parse(session);
       this.username = user.username;
     }
-
-    this.progress = this.quizService.getProgress();
-
-    this.failedQuestions = this.getFailedQuestions();
+    
+   this.progress = this.quizService.getProgress();
 
     console.log(this.progress);
-
+    this.failedQuestions = this.getFailedQuestions();
   }
 
   get failedCount(): number {
@@ -84,43 +46,61 @@ export class WelcomeComponent implements OnInit, OnDestroy {
   }
 
   get areFailedQuestions(): boolean {
-    return this.failedQuestions.length > 0;
+    return this.getFailedQuestions().length > 0;
   }
-
+  
   getFailedQuestions(): number[] {
 
     const session = localStorage.getItem("userSession");
-
-    if (!session) return [];
-
+  
+    if (!session) {
+      return [];
+    }
+  
     const currentUser = JSON.parse(session);
-
-    const username = currentUser?.username || "anonymous";
-
+  
+    const username = currentUser?.username;
+  
+    if (!username) {
+      return [];
+    }
+  
     const raw = sessionStorage.getItem("quiz_history");
-
-    if (!raw) return [];
-
-    const history: any[] = JSON.parse(raw);
-
-    const userHistory = history.find(u => u.user === username);
-
-    if (!userHistory) return [];
-
-    const failedQuestions: number[] = userHistory.attempts.flatMap((attempt: any) =>
-      Object.entries(attempt.wrongAnswers || {})
-        .filter(([_, count]) => Number(count) > 0)
-        .map(([id]) => Number(id))
-    );
-
-    return [...new Set(failedQuestions)];
-
+  
+    if (!raw) {
+      return [];
+    }
+  
+    const history = JSON.parse(raw);
+  
+    const userHistory = history.find((u: any) => u.user === username);
+  
+    if (!userHistory) {
+      return [];
+    }
+  
+    const state = new Map<number, boolean>();
+  
+    for (const attempt of userHistory.attempts) {
+  
+      if (!attempt.questions) {
+        continue;
+      }
+  
+      for (const question of attempt.questions) {
+        // La última respuesta registrada para cada pregunta prevalece
+        state.set(question.questionId, question.correct);
+      }
+  
+    }
+  
+    return Array.from(state.entries())
+      .filter(([, correct]) => !correct)
+      .map(([id]) => id);
   }
 
-  startQuiz(): void {
-
+  startQuiz() {
     if (this.username && this.selectedQuestionCount) {
-
       const config = {
         username: this.username,
         count: this.selectedQuestionCount,
@@ -128,60 +108,46 @@ export class WelcomeComponent implements OnInit, OnDestroy {
 
       this.configSubmitted.emit(config);
 
-      this.router.navigate(
-        ["/questions"],
-        {
-          queryParams: {
-            name: config.username,
-            count: config.count,
-          },
-        }
-      );
-
+      this.router.navigate(["/questions"], {
+        queryParams: {
+          name: config.username,
+          count: config.count,
+        },
+      });
     }
-
   }
 
-  sendSuggestionsMail(): void {
-
+  sendSuggestionsMail() {
     const email = "urtzi.aresti+OPEAPP@gmail.com";
-
     const subject = encodeURIComponent(
       "Sugerencias OPE - Test Radioterapia"
     );
-
     const body = encodeURIComponent(
-      "Hola,\n\nQuería enviar las siguientes sugerencias sobre el test:\n\n"
+      `Hola,\n\nQuería enviar las siguientes sugerencias sobre el test:\n\n`
     );
-
-    window.location.href =
-      `mailto:${email}?subject=${subject}&body=${body}`;
-
+  
+    window.open(
+      `mailto:${email}?subject=${subject}&body=${body}`,
+      "_self"
+    );
   }
 
-  startRepasoMode(): void {
-
-    if (!this.failedQuestions.length) {
-      return;
-    }
-
-    this.router.navigate(
-      ["/questions"],
-      {
-        queryParams: {
-          name: this.username,
-          mode: "failed",
-          ids: JSON.stringify(this.failedQuestions),
-        },
+  startRepasoMode() {
+    const failedIds = this.failedQuestions;
+  
+    if (!failedIds.length) return;
+  
+    this.router.navigate(['/questions'], {
+      queryParams: {
+        name: this.username,
+        mode: 'failed',
+        ids: JSON.stringify(failedIds)
       }
-    );
-
+    });
+    
   }
-
-  viewData(): void {
-
-    this.router.navigate(["/data"]);
-
+  viewData(){
+    this.router.navigate(["/data"])
   }
 
 }
