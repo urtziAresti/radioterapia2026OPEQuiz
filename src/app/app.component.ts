@@ -30,7 +30,8 @@ export class AppComponent {
    */
   private whiteListUrls: string[] = [
     '/login',
-    '/welcome'
+    '/welcome',
+    '/data'
   ];
 
   constructor() {

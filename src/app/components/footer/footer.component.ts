@@ -8,7 +8,7 @@ import packageInfo from '../../../../package.json';
   imports: [CommonModule],
   template: `
     <div class="version-footer">
-      v{{ appVersion }} by Urr
+      RadiOpe v{{ appVersion }} by Urr
     </div>
   `,
   styles: [`
