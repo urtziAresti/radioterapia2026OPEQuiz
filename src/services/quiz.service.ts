@@ -105,9 +105,9 @@ d) ${question.options.d}
   getQuestions(count: number): Question[] {
     debugger;
     if (this.availableQuestions.length < count) {
+      debugger;
       this.resetQuestions();
     }
-
     return this.availableQuestions.splice(0, count);
   }
 

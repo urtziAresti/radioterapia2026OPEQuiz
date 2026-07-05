@@ -12,7 +12,7 @@ export const QUESTIONS_201_250: Question[] = [
       c: "Picor en el cuero cabelludo.",
       d: "Todas las opciones son correctas.",
     },
-    correct: "X",
+    correct: "d",
   },
   {
     id: 202,
@@ -24,7 +24,7 @@ export const QUESTIONS_201_250: Question[] = [
       c: "Pruebas de referencia.",
       d: "Pruebas de constancia.",
     },
-    correct: "X",
+    correct: "d",
   },
   {
     id: 203,
@@ -36,7 +36,7 @@ export const QUESTIONS_201_250: Question[] = [
       c: "Cáncer de pulmón.",
       d: "Cáncer de estómago.",
     },
-    correct: "X",
+    correct: "b",
   },
   {
     id: 204,
@@ -48,7 +48,7 @@ export const QUESTIONS_201_250: Question[] = [
       c: "Náuseas y vómitos.",
       d: "Pérdida total de sensibilidad.",
     },
-    correct: "X",
+    correct: "a",
   },
   {
     id: 205,
@@ -59,7 +59,7 @@ export const QUESTIONS_201_250: Question[] = [
       c: "El fotón incidente modifica su trayectoria tras la interacción.",
       d: "La energía del electrón dispersado depende del ángulo con el que sale despedido.",
     },
-    correct: "X",
+    correct: "a",
   },
   {
     id: 206,
@@ -71,7 +71,7 @@ export const QUESTIONS_201_250: Question[] = [
       c: "Antenas de recepción.",
       d: "Microondas.",
     },
-    correct: "X",
+    correct: "d",
   },
   {
     id: 207,
@@ -82,7 +82,7 @@ export const QUESTIONS_201_250: Question[] = [
       c: "Linfoma no-folicular.",
       d: "Linfoma de la zona marginal.",
     },
-    correct: "X",
+    correct: "a",
   },
   {
     id: 208,
@@ -94,7 +94,7 @@ export const QUESTIONS_201_250: Question[] = [
       c: "Conos.",
       d: "Colimadores.",
     },
-    correct: "X",
+    correct: "a",
   },
   {
     id: 209,
@@ -106,7 +106,7 @@ export const QUESTIONS_201_250: Question[] = [
       c: "En un máximo de 2 horas.",
       d: "El tiempo no tiene una importancia significativa.",
     },
-    correct: "X",
+    correct: "b",
   },
   {
     id: 210,
@@ -118,7 +118,7 @@ export const QUESTIONS_201_250: Question[] = [
       c: "Tanto las dosis individuales como el número de personas expuestas deben mantenerse tan bajas como razonablemente sea posible.",
       d: "Tanto las dosis individuales como el número de personas expuestas deben mantenerse tan bajas como razonablemente sea posible, teniendo en cuenta factores económicos y sociales.",
     },
-    correct: "X",
+    correct: "d",
   },
   {
     id: 211,
@@ -130,7 +130,7 @@ export const QUESTIONS_201_250: Question[] = [
       c: "Fase G2-M.",
       d: "Fase G0.",
     },
-    correct: "X",
+    correct: "c",
   },
   {
     id: 212,
@@ -142,7 +142,7 @@ export const QUESTIONS_201_250: Question[] = [
       c: "Organización flexible y jerárquica.",
       d: "Organización flexible y en serie.",
     },
-    correct: "X",
+    correct: "a",
   },
   {
     id: 213,
@@ -154,7 +154,7 @@ export const QUESTIONS_201_250: Question[] = [
       c: "PET (Tomografía por Emisión de Positrones).",
       d: "Radiografía de simulación.",
     },
-    correct: "X",
+    correct: "c",
   },
   {
     id: 214,
@@ -166,7 +166,7 @@ export const QUESTIONS_201_250: Question[] = [
       c: "Entre las espinas ilíacas anterosuperiores y la sínfisis del pubis.",
       d: "Ninguna respuesta es correcta.",
     },
-    correct: "X",
+    correct: "a",
   },
   {
     id: 215,
@@ -177,7 +177,7 @@ export const QUESTIONS_201_250: Question[] = [
       c: "Sus actividades se rigen por un estatuto propio.",
       d: "Nunca actúa en caso de emergencia.",
     },
-    correct: "X",
+    correct: "c",
   },
   {
     id: 216,
@@ -189,7 +189,7 @@ export const QUESTIONS_201_250: Question[] = [
       c: "Detectores de centelleo.",
       d: "Todas las respuestas son correctas.",
     },
-    correct: "X",
+    correct: "a",
   },
   {
     id: 217,
@@ -201,7 +201,7 @@ export const QUESTIONS_201_250: Question[] = [
       c: "Suelen utilizar una sola cuña con un ángulo de 45º.",
       d: "Suelen utilizar dos cuñas con un ángulo de 45º cada una.",
     },
-    correct: "X",
+    correct: "a",
   },
   {
     id: 218,
@@ -212,7 +212,7 @@ export const QUESTIONS_201_250: Question[] = [
       c: "La diferencia entre el GTV y el CTV.",
       d: "El margen total añadido al tumor.",
     },
-    correct: "X",
+    correct: "a",
   },
   {
     id: 219,
@@ -224,7 +224,7 @@ export const QUESTIONS_201_250: Question[] = [
       c: "Pulmones y cristalino.",
       d: "Cristalino y uñas.",
     },
-    correct: "X",
+    correct: "b",
   },
   {
     id: 220,
@@ -236,7 +236,7 @@ export const QUESTIONS_201_250: Question[] = [
       c: "Pueden expresar la dosis en valor absoluto o en tanto por ciento.",
       d: "Solo se utilizan con haces de fotones.",
     },
-    correct: "X",
+    correct: "d",
   },
   {
     id: 221,
@@ -248,7 +248,7 @@ export const QUESTIONS_201_250: Question[] = [
       c: "Efectos perjudiciales clínicamente observables en las personas o sus descendientes, cuya aparición es inmediata.",
       d: "Efectos perjudiciales clínicamente observables en las personas o sus descendientes, cuya aparición es inmediata o tardía.",
     },
-    correct: "X",
+    correct: "a",
   },
   {
     id: 222,
@@ -260,7 +260,7 @@ export const QUESTIONS_201_250: Question[] = [
       c: "La dosis que genera un índice de complicaciones aceptable para un/una paciente en particular.",
       d: "La dosis que genera unos efectos precoces dañinos en ese tejido en el 95% de la población.",
     },
-    correct: "X",
+    correct: "c",
   },
   {
     id: 223,
@@ -272,7 +272,7 @@ export const QUESTIONS_201_250: Question[] = [
       c: "El potencial (kVp), los miliamperios seleccionados, el tiempo de disparo y la filtración añadida.",
       d: "El potencial (kVp), los miliamperios seleccionados, el tiempo de disparo y la filtración inherente.",
     },
-    correct: "X",
+    correct: "b",
   },
   {
     id: 224,
@@ -284,7 +284,7 @@ export const QUESTIONS_201_250: Question[] = [
       c: "Grado alto.",
       d: "La opción a) y b) son correctas.",
     },
-    correct: "X",
+    correct: "c",
   },
   {
     id: 225,
@@ -296,7 +296,7 @@ export const QUESTIONS_201_250: Question[] = [
       c: "Cóclea.",
       d: "Médula cervical.",
     },
-    correct: "X",
+    correct: "a",
   },
   {
     id: 226,
@@ -308,7 +308,7 @@ export const QUESTIONS_201_250: Question[] = [
       c: "Colaborar en el programa de control de calidad del equipamiento, bajo la supervisión del especialista o de la especialista en radiofísica hospitalaria.",
       d: "Todas las opciones son correctas.",
     },
-    correct: "X",
+    correct: "d",
   },
   {
     id: 227,
@@ -320,7 +320,7 @@ export const QUESTIONS_201_250: Question[] = [
       c: "Histograma dosis-volumen acumulativo.",
       d: "Herramienta DICOM.",
     },
-    correct: "X",
+    correct: "d",
   },
   {
     id: 228,
@@ -332,7 +332,7 @@ export const QUESTIONS_201_250: Question[] = [
       c: "Consta de un equipo de RX que puede trabajar en modo radiográfico y fluoroscópico.",
       d: "Ninguna de las respuestas es correcta.",
     },
-    correct: "X",
+    correct: "c",
   },
   {
     id: 229,
@@ -343,7 +343,7 @@ export const QUESTIONS_201_250: Question[] = [
       c: "Capacidad eléctrica.",
       d: "Carga eléctrica.",
     },
-    correct: "X",
+    correct: "d",
   },
   {
     id: 230,
@@ -355,7 +355,7 @@ export const QUESTIONS_201_250: Question[] = [
       c: "Exacerbación de los síntomas neurológicos.",
       d: "Todas las respuestas son correctas.",
     },
-    correct: "X",
+    correct: "c",
   },
   {
     id: 231,
@@ -367,7 +367,7 @@ export const QUESTIONS_201_250: Question[] = [
       c: "Para cambiar protones por neutrones.",
       d: "Para enfocar el haz en un solo punto.",
     },
-    correct: "X",
+    correct: "b",
   },
   {
     id: 232,
@@ -379,7 +379,7 @@ export const QUESTIONS_201_250: Question[] = [
       c: "La probabilidad de control tumoral frente a la tasa de dosis administrada por minuto.",
       d: "La probabilidad de daño de un tejido sano frente a la tasa de dosis administrada por minuto.",
     },
-    correct: "X",
+    correct: "a",
   },
   {
     id: 233,
@@ -390,7 +390,7 @@ export const QUESTIONS_201_250: Question[] = [
       c: "Se dé cualquiera de las condiciones indicadas en las respuestas a) y b).",
       d: "Se den las dos condiciones indicadas en las respuestas a) y b).",
     },
-    correct: "X",
+    correct: "c",
   },
   {
     id: 234,
@@ -402,7 +402,7 @@ export const QUESTIONS_201_250: Question[] = [
       c: "80%.",
       d: "75%.",
     },
-    correct: "X",
+    correct: "b",
   },
   {
     id: 235,
@@ -414,7 +414,7 @@ export const QUESTIONS_201_250: Question[] = [
       c: "5 fracciones de 300 cGy/día y 5 Gy en sesión única.",
       d: "10 fracciones de 300 cGy/día y 5 fracciones de 400 cGy/día.",
     },
-    correct: "X",
+    correct: "b",
   },
   {
     id: 236,
@@ -426,7 +426,7 @@ export const QUESTIONS_201_250: Question[] = [
       c: "Entre 75ºC- 85ºC.",
       d: "Entre 70ºC- 90ºC.",
     },
-    correct: "X",
+    correct: "a",
   },
   {
     id: 237,
@@ -438,7 +438,7 @@ export const QUESTIONS_201_250: Question[] = [
       c: "65-70 MeV.",
       d: "30-50 keV.",
     },
-    correct: "X",
+    correct: "c",
   },
   {
     id: 238,
@@ -450,7 +450,7 @@ export const QUESTIONS_201_250: Question[] = [
       c: "La radiación característica generada, representada por la curva del espectro.",
       d: "La radiación característica generada, representada por las líneas verticales del espectro.",
     },
-    correct: "X",
+    correct: "d",
   },
   {
     id: 239,
@@ -462,7 +462,7 @@ export const QUESTIONS_201_250: Question[] = [
       c: "Yodo 125.",
       d: "Yodo 195.",
     },
-    correct: "X",
+    correct: "b",
   },
   {
     id: 240,
@@ -474,7 +474,7 @@ export const QUESTIONS_201_250: Question[] = [
       c: "El límite de dosis equivalente para la piel será de 500 mSv por año oficial.",
       d: "El límite de dosis equivalente para cada extremidad será de 500 mSv por año oficial.",
     },
-    correct: "X",
+    correct: "b",
   },
   {
     id: 241,
@@ -486,7 +486,7 @@ export const QUESTIONS_201_250: Question[] = [
       c: "Neoplasia de pulmón.",
       d: "Neoplasia de recto.",
     },
-    correct: "X",
+    correct: "a",
   },
   {
     id: 242,
@@ -498,7 +498,7 @@ export const QUESTIONS_201_250: Question[] = [
       c: "Puede diferenciar tumores malignos del tejido sano que los rodea.",
       d: "Permite realizar un seguimiento de la evolución de la lesión.",
     },
-    correct: "X",
+    correct: "b",
   },
   {
     id: 243,
@@ -510,7 +510,7 @@ export const QUESTIONS_201_250: Question[] = [
       c: "Solo se presentan en los tejidos de rápida proliferación.",
       d: "Suelen presentarse en los tejidos de rápida proliferación, pero no solo en ellos.",
     },
-    correct: "X",
+    correct: "b",
   },
   {
     id: 244,
@@ -522,7 +522,7 @@ export const QUESTIONS_201_250: Question[] = [
       c: "En el taller de moldes con la persona paciente presente, excepto de los moldes hechos con impresora 3D para tumores cutáneos.",
       d: "En el taller de moldes sin la persona paciente presente, incluso los moldes hechos con impresora 3D para tumores cutáneos.",
     },
-    correct: "X",
+    correct: "c",
   },
   {
     id: 245,
@@ -534,7 +534,7 @@ export const QUESTIONS_201_250: Question[] = [
       c: "Necrosis ósea púbica.",
       d: "Estenosis del introito vaginal.",
     },
-    correct: "X",
+    correct: "b",
   },
   {
     id: 246,
@@ -546,7 +546,7 @@ export const QUESTIONS_201_250: Question[] = [
       c: "Son una herramienta de contorneo de órganos.",
       d: "Ofrecen una calidad de imagen igual o incluso mayor que las imágenes de TC.",
     },
-    correct: "X",
+    correct: "b",
   },
   {
     id: 247,
@@ -558,7 +558,7 @@ export const QUESTIONS_201_250: Question[] = [
       c: "Fibrosis.",
       d: "Alteraciones en el color de la piel.",
     },
-    correct: "X",
+    correct: "a",
   },
   {
     id: 248,
@@ -570,7 +570,7 @@ export const QUESTIONS_201_250: Question[] = [
       c: "Aparición de erupciones cutáneas.",
       d: "Alteración del nivel de consciencia.",
     },
-    correct: "X",
+    correct: "c",
   },
   {
     id: 249,
@@ -582,7 +582,7 @@ export const QUESTIONS_201_250: Question[] = [
       c: "Confortable.",
       d: "Durabilidad.",
     },
-    correct: "X",
+    correct: "d",
   },
   {
     id: 250,
@@ -593,6 +593,6 @@ export const QUESTIONS_201_250: Question[] = [
       c: "Intensificador de imagen.",
       d: "Láseres de centrado.",
     },
-    correct: "X",
+    correct: "b",
   },
 ];
