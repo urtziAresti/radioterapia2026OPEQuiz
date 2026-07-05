@@ -1,7 +1,7 @@
-import { Component, EventEmitter, inject, Output, OnInit } from "@angular/core";
+import { Component, EventEmitter, inject, Output, OnInit, OnDestroy } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
-import { Router } from "@angular/router";
+import { NavigationEnd, Router } from "@angular/router";
 import { QuizService } from "../../../services/quiz.service";
 import { QuestionProgress } from "../../../interfaces/progress";
 import { IonicModule } from "@ionic/angular";
@@ -13,7 +13,7 @@ import { IonicModule } from "@ionic/angular";
   templateUrl: "./welcome.component.html",
   styleUrls: ["./welcome.component.scss"],
 })
-export class WelcomeComponent implements OnInit {
+export class WelcomeComponent implements OnInit,OnDestroy {
   username: string = "";
   selectedQuestionCount: number = 25;
   failedQuestions: number[] = [];
@@ -25,6 +25,23 @@ export class WelcomeComponent implements OnInit {
     username: string;
     count: number;
   }>();
+
+  constructor() {
+
+    inject(Router).events.subscribe(event => {
+  
+      if (event instanceof NavigationEnd) {
+  
+        alert("entra en NavigationEnd");
+  
+      }
+  
+    });
+  
+  }
+  ngOnDestroy() {
+    alert("destroy");
+  }
 
   ngOnInit() {
     alert("entra en el init wel");
