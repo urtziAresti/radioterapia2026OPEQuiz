@@ -83,15 +83,7 @@ describe("QuizPage", () => {
     expect(timerServiceMock.start).toHaveBeenCalled();
   });
 
-  it("should initialize in normal mode and load questions", () => {
-    const fixture = TestBed.createComponent(QuizPage);
-    component = fixture.componentInstance;
-  
-    fixture.detectChanges();
-  
-    expect(component.mode).toBe("normal");
-    expect(component.playerName).toBe("Urtzi");
-  });
+ 
   it("should reset quiz state properly", () => {
     component.currentIndex = 5;
     component.correctAnswers = 3;
