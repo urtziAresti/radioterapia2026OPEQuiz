@@ -18,12 +18,13 @@ import {
 } from '@ionic/angular/standalone';
 
 import { addIcons } from 'ionicons';
-import { lockClosedOutline, logInOutline } from 'ionicons/icons';
+import { lockClosedOutline, logInOutline, personAddOutline } from 'ionicons/icons';
 import { LogService } from '../../../services/log.service';
 
 addIcons({
   'lock-closed-outline': lockClosedOutline,
-  'log-in-outline': logInOutline
+  'log-in-outline': logInOutline,
+  'person-add-outline': personAddOutline
 });
 
 @Component({
@@ -123,5 +124,20 @@ export class LoginComponent {
     });
 
     await toast.present();
+  }
+
+  register(){
+    const email = "urtzi.aresti+OPEAPP@gmail.com";
+    const subject = encodeURIComponent(
+      "Registro App - Test Radioterapia"
+    );
+    const body = encodeURIComponent(
+      `Hola,\n\nEl siguiente formulario es para registrarte:\n\n- Nombre y apellidos:\n- Usuario:\n- Contraseña:\n\n`
+    );
+  
+    window.open(
+      `mailto:${email}?subject=${subject}&body=${body}`,
+      "_self"
+    );
   }
 }
