@@ -1,7 +1,7 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { DataComponent } from './data.component';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { DataComponent } from "./data.component";
 
-describe('DataComponent', () => {
+describe("DataComponent", () => {
   let component: DataComponent;
   let fixture: ComponentFixture<DataComponent>;
 
@@ -15,17 +15,37 @@ describe('DataComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 
-  it('should open a file in a new tab', () => {
-    spyOn(window, 'open');
+  it("should open file", () => {
+    spyOn(window, "open");
 
-    const path = 'assets/docs/preguntas.pdf';
+    component.openFile("/assets/docs/test.pdf");
 
-    component.openFile(path);
+    expect(window.open).toHaveBeenCalledWith(
+      "/assets/docs/test.pdf",
+      "_blank"
+    );
+  });
 
-    expect(window.open).toHaveBeenCalledWith(path, '_blank');
+  it("should open pdf in Google Viewer", () => {
+    spyOn(window, "open");
+
+    component.openPDF();
+
+    const fileUrl = new URL(
+      "https://radioterapia2026-ope.vercel.app/assets/docs/preguntasOK.pdf",
+      document.baseURI
+    ).href;
+
+    const expected =
+      `https://docs.google.com/gview?embedded=true&url=${encodeURIComponent(fileUrl)}`;
+
+    expect(window.open).toHaveBeenCalledWith(
+      expected,
+      "_blank"
+    );
   });
 });

@@ -91,12 +91,17 @@ export class WelcomeComponent implements OnInit {
 
   sendSuggestionsMail() {
     const email = "urtzi.aresti+OPEAPP@gmail.com";
-    const subject = encodeURIComponent("Sugerencias OPE - Test Radioterapia");
+    const subject = encodeURIComponent(
+      "Sugerencias OPE - Test Radioterapia"
+    );
     const body = encodeURIComponent(
       `Hola,\n\nQuería enviar las siguientes sugerencias sobre el test:\n\n`
     );
-
-    window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+  
+    window.open(
+      `mailto:${email}?subject=${subject}&body=${body}`,
+      "_self"
+    );
   }
 
   startRepasoMode() {
