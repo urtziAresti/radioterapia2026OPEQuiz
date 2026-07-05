@@ -76,8 +76,6 @@ export class QuizPage implements OnInit, OnDestroy {
 
   private questionTimeout: any = null;
 
-  wrongAnswersMap: Record<number, number> = {};
-
   constructor() {
     this.timerService.elapsedTime$.subscribe((time) => {
       this.elapsedTime = time;
@@ -133,8 +131,6 @@ export class QuizPage implements OnInit, OnDestroy {
 
     this.quizFinished = false;
 
-    this.wrongAnswersMap = {};
-
     this.timerService.start();
   }
 
@@ -163,23 +159,16 @@ export class QuizPage implements OnInit, OnDestroy {
       this.correctAnswers++;
 
       if (this.mode === "failed") {
-        this.historyService.removeWrongAnswer(currentQuestion.id);
-
         this.failedIds = this.failedIds.filter(
           (id) => id !== currentQuestion.id
         );
       }
-
       this.slideError(this.OK_QUESTION_TIME);
     } else {
       this.nextVisible = true;
-
-      const id = currentQuestion.id;
-
-      this.wrongAnswersMap[id] = (this.wrongAnswersMap[id] || 0) + 1;
-
-      this.historyService.saveWrongAnswer(id);
     }
+
+    this.historyService.saveQuestion(currentQuestion.id, isCorrect);
 
     this.logService.log("ANSWER_SELECTED", {
       questionId: currentQuestion.id,

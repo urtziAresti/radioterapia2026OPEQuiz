@@ -48,27 +48,53 @@ export class WelcomeComponent implements OnInit {
   }
   
   getFailedQuestions(): number[] {
+
     const session = localStorage.getItem("userSession");
-    if (!session) return [];
+  
+    if (!session) {
+      return [];
+    }
   
     const currentUser = JSON.parse(session);
-    const username = currentUser?.username || "anonymous";
+  
+    const username = currentUser?.username;
+  
+    if (!username) {
+      return [];
+    }
   
     const raw = sessionStorage.getItem("quiz_history");
-    if (!raw) return [];
   
-    const history: any[] = JSON.parse(raw);
+    if (!raw) {
+      return [];
+    }
   
-    const userHistory = history.find(u => u.user === username);
-    if (!userHistory) return [];
+    const history = JSON.parse(raw);
   
-    const failedQuestions: number[] = userHistory.attempts.flatMap((attempt: any) =>
-      Object.entries(attempt.wrongAnswers || {})
-        .filter(([_, count]) => Number(count) > 0)
-        .map(([id]) => Number(id))
-    );
+    const userHistory = history.find((u: any) => u.user === username);
   
-    return [...new Set(failedQuestions)];
+    if (!userHistory) {
+      return [];
+    }
+  
+    const state = new Map<number, boolean>();
+  
+    for (const attempt of userHistory.attempts) {
+  
+      if (!attempt.questions) {
+        continue;
+      }
+  
+      for (const question of attempt.questions) {
+        // La última respuesta registrada para cada pregunta prevalece
+        state.set(question.questionId, question.correct);
+      }
+  
+    }
+  
+    return Array.from(state.entries())
+      .filter(([, correct]) => !correct)
+      .map(([id]) => id);
   }
 
   startQuiz() {

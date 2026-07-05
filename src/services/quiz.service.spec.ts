@@ -1,33 +1,39 @@
-import { TestBed } from "@angular/core/testing";
+import { TestBed } from '@angular/core/testing';
 import {
+  HttpClientTestingModule,
   HttpTestingController,
-  provideHttpClientTesting,
-} from "@angular/common/http/testing";
-import { provideHttpClient } from "@angular/common/http";
+} from '@angular/common/http/testing';
 
-import { QuizService } from "./quiz.service";
-import { HistoryService } from "./history.service";
-import { Question } from "../interfaces/question";
+import { QuizService } from './quiz.service';
+import { HistoryService } from './history.service';
+import { RADIO_QUESTIONS } from '../data/radio-questions/radio_questions';
 
-describe("QuizService", () => {
+describe('QuizService', () => {
   let service: QuizService;
   let httpMock: HttpTestingController;
 
-  const historySpy = jasmine.createSpyObj("HistoryService", [
-    "saveWrongAnswer",
-    "removeWrongAnswer",
-    "getWrongAnswers",
-    "hasWrongAnswers",
-    "clearHistory",
-    "getAllHistory",
-  ]);
+  let historySpy: jasmine.SpyObj<HistoryService>;
 
   beforeEach(() => {
+    historySpy = jasmine.createSpyObj('HistoryService', [
+      'getAnsweredQuestionIds',
+      'getAnsweredQuestionsCount',
+      'getIncorrectAnswers',
+      'hasIncorrectAnswers',
+      'clearHistory',
+      'getAllHistory',
+    ]);
+
+    historySpy.getAnsweredQuestionIds.and.returnValue([]);
+    historySpy.getAnsweredQuestionsCount.and.returnValue(0);
+    historySpy.getIncorrectAnswers.and.returnValue([]);
+    historySpy.hasIncorrectAnswers.and.returnValue(false);
+    historySpy.getAllHistory.and.returnValue([]);
+
     TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
       providers: [
         QuizService,
-        provideHttpClient(),
-        provideHttpClientTesting(),
         {
           provide: HistoryService,
           useValue: historySpy,
@@ -43,150 +49,180 @@ describe("QuizService", () => {
     httpMock.verify();
   });
 
-  it("should be created", () => {
+  // ====================================================
+  // GPT
+  // ====================================================
+
+  it('should create', () => {
     expect(service).toBeTruthy();
   });
 
-  it("should return questions", () => {
-    const questions = service.getQuestions(5);
+  it('should parse GPT valid json', () => {
+    let result: any;
 
-    expect(questions.length).toBe(5);
+    service.ask(RADIO_QUESTIONS[0]).subscribe(r => (result = r));
+
+    const req = httpMock.expectOne('/api/GPT');
+
+    expect(req.request.method).toBe('POST');
+
+    req.flush({
+      ok: true,
+      answer: JSON.stringify({
+        answer: 'a',
+        explanation: 'Correcto',
+      }),
+    });
+
+    expect(result.answer).toBe('a');
+    expect(result.explanation).toBe('Correcto');
   });
 
-  it("should return empty array if ids are empty", () => {
+  it('should parse markdown json', () => {
+    let result: any;
+
+    service.ask(RADIO_QUESTIONS[0]).subscribe(r => (result = r));
+
+    const req = httpMock.expectOne('/api/GPT');
+
+    req.flush({
+      ok: true,
+      answer:
+        '```json\n{"answer":"b","explanation":"Texto"}\n```',
+    });
+
+    expect(result.answer).toBe('b');
+  });
+
+  it('should return parse error', () => {
+    let result: any;
+
+    service.ask(RADIO_QUESTIONS[0]).subscribe(r => (result = r));
+
+    const req = httpMock.expectOne('/api/GPT');
+
+    req.flush({
+      ok: true,
+      answer: 'xxxxx',
+    });
+
+    expect(result.answer).toBe('');
+    expect(result.explanation).toContain('Error');
+  });
+
+  // ====================================================
+  // QUESTIONS
+  // ====================================================
+
+  it('should return requested number of questions', () => {
+    const questions = service.getQuestions(20);
+
+    expect(questions.length).toBe(20);
+  });
+
+  it('should never return answered questions', () => {
+    historySpy.getAnsweredQuestionIds.and.returnValue([
+      RADIO_QUESTIONS[0].id,
+      RADIO_QUESTIONS[1].id,
+      RADIO_QUESTIONS[2].id,
+    ]);
+
+    const questions = service.getQuestions(100);
+
+    expect(
+      questions.some(q => q.id === RADIO_QUESTIONS[0].id)
+    ).toBeFalse();
+
+    expect(
+      questions.some(q => q.id === RADIO_QUESTIONS[1].id)
+    ).toBeFalse();
+
+    expect(
+      questions.some(q => q.id === RADIO_QUESTIONS[2].id)
+    ).toBeFalse();
+  });
+
+  it('should get questions by ids', () => {
+    const ids = [
+      RADIO_QUESTIONS[0].id,
+      RADIO_QUESTIONS[5].id,
+    ];
+
+    const result = service.getQuestionsByIds(ids);
+
+    expect(result.length).toBe(2);
+    expect(result[0].id).toBe(ids[0]);
+  });
+
+  it('should return empty array if ids are empty', () => {
     expect(service.getQuestionsByIds([])).toEqual([]);
   });
 
-  it("should check correct answer", () => {
-    const question = {
-      correct: "b",
-    } as Question;
-
-    expect(service.checkAnswer(question, "b")).toBeTrue();
-    expect(service.checkAnswer(question, "a")).toBeFalse();
+  it('should validate correct answer', () => {
+    expect(
+      service.checkAnswer(
+        RADIO_QUESTIONS[0],
+        RADIO_QUESTIONS[0].correct
+      )
+    ).toBeTrue();
   });
 
-  it("should calculate progress", () => {
-    service.getQuestions(10);
+  it('should validate incorrect answer', () => {
+    expect(
+      service.checkAnswer(
+        RADIO_QUESTIONS[0],
+        'z'
+      )
+    ).toBeFalse();
+  });
+
+  // ====================================================
+  // PROGRESS
+  // ====================================================
+
+  it('should calculate progress', () => {
+    historySpy.getAnsweredQuestionsCount.and.returnValue(60);
 
     const progress = service.getProgress();
 
-    expect(progress.total).toBeGreaterThan(0);
-    expect(progress.answered).toBeGreaterThanOrEqual(10);
+    expect(progress.answered).toBe(60);
+    expect(progress.total).toBe(RADIO_QUESTIONS.length);
+    expect(progress.remaining).toBe(
+      RADIO_QUESTIONS.length - 60
+    );
+
+    expect(progress.percentage).toBe(
+      Math.round((60 / RADIO_QUESTIONS.length) * 100)
+    );
   });
 
-  it("should call HistoryService.saveWrongAnswer", () => {
-    service.saveWrongAnswer(5);
+  // ====================================================
+  // HISTORY
+  // ====================================================
 
-    expect(historySpy.saveWrongAnswer).toHaveBeenCalledWith(5);
+  it('should return incorrect questions', () => {
+    historySpy.getIncorrectAnswers.and.returnValue([1, 2]);
+
+    expect(service.getIncorrect()).toEqual([1, 2]);
   });
 
-  it("should call HistoryService.removeWrongAnswer", () => {
-    service.removeWrongAnswer(3);
+  it('should know if there are incorrect questions', () => {
+    historySpy.hasIncorrectAnswers.and.returnValue(true);
 
-    expect(historySpy.removeWrongAnswer).toHaveBeenCalledWith(3);
+    expect(service.hasIncorrect()).toBeTrue();
   });
 
-  it("should call HistoryService.getWrongAnswers", () => {
-    historySpy.getWrongAnswers.and.returnValue([1, 2]);
-
-    expect(service.getWrongAnswers()).toEqual([1, 2]);
-  });
-
-  it("should call HistoryService.hasWrongAnswers", () => {
-    historySpy.hasWrongAnswers.and.returnValue(true);
-
-    expect(service.hasWrongAnswers()).toBeTrue();
-  });
-
-  it("should call HistoryService.clearHistory", () => {
+  it('should clear history', () => {
     service.clearHistory();
 
     expect(historySpy.clearHistory).toHaveBeenCalled();
   });
 
-  it("should call HistoryService.getAllHistory", () => {
-    const history = [{ user: "urtzi" }];
+  it('should return history', () => {
+    const history = [{ user: 'ADMIN', attempts: [] }];
 
     historySpy.getAllHistory.and.returnValue(history);
 
     expect(service.getHistory()).toEqual(history);
-  });
-
-  it("should parse valid GPT response", () => {
-    const question = {
-      question: "Pregunta",
-      options: {
-        a: "A",
-        b: "B",
-        c: "C",
-        d: "D",
-      },
-    } as Question;
-
-    service.ask(question).subscribe((res) => {
-      expect(res.answer).toBe("a");
-      expect(res.explanation).toBe("Correcta");
-    });
-
-    const req = httpMock.expectOne("/api/GPT");
-
-    expect(req.request.method).toBe("POST");
-
-    req.flush({
-      ok: true,
-      answer: JSON.stringify({
-        answer: "a",
-        explanation: "Correcta",
-      }),
-    });
-  });
-
-  it("should parse markdown GPT response", () => {
-    const question = {
-      question: "Pregunta",
-      options: {
-        a: "A",
-        b: "B",
-        c: "C",
-        d: "D",
-      },
-    } as Question;
-
-    service.ask(question).subscribe((res) => {
-      expect(res.answer).toBe("c");
-    });
-
-    const req = httpMock.expectOne("/api/GPT");
-
-    req.flush({
-      ok: true,
-      answer:
-        "```json\n{\"answer\":\"c\",\"explanation\":\"Texto\"}\n```",
-    });
-  });
-
-  it("should return fallback on invalid GPT response", () => {
-    const question = {
-      question: "Pregunta",
-      options: {
-        a: "A",
-        b: "B",
-        c: "C",
-        d: "D",
-      },
-    } as Question;
-
-    service.ask(question).subscribe((res) => {
-      expect(res.answer).toBe("");
-      expect(res.explanation).toContain("Error");
-    });
-
-    const req = httpMock.expectOne("/api/GPT");
-
-    req.flush({
-      ok: true,
-      answer: "Respuesta inválida",
-    });
   });
 });

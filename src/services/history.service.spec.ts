@@ -1,4 +1,5 @@
 import { TestBed } from "@angular/core/testing";
+
 import { HistoryService } from "./history.service";
 
 describe("HistoryService", () => {
@@ -6,11 +7,17 @@ describe("HistoryService", () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-
     service = TestBed.inject(HistoryService);
 
     localStorage.clear();
     sessionStorage.clear();
+
+    localStorage.setItem(
+      "userSession",
+      JSON.stringify({
+        username: "ADMIN",
+      })
+    );
   });
 
   afterEach(() => {
@@ -18,152 +25,195 @@ describe("HistoryService", () => {
     sessionStorage.clear();
   });
 
-  function login(username = "urtzi") {
-    localStorage.setItem(
-      "userSession",
-      JSON.stringify({ username })
-    );
-  }
-
   it("should be created", () => {
     expect(service).toBeTruthy();
   });
 
-  it("should not save wrong answer without session", () => {
-    service.saveWrongAnswer(10);
-
-    expect(sessionStorage.getItem("quiz_history")).toBeNull();
-  });
-
-  it("should save wrong answer", () => {
-    login();
-
-    service.saveWrongAnswer(5);
+  it("should save a new question", () => {
+    service.saveQuestion(1, true);
 
     const history = service.getAllHistory();
 
     expect(history.length).toBe(1);
-    expect(history[0].user).toBe("urtzi");
+    expect(history[0].user).toBe("ADMIN");
     expect(history[0].attempts.length).toBe(1);
-    expect(history[0].attempts[0].wrongAnswers[5]).toBeTrue();
+    expect(history[0].attempts[0].questions.length).toBe(1);
+    expect(history[0].attempts[0].questions[0].questionId).toBe(1);
+    expect(history[0].attempts[0].questions[0].correct).toBeTrue();
   });
 
-  it("should save multiple wrong answers", () => {
-    login();
+  it("should update an existing question instead of duplicating it", () => {
+    service.saveQuestion(10, false);
+    service.saveQuestion(10, true);
 
-    service.saveWrongAnswer(1);
-    service.saveWrongAnswer(2);
+    const history = service.getAllHistory();
 
-    expect(service.getWrongAnswers()).toEqual([1, 2]);
+    const questions = history[0].attempts[0].questions;
+
+    expect(questions.length).toBe(1);
+    expect(questions[0].questionId).toBe(10);
+    expect(questions[0].correct).toBeTrue();
   });
 
-  it("should remove wrong answer", () => {
-    login();
+  it("should save multiple different questions", () => {
+    service.saveQuestion(1, true);
+    service.saveQuestion(2, false);
+    service.saveQuestion(3, true);
 
-    service.saveWrongAnswer(10);
-    service.saveWrongAnswer(20);
+    const history = service.getAllHistory();
 
-    service.removeWrongAnswer(10);
-
-    expect(service.getWrongAnswers()).toEqual([20]);
+    expect(history[0].attempts[0].questions.length).toBe(3);
   });
 
-  it("should ignore remove if user does not exist", () => {
-    login();
+  it("should return incorrect answers", () => {
+    service.saveQuestion(1, true);
+    service.saveQuestion(2, false);
+    service.saveQuestion(3, false);
 
-    service.removeWrongAnswer(1);
-
-    expect(service.getWrongAnswers()).toEqual([]);
+    expect(service.getIncorrectAnswers()).toEqual([2, 3]);
   });
 
-  it("should return empty wrong answers without session", () => {
-    expect(service.getWrongAnswers()).toEqual([]);
+  it("should return empty incorrect answers", () => {
+    service.saveQuestion(1, true);
+
+    expect(service.getIncorrectAnswers()).toEqual([]);
   });
 
-  it("should return empty wrong answers if history is empty", () => {
-    login();
+  it("should return hasIncorrectAnswers true", () => {
+    service.saveQuestion(1, false);
 
-    expect(service.getWrongAnswers()).toEqual([]);
+    expect(service.hasIncorrectAnswers()).toBeTrue();
   });
 
-  it("should detect wrong answers", () => {
-    login();
+  it("should return hasIncorrectAnswers false", () => {
+    service.saveQuestion(1, true);
 
-    expect(service.hasWrongAnswers()).toBeFalse();
+    expect(service.hasIncorrectAnswers()).toBeFalse();
+  });
 
-    service.saveWrongAnswer(3);
+  it("should return answered questions count", () => {
+    service.saveQuestion(1, true);
+    service.saveQuestion(2, true);
+    service.saveQuestion(3, false);
 
-    expect(service.hasWrongAnswers()).toBeTrue();
+    expect(service.getAnsweredQuestionsCount()).toBe(3);
+  });
+
+  it("should not increase answered count when updating a question", () => {
+    service.saveQuestion(1, false);
+    service.saveQuestion(1, true);
+
+    expect(service.getAnsweredQuestionsCount()).toBe(1);
+  });
+
+  it("should return answered ids", () => {
+    service.saveQuestion(5, true);
+    service.saveQuestion(8, false);
+
+    expect(service.getAnsweredQuestionIds()).toEqual([5, 8]);
+  });
+
+  it("should start a new attempt", () => {
+    service.saveQuestion(1, true);
+
+    service.startNewAttempt();
+
+    const history = service.getAllHistory();
+
+    expect(history[0].attempts.length).toBe(2);
+    expect(history[0].attempts[1].questions.length).toBe(0);
+  });
+
+  it("should save question in new attempt", () => {
+    service.saveQuestion(1, true);
+
+    service.startNewAttempt();
+
+    service.saveQuestion(2, false);
+
+    const history = service.getAllHistory();
+
+    expect(history[0].attempts.length).toBe(2);
+    expect(history[0].attempts[1].questions.length).toBe(1);
+    expect(history[0].attempts[1].questions[0].questionId).toBe(2);
   });
 
   it("should clear history", () => {
-    login();
-
-    service.saveWrongAnswer(99);
-
-    expect(service.getAllHistory().length).toBe(1);
+    service.saveQuestion(1, true);
 
     service.clearHistory();
 
     expect(service.getAllHistory()).toEqual([]);
   });
 
-  it("should return full history", () => {
-    login();
-
-    service.saveWrongAnswer(1);
-
-    const history = service.getAllHistory();
-
-    expect(history.length).toBe(1);
+  it("should return empty history when storage is empty", () => {
+    expect(service.getAllHistory()).toEqual([]);
   });
 
-  it("should return empty history if storage contains invalid JSON", () => {
-    sessionStorage.setItem("quiz_history", "invalid json");
+  it("should return empty ids when no history exists", () => {
+    expect(service.getAnsweredQuestionIds()).toEqual([]);
+  });
+
+  it("should return zero answered count without history", () => {
+    expect(service.getAnsweredQuestionsCount()).toBe(0);
+  });
+
+  it("should return empty incorrect answers without history", () => {
+    expect(service.getIncorrectAnswers()).toEqual([]);
+  });
+
+  it("should handle invalid session json", () => {
+    localStorage.setItem("userSession", "{");
+
+    service.saveQuestion(1, true);
 
     expect(service.getAllHistory()).toEqual([]);
   });
 
-  it("should return null username if session JSON is invalid", () => {
-    localStorage.setItem("userSession", "invalid");
-
-    service.saveWrongAnswer(1);
+  it("should handle invalid history json", () => {
+    sessionStorage.setItem("quiz_history", "{");
 
     expect(service.getAllHistory()).toEqual([]);
   });
 
-  it("should create a new attempt automatically", () => {
-    login();
+  it("should support multiple users", () => {
+    service.saveQuestion(1, true);
 
-    service.saveWrongAnswer(100);
-
-    const history = service.getAllHistory();
-
-    expect(history[0].attempts.length).toBe(1);
-    expect(history[0].attempts[0].date).toBeDefined();
-  });
-
-  it("should not fail removing from empty attempt", () => {
-    login();
-
-    const history = [
-      {
-        user: "urtzi",
-        attempts: [
-          {
-            wrongAnswers: {},
-          },
-        ],
-      },
-    ];
-
-    sessionStorage.setItem(
-      "quiz_history",
-      JSON.stringify(history)
+    localStorage.setItem(
+      "userSession",
+      JSON.stringify({
+        username: "USER2",
+      })
     );
 
-    service.removeWrongAnswer(999);
+    service.saveQuestion(2, false);
 
-    expect(service.getWrongAnswers()).toEqual([]);
+    const history = service.getAllHistory();
+
+    expect(history.length).toBe(2);
+  });
+
+  it("should update incorrect answer to correct", () => {
+    service.saveQuestion(10, false);
+
+    expect(service.getIncorrectAnswers()).toEqual([10]);
+
+    service.saveQuestion(10, true);
+
+    expect(service.getIncorrectAnswers()).toEqual([]);
+  });
+
+  it("should preserve previous attempts", () => {
+    service.saveQuestion(1, true);
+
+    service.startNewAttempt();
+
+    service.saveQuestion(2, false);
+
+    const history = service.getAllHistory();
+
+    expect(history[0].attempts.length).toBe(2);
+    expect(history[0].attempts[0].questions.length).toBe(1);
+    expect(history[0].attempts[1].questions.length).toBe(1);
   });
 });

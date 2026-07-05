@@ -11,7 +11,7 @@ export const QUESTIONS_251_300: Question[] = [
       c: "30-40 fracciones en un periodo de 2 meses.",
       d: "Dos fracciones separadas por 24 horas.",
     },
-    correct: "X",
+    correct: "b",
   },
   {
     id: 252,
@@ -23,7 +23,7 @@ export const QUESTIONS_251_300: Question[] = [
       c: "Campos oblicuos.",
       d: "Técnica en aspa.",
     },
-    correct: "X",
+    correct: "c",
   },
   {
     id: 253,
@@ -35,7 +35,7 @@ export const QUESTIONS_251_300: Question[] = [
       c: "Realizar una sedación corta y superficial.",
       d: "Realizar una sedación corta y profunda.",
     },
-    correct: "X",
+    correct: "d",
   },
   {
     id: 254,
@@ -47,7 +47,7 @@ export const QUESTIONS_251_300: Question[] = [
       c: "Sistemas de radiografía digital directa.",
       d: "Las respuestas b) y c) son correctas.",
     },
-    correct: "X",
+    correct: "c",
   },
   {
     id: 255,
@@ -59,7 +59,7 @@ export const QUESTIONS_251_300: Question[] = [
       c: "El lavado de manos frecuente.",
       d: "La fumigación ambiental periódica de las habitaciones.",
     },
-    correct: "X",
+    correct: "c",
   },
   {
     id: 256,
@@ -71,7 +71,7 @@ export const QUESTIONS_251_300: Question[] = [
       c: "Solo el cuello del útero.",
       d: "Toda la mucosa uterina.",
     },
-    correct: "X",
+    correct: "d",
   },
   {
     id: 257,
@@ -83,7 +83,7 @@ export const QUESTIONS_251_300: Question[] = [
       c: "Adecuar la posición a los haces de tratamiento.",
       d: "Asegurar la reproducibilidad a lo largo del tratamiento.",
     },
-    correct: "X",
+    correct: "a",
   },
   {
     id: 258,
@@ -95,7 +95,7 @@ export const QUESTIONS_251_300: Question[] = [
       c: "En las zonas controladas en las que exista riesgo de exposición externa será obligatoria una estimación individual de dosis, que, en el caso de trabajadores/as de categoría A y B, deberá estar basada en dosimetría individual.",
       d: "En las zonas controladas en las que exista riesgo de contaminación, será obligatoria la utilización de equipos de protección individual adecuados al riesgo existente.",
     },
-    correct: "X",
+    correct: "d",
   },
   {
     id: 259,
@@ -107,7 +107,7 @@ export const QUESTIONS_251_300: Question[] = [
       c: "Tratar únicamente tumores sólidos localizados en las extremidades.",
       d: "Sustituir completamente la fase de acondicionamiento con quimioterapia.",
     },
-    correct: "X",
+    correct: "a",
   },
   {
     id: 260,
@@ -119,7 +119,7 @@ export const QUESTIONS_251_300: Question[] = [
       c: "Electrones.",
       d: "Las respuestas a) y c) son correctas.",
     },
-    correct: "X",
+    correct: "d",
   },
   {
     id: 261,
@@ -131,7 +131,7 @@ export const QUESTIONS_251_300: Question[] = [
       c: "Los contadores proporcionales trabajan en la zona de saturación.",
       d: "Los diferentes tipos de detectores de ionización gaseosa se diferencian, principalmente, en los valores de tensión en los que opera cada uno.",
     },
-    correct: "X",
+    correct: "d",
   },
   {
     id: 262,
@@ -142,7 +142,7 @@ export const QUESTIONS_251_300: Question[] = [
       c: "4D capturando el movimiento respiratorio en tiempo real mediante infrarrojos.",
       d: "4D capturando el movimiento respiratorio en tiempo real mediante ultrasonidos.",
     },
-    correct: "X",
+    correct: "b",
   },
   {
     id: 263,
@@ -154,7 +154,7 @@ export const QUESTIONS_251_300: Question[] = [
       c: "Las respuestas a) y b) son correctas.",
       d: "Ninguna de las respuestas es correcta.",
     },
-    correct: "X",
+    correct: "c",
   },
   {
     id: 264,
@@ -165,7 +165,7 @@ export const QUESTIONS_251_300: Question[] = [
       c: "Cerca de la hipófisis y del quiasma óptico.",
       d: "En el tronco del encéfalo.",
     },
-    correct: "X",
+    correct: "c",
   },
   {
     id: 265,
@@ -177,7 +177,7 @@ export const QUESTIONS_251_300: Question[] = [
       c: "Tomoterapia.",
       d: "Sistema de dispersión pasiva.",
     },
-    correct: "X",
+    correct: "c",
   },
   {
     id: 266,
@@ -189,7 +189,7 @@ export const QUESTIONS_251_300: Question[] = [
       c: "Metástasis hepáticas.",
       d: "Las respuestas a) y b) son correctas.",
     },
-    correct: "X",
+    correct: "c",
   },
   {
     id: 267,
@@ -200,7 +200,7 @@ export const QUESTIONS_251_300: Question[] = [
       c: "La hipertermia de cuerpo entero calienta todo el cuerpo a temperaturas de unos 39-41ºC.",
       d: "Ninguna de las respuestas es correcta.",
     },
-    correct: "X",
+    correct: "c",
   },
   {
     id: 268,
@@ -212,7 +212,7 @@ export const QUESTIONS_251_300: Question[] = [
       c: "El circuito de baja tensión.",
       d: "El circuito de alta tensión.",
     },
-    correct: "X",
+    correct: "b",
   },
   {
     id: 269,
@@ -224,7 +224,7 @@ export const QUESTIONS_251_300: Question[] = [
       c: "PET-TC con flúor-19.",
       d: "Radiografía de alta resolución.",
     },
-    correct: "X",
+    correct: "a",
   },
   {
     id: 270,
@@ -236,7 +236,7 @@ export const QUESTIONS_251_300: Question[] = [
       c: "El único efecto que ha podido correlacionarse con la muerte y mutación celular son las roturas simples de cadena.",
       d: "El único efecto que ha podido correlacionarse con la muerte y mutación celular son las roturas dobles de cadena.",
     },
-    correct: "X",
+    correct: "d",
   },
   {
     id: 271,
@@ -248,7 +248,7 @@ export const QUESTIONS_251_300: Question[] = [
       c: "Simulador adaptado.",
       d: "Programa de representación.",
     },
-    correct: "X",
+    correct: "a",
   },
   {
     id: 272,
@@ -260,7 +260,7 @@ export const QUESTIONS_251_300: Question[] = [
       c: "En el margen que se deja del CTV al PTV.",
       d: "Todas las opciones son correctas.",
     },
-    correct: "X",
+    correct: "d",
   },
   {
     id: 273,
@@ -272,7 +272,7 @@ export const QUESTIONS_251_300: Question[] = [
       c: "En tumores pequeños en estadios T3 o T4.",
       d: "En tumores grandes en estadios T3 o T4.",
     },
-    correct: "X",
+    correct: "a",
   },
   {
     id: 274,
@@ -284,7 +284,7 @@ export const QUESTIONS_251_300: Question[] = [
       c: "Utiliza una fuente natural de cobalto-60.",
       d: "Utiliza una fuente artificial de cobalto-60.",
     },
-    correct: "X",
+    correct: "d",
   },
   {
     id: 275,
@@ -295,7 +295,7 @@ export const QUESTIONS_251_300: Question[] = [
       c: "Sirve para el estudio de vasos sanguíneos.",
       d: "Todas las respuestas son correctas.",
     },
-    correct: "X",
+    correct: "c",
   },
   {
     id: 276,
@@ -306,7 +306,7 @@ export const QUESTIONS_251_300: Question[] = [
       c: "Una dosis baja de irradiación en varias fracciones.",
       d: "Una dosis alta de irradiación en varias fracciones.",
     },
-    correct: "X",
+    correct: "b",
   },
   {
     id: 277,
@@ -318,7 +318,7 @@ export const QUESTIONS_251_300: Question[] = [
       c: "Una única radiografía lateral.",
       d: "Radiografías ortogonales.",
     },
-    correct: "X",
+    correct: "d",
   },
   {
     id: 278,
@@ -330,7 +330,7 @@ export const QUESTIONS_251_300: Question[] = [
       c: "15 días.",
       d: "30 días.",
     },
-    correct: "X",
+    correct: "d",
   },
   {
     id: 279,
@@ -342,7 +342,7 @@ export const QUESTIONS_251_300: Question[] = [
       c: "Con la PDR (Pulsed Dose Rate).",
       d: "Ninguna opción es correcta.",
     },
-    correct: "X",
+    correct: "c",
   },
   {
     id: 280,
@@ -354,7 +354,7 @@ export const QUESTIONS_251_300: Question[] = [
       c: "Hacia los ganglios iliacos internos, externos y comunes.",
       d: "Hacia los ganglios iliacos internos, externos, comunes y hacia los ganglios renales.",
     },
-    correct: "X",
+    correct: "c",
   },
   {
     id: 281,
@@ -366,7 +366,7 @@ export const QUESTIONS_251_300: Question[] = [
       c: "Radiación delta.",
       d: "Radiación gamma.",
     },
-    correct: "X",
+    correct: "c",
   },
   {
     id: 282,
@@ -377,7 +377,7 @@ export const QUESTIONS_251_300: Question[] = [
       c: "Deben existir imágenes de referencia para la verificación del tratamiento.",
       d: "Todas las respuestas son correctas.",
     },
-    correct: "X",
+    correct: "d",
   },
   {
     id: 283,
@@ -389,7 +389,7 @@ export const QUESTIONS_251_300: Question[] = [
       c: "2 meses.",
       d: "4 semanas.",
     },
-    correct: "X",
+    correct: "c",
   },
   {
     id: 284,
@@ -400,7 +400,7 @@ export const QUESTIONS_251_300: Question[] = [
       c: "Las respuestas a) y b) son correctas.",
       d: "Ninguna de las respuestas es correcta.",
     },
-    correct: "X",
+    correct: "c",
   },
   {
     id: 285,
@@ -412,7 +412,7 @@ export const QUESTIONS_251_300: Question[] = [
       c: "Se promedian las desviaciones de las últimas cinco sesiones para compensarlas en la sesión siguiente.",
       d: "Se ajusta manualmente la energía del haz de megavoltaje para compensar el error de posicionamiento.",
     },
-    correct: "X",
+    correct: "b",
   },
   {
     id: 286,
@@ -424,7 +424,7 @@ export const QUESTIONS_251_300: Question[] = [
       c: "Reducción del tiempo de tratamiento.",
       d: "La opción b) y c) son correctas.",
     },
-    correct: "X",
+    correct: "c",
   },
   {
     id: 287,
@@ -436,7 +436,7 @@ export const QUESTIONS_251_300: Question[] = [
       c: "Haz disperso, haz primario y radiación de fuga.",
       d: "Radiación de fuga, haz primario y haz disperso.",
     },
-    correct: "X",
+    correct: "a",
   },
   {
     id: 288,
@@ -448,7 +448,7 @@ export const QUESTIONS_251_300: Question[] = [
       c: "En todos los casos que se haga una colostomía.",
       d: "En caso de que la persona paciente no desee un tratamiento radioterápico.",
     },
-    correct: "X",
+    correct: "b",
   },
   {
     id: 289,
@@ -460,7 +460,7 @@ export const QUESTIONS_251_300: Question[] = [
       c: "En la braquiterapia intersticial.",
       d: "En la braquiterapia superficial.",
     },
-    correct: "X",
+    correct: "a",
   },
   {
     id: 290,
@@ -472,7 +472,7 @@ export const QUESTIONS_251_300: Question[] = [
       c: "Tomografía computarizada.",
       d: "Radioscopia simple.",
     },
-    correct: "X",
+    correct: "c",
   },
   {
     id: 291,
@@ -484,7 +484,7 @@ export const QUESTIONS_251_300: Question[] = [
       c: "Ofrecen la posibilidad de ver los órganos en 3 dimensiones.",
       d: "Reducen la homogeneidad de las dosis en los volúmenes tratados.",
     },
-    correct: "X",
+    correct: "a",
   },
   {
     id: 292,
@@ -495,7 +495,7 @@ export const QUESTIONS_251_300: Question[] = [
       c: "Capa de ionización.",
       d: "Capa de valencia.",
     },
-    correct: "X",
+    correct: "d",
   },
   {
     id: 293,
@@ -507,7 +507,7 @@ export const QUESTIONS_251_300: Question[] = [
       c: "Nunca, por riesgo de toxicidad.",
       d: "Siempre, si no existe riesgo de toxicidad.",
     },
-    correct: "X",
+    correct: "b",
   },
   {
     id: 294,
@@ -519,7 +519,7 @@ export const QUESTIONS_251_300: Question[] = [
       c: "Reducir la incidencia de metástasis óseas en pacientes con mala respuesta al tratamiento previo.",
       d: "Reducir la incidencia de metástasis hepáticas en pacientes con buena respuesta al tratamiento previo.",
     },
-    correct: "X",
+    correct: "a",
   },
   {
     id: 295,
@@ -531,7 +531,7 @@ export const QUESTIONS_251_300: Question[] = [
       c: "A la altura de la vértebra L4, unos centímetros por encima de las crestas ilíacas.",
       d: "A la altura de la vértebra L4, unos centímetros por debajo de las crestas ilíacas.",
     },
-    correct: "X",
+    correct: "a",
   },
   {
     id: 296,
@@ -543,7 +543,7 @@ export const QUESTIONS_251_300: Question[] = [
       c: "El boost en los gliomas cerebrales de alto grado hace que el tiempo de supervivencia sea mayor.",
       d: "Si se aplica el boost en cáncer de mama precoz, debe ser de 20 Gy.",
     },
-    correct: "X",
+    correct: "c",
   },
   {
     id: 297,
@@ -555,7 +555,7 @@ export const QUESTIONS_251_300: Question[] = [
       c: "Coeficiente de atenuación lineal.",
       d: "Espesor de disminución relativa.",
     },
-    correct: "X",
+    correct: "a",
   },
   {
     id: 298,
@@ -567,7 +567,7 @@ export const QUESTIONS_251_300: Question[] = [
       c: "Muerte diferida, muerte celular o célula viable.",
       d: "Muerte diferida, muerte celular o célula viable, pero modificada en su genoma.",
     },
-    correct: "X",
+    correct: "b",
   },
   {
     id: 299,
@@ -579,7 +579,7 @@ export const QUESTIONS_251_300: Question[] = [
       c: "Antisepsia.",
       d: "Sepsis.",
     },
-    correct: "X",
+    correct: "c",
   },
   {
     id: 300,
@@ -590,6 +590,6 @@ export const QUESTIONS_251_300: Question[] = [
       c: "En el estudio de tipo prospectivo la adquisición de las imágenes se realiza durante todo el ciclo respiratorio.",
       d: "En el estudio de tipo retrospectivo la adquisición de imágenes se realiza sincronizando un instante de la señal de la respiración con la del disparo de los rayos X.",
     },
-    correct: "X",
+    correct: "b",
   },
 ];

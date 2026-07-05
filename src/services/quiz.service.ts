@@ -103,12 +103,15 @@ d) ${question.options.d}
   // =====================================
 
   getQuestions(count: number): Question[] {
-    debugger;
-    if (this.availableQuestions.length < count) {
-      debugger;
-      this.resetQuestions();
-    }
-    return this.availableQuestions.splice(0, count);
+    const answeredIds = new Set(this.history.getAnsweredQuestionIds());
+
+    const remainingQuestions = RADIO_QUESTIONS.filter(
+      (q) => !answeredIds.has(q.id)
+    );
+
+    this.shuffle(remainingQuestions);
+
+    return remainingQuestions.slice(0, count);
   }
 
   getQuestionsByIds(ids: number[]): Question[] {
@@ -127,7 +130,6 @@ d) ${question.options.d}
 
   private resetQuestions(): void {
     this.availableQuestions = [...RADIO_QUESTIONS];
-
     this.shuffle(this.availableQuestions);
   }
 
@@ -143,39 +145,26 @@ d) ${question.options.d}
   // =====================================
 
   getProgress(): QuestionProgress {
+    const answered = this.history.getAnsweredQuestionsCount();
+
+    const total = RADIO_QUESTIONS.length;
+
+    const remaining = Math.max(0, total - answered);
+
     return {
-      answered: RADIO_QUESTIONS.length - this.availableQuestions.length,
-
-      total: RADIO_QUESTIONS.length,
-
-      remaining: this.availableQuestions.length,
-
-      percentage: Math.round(
-        ((RADIO_QUESTIONS.length - this.availableQuestions.length) /
-          RADIO_QUESTIONS.length) *
-          100
-      ),
+      answered,
+      total,
+      remaining,
+      percentage: Math.round((answered / total) * 100),
     };
   }
 
-  // =====================================
-  // HISTORIAL
-  // =====================================
-
-  saveWrongAnswer(questionId: number): void {
-    this.history.saveWrongAnswer(questionId);
+  getIncorrect(): number[] {
+    return this.history.getIncorrectAnswers();
   }
 
-  removeWrongAnswer(questionId: number): void {
-    this.history.removeWrongAnswer(questionId);
-  }
-
-  getWrongAnswers(): number[] {
-    return this.history.getWrongAnswers();
-  }
-
-  hasWrongAnswers(): boolean {
-    return this.history.hasWrongAnswers();
+  hasIncorrect(): boolean {
+    return this.history.hasIncorrectAnswers();
   }
 
   clearHistory(): void {

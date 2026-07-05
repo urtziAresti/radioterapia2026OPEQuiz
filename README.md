@@ -9,16 +9,12 @@
 - FORZAR ACTUALIZACIONES(RECARGA) SI ESTA DESACTUALIZADO
 
 # features 
-- BUG - contar todas las respondidas en total 
 - TEMARIO COMUN - AÑADIR PREGUNTAS 
 - 3 OPCIONES DE PREGUNTAS (RADIO,COMUN O MIX 80/20),
 
  # preguntas
 
-200 OK preguntas y respuestas 
-
-200 - 300 preguntas - sin revisar 
-
+faltan 300 temario comun
 
 # groq IA
 
