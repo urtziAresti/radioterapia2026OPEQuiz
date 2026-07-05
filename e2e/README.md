@@ -1,0 +1,1 @@
+# Playwright E2E Template for Angular/Ionic
