@@ -5,6 +5,8 @@
     <div class="form-group">
       <label for="questionCount">Número de preguntas para el test:</label>
       <select id="questionCount" [(ngModel)]="selectedQuestionCount">
+        <option [ngValue]="2">2 preguntas</option>
+        <option [ngValue]="5">5 preguntas</option>
         <option [ngValue]="10">10 preguntas</option>
         <option [ngValue]="25">25 preguntas</option>
         <option [ngValue]="50">50 preguntas</option>
