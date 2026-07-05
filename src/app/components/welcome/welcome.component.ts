@@ -39,7 +39,6 @@ export class WelcomeComponent implements OnInit {
   
   }
   loadData(){
-    alert("load data")
     const session = localStorage.getItem("userSession");
     if (session) {
       const user = JSON.parse(session);
@@ -53,8 +52,6 @@ export class WelcomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    alert("entra en el init wel");
-    debugger;
     const session = localStorage.getItem("userSession");
     if (session) {
       const user = JSON.parse(session);

@@ -55,6 +55,15 @@ describe("QuizPage", () => {
       navigate: jasmine.createSpy(),
     };
 
+    routerMock = jasmine.createSpyObj("Router", [
+      "navigate",
+      "navigateByUrl"
+    ]);
+
+    routerMock.navigateByUrl.and.returnValue(
+      Promise.resolve(true)
+    );
+
     await TestBed.configureTestingModule({
       imports: [QuizPage],
       providers: [
@@ -338,10 +347,26 @@ describe("QuizPage", () => {
 
     expect(component.getOptionColor("c")).toBe("disabled-option");
   });
-  it("should navigate home", () => {
-    component.goToHome();
+  it("should navigate home", async () => {
 
-    expect(routerMock.navigate).toHaveBeenCalledWith(["/welcome"]);
+    await component.goToHome();
+  
+    expect(routerMock.navigateByUrl).toHaveBeenCalledTimes(2);
+  
+    expect(routerMock.navigateByUrl.calls.argsFor(0)).toEqual([
+      "/",
+      {
+        skipLocationChange: true
+      }
+    ]);
+  
+    expect(routerMock.navigateByUrl.calls.argsFor(1)).toEqual([
+      "/welcome",
+      {
+        replaceUrl: true
+      }
+    ]);
+  
   });
 
   it("should call magic service successfully", () => {
