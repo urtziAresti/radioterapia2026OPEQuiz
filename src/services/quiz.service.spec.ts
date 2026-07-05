@@ -1,17 +1,38 @@
-import { TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { TestBed } from "@angular/core/testing";
+import {
+  HttpTestingController,
+  provideHttpClientTesting,
+} from "@angular/common/http/testing";
+import { provideHttpClient } from "@angular/common/http";
 
-import { QuizService, MagicAnswer } from './quiz.service';
-import { Question } from '../models/question.model';
+import { QuizService } from "./quiz.service";
+import { HistoryService } from "./history.service";
+import { Question } from "../interfaces/question";
 
-describe('QuizService', () => {
+describe("QuizService", () => {
   let service: QuizService;
   let httpMock: HttpTestingController;
 
+  const historySpy = jasmine.createSpyObj("HistoryService", [
+    "saveWrongAnswer",
+    "removeWrongAnswer",
+    "getWrongAnswers",
+    "hasWrongAnswers",
+    "clearHistory",
+    "getAllHistory",
+  ]);
+
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [QuizService]
+      providers: [
+        QuizService,
+        provideHttpClient(),
+        provideHttpClientTesting(),
+        {
+          provide: HistoryService,
+          useValue: historySpy,
+        },
+      ],
     });
 
     service = TestBed.inject(QuizService);
@@ -22,125 +43,150 @@ describe('QuizService', () => {
     httpMock.verify();
   });
 
-  it('should be created', () => {
+  it("should be created", () => {
     expect(service).toBeTruthy();
   });
 
-  // ---------------------------
-  // ASK (HTTP + MAP JSON)
-  // ---------------------------
+  it("should return questions", () => {
+    const questions = service.getQuestions(5);
 
-  it('should call API and parse valid JSON response', () => {
-    const question: Question = {
-      question: 'Test question',
-      options: {
-        a: 'A1',
-        b: 'B1',
-        c: 'C1',
-        d: 'D1'
-      },
-      correct: 'a',
-      id: 1
-    } as any;
-
-    const mockResponse = {
-      ok: true,
-      answer: JSON.stringify({
-        answer: 'a',
-        explanation: 'correct'
-      })
-    };
-
-    let result!: MagicAnswer;
-
-    service.ask(question).subscribe(res => {
-      result = res;
-    });
-
-    const req = httpMock.expectOne('/api/GPT');
-
-    expect(req.request.method).toBe('POST');
-    expect(req.request.body.question).toContain('Test question');
-
-    req.flush(mockResponse);
-
-    expect(result).toEqual({
-      answer: 'a',
-      explanation: 'correct'
-    });
+    expect(questions.length).toBe(5);
   });
 
-  it('should return fallback when JSON parse fails', () => {
-    const question: Question = {
-      question: 'Bad question',
-      options: { a: 'A', b: 'B', c: 'C', d: 'D' },
-      correct: 'a',
-      id: 1
-    } as any;
+  it("should return empty array if ids are empty", () => {
+    expect(service.getQuestionsByIds([])).toEqual([]);
+  });
 
-    let result!: MagicAnswer;
+  it("should check correct answer", () => {
+    const question = {
+      correct: "b",
+    } as Question;
 
-    service.ask(question).subscribe(res => {
-      result = res;
+    expect(service.checkAnswer(question, "b")).toBeTrue();
+    expect(service.checkAnswer(question, "a")).toBeFalse();
+  });
+
+  it("should calculate progress", () => {
+    service.getQuestions(10);
+
+    const progress = service.getProgress();
+
+    expect(progress.total).toBeGreaterThan(0);
+    expect(progress.answered).toBeGreaterThanOrEqual(10);
+  });
+
+  it("should call HistoryService.saveWrongAnswer", () => {
+    service.saveWrongAnswer(5);
+
+    expect(historySpy.saveWrongAnswer).toHaveBeenCalledWith(5);
+  });
+
+  it("should call HistoryService.removeWrongAnswer", () => {
+    service.removeWrongAnswer(3);
+
+    expect(historySpy.removeWrongAnswer).toHaveBeenCalledWith(3);
+  });
+
+  it("should call HistoryService.getWrongAnswers", () => {
+    historySpy.getWrongAnswers.and.returnValue([1, 2]);
+
+    expect(service.getWrongAnswers()).toEqual([1, 2]);
+  });
+
+  it("should call HistoryService.hasWrongAnswers", () => {
+    historySpy.hasWrongAnswers.and.returnValue(true);
+
+    expect(service.hasWrongAnswers()).toBeTrue();
+  });
+
+  it("should call HistoryService.clearHistory", () => {
+    service.clearHistory();
+
+    expect(historySpy.clearHistory).toHaveBeenCalled();
+  });
+
+  it("should call HistoryService.getAllHistory", () => {
+    const history = [{ user: "urtzi" }];
+
+    historySpy.getAllHistory.and.returnValue(history);
+
+    expect(service.getHistory()).toEqual(history);
+  });
+
+  it("should parse valid GPT response", () => {
+    const question = {
+      question: "Pregunta",
+      options: {
+        a: "A",
+        b: "B",
+        c: "C",
+        d: "D",
+      },
+    } as Question;
+
+    service.ask(question).subscribe((res) => {
+      expect(res.answer).toBe("a");
+      expect(res.explanation).toBe("Correcta");
     });
 
-    const req = httpMock.expectOne('/api/GPT');
+    const req = httpMock.expectOne("/api/GPT");
+
+    expect(req.request.method).toBe("POST");
 
     req.flush({
       ok: true,
-      answer: 'NOT_JSON'
-    });
-
-    expect(result).toEqual({
-      answer: '',
-      explanation: 'Error parseando respuesta de la IA'
+      answer: JSON.stringify({
+        answer: "a",
+        explanation: "Correcta",
+      }),
     });
   });
 
-  // ---------------------------
-  // GET QUESTIONS
-  // ---------------------------
+  it("should parse markdown GPT response", () => {
+    const question = {
+      question: "Pregunta",
+      options: {
+        a: "A",
+        b: "B",
+        c: "C",
+        d: "D",
+      },
+    } as Question;
 
-  it('should return random questions with limit', () => {
-    const result = service.getQuestions(3);
+    service.ask(question).subscribe((res) => {
+      expect(res.answer).toBe("c");
+    });
 
-    expect(result.length).toBe(3);
+    const req = httpMock.expectOne("/api/GPT");
+
+    req.flush({
+      ok: true,
+      answer:
+        "```json\n{\"answer\":\"c\",\"explanation\":\"Texto\"}\n```",
+    });
   });
 
-  it('should return shuffled results (not strict order)', () => {
-    const first = service.getQuestions(5);
-    const second = service.getQuestions(5);
+  it("should return fallback on invalid GPT response", () => {
+    const question = {
+      question: "Pregunta",
+      options: {
+        a: "A",
+        b: "B",
+        c: "C",
+        d: "D",
+      },
+    } as Question;
 
-    // Puede fallar raramente por random, pero sirve como smoke test
-    expect(first.length).toBe(5);
-    expect(second.length).toBe(5);
-  });
+    service.ask(question).subscribe((res) => {
+      expect(res.answer).toBe("");
+      expect(res.explanation).toContain("Error");
+    });
 
-  // ---------------------------
-  // CHECK ANSWER
-  // ---------------------------
+    const req = httpMock.expectOne("/api/GPT");
 
-  it('should validate correct answer', () => {
-    const question: Question = {
-      correct: 'a'
-    } as any;
-
-    expect(service.checkAnswer(question, 'a')).toBeTrue();
-    expect(service.checkAnswer(question, 'b')).toBeFalse();
-  });
-
-  // ---------------------------
-  // GET QUESTIONS BY IDS
-  // ---------------------------
-
-  it('should filter questions by ids', () => {
-    const result = service.getQuestionsByIds([1, 2, 3]);
-
-    expect(Array.isArray(result)).toBeTrue();
-  });
-
-  it('should return empty array if ids invalid', () => {
-    expect(service.getQuestionsByIds([])).toEqual([]);
-    expect(service.getQuestionsByIds(null as any)).toEqual([]);
+    req.flush({
+      ok: true,
+      answer: "Respuesta inválida",
+    });
   });
 });

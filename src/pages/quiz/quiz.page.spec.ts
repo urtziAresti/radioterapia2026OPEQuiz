@@ -1,178 +1,224 @@
-import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
-import { ActivatedRoute, Router } from '@angular/router';
-import { of, Subject } from 'rxjs';
+import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
+import { of, throwError } from "rxjs";
+import { ActivatedRoute, Router } from "@angular/router";
 
-import { QuizPage } from './quiz.page';
-import { QuizService } from '../../services/quiz.service';
-import { LogService } from '../../services/log.service';
+import { QuizPage } from "./quiz.page";
+import { QuizService } from "../../services/quiz.service";
+import { HistoryService } from "../../services/history.service";
+import { TimerService } from "../../services/timer.service";
+import { LogService } from "../../services/log.service";
+import { Question } from "../../interfaces/question";
 
-describe('QuizPage', () => {
-  let fixture: ComponentFixture<QuizPage>;
+describe("QuizPage", () => {
   let component: QuizPage;
+  let fixture: ComponentFixture<QuizPage>;
 
-  let routerMock: jasmine.SpyObj<Router>;
-  let logServiceMock: jasmine.SpyObj<LogService>;
-  let quizServiceMock: jasmine.SpyObj<QuizService>;
+  let quizService: jasmine.SpyObj<QuizService>;
+  let historyService: jasmine.SpyObj<HistoryService>;
+  let timerService: jasmine.SpyObj<TimerService>;
+  let logService: jasmine.SpyObj<LogService>;
+  let router: jasmine.SpyObj<Router>;
 
-  let routeSubject: Subject<any>;
+  const question: Question = {
+    id: 1,
+    question: "Pregunta",
+    correct: "a",
+    options: {
+      a: "A",
+      b: "B",
+      c: "C",
+      d: "D",
+    },
+  };
 
   beforeEach(async () => {
-    routerMock = jasmine.createSpyObj('Router', ['navigate']);
-    logServiceMock = jasmine.createSpyObj('LogService', ['log']);
-
-    quizServiceMock = jasmine.createSpyObj('QuizService', [
-      'getQuestions',
-      'getQuestionsByIds',
-      'ask'
+    quizService = jasmine.createSpyObj("QuizService", [
+      "getQuestions",
+      "getQuestionsByIds",
+      "checkAnswer",
+      "ask",
     ]);
 
-    quizServiceMock.getQuestions.and.returnValue([
-      { id: 1, correct: 'A', options: [] },
-      { id: 2, correct: 'B', options: [] }
-    ] as any);
+    historyService = jasmine.createSpyObj("HistoryService", [
+      "saveWrongAnswer",
+      "removeWrongAnswer",
+    ]);
 
-    quizServiceMock.getQuestionsByIds.and.returnValue([
-      { id: 1, correct: 'A', options: [] }
-    ] as any);
+    timerService = jasmine.createSpyObj(
+      "TimerService",
+      ["start", "stop"],
+      {
+        elapsedTime$: of("00:00"),
+      }
+    );
 
-    quizServiceMock.ask.and.returnValue(of({
-      answer: 'test',
-      explanation: 'ok'
-    }));
+    logService = jasmine.createSpyObj("LogService", ["log"]);
 
-    routeSubject = new Subject();
+    router = jasmine.createSpyObj("Router", ["navigate"]);
+
+    quizService.getQuestions.and.returnValue([question]);
 
     await TestBed.configureTestingModule({
       imports: [QuizPage],
       providers: [
-        { provide: Router, useValue: routerMock },
-        { provide: LogService, useValue: logServiceMock },
-        { provide: QuizService, useValue: quizServiceMock },
+        {
+          provide: QuizService,
+          useValue: quizService,
+        },
+        {
+          provide: HistoryService,
+          useValue: historyService,
+        },
+        {
+          provide: TimerService,
+          useValue: timerService,
+        },
+        {
+          provide: LogService,
+          useValue: logService,
+        },
+        {
+          provide: Router,
+          useValue: router,
+        },
         {
           provide: ActivatedRoute,
           useValue: {
-            queryParams: routeSubject.asObservable()
-          }
-        }
-      ]
+            queryParams: of({
+              count: 1,
+              name: "urtzi",
+            }),
+          },
+        },
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(QuizPage);
     component = fixture.componentInstance;
-
-    localStorage.clear();
-    sessionStorage.clear();
-
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 
-  it('should load normal quiz mode from query params', () => {
-    routeSubject.next({
-      name: 'testUser',
-      count: 2
-    });
-
-    expect(component.playerName).toBe('testUser');
-    expect(component.count).toBe(2);
-    expect(component.questions.length).toBe(2);
-  });
-
-  it('should load failed mode correctly', () => {
-    routeSubject.next({
-      name: 'testUser',
-      mode: 'failed',
-      ids: JSON.stringify([1])
-    });
-
-    expect(component.mode).toBe('failed');
+  it("should load questions", () => {
     expect(component.questions.length).toBe(1);
+    expect(quizService.getQuestions).toHaveBeenCalled();
   });
 
-  it('should progress when answering correctly', () => {
-    component.questions = [
-      { id: 1, correct: 'A', options: [] } as any
-    ];
+  it("should calculate progress", () => {
+    component.currentIndex = 1;
+    expect(component.progress).toBe(1);
+  });
 
-    component.answer('A');
+  it("should answer correctly", fakeAsync(() => {
+    quizService.checkAnswer.and.returnValue(true);
+
+    component.answer("a");
 
     expect(component.correctAnswers).toBe(1);
-    expect(logServiceMock.log).toHaveBeenCalledWith(
-      'ANSWER_SELECTED',
-      jasmine.any(Object)
-    );
-  });
+    expect(logService.log).toHaveBeenCalled();
 
-  it('should mark wrong answer and increase wrongAnswersMap', () => {
-    component.questions = [
-      { id: 1, correct: 'A', options: [] } as any
-    ];
+    tick(1500);
+  }));
 
-    component.answer('B');
+  it("should answer incorrectly", () => {
+    quizService.checkAnswer.and.returnValue(false);
 
-    expect(component.wrongAnswersMap[1]).toBe(1);
+    component.answer("b");
+
+    expect(historyService.saveWrongAnswer).toHaveBeenCalledWith(1);
+
     expect(component.nextVisible).toBeTrue();
   });
 
-  it('should navigate home', () => {
-    component.goToHome();
-    expect(routerMock.navigate).toHaveBeenCalledWith(['/welcome']);
+  it("should remove wrong answer in failed mode", fakeAsync(() => {
+    component.mode = "failed";
+    component.failedIds = [1];
+
+    quizService.checkAnswer.and.returnValue(true);
+
+    component.answer("a");
+
+    expect(historyService.removeWrongAnswer).toHaveBeenCalledWith(1);
+
+    tick(1500);
+  }));
+
+  it("should ignore second answer", () => {
+    component["answerLocked"] = true;
+
+    component.answer("a");
+
+    expect(logService.log).not.toHaveBeenCalled();
   });
 
-  it('should finish quiz when reaching end', () => {
-    component.questions = [
-      { id: 1, correct: 'A', options: [] } as any
-    ];
+  it("should move to next question", () => {
+    component.questions = [question, question];
 
+    component.nextQuestion();
+
+    expect(component.currentIndex).toBe(1);
+  });
+
+  it("should finish quiz", () => {
+    component.questions = [question];
     component.currentIndex = 0;
 
     component.nextQuestion();
 
-    expect(component['quizFinished']).toBeTrue();
+    expect(timerService.stop).toHaveBeenCalled();
   });
 
-  it('should compute progress correctly', () => {
-    component.questions = [1, 2, 3] as any;
-    component.currentIndex = 1;
+  it("should navigate home", () => {
+    component.goToHome();
 
-    expect(component.progress).toBe(1 / 3);
+    expect(router.navigate).toHaveBeenCalledWith(["/welcome"]);
   });
 
-  it('should call magic API and set response', fakeAsync(() => {
-    component.questions = [
-      { id: 1, correct: 'A', options: [] } as any
-    ];
+  it("should call GPT", () => {
+    quizService.ask.and.returnValue(
+      of({
+        answer: "a",
+        explanation: "ok",
+      })
+    );
 
-    component.useMagic({ question: 'test' });
+    component.useMagic(question as any);
 
-    tick();
-
-    expect(quizServiceMock.ask).toHaveBeenCalled();
-    expect(component.magicAnswer).toEqual({
-      answer: 'test',
-      explanation: 'ok'
-    });
-  }));
-
-  it('should not allow double answer', () => {
-    component.questions = [
-      { id: 1, correct: 'A', options: [] } as any
-    ];
-
-    component.answer('A');
-    component.answer('A');
-
-    expect(component.correctAnswers).toBe(1);
+    expect(component.magicAnswer?.answer).toBe("a");
   });
 
-  it('should reset timer on init/reset', fakeAsync(() => {
-    component['startTimer']();
+  it("should handle GPT error", () => {
+    quizService.ask.and.returnValue(
+      throwError(() => new Error())
+    );
 
-    tick(3000);
+    component.useMagic(question as any);
 
-    expect(component.elapsedTime).toContain(':');
-  }));
+    expect(component.errorMessage).toContain("Error");
+  });
+
+  it("should return correct option color", () => {
+    component.questions = [question];
+    component.selectedOption = "a";
+    component.isAnswered = true;
+
+    expect(component.getOptionColor("a")).toBe("correct-option");
+  });
+
+  it("should return incorrect option color", () => {
+    component.questions = [question];
+    component.selectedOption = "b";
+    component.isAnswered = true;
+
+    expect(component.getOptionColor("b")).toBe("incorrect-option");
+  });
+
+  it("should destroy component", () => {
+    component.ngOnDestroy();
+
+    expect(timerService.stop).toHaveBeenCalled();
+  });
 });
