@@ -26,7 +26,10 @@ Mejorar titulo  - OK
 -- login --
 paleta colores rosa-radio - azul-osaki  - OK 
 revisar todo - OK
-
+quitar card 
+cambiar candado pro icono app
+revisar textos quitar
+quitar header
 
 -- datos --
 paleta colores rosa-radio - azul-osaki 
@@ -44,11 +47,11 @@ revisar bien espacios y letras
 -- de todo --
 unificar archivos iconos
 acabar de Pintar icono
-Unificar fuente
+Unificar fuente 
+Crear archivo colors para variables colores
 Color header segun tema Radio Comun o mix 
-traducciones a archivo
+traducciones a archivo - tradus
 servicio envio mails
-
 
 - 100 OKK
 
