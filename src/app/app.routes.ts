@@ -52,6 +52,14 @@ export const routes: Routes = [
         (m) => m.DataComponent
       ),
   },
+  {
+    path: 'instructions',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('../app/components/instructions/instructions.component').then(
+        (m) => m.InstructionsComponent
+      ),
+  },
 
   {
     path: '**',

@@ -25,6 +25,8 @@ describe('LoginComponent', () => {
 
     toastControllerMock = jasmine.createSpyObj('ToastController', ['create']);
 
+    toastControllerMock = jasmine.createSpyObj('ToastController', ['create']);
+
     await TestBed.configureTestingModule({
       imports: [
         LoginComponent,
@@ -129,4 +131,41 @@ describe('LoginComponent', () => {
       jasmine.any(Object)
     );
   }));
+
+  it('should generate a new deviceId if not present in localStorage', () => {
+    spyOn(localStorage, 'getItem').and.returnValue(null);
+    const setItemSpy = spyOn(localStorage, 'setItem');
+
+    const deviceId = component.getDeviceId();
+
+    expect(deviceId).toBeTruthy();
+    expect(setItemSpy).toHaveBeenCalledWith('deviceId', deviceId);
+  });
+
+  it('should return existing deviceId from localStorage', () => {
+    spyOn(localStorage, 'getItem').and.returnValue('existing-device-id');
+
+    const deviceId = component.getDeviceId();
+
+    expect(deviceId).toBe('existing-device-id');
+  });
+
+  xit('should present an error toast', fakeAsync(async () => {
+    // Llamar al método que presenta el toast
+    await component.presentErrorToast('Test error message');
+  
+    // Verificar que el toast se haya creado con los parámetros correctos
+    expect(toastControllerMock.create).toHaveBeenCalledWith({
+      message: 'Test error message',
+      duration: 3000,
+      position: 'bottom',
+      color: 'danger',
+      buttons: [{ text: 'Cerrar', role: 'cancel' }]
+    });
+  
+    // Verificar que el método present del toast haya sido llamado
+    const toastInstance = await toastControllerMock.create.calls.mostRecent().returnValue;
+    expect(toastInstance.present).toHaveBeenCalled();
+  }));
+
 });

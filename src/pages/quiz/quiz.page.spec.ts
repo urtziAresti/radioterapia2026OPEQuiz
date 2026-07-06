@@ -1,5 +1,5 @@
 import { TestBed } from "@angular/core/testing";
-import { ActivatedRoute, Router } from "@angular/router";
+import { ActivatedRoute, NavigationEnd, Router } from "@angular/router";
 import { of, throwError } from "rxjs";
 
 import { QuizPage } from "./quiz.page";
@@ -60,9 +60,15 @@ describe("QuizPage", () => {
       "navigateByUrl"
     ]);
 
-    routerMock.navigateByUrl.and.returnValue(
-      Promise.resolve(true)
+    routerMock = jasmine.createSpyObj(
+      "Router",
+      ["navigate", "navigateByUrl"],
+      {
+        events: of(new NavigationEnd(1, "/", "/"))
+      }
     );
+    
+    routerMock.navigateByUrl.and.returnValue(Promise.resolve(true));
 
     await TestBed.configureTestingModule({
       imports: [QuizPage],

@@ -17,10 +17,11 @@ describe("WelcomeComponent", () => {
   let routerEvents: Subject<any>;
 
   let quizService: jasmine.SpyObj<QuizService>;
-
+  let routerMock: jasmine.SpyObj<Router>;
   beforeEach(async () => {
 
     routerEvents = new Subject();
+    routerMock = jasmine.createSpyObj('Router', ['navigate']);
 
     router = jasmine.createSpyObj(
       "Router",
@@ -429,5 +430,6 @@ describe("WelcomeComponent", () => {
     expect(component.failedQuestions).toEqual([10,20]);
 
   });
+
 
 });
