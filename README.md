@@ -1,20 +1,19 @@
 # Radioterapia Quiz PWA
-# V 0.0.3
 
-- rama deloy publica ci/cd 
-
-# PROXIMOS DESARROLLOS
 
 # funcionales
 - FORZAR ACTUALIZACIONES(RECARGA) SI ESTA DESACTUALIZADO
 
 # features 
-- TEMARIO COMUN - AÑADIR PREGUNTAS 
-- 3 OPCIONES DE PREGUNTAS (RADIO,COMUN O MIX 80/20),
+- test y desplegar 
+- TEMARIO COMUN - AÑADIR PREGUNTAS  150-200
+
+
+- 100 OKK
 
  # preguntas
-
-faltan 300 temario comun
+- Revisar respuestas de 100-200 
+- faltan 100 ultimas del temario comun
 
 # groq IA
 

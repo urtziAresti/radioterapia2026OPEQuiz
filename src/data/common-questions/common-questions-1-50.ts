@@ -1,8 +1,8 @@
 import { Question } from "../../interfaces/question";
 
-export const QUESTIONS: Question[] = [
+export const COMMON_QUESTIONS_1_50: Question[] = [
   {
-    id: 1,
+    id: 301,
     question:
       "De acuerdo con las normas generales de ordenación de las profesiones sanitarias, para poder ejercer una profesión sanitaria será requisito imprescindible:",
     options: {
@@ -11,10 +11,10 @@ export const QUESTIONS: Question[] = [
       c: "Tener suscrito y vigente un seguro de responsabilidad, un aval u otra garantía financiera, ya sean de protección personal o colectiva, que cubra las indemnizaciones que se puedan derivar de la responsabilidad profesional por un eventual daño a las personas, causado con ocasión de la prestación de tal asistencia o servicios, cuando se ejerza la profesión en el ámbito de la asistencia sanitaria pública.",
       d: "Todo lo anterior.",
     },
-    correct: "x",
+    correct: "a",
   },
   {
-    id: 2,
+    id: 302,
     question:
       "Según lo establecido en la normativa vigente sobre ordenación de las profesiones sanitarias, para poder ejercer una profesión sanitaria:",
     options: {
@@ -23,10 +23,10 @@ export const QUESTIONS: Question[] = [
       c: "Se ha de tener suscrito y vigente un seguro de responsabilidad, un aval u otra garantía financiera, sean de protección personal o colectiva, que cubra las indemnizaciones que se puedan derivar de la responsabilidad profesional por un eventual daño a las personas causado con ocasión de la prestación de tal asistencia o servicios cuando se ejerza la profesión en el ámbito de la asistencia sanitaria pública.",
       d: "Todas las opciones son falsas.",
     },
-    correct: "x",
+    correct: "b",
   },
   {
-    id: 3,
+    id: 303,
     question:
       "Según la normativa vigente, el órgano encargado del Registro Estatal de Profesionales Sanitarios podrá (indíquese la que sea correcta):",
     options: {
@@ -35,10 +35,10 @@ export const QUESTIONS: Question[] = [
       c: "Consultar los datos de carácter personal de los profesionales sanitarios contenidos en los archivos y ficheros del Documento Nacional de Identidad (DNI) y del Número de Identidad de Extranjero (NIE) competencia del Ministerio del Interior, para contrastar la veracidad de la información que consta en el registro, pero solo si el titular de los datos da su consentimiento expreso.",
       d: "Solo podrá consultar los datos de carácter personal de la población profesional sanitaria contenidos en los archivos y ficheros del Documento Nacional de Identidad (DNI) y del Número de Identidad de Extranjero (NIE) en el curso de una investigación sobre una infracción administrativa.",
     },
-    correct: "x",
+    correct: "a",
   },
   {
-    id: 4,
+    id: 304,
     question:
       "En el marco de la ordenación de las profesiones sanitarias, las personas pacientes:",
     options: {
@@ -47,10 +47,10 @@ export const QUESTIONS: Question[] = [
       c: "Tienen derecho a la libre elección del personal facultativo que debe atenderles, pero solo si su ejercicio profesional se desarrolla en el ámbito privado.",
       d: "Ninguna de las anteriores es correcta.",
     },
-    correct: "x",
+    correct: "a",
   },
   {
-    id: 5,
+    id: 305,
     question:
       "Según la normativa de ordenación de las profesiones sanitarias, el personal profesional y las personas responsables de los centros sanitarios facilitarán a sus pacientes el ejercicio del derecho a conocer:",
     options: {
@@ -59,10 +59,10 @@ export const QUESTIONS: Question[] = [
       c: "El nombre, la titulación y la especialidad del personal sanitario que les atiende, así como la categoría y función de dicho personal, si así estuvieran definidas en su centro o institución.",
       d: "El nombre, la titulación y la especialidad del personal sanitario que les atiende, pero no su categoría y función en su centro o institución.",
     },
-    correct: "x",
+    correct: "c",
   },
   {
-    id: 6,
+    id: 306,
     question:
       "De acuerdo con las normas generales de ordenación de las profesiones sanitarias, el ejercicio del derecho del personal profesional sanitario a la renuncia a la atención a una persona paciente queda condicionado a que (señálese la respuesta incorrecta):",
     options: {
@@ -71,10 +71,10 @@ export const QUESTIONS: Question[] = [
       c: "Quede constancia, aunque no sea formal, de la renuncia.",
       d: "La renuncia se ejerza de acuerdo con procedimientos establecidos y explícitos.",
     },
-    correct: "x",
+    correct: "c",
   },
   {
-    id: 7,
+    id: 307,
     question:
       "Los centros sanitarios revisarán que el personal sanitario de su plantilla cumple los requisitos necesarios para ejercer la profesión conforme a lo previsto en la Ley 44/2003, de 21 de noviembre, de ordenación de las profesiones sanitarias y en las demás normas aplicables:",
     options: {
@@ -83,10 +83,10 @@ export const QUESTIONS: Question[] = [
       c: "Cada dos años como mínimo.",
       d: "Cada cuatro años como mínimo.",
     },
-    correct: "x",
+    correct: "b",
   },
   {
-    id: 8,
+    id: 308,
     question:
       "Según dispone la Ley 44/2003, de 21 de noviembre, de ordenación de las profesiones sanitarias, cuando una actuación sanitaria se realice por un equipo de profesionales (señálese la respuesta incorrecta):",
     options: {
@@ -95,10 +95,10 @@ export const QUESTIONS: Question[] = [
       c: "Se articulará de forma preferentemente colegiada, atendiendo a los criterios de conocimientos y competencia y, en su caso, al de titulación del personal profesional que integra el equipo, en función de la actividad concreta a desarrollar, de la confianza y conocimiento recíproco de las capacidades de quienes forman el equipo, y de los principios de accesibilidad y continuidad asistencial de las personas atendidas.",
       d: "Ninguna de las anteriores es correcta.",
     },
-    correct: "x",
+    correct: "d",
   },
   {
-    id: 9,
+    id: 309,
     question:
       "De acuerdo con la Ley 44/2003, de 21 de noviembre, de ordenación de las profesiones sanitarias, diga cuál de los siguientes principios generales de la relación entre las personas que ejercen profesiones sanitarias y las personas atendidas no es tal:",
     options: {
@@ -107,10 +107,10 @@ export const QUESTIONS: Question[] = [
       c: "El personal profesional tiene el deber de proporcionar a las personas pacientes información precisa sobre su formación profesional, la forma en que han actualizado sus conocimientos y las demandas de responsabilidad que hayan podido derivar en responsabilidades administrativas.",
       d: "El personal profesional tiene el deber de respetar la personalidad, dignidad e intimidad de las personas a su cuidado y debe respetar su participación en las tomas de decisiones que les afecten. En todo caso, deben ofrecer una información suficiente y adecuada para que puedan ejercer su derecho al consentimiento sobre dichas decisiones.",
     },
-    correct: "x",
+    correct: "c",
   },
   {
-    id: 10,
+    id: 310,
     question:
       "De acuerdo con la Ley 44/2003, de 21 de noviembre, de ordenación de las profesiones sanitarias, los centros sanitarios acreditados para desarrollar programas de formación continuada:",
     options: {
@@ -119,10 +119,10 @@ export const QUESTIONS: Question[] = [
       c: "Deberán contar una comisión de docencia y con una figura de defensoría del alumnado, así como con jefaturas de estudios, coordinación docente y personal tutor de la formación que resulten adecuados en función de las actividades a desarrollar.",
       d: "Todas las anteriores son incorrectas.",
     },
-    correct: "x",
+    correct: "d",
   },
   {
-    id: 11,
+    id: 311,
     question:
       "Según dispone la Ley 16/2003, de 28 de mayo, de cohesión y calidad del Sistema Nacional de Salud, sus disposiciones se aplicarán a:",
     options: {
@@ -131,10 +131,10 @@ export const QUESTIONS: Question[] = [
       c: "A los servicios sanitarios de financiación pública y a los privados concertados.",
       d: "Únicamente a los servicios sanitarios de financiación pública.",
     },
-    correct: "x",
+    correct: "b",
   },
   {
-    id: 12,
+    id: 312,
     question:
       "Según dispone la Ley 16/2003, de 28 de mayo, de cohesión y calidad del Sistema Nacional de Salud, la ciudadanía tendrá los siguientes derechos en el conjunto del Sistema Nacional de Salud:",
     options: {
@@ -143,10 +143,10 @@ export const QUESTIONS: Question[] = [
       c: "A recibir el reembolso de los gastos derivados de la asistencia sanitaria del catálogo de prestaciones del Sistema Nacional de Salud que pudiera requerir del servicio de salud de la comunidad autónoma en la que se encuentre desplazado/a.",
       d: "Ninguna de las respuestas anteriores es correcta.",
     },
-    correct: "x",
+    correct: "a",
   },
   {
-    id: 13,
+    id: 313,
     question:
       "Según dispone la Ley 16/2003, de 28 de mayo, de cohesión y calidad del Sistema Nacional de Salud, la cartera común de servicios del Sistema Nacional de Salud se articula en torno a las siguientes modalidades:",
     options: {
@@ -155,10 +155,10 @@ export const QUESTIONS: Question[] = [
       c: "Cartera común nacional básica de servicios asistenciales, cartera común suplementaria autonómica y cartera común de servicios accesorios autonómicos.",
       d: "Cartera común nacional y autonómica básica de servicios asistenciales, cartera común nacional y autonómica suplementaria y cartera común nacional y autonómica de servicios accesorios.",
     },
-    correct: "x",
+    correct: "a",
   },
   {
-    id: 14,
+    id: 314,
     question:
       "Según dispone la Ley 16/2003, de 28 de mayo, de cohesión y calidad del Sistema Nacional de Salud, la cartera común básica de servicios asistenciales del Sistema Nacional de Salud comprende:",
     options: {
@@ -167,10 +167,10 @@ export const QUESTIONS: Question[] = [
       c: "Todas las actividades asistenciales de prevención, diagnóstico, tratamiento y rehabilitación que se realicen en centros sanitarios o sociosanitarios, así como el transporte sanitario urgente, y la prestación ortoprotésica, cubiertos de forma completa por financiación pública.",
       d: "Todas las actividades asistenciales de prevención, diagnóstico, tratamiento y rehabilitación que se realicen en centros sanitarios o sociosanitarios, así como el transporte sanitario urgente, cubiertos de forma completa por financiación pública.",
     },
-    correct: "x",
+    correct: "d",
   },
   {
-    id: 15,
+    id: 315,
     question:
       "Según dispone la Ley 16/2003, de 28 de mayo, de cohesión y calidad del Sistema Nacional de Salud, la cartera común suplementaria del Sistema Nacional de Salud incluirá las siguientes prestaciones:",
     options: {
@@ -179,10 +179,10 @@ export const QUESTIONS: Question[] = [
       c: "Únicamente la prestación farmacéutica y la prestación ortoprotésica.",
       d: "La prestación farmacéutica, la prestación ortoprotésica y la prestación con productos dietéticos.",
     },
-    correct: "x",
+    correct: "d",
   },
   {
-    id: 16,
+    id: 316,
     question:
       "Según dispone la Ley 16/2003, de 28 de mayo, de cohesión y calidad del Sistema Nacional de Salud, la prestación de atención primaria no comprenderá:",
     options: {
@@ -191,10 +191,10 @@ export const QUESTIONS: Question[] = [
       c: "La rehabilitación básica.",
       d: "Ninguna de las respuestas anteriores es correcta.",
     },
-    correct: "x",
+    correct: "d",
   },
   {
-    id: 17,
+    id: 317,
     question:
       "Según dispone la Ley 16/2003, de 28 de mayo, de cohesión y calidad del Sistema Nacional de Salud, para la elaboración del contenido de la cartera común de servicios del Sistema Nacional de Salud:",
     options: {
@@ -203,10 +203,10 @@ export const QUESTIONS: Question[] = [
       c: "Es preceptivo el informe favorable de las sociedades científicas implicadas, en relación con la eficacia, eficiencia, efectividad, seguridad y utilidad terapéuticas, así como las ventajas y alternativas asistenciales, el cuidado de grupos menos protegidos o de riesgo y las necesidades sociales, así como su impacto económico y organizativo.",
       d: "Se contará con la participación de las sociedades científicas implicadas, en la evaluación de la eficacia, eficiencia, efectividad, seguridad y utilidad terapéuticas, así como las ventajas y alternativas asistenciales, el cuidado de grupos menos protegidos o de riesgo y las necesidades sociales, así como su impacto económico y organizativo.",
     },
-    correct: "x",
+    correct: "b",
   },
   {
-    id: 18,
+    id: 318,
     question:
       "Según dispone la Ley 16/2003, de 28 de mayo, de cohesión y calidad del Sistema Nacional de Salud, la exclusión de una técnica, tecnología o procedimiento actualmente incluido en la cartera de servicios se llevará a cabo cuando:",
     options: {
@@ -215,10 +215,10 @@ export const QUESTIONS: Question[] = [
       c: "Hayan cambiado las condiciones económicas de su implantación.",
       d: "Todas las respuestas anteriores son correctas.",
     },
-    correct: "x",
+    correct: "a",
   },
   {
-    id: 19,
+    id: 319,
     question:
       "Según dispone la Ley 16/2003, de 28 de mayo, de cohesión y calidad del Sistema Nacional de Salud, la exclusión de una técnica, tecnología o procedimiento actualmente incluido en la cartera de servicios se llevará a cabo cuando:",
     options: {
@@ -227,10 +227,10 @@ export const QUESTIONS: Question[] = [
       c: "Hayan cambiado las condiciones económicas de su implantación.",
       d: "Todas las respuestas anteriores son correctas.",
     },
-    correct: "X",
+    correct: "c",
   },
   {
-    id: 20,
+    id: 320,
     question:
       "Según dispone la Ley 16/2003, de 28 de mayo, de cohesión y calidad del Sistema Nacional de Salud, la declaración de actuaciones coordinadas en salud pública y en seguridad alimentaria deberán encuadrarse en alguno de los supuestos siguientes:",
     options: {
@@ -239,10 +239,10 @@ export const QUESTIONS: Question[] = [
       c: "Realizar análisis epidemiológicos que permitan establecer estructuras y recursos según las previsiones en materia de salud pública y seguridad alimentaria.",
       d: "Las respuestas a) y b) son verdaderas y la c) es falsa.",
     },
-    correct: "x",
+    correct: "a",
   },
   {
-    id: 21,
+    id: 321,
     question:
       "Según dispone la Ley 55/2003, de 16 de diciembre, del Estatuto Marco del personal estatutario de los servicios de salud, la ordenación del régimen personal estatutario de los servicios de salud se rige por una serie de principios y criterios. Señale cuales no están entre los mencionados por esta ley.",
     options: {
@@ -251,10 +251,10 @@ export const QUESTIONS: Question[] = [
       c: "Integración en el régimen organizativo y funcional del servicio de salud y de sus centros e instituciones.",
       d: "Coordinación, cooperación y mutua información entre las Administraciones sanitarias públicas.",
     },
-    correct: "x",
+    correct: "b",
   },
   {
-    id: 22,
+    id: 322,
     question:
       "La condición de personal estatutario fijo se adquiere, tal y como prevé la Ley 55/2003, de 16 de diciembre, del Estatuto Marco del personal estatutario de los servicios de salud, por el cumplimiento de los siguientes requisitos:",
     options: {
@@ -263,10 +263,10 @@ export const QUESTIONS: Question[] = [
       c: "Superación de las pruebas de selección; nombramiento conferido por el órgano competente; e incorporación, previo cumplimiento de los requisitos formales en cada caso establecidos, a una plaza del servicio, institución o centro que corresponda en el plazo determinado en la convocatoria.",
       d: "Superación de las pruebas de selección; nombramiento conferido por el órgano competente; e incorporación a una plaza del servicio, institución o centro que corresponda en todo caso en el plazo determinado en la convocatoria.",
     },
-    correct: "x",
+    correct: "c",
   },
   {
-    id: 23,
+    id: 323,
     question:
       "Según dice la Ley 55/2003, de 16 de diciembre, del Estatuto Marco del personal estatutario de los servicios de salud, en el proceso de la adquisición de la condición de personal estatutario fijo, no podrán recibir nombramiento y quedarán sin efecto las actuaciones de quienes:",
     options: {
@@ -275,10 +275,10 @@ export const QUESTIONS: Question[] = [
       c: "No acrediten que reúnen los requisitos y condiciones exigidos en la convocatoria, una vez firmada la convocatoria.",
       d: "Una vez superado el proceso selectivo, automáticamente se procede al nombramiento por el órgano competente.",
     },
-    correct: "x",
+    correct: "a",
   },
   {
-    id: 24,
+    id: 324,
     question:
       "La pérdida de la condición de personal estatutario regulada en la Ley 55/2003, de 16 de diciembre, del Estatuto Marco del personal estatutario de los servicios de salud, se produce:",
     options: {
@@ -287,10 +287,10 @@ export const QUESTIONS: Question[] = [
       c: "En caso de que se adopte la pena de inhabilitación especial para la correspondiente profesión, siempre que esta exceda de seis años.",
       d: "En caso de que se adopte la pena de inhabilitación especial para la correspondiente profesión, siempre que esta exceda de tres años.",
     },
-    correct: "x",
+    correct: "c",
   },
   {
-    id: 25,
+    id: 325,
     question:
       "Conforme a la Ley 55/2003, de 16 de diciembre, del Estatuto Marco del personal estatutario de los servicios de salud, señale cuál de las siguientes afirmaciones no es correcta:",
     options: {
@@ -299,10 +299,10 @@ export const QUESTIONS: Question[] = [
       c: "La jubilación forzosa se declarará al cumplir la persona interesada 65 años.",
       d: "Podrá optar a la jubilación voluntaria, total o parcial, el personal estatutario que reúna los requisitos establecidos en la legislación de Seguridad Social.",
     },
-    correct: "x",
+    correct: "b",
   },
   {
-    id: 26,
+    id: 326,
     question:
       "Procede la extinción de la condición de personal estatutario fijo de los servicios de salud:",
     options: {
@@ -311,10 +311,10 @@ export const QUESTIONS: Question[] = [
       c: "Siempre que se imponga una pena principal o accesoria de inhabilitación especial para empleo o cargo público o para el ejercicio de la correspondiente profesión.",
       d: "Todas las anteriores respuestas son correctas.",
     },
-    correct: "x",
+    correct: "d",
   },
   {
-    id: 27,
+    id: 327,
     question:
       "En materia de retribuciones, la Ley 55/2003, de 16 de diciembre, del Estatuto Marco del personal estatutario de los servicios de salud, prevé que:",
     options: {
@@ -323,10 +323,10 @@ export const QUESTIONS: Question[] = [
       c: "El sistema retributivo del personal estatutario responde a los principios de cualificación técnica y profesional.",
       d: "Todas las respuestas son correctas.",
     },
-    correct: "x",
+    correct: "d",
   },
   {
-    id: 28,
+    id: 328,
     question:
       "De acuerdo con la Ley 55/2003, de 16 de diciembre, del Estatuto Marco del personal estatutario de los servicios de salud, señale la respuesta correcta respecto a las retribuciones del personal estatutario de los servicios de salud:",
     options: {
@@ -335,10 +335,10 @@ export const QUESTIONS: Question[] = [
       c: "El personal estatutario temporal percibirá la totalidad de las retribuciones que, en el correspondiente servicio de salud, correspondan a su nombramiento, con excepción del complemento de carrera.",
       d: "El complemento de atención continuada está destinado a retribuir la iniciativa continuada y permanente de la persona titular del puesto.",
     },
-    correct: "x",
+    correct: "a",
   },
   {
-    id: 29,
+    id: 329,
     question:
       "La pérdida de la condición de personal estatutario de los servicios de salud se produce cuando la incapacidad permanente sea declarada:",
     options: {
@@ -347,10 +347,10 @@ export const QUESTIONS: Question[] = [
       c: "En grado de gran invalidez.",
       d: "Todas las respuestas son correctas.",
     },
-    correct: "x",
+    correct: "d",
   },
   {
-    id: 30,
+    id: 330,
     question:
       "En el supuesto del personal estatutario de los servicios de salud:",
     options: {
@@ -359,10 +359,10 @@ export const QUESTIONS: Question[] = [
       c: "El trabajo por turnos es una forma de organización del trabajo en equipo con arreglo al ritmo rotatorio y siempre de tipo continuo.",
       d: "El período de localización es aquel período de tiempo en el que el personal se encuentra en situación de disponibilidad a los solos efectos de asegurar su posible localización.",
     },
-    correct: "x",
+    correct: "b",
   },
   {
-    id: 31,
+    id: 331,
     question:
       "Para el personal estatutario de los servicios de salud, el período nocturno tendrá la siguiente duración:",
     options: {
@@ -371,10 +371,10 @@ export const QUESTIONS: Question[] = [
       c: "Mínima de ocho horas e incluirá necesariamente el período comprendido entre las doce y las cinco horas de cada día natural.",
       d: "Mínima de siete horas e incluirá necesariamente el período comprendido entre las doce y las cinco horas de cada día natural.",
     },
-    correct: "x",
+    correct: "a",
   },
   {
-    id: 32,
+    id: 332,
     question:
       "Según establece la Ley 55/2003, de 16 de diciembre, del Estatuto Marco del personal estatutario de los servicios de salud:",
     options: {
@@ -383,42 +383,222 @@ export const QUESTIONS: Question[] = [
       c: "Atendiendo a lo que establezca la legislación vigente, el personal estatutario de los servicios de salud podrá compatibilizar las funciones sanitarias con la actividad pública o privada.",
       d: "Todas las anteriores respuestas son incorrectas.",
     },
-    correct: "x",
+    correct: "c",
   },
   {
-    id: 33,
+    id: 333,
     question:
-      "Según el texto refundido de la Ley de Ordenación Sanitaria de Euskadi, las áreas de salud se configuran como las estructuras fundamentales del sistema sanitario vasco para la gestión de las prestaciones de atención primaria y hospitalaria.",
+      "La Ley 55/2003, de 16 de diciembre, del Estatuto Marco del personal estatutario de los servicios de salud regula el descanso semanal. Señale la respuesta que no es correcta:",
     options: {
-      a: "Verdadero, pero solo en los territorios históricos que superen una población censada superior a los 250.000 habitantes.",
-      b: "Falso, las áreas de salud están delegadas de forma completa e independiente en las juntas locales de sanidad.",
-      c: "Verdadero, constituyendo la demarcación geográfica idónea para la planificación y la gestión integrada de las actividades sanitarias.",
-      d: "Ninguna de las respuestas es correcta.",
+      a: "El personal tendrá derecho a un período mínimo que siempre será fijo de descanso ininterrumpido con una duración media de 24 horas semanales.",
+      b: "El período de referencia para el cálculo del período de descanso semanal será de tres meses.",
+      c: "En el caso de que no se hubiera disfrutado del tiempo mínimo de descanso semanal en el período de tres meses se producirá una compensación a través del régimen de descansos alternativos.",
+      d: "El período de referencia para el cálculo del período de descanso semanal será de dos meses.",
     },
-    correct: "x",
+    correct: "b",
   },
   {
-    id: 34,
+    id: 334,
     question:
-      "La Ley de Ordenación Sanitaria de Euskadi atribuye las competencias de alta dirección, planificación estratégica, y asignación de recursos financieros para el ente público Osakidetza-Servicio Vasco de Salud principalmente a:",
+      "Conforme a la Ley 55/2003, de 16 de diciembre, del Estatuto Marco del personal estatutario de los servicios de salud:",
     options: {
-      a: "Las gerencias de las Organizaciones Sanitarias Integradas (OSI) de manera independiente.",
-      b: "El Departamento del Gobierno Vasco competente en materia de sanidad.",
-      c: "Los consejos técnicos de participación profesional de cada centro asistencial.",
-      d: "Las Mutuas colaboradoras con la Seguridad Social firmantes de conciertos específicos.",
+      a: "El personal tendrá derecho a una vacación retribuida cuya duración no será inferior en ningún caso a 30 días naturales.",
+      b: "El personal estatutario de los servicios de salud podrá elegir sustituir el período de vacación por una compensación económica.",
+      c: "Solo podrá ser sustituido por una compensación económica el período vacacional anual mediante la programación funcional de los centros, cuando así lo aconsejen razones organizativas.",
+      d: "Anualmente, el personal tendrá derecho a una vacación retribuida cuya duración no será inferior a 30 días naturales, o al tiempo que proporcionalmente corresponda en función del tiempo de servicios.",
     },
-    correct: "x",
+    correct: "d",
   },
   {
-    id: 35,
+    id: 335,
     question:
-      "De acuerdo con el marco de derechos del paciente en Euskadi, la información clínica que se incorpora a la historia de un usuario debe estar garantizada de forma prioritaria en cuanto a:",
+      "La excedencia voluntaria solicitada por el personal estatutario de los servicios de salud por interés particular exige haber prestado servicios efectivos en cualquiera de las Administraciones públicas durante:",
     options: {
-      a: "Su confidencialidad, autenticidad, integridad y la trazabilidad de los accesos realizados.",
-      b: "Su publicación íntegra en los boletines oficiales para garantizar la máxima transparencia administrativa.",
-      c: "Su almacenamiento exclusivo en dispositivos físicos locales no conectados a redes digitales para evitar riesgos telemáticos.",
-      d: "La simplificación del historial eliminando cualquier dato relativo a antecedentes familiares o genéticos.",
+      a: "Los cinco años inmediatamente anteriores.",
+      b: "Los cuatro años inmediatamente anteriores.",
+      c: "Los dos años inmediatamente anteriores.",
+      d: "Los tres años inmediatamente anteriores.",
     },
-    correct: "x",
+    correct: "a",
+  },
+  {
+    id: 336,
+    question:
+      "La Ley 8/1997, de 26 de junio, de ordenación Sanitaria de Euskadi, establece que la Administración sanitaria vasca debe garantizar la tutela general de la salud pública a través de:",
+    options: {
+      a: "Medidas preventivas.",
+      b: "Promoción de la salud.",
+      c: "Prestaciones sanitarias individuales.",
+      d: "Son correctas todas las respuestas.",
+    },
+    correct: "d",
+  },
+  {
+    id: 337,
+    question:
+      "La Ley 8/1997, de 26 de junio, de ordenación Sanitaria de Euskadi, reconoce la universalidad del derecho a la protección de la salud para:",
+    options: {
+      a: "Todas las personas residentes en el territorio de Euskadi, así como para las personas transeúntes.",
+      b: "Todas las personas residentes en Euskadi o fuera de Euskadi, así como para las personas transeúntes.",
+      c: "Solo para las personas que tengan vecindad administrativa en Euskadi.",
+      d: "Solo para las personas de quienes pueda predicarse la condición política de vascos.",
+    },
+    correct: "a",
+  },
+  {
+    id: 338,
+    question:
+      "Señale cuál de los siguientes principios no se enuncian entre los principios informadores del sistema sanitario de Euskadi en la Ley 8/1997, de 26 de junio, de ordenación Sanitaria de Euskadi:",
+    options: {
+      a: "Universalidad.",
+      b: "Solidaridad ciudadana.",
+      c: "Equidad.",
+      d: "Calidad de los servicios.",
+    },
+    correct: "b",
+  },
+  {
+    id: 339,
+    question:
+      "La Ley 8/1997, de 26 de junio, de ordenación Sanitaria de Euskadi, establece respecto a las áreas de salud que:",
+    options: {
+      a: "La Comunidad Autónoma del País Vasco se divide territorialmente en áreas de salud de acuerdo con la situación socio-económica de cada demarcación geográfica.",
+      b: "En cada área de salud pueden ponerse en práctica las actuaciones esenciales que requiere la tutela general de la salud pública y exclusivamente la asistencia sanitaria primaria.",
+      c: "En cada área de salud se garantizará una adecuada ordenación de la atención primaria y su coordinación con la atención especializada.",
+      d: "Son correctas la a) y la c).",
+    },
+    correct: "c",
+  },
+  {
+    id: 340,
+    question:
+      "La Ley 8/1997, de 26 de junio, de ordenación Sanitaria de Euskadi prevé la creación de sistemas de información necesarios para facilitar el ejercicio adecuado de los distintos niveles de responsabilidad en el sistema. A tal fin, los datos de carácter personal relativos a la salud podrán ser recabados y tratados siempre que se cumplan los siguientes requisitos:",
+    options: {
+      a: "Siempre debe constar el previo consentimiento de la persona afectada.",
+      b: "Si no consta el previo consentimiento de la persona afectada se requiere que la actuación se encuentre debidamente autorizada y se efectúe previo procedimiento de disociación que garantice el anonimato de la información.",
+      c: "Que conste el previo consentimiento de la persona afectada por escrito y que se garantice el anonimato de la información.",
+      d: "Basta con que la actuación se encuentre debidamente autorizada.",
+    },
+    correct: "b",
+  },
+  {
+    id: 341,
+    question:
+      "La Ley 8/1997, de 26 de junio, de Ordenación Sanitaria de Euskadi al contemplar los derechos y deberes ciudadanos, alude a:",
+    options: {
+      a: "La obligación de dejar constancia escrita de todo proceso diagnóstico o terapéutico.",
+      b: "La obligación de dejar constancia por cualquier medio de todo proceso diagnóstico.",
+      c: "La obligación de dejar constancia por cualquier medio de todo proceso diagnóstico o terapéutico.",
+      d: "No existe en la Ley ninguna previsión a este respecto, de modo que será el personal facultativo el que decida si el proceso diagnóstico o terapéutico debe quedar registrado.",
+    },
+    correct: "a",
+  },
+  {
+    id: 342,
+    question:
+      "El contrato-programa, tal y como establece la Ley 8/1997, de 26 de junio, de Ordenación Sanitaria de Euskadi:",
+    options: {
+      a: "Es el instrumento jurídico mediante el que se articulan las relaciones entre el Gobierno Vasco y las organizaciones del ente público Osakidetza-Servicio Vasco de Salud para la provisión de servicios sanitarios.",
+      b: "Es el instrumento jurídico mediante el que se articulan de manera directa las relaciones entre el Departamento competente en materia de sanidad y las organizaciones del ente público Osakidetza-Servicio Vasco de Salud que tiene naturaleza jurídica de concierto.",
+      c: "Es el instrumento jurídico mediante el que se articulan de manera directa las relaciones entre el Departamento competente en materia de sanidad y las organizaciones del ente público Osakidetza-Servicio Vasco de Salud que tiene naturaleza jurídica de un convenio de carácter especial.",
+      d: "Ninguna respuesta es correcta.",
+    },
+    correct: "c",
+  },
+  {
+    id: 343,
+    question:
+      "El consejo de administración de Osakidetza-Servicio Vasco de Salud está integrado por:",
+    options: {
+      a: "La persona titular de la presidencia y por un número no superior a cinco miembros en representación de la Administración de la Comunidad Autónoma de Euskadi.",
+      b: "La persona titular de la presidencia y por un número no superior a tres miembros en representación de la Administración de la Comunidad Autónoma de Euskadi.",
+      c: "La persona titular de la presidencia y por cinco miembros en representación del Departamento competente en materia de sanidad.",
+      d: "La persona titular de la presidencia, la Consejería del Departamento competente en materia de sanidad y tres miembros en representación de la Administración de la Comunidad Autónoma de Euskadi.",
+    },
+    correct: "a",
+  },
+  {
+    id: 344,
+    question:
+      "Según establece la Ley 8/1997, de 26 de junio, de Ordenación Sanitaria de Euskadi:",
+    options: {
+      a: "El Plan de Salud de Euskadi debe ser aprobado por el Parlamento Vasco.",
+      b: "El Departamento competente en materia de sanidad debe elaborar semestralmente y remitir al Parlamento un informe con la evaluación de los objetivos y determinaciones del Plan de Salud de Euskadi.",
+      c: "El Departamento competente en materia de sanidad debe elaborar anualmente y remitir al Parlamento un informe con la evaluación de los objetivos y determinaciones del Plan de Salud de Euskadi.",
+      d: "Son correctas las respuestas a) y c.",
+    },
+    correct: "c",
+  },
+  {
+    id: 345,
+    question:
+      "A los efectos de la Ley 8/1997, de 26 de junio, de Ordenación Sanitaria de Euskadi, las plantillas de personal del ente público Osakidetza-Servicio Vasco de Salud:",
+    options: {
+      a: "Serán aprobadas por la Presidencia a propuesta del consejo de administración.",
+      b: "Se denomina así al número de efectivos de carácter estructural con que cuentan tanto su organización central de administración como las organizaciones de servicios dependientes de Osakidetza-Servicio Vasco de Salud.",
+      c: "Deberán ajustarse al número máximo de efectivos, según grupos profesionales, que anualmente aprobará su consejo de administración a propuesta del Departamento de Sanidad.",
+      d: "Deberán ajustarse al número máximo de efectivos, según grupos de titulación, que anualmente aprobará el Departamento de Sanidad.",
+    },
+    correct: "b",
+  },
+  {
+    id: 346,
+    question:
+      "En el ámbito territorial de la Comunidad Autónoma de Euskadi, las inspecciones necesarias para asegurar el cumplimiento de lo previsto en la Ley 8/1997, de 26 de junio, de Ordenación Sanitaria de Euskadi y en el resto de la legislación sanitaria corresponde:",
+    options: {
+      a: "A la inspección de trabajo del País Vasco adscrita al Departamento de trabajo y empleo del Gobierno Vasco.",
+      b: "En todos los casos a las corporaciones locales de la Comunidad Autónoma.",
+      c: "Al Departamento competente en materia de sanidad.",
+      d: "La inspección en materia sanitaria no es competencia de la Comunidad Autónoma de Euskadi.",
+    },
+    correct: "c",
+  },
+  {
+    id: 347,
+    question:
+      "Señale cuál de los siguientes criterios no está contemplado en la Ley 8/1997, de 26 de junio, de Ordenación Sanitaria de Euskadi para la clasificación de las infracciones en leves, graves o muy graves:",
+    options: {
+      a: "La cuantía de la indemnización solicitada.",
+      b: "Los riesgos para la salud.",
+      c: "El grado de intencionalidad.",
+      d: "La gravedad de la alteración sanitaria y social producida.",
+    },
+    correct: "a",
+  },
+  {
+    id: 348,
+    question:
+      "Según establece la Ley 8/1997, de 26 de junio, de Ordenación Sanitaria de Euskadi, en materia de sanciones señale la respuesta correcta:",
+    options: {
+      a: "Las infracciones serán sancionadas exclusivamente con sanción pecuniaria o económica.",
+      b: "En los casos de infracciones muy graves, el Gobierno Vasco podrá acordar el cierre temporal del establecimiento, instalación o servicio por un plazo máximo de cinco años.",
+      c: "Sin perjuicio de la multa que proceda imponer, en ciertos casos, la sanción económica que se imponga podrá ser incrementada hasta el triple de la cuantía del beneficio ilícito obtenido.",
+      d: "En los casos de infracciones muy graves, el Gobierno Vasco podrá acordar el cierre temporal del establecimiento, instalación o servicio por un plazo máximo de tres años.",
+    },
+    correct: "b",
+  },
+  {
+    id: 349,
+    question:
+      "Según la Ley 8/1997, de 26 de junio, de Ordenación Sanitaria de Euskadi, las organizaciones a través de las que se procede a la provisión de servicios sanitarios con medios adscritos al ente público Osakidetza-Servicio Vasco de Salud:",
+    options: {
+      a: "Realizarán su actividad bajo el principio de autonomía económico-financiera y de gestión.",
+      b: "Se configurarán como instituciones de titularidad privada y con personalidad jurídica propia.",
+      c: "Se crearán por ley como entidades de titularidad pública y con personalidad jurídica propia.",
+      d: "Para realizar su actividad dependen presupuestariamente del ente público Osakidetza- Servicio Vasco de Salud.",
+    },
+    correct: "a",
+  },
+  {
+    id: 350,
+    question:
+      "Respecto al personal sujeto al régimen estatutario que establece la Ley 8/1997, de 26 de junio, de Ordenación Sanitaria de Euskadi, señale la respuesta correcta:",
+    options: {
+      a: "Este vínculo estatutario se adquiere mediante el cumplimiento de los dos siguientes requisitos: superación del proceso selectivo correspondiente y nombramiento conferido por autoridad competente.",
+      b: "Los principios que rigen el procedimiento selectivo para la adquisición del vínculo estatutario son exclusivamente el de igualdad, mérito y capacidad.",
+      c: "Los instrumentos de clasificación del personal sujeto a este régimen estatutario son el grupo de titulación, el grupo profesional, la categoría y el puesto funcional que se desempeñe.",
+      d: "El grupo de titulación constituye el instrumento de clasificación del personal en base al agrupamiento unitario de las aptitudes profesionales y contenido específico da las tareas propias de la prestación.",
+    },
+    correct: "c",
   },
 ];

@@ -119,6 +119,33 @@ h1 {
   width: 100%;
   transition: background-color 0.2s;
 }
+.btn-common {
+  background: linear-gradient(135deg, #6c63ff, #8e7dff);
+  color: white;
+  margin-top: 10px;
+  border: none;
+  padding: 14px 40px;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.2s;
+}
+
+.btn-mix {
+  background:var(--ion-color-secondary);
+  color: white;
+  margin-top: 10px;
+  border: none;
+  padding: 14px 40px;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.2s;
+}
 
 .btn-start:hover:not(:disabled) {
   background-color: #a67aca;
@@ -139,8 +166,41 @@ h1 {
   margin-top: 12px;
   width: 100%;
   padding: 12px 16px;
+  margin-top: 16px;
   border: none;
   background: linear-gradient(135deg, #ed3419, #8e7dff);
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 22px rgba(108, 99, 255, 0.35);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.btn-instructions{
+  margin-top: 12px;
+  width: 100%;
+  padding: 12px 16px;
+  margin-top: 16px;
+  border: none;
+  background: linear-gradient(135deg, #8e7dff, #ed3419);
   color: white;
   font-weight: 600;
   font-size: 14px;

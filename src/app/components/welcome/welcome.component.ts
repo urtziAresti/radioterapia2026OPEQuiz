@@ -13,6 +13,12 @@ import { QuizService } from "../../../services/quiz.service";
 import { QuestionProgress } from "../../../interfaces/progress";
 import { IonicModule } from "@ionic/angular";
 
+
+export enum TEST_TYPE {
+  RADIO = "RADIO",
+  COMMON = "COMMON",  
+  ALL = "ALL"
+}
 @Component({
   selector: "app-welcome",
   standalone: true,
@@ -27,6 +33,7 @@ export class WelcomeComponent implements OnInit {
   private router = inject(Router);
   private quizService = inject(QuizService);
   progress!: QuestionProgress;
+  TEST_TYPE: typeof TEST_TYPE = TEST_TYPE;
 
   @Output() configSubmitted = new EventEmitter<{
     username: string;
@@ -118,7 +125,7 @@ export class WelcomeComponent implements OnInit {
       .map(([id]) => id);
   }
 
-  startQuiz() {
+  startQuiz(type: TEST_TYPE) {
     if (this.username && this.selectedQuestionCount) {
       const config = {
         username: this.username,
@@ -131,6 +138,7 @@ export class WelcomeComponent implements OnInit {
         queryParams: {
           name: config.username,
           count: config.count,
+          quiz_type: type
         },
       });
     }
@@ -148,6 +156,8 @@ export class WelcomeComponent implements OnInit {
 
   startRepasoMode() {
     const failedIds = this.failedQuestions;
+
+    
 
     if (!failedIds.length) return;
 

@@ -3,7 +3,7 @@
     <h1>Test de Radioterapia</h1>
     <img src="assets/icon/radio.svg" alt="Radioterapia" class="logo" />
     <div class="form-group">
-      <label for="questionCount">Número de preguntas para el test:</label>
+      <label for="questionCount">Número de preguntas:</label>
       <select id="questionCount" [(ngModel)]="selectedQuestionCount">
         <option [ngValue]="2">2 preguntas</option>
         <option [ngValue]="5">5 preguntas</option>
@@ -48,10 +48,28 @@
     <button
       class="btn-start"
       [disabled]="!selectedQuestionCount"
-      (click)="startQuiz()"
+      (click)="startQuiz(TEST_TYPE.RADIO)"
     >
-      Test
+      Test Radio
     </button>
+
+    <button
+    class="btn-common"
+    [disabled]="!selectedQuestionCount"
+    (click)="startQuiz(TEST_TYPE.COMMON)"
+  >
+    Test Comunes
+  </button>
+
+
+  <button
+  class="btn-mix"
+  [disabled]="!selectedQuestionCount"
+  (click)="startQuiz(TEST_TYPE.ALL)"
+>
+  Test Mixto 80/20 Radio-Comunes
+</button>
+
     <button
       class="btn-repaso"
       *ngIf="areFailedQuestions"
@@ -60,6 +78,7 @@
     </button>
 
     <button
+      *ngIf="['navis', 'ADMIN'].includes(username)"
       class="btn-suggestions"
       type="button"
       (click)="sendSuggestionsMail()"
@@ -77,7 +96,7 @@
   </button>
 
   <button
-    class="btn-data"
+    class="btn-instructions"
     color="secondary"
     type="button"
     (click)="viewInstructions()">

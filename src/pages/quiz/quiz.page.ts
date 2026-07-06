@@ -14,6 +14,7 @@ import { HistoryService } from "../../services/history.service";
 import { TimerService } from "../../services/timer.service";
 import { LogService } from "../../services/log.service";
 import { Question } from "../../interfaces/question";
+import { TEST_TYPE } from "../../app/components/welcome/welcome.component";
 
 
 addIcons({
@@ -41,14 +42,12 @@ export class QuizPage implements OnInit, OnDestroy {
   private logService = inject(LogService);
 
   questions: Question[] = [];
-
   currentIndex = 0;
-
   correctAnswers = 0;
-
   count = 0;
 
   playerName = "";
+  quiz_type : TEST_TYPE = TEST_TYPE.RADIO;
 
   mode: "normal" | "failed" = "normal";
 
@@ -88,6 +87,11 @@ export class QuizPage implements OnInit, OnDestroy {
         this.playerName = params["name"];
       }
 
+      if (params["quiz_type"]) {
+        
+        this.quiz_type = params["quiz_type"];
+      }
+
       if (params["mode"] === "failed") {
         this.mode = "failed";
 
@@ -99,14 +103,10 @@ export class QuizPage implements OnInit, OnDestroy {
 
         return;
       }
-
       this.mode = "normal";
-
       this.count = +params["count"];
-
       this.resetQuiz();
-
-      this.questions = this.quizService.getQuestions(this.count);
+      this.questions = this.quizService.getQuestions(this.quiz_type,this.count);
     });
   }
 
@@ -157,8 +157,9 @@ export class QuizPage implements OnInit, OnDestroy {
 
     if (isCorrect) {
       this.correctAnswers++;
-
+        
       if (this.mode === "failed") {
+        
         this.failedIds = this.failedIds.filter(
           (id) => id !== currentQuestion.id
         );

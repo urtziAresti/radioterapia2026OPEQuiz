@@ -5,7 +5,7 @@ import {
 } from "@angular/router";
 import { Subject } from "rxjs";
 
-import { WelcomeComponent } from "./welcome.component";
+import { TEST_TYPE, WelcomeComponent } from "./welcome.component";
 import { QuizService } from "../../../services/quiz.service";
 
 describe("WelcomeComponent", () => {
@@ -298,8 +298,7 @@ describe("WelcomeComponent", () => {
     component.username="urtzi";
     component.selectedQuestionCount=50;
 
-    component.startQuiz();
-
+    component.startQuiz(TEST_TYPE.RADIO);
     expect(component.configSubmitted.emit).toHaveBeenCalledWith({
       username:"urtzi",
       count:50
@@ -310,7 +309,8 @@ describe("WelcomeComponent", () => {
       {
         queryParams:{
           name:"urtzi",
-          count:50
+          count:50,
+          quiz_type: 'RADIO'
         }
       }
     );
@@ -321,7 +321,7 @@ describe("WelcomeComponent", () => {
 
     component.username="";
 
-    component.startQuiz();
+    component.startQuiz(TEST_TYPE.RADIO);
 
     expect(router.navigate).not.toHaveBeenCalled();
 
@@ -332,7 +332,7 @@ describe("WelcomeComponent", () => {
     component.username="urtzi";
     component.selectedQuestionCount=0;
 
-    component.startQuiz();
+    component.startQuiz(TEST_TYPE.RADIO);
 
     expect(router.navigate).not.toHaveBeenCalled();
 
