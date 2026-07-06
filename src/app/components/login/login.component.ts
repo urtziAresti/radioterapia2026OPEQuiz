@@ -14,12 +14,15 @@ import {
   IonInput,
   IonButton,
   IonIcon,
-  ToastController
+  ToastController,
+  IonBackButton,
+  IonButtons
 } from '@ionic/angular/standalone';
 
 import { addIcons } from 'ionicons';
 import { lockClosedOutline, logInOutline, personAddOutline } from 'ionicons/icons';
 import { LogService } from '../../../services/log.service';
+import { IonicModule } from '@ionic/angular';
 
 addIcons({
   'lock-closed-outline': lockClosedOutline,
@@ -35,14 +38,7 @@ addIcons({
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    IonHeader,
-    IonToolbar,
-    IonTitle,
-    IonContent,
-    IonItem,
-    IonInput,
-    IonButton,
-    IonIcon
+    IonicModule
   ]
 })
 export class LoginComponent {

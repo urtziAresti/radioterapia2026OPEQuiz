@@ -4,7 +4,6 @@ import {
   inject,
   Output,
   OnInit,
-  OnDestroy,
 } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
@@ -12,7 +11,6 @@ import { NavigationEnd, Router } from "@angular/router";
 import { QuizService } from "../../../services/quiz.service";
 import { QuestionProgress } from "../../../interfaces/progress";
 import { IonicModule } from "@ionic/angular";
-
 
 export enum TEST_TYPE {
   RADIO = "RADIO",
@@ -47,7 +45,8 @@ export class WelcomeComponent implements OnInit {
       }
     });
   }
-  loadData() {
+  
+  ngOnInit() {
     const session = localStorage.getItem("userSession");
     if (session) {
       const user = JSON.parse(session);
@@ -55,11 +54,10 @@ export class WelcomeComponent implements OnInit {
     }
 
     this.progress = this.quizService.getProgress();
-
     this.failedQuestions = this.getFailedQuestions();
   }
 
-  ngOnInit() {
+  loadData() {
     const session = localStorage.getItem("userSession");
     if (session) {
       const user = JSON.parse(session);
@@ -86,7 +84,6 @@ export class WelcomeComponent implements OnInit {
     }
 
     const currentUser = JSON.parse(session);
-
     const username = currentUser?.username;
 
     if (!username) {
@@ -156,9 +153,7 @@ export class WelcomeComponent implements OnInit {
 
   startRepasoMode() {
     const failedIds = this.failedQuestions;
-
     
-
     if (!failedIds.length) return;
 
     this.router.navigate(["/questions"], {

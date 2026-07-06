@@ -11,22 +11,25 @@
 
 # rediseño
 -- welcome page --
-paleta colores rosa-radio - azul-osaki
-mas ancho
-sin card
-titulo mejor estirado
+paleta colores rosa-radio - azul-osaki  - oK
+mas ancho - OK
+sin card - OK
+titulo mejor estirado - Ok
 selector de preguntas bonito
-espacio botones
-
--- login --
-revisar todo
+espacio botones - OK
 
 -- instrucciones --
-Mejorar texto
-Mejorar titulo 
+paleta colores rosa-radio - azul-osaki _OK
+Mejorar texto - ok 
+Mejorar titulo  - OK
+
+-- login --
+paleta colores rosa-radio - azul-osaki  - OK 
+revisar todo - OK
 
 
 -- datos --
+paleta colores rosa-radio - azul-osaki 
 mas anchos
 sin card
 mejorar titulo
@@ -35,14 +38,16 @@ mejorar titulo
 mejorar nombre usuario
 mejorar textos
 
+-- quiz --
+revisar bien espacios y letras
 
 -- de todo --
 unificar archivos iconos
 acabar de Pintar icono
 Unificar fuente
 Color header segun tema Radio Comun o mix 
-unificar ion toolbar en componente
 traducciones a archivo
+servicio envio mails
 
 
 - 100 OKK

@@ -1,12 +1,13 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar color="primary">
-    <ion-title>Acceso al Cuestionario</ion-title>
+    <ion-title class="theme-title">
+    Acceso al cuestionario
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding ion-text-center">
   <div class="login-container">
-    
     <div class="logo-section">
       <ion-icon name="lock-closed-outline" color="primary" style="font-size: 64px;"></ion-icon>
       <h2><b>RADIOTERAPIA OPE 2026</b></h2>
@@ -27,11 +28,11 @@
 
       <ion-item lines="full" class="ion-margin-bottom">
         <ion-input 
-          label="Código de Acceso" 
+          label="Código" 
           labelPlacement="floating" 
           type="password" 
           formControlName="code"
-          placeholder="Introduce el código">
+          placeholder="Código">
         </ion-input>
       </ion-item>
 
@@ -41,8 +42,6 @@
           <ion-icon slot="end" name="log-in-outline"></ion-icon>
         </ion-button>
       </div>
-
-      
 
     </form>
 
