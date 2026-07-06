@@ -18,7 +18,8 @@ titulo mejor estirado
 selector de preguntas bonito
 espacio botones
 
-
+-- login --
+revisar todo
 
 -- instrucciones --
 Mejorar texto
@@ -38,9 +39,10 @@ mejorar textos
 -- de todo --
 unificar archivos iconos
 acabar de Pintar icono
-
+Unificar fuente
 Color header segun tema Radio Comun o mix 
 unificar ion toolbar en componente
+traducciones a archivo
 
 
 - 100 OKK

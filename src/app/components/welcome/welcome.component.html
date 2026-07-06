@@ -24,83 +24,53 @@
           {{ progress.answered }} de {{ progress.total }} preguntas
         </ion-card-subtitle>
       </ion-card-header>
-    
+
       <ion-card-content>
-    
-        <ion-progress-bar
-          [value]="progress.answered / progress.total">
+
+        <ion-progress-bar [value]="progress.answered / progress.total">
         </ion-progress-bar>
-    
+
         <div class="progress-info">
           <div>
             <h2>{{ progress.percentage }}%</h2>
             <p>Completado</p>
           </div>
-    
+
           <div>
             <h2>{{ progress.remaining }}</h2>
             <p>Restantes</p>
           </div>
         </div>
-    
+
       </ion-card-content>
     </ion-card>
-    <button
-      class="btn-start"
-      [disabled]="!selectedQuestionCount"
-      (click)="startQuiz(TEST_TYPE.RADIO)"
-    >
-      Test Radio
+    <button class="btn-start" [disabled]="!selectedQuestionCount" (click)="startQuiz(TEST_TYPE.RADIO)">
+      Radio
     </button>
 
-    <button
-    class="btn-common"
-    [disabled]="!selectedQuestionCount"
-    (click)="startQuiz(TEST_TYPE.COMMON)"
-  >
-    Test Comunes
-  </button>
+    <button class="btn-common" [disabled]="!selectedQuestionCount" (click)="startQuiz(TEST_TYPE.COMMON)">
+      Comunes
+    </button>
 
+    <button class="btn-mix" [disabled]="!selectedQuestionCount" (click)="startQuiz(TEST_TYPE.ALL)">
+      Mixto 80/20 Radio-Comunes
+    </button>
 
-  <button
-  class="btn-mix"
-  [disabled]="!selectedQuestionCount"
-  (click)="startQuiz(TEST_TYPE.ALL)"
->
-  Test Mixto 80/20 Radio-Comunes
-</button>
-
-    <button
-      class="btn-repaso"
-      *ngIf="areFailedQuestions"
-      (click)="startRepasoMode()">
+    <button class="btn-repaso" *ngIf="areFailedQuestions" (click)="startRepasoMode()">
       Repasar fallidas ({{ failedCount }})
     </button>
 
-    <button
-      *ngIf="['navis', 'ADMIN'].includes(username)"
-      class="btn-suggestions"
-      type="button"
-      (click)="sendSuggestionsMail()"
-    >
-      ENVIA SUGERENCIAS
+    <button *ngIf="['navis', 'ADMIN'].includes(username)" class="btn-suggestions" type="button"
+      (click)="sendSuggestionsMail()">
+      Envia sugerencias
     </button>
 
+    <button class="btn-data" color="secondary" type="button" (click)="viewData()">
+      Ver fuentes
+    </button>
 
-  <button
-    class="btn-data"
-    color="secondary"
-    type="button"
-    (click)="viewData()">
-    Ver fuentes
-  </button>
-
-  <button
-    class="btn-instructions"
-    color="secondary"
-    type="button"
-    (click)="viewInstructions()">
-    Instrucciones
-  </button>
+    <button class="btn-instructions" color="secondary" type="button" (click)="viewInstructions()">
+      Instrucciones
+    </button>
   </div>
 </div>
