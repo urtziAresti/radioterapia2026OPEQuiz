@@ -31,7 +31,7 @@ El siguiente formulario es para registrarte:
     const email = "urtzi.aresti+OPEAPP@gmail.com";
     const subject = encodeURIComponent("Sugerencias OPE - Test Radioterapia");
     const body = encodeURIComponent(
-      `Hola,\n\nQuería enviar las siguientes sugerencias sobre el test:\n\n`
+      `Hola,\n\nQuería enviar las siguientes sugerencias:\n\n`
     );
 
     window.open(`mailto:${email}?subject=${subject}&body=${body}`, "_self");
