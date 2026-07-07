@@ -16,6 +16,7 @@ import { I18nService } from "../../../assets/i18n/i18n.service";
 import { LogService } from "../../services/log.service";
 import { Question } from "../../interfaces/question";
 import { TEST_TYPE } from "../../components/welcome/welcome.component";
+import { StatsService } from "../../services/stats.service";
 
 
 addIcons({
@@ -38,7 +39,7 @@ export class QuizPage implements OnInit, OnDestroy {
   private quizService = inject(QuizService);
   private historyService = inject(HistoryService);
   private timerService = inject(TimerService);
-
+  private statsService = inject(StatsService); 
   private router = inject(Router);
   private route = inject(ActivatedRoute);
   private logService = inject(LogService);
@@ -227,9 +228,23 @@ export class QuizPage implements OnInit, OnDestroy {
       return;
     }
 
+this.saveProgress();
     this.quizFinished = true;
 
     this.timerService.stop();
+  }
+
+  saveProgress(){
+    //TODO: Implement the logic to save the quiz progress using the StatsService
+    const resultModel = {
+      playerName: this.playerName,
+      quizType: this.quiz_type,
+      correctAnswers: this.correctAnswers,
+      totalQuestions: this.questions.length,
+      elapsedTime: this.elapsedTime,
+      //more stats
+    };
+    //this.statsService.uploadProgress(resultModel);
   }
 
   getOptionColor(optionKey: string): string {
