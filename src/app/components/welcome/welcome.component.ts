@@ -12,6 +12,7 @@ import { QuizService } from "../../../services/quiz.service";
 import { QuestionProgress } from "../../../interfaces/progress";
 import { IonicModule } from "@ionic/angular";
 import { MailService } from "../../../services/mail-service";
+import { I18nService } from "../../../assets/i18n/i18n.service";
 
 export enum TEST_TYPE {
   RADIO = "RADIO",
@@ -26,6 +27,8 @@ export enum TEST_TYPE {
   styleUrls: ["./welcome.component.scss"],
 })
 export class WelcomeComponent implements OnInit {
+  private readonly i18n = inject(I18nService);
+  texts = this.i18n.texts;
   username: string = "";
   selectedQuestionCount: number = 25;
   failedQuestions: number[] = [];

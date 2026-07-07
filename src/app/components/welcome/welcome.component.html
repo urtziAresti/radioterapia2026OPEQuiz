@@ -1,25 +1,25 @@
 <div class="welcome-container">
   <div class="welcome-card">
-    <h1>Test de Radioterapia</h1>
+    <h1>{{texts.WELCOME.title}}</h1>
     <img src="assets/icon/radio.svg" alt="Radioterapia" class="logo" />
 
     <div class="form-group">
       <select id="questionCount" [(ngModel)]="selectedQuestionCount">
-        <option [ngValue]="2">2 preguntas</option>
-        <option [ngValue]="5">5 preguntas</option>
-        <option [ngValue]="10">10 preguntas</option>
-        <option [ngValue]="25">25 preguntas</option>
-        <option [ngValue]="50">50 preguntas</option>
-        <option [ngValue]="110">110 preguntas</option>
-        <option [ngValue]="150">150 preguntas</option>
-        <option [ngValue]="200">200 preguntas</option>
-        <option [ngValue]="300">300 preguntas</option>
+        <option [ngValue]="2">{{texts.WELCOME.questions[2]}}</option>
+        <option [ngValue]="5">{{texts.WELCOME.questions[5]}}</option>
+        <option [ngValue]="10">{{texts.WELCOME.questions[10]}}</option>
+        <option [ngValue]="25">{{texts.WELCOME.questions[25]}}</option>
+        <option [ngValue]="50">{{texts.WELCOME.questions[50]}}</option>
+        <option [ngValue]="110">{{texts.WELCOME.questions[110]}}</option>
+        <option [ngValue]="150">{{texts.WELCOME.questions[150]}}</option>
+        <option [ngValue]="200">{{texts.WELCOME.questions[200]}}</option>
+        <option [ngValue]="300">{{texts.WELCOME.questions[300]}}</option>
       </select>
     </div>
 
     <ion-card class="progress-card">
       <ion-card-header>
-        <ion-card-title>📚 Progreso</ion-card-title>
+        <ion-card-title> {{texts.WELCOME.progress.title}}</ion-card-title>
         <ion-card-subtitle>
           {{ progress.answered }} de {{ progress.total }} preguntas
         </ion-card-subtitle>
@@ -33,44 +33,44 @@
         <div class="progress-info">
           <div>
             <h2>{{ progress.percentage }}%</h2>
-            <p>Completado</p>
+            <p>{{texts.WELCOME.progress.completed}}</p>
           </div>
 
           <div>
             <h2>{{ progress.remaining }}</h2>
-            <p>Restantes</p>
+            <p>{{texts.WELCOME.progress.remaining}}</p>
           </div>
         </div>
 
       </ion-card-content>
     </ion-card>
     <button class="btn-start" [disabled]="!selectedQuestionCount" (click)="startQuiz(TEST_TYPE.RADIO)">
-      Radio
+      {{texts.WELCOME.buttons.radio}}
     </button>
 
     <button class="btn-common" [disabled]="!selectedQuestionCount" (click)="startQuiz(TEST_TYPE.COMMON)">
-      Comunes
+      {{texts.WELCOME.buttons.common}}
     </button>
 
     <button class="btn-mix" [disabled]="!selectedQuestionCount" (click)="startQuiz(TEST_TYPE.ALL)">
-      Mixto 80/20 Radio-Comunes
+      {{texts.WELCOME.buttons.mixed}}
     </button>
 
     <button class="btn-repaso" *ngIf="areFailedQuestions" (click)="startRepasoMode()">
-      Repasar fallidas ({{ failedCount }})
+      {{texts.WELCOME.buttons.failed}} ({{ failedCount }})
     </button>
 
     <button *ngIf="['navis', 'ADMIN'].includes(username)" class="btn-suggestions" type="button"
       (click)="sendSuggestionsMail()">
-      Envia sugerencias
-    </button>
+      {{texts.WELCOME.buttons.suggestions}}    
+     </button>
 
     <button class="btn-data" color="secondary" type="button" (click)="viewData()">
-      Ver fuentes
+      {{texts.WELCOME.buttons.data}}    
     </button>
 
     <button class="btn-instructions" color="secondary" type="button" (click)="viewInstructions()">
-      Instrucciones
+      {{texts.WELCOME.buttons.instructions}}    
     </button>
   </div>
 </div>
