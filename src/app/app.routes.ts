@@ -48,8 +48,8 @@ export const routes: Routes = [
     path: 'data',
     canActivate: [authGuard],
     loadComponent: () =>
-      import('../app/components/data/data.component').then(
-        (m) => m.DataComponent
+      import('../app/components/data/references.component').then(
+        (m) => m.ReferencesComponent
       ),
   },
   {

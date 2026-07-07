@@ -11,14 +11,6 @@
 
 # rediseño
 
--- login --
-paleta colores rosa-radio - azul-osaki  - OK 
-revisar todo - OK
-quitar card 
-cambiar candado pro icono app
-revisar textos quitar
-
-
 -- datos --
 paleta colores rosa-radio - azul-osaki 
 mas anchos
@@ -34,6 +26,7 @@ mejorar textos
 revisar bien espacios y letras
 
 
+Guardar resultados de la gente en storage de vercel 
 
 - 100 OKK
 

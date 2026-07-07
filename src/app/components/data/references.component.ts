@@ -11,12 +11,12 @@ addIcons({
 
 });
 @Component({
-  selector: 'app-data',
-  templateUrl: './data.component.html',
-  styleUrls: ['./data.component.scss'],
+  selector: 'app-references',
+  templateUrl: './references.component.html',
+  styleUrls: ['./references.component.scss'],
   imports: [IonicModule, CommonModule],
 })
-export class DataComponent {
+export class ReferencesComponent {
   private readonly i18n = inject(I18nService);
   texts = this.i18n.texts;
   constructor() { }
