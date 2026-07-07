@@ -11,6 +11,7 @@ import { NavigationEnd, Router } from "@angular/router";
 import { QuizService } from "../../../services/quiz.service";
 import { QuestionProgress } from "../../../interfaces/progress";
 import { IonicModule } from "@ionic/angular";
+import { MailService } from "../../../services/mail-service";
 
 export enum TEST_TYPE {
   RADIO = "RADIO",
@@ -30,6 +31,7 @@ export class WelcomeComponent implements OnInit {
   failedQuestions: number[] = [];
   private router = inject(Router);
   private quizService = inject(QuizService);
+  private mailService = inject(MailService);
   progress!: QuestionProgress;
   TEST_TYPE: typeof TEST_TYPE = TEST_TYPE;
 
@@ -142,13 +144,7 @@ export class WelcomeComponent implements OnInit {
   }
 
   sendSuggestionsMail() {
-    const email = "urtzi.aresti+OPEAPP@gmail.com";
-    const subject = encodeURIComponent("Sugerencias OPE - Test Radioterapia");
-    const body = encodeURIComponent(
-      `Hola,\n\nQuería enviar las siguientes sugerencias sobre el test:\n\n`
-    );
-
-    window.open(`mailto:${email}?subject=${subject}&body=${body}`, "_self");
+    this.mailService.sendSuggestionsMail();
   }
 
   startRepasoMode() {

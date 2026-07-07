@@ -48,6 +48,7 @@ export class QuizPage implements OnInit, OnDestroy {
 
   playerName = "";
   quiz_type : TEST_TYPE = TEST_TYPE.RADIO;
+  TEST_TYPE = TEST_TYPE;
 
   mode: "normal" | "failed" = "normal";
 
@@ -287,6 +288,33 @@ export class QuizPage implements OnInit, OnDestroy {
 
   get resultsPage(): boolean {
     return this.currentIndex !== this.questions.length;
+  }
+
+  get toolbarTitle(): string {
+    switch (this.quiz_type) {
+      case TEST_TYPE.RADIO:
+        return 'Radioterapia';
+  
+      case TEST_TYPE.COMMON:
+        return 'Común';
+  
+      case TEST_TYPE.ALL:
+        return 'Radioterapia/Común';
+  
+      default:
+        return 'Test';
+    }
+  }
+
+  get toolbarColor(): 'primary' | 'secondary' | 'tertiary' {
+    switch (this.quiz_type) {
+      case TEST_TYPE.RADIO:
+        return 'primary';
+      case TEST_TYPE.COMMON:
+        return 'secondary';
+      case TEST_TYPE.ALL:
+        return 'tertiary';
+    }
   }
 
   ngOnDestroy(): void {

@@ -45,13 +45,13 @@ mejorar textos
 revisar bien espacios y letras
 
 -- de todo --
-unificar archivos iconos
-acabar de Pintar icono
-Unificar fuente 
-Crear archivo colors para variables colores
-Color header segun tema Radio Comun o mix 
+acabar de Pintar icono _OK 
+Unificar fuente  - OK 
+Crear archivo colors para variables colores - OK
+Color header segun tema Radio Comun o mix - OK 
+servicio envio mails - OK 
+warning compilacion - OK 
 traducciones a archivo - tradus
-servicio envio mails
 
 - 100 OKK
 

@@ -10,6 +10,7 @@
  */
 /* Tu archivo de variables con los colores */
 @use "./theme/variables" as *;
+@use "./theme/colors";
 /* Core CSS required for Ionic components to work properly */
 @import "@ionic/angular/css/core.css";
 
@@ -25,6 +26,8 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
+
+
 
 /**
  * Ionic Dark Mode
@@ -69,7 +72,6 @@ ion-header {
     --ion-color-success-shade: #a67aca !important;
     --ion-color-success-tint: #a67aca !important;
   }
-
   
 * {
   font-family: "Elms Sans", sans-serif;

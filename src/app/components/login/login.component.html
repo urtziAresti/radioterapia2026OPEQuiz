@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
     <ion-title class="theme-title">
-    Acceso al cuestionario
+    {{texts.LOGIN.title}}
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -10,35 +10,36 @@
   <div class="login-container">
     <div class="logo-section">
       <ion-icon name="lock-closed-outline" color="primary" style="font-size: 64px;"></ion-icon>
-      <h2><b>RADIOTERAPIA OPE 2026</b></h2>
-      <p>Introduce tus credenciales para comenzar</p>
+      <h2><b>    {{texts.LOGIN.appName}}
+      </b></h2>
+      <p>{{texts.LOGIN.subtitle}}</p>
     </div>
 
     <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
       
       <ion-item lines="full" class="ion-margin-bottom">
         <ion-input 
-          label="Usuario" 
+          [label]="texts.LOGIN.username.label" 
           labelPlacement="floating" 
           type="text" 
           formControlName="username"
-          placeholder="Tu nombre de usuario">
+          placeholder="texts.LOGIN.username.placeholder">
         </ion-input>
       </ion-item>
 
       <ion-item lines="full" class="ion-margin-bottom">
         <ion-input 
-          label="Código" 
+          [label]="texts.LOGIN.code.label" 
           labelPlacement="floating" 
           type="password" 
           formControlName="code"
-          placeholder="Código">
+          placeholder="texts.LOGIN.code.placeholder">
         </ion-input>
       </ion-item>
 
       <div class="ion-padding-top">
         <ion-button type="submit" expand="block" [disabled]="loginForm.invalid">
-          Entrar
+        {{texts.LOGIN.buttons.login}}
           <ion-icon slot="end" name="log-in-outline"></ion-icon>
         </ion-button>
       </div>
@@ -47,7 +48,7 @@
 
     <div class="ion-padding-top">
       <ion-button class="register-button" (click)="register()" type="form" expand="block" >
-        Registro
+        {{texts.LOGIN.buttons.register}}
         <ion-icon slot="end" name="person-add-outline"></ion-icon>
       </ion-button>
     </div>
