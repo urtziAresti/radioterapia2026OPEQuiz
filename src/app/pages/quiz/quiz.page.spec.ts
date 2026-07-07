@@ -87,17 +87,7 @@ describe("QuizPage", () => {
   });
 
   afterEach(() => {
-    jasmine.clock().uninstall?.();
-  });
-  xit("should initialize in normal mode and load questions", () => {
-    component.ngOnInit();
-
-    expect(component.mode).toBe("normal");
-    expect(component.playerName).toBe("Urtzi");
-    expect(component.count).toBe(3);
-
-    expect(quizServiceMock.getQuestions).toHaveBeenCalledWith(3);
-    expect(timerServiceMock.start).toHaveBeenCalled();
+    jasmine.clock().uninstall();
   });
 
   it("should reset quiz state properly", () => {

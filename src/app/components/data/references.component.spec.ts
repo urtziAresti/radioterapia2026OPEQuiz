@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { ReferencesComponent } from "./data.component";
+import { ReferencesComponent } from "./references.component";
 
 describe("ReferencesComponent", () => {
   let component: ReferencesComponent;
