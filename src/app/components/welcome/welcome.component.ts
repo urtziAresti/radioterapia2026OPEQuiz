@@ -29,6 +29,17 @@ export enum TEST_TYPE {
 export class WelcomeComponent implements OnInit {
   private readonly i18n = inject(I18nService);
   texts = this.i18n.texts;
+  questionCounts = [
+    { value: 2, label: this.texts.WELCOME.questions[2] },
+    { value: 5, label: this.texts.WELCOME.questions[5] },
+    { value: 10, label: this.texts.WELCOME.questions[10] },
+    { value: 25, label: this.texts.WELCOME.questions[25] },
+    { value: 50, label: this.texts.WELCOME.questions[50] },
+    { value: 110, label: this.texts.WELCOME.questions[110] },
+    { value: 150, label: this.texts.WELCOME.questions[150] },
+    { value: 200, label: this.texts.WELCOME.questions[200] },
+    { value: 300, label: this.texts.WELCOME.questions[300] },
+  ];
   username: string = "";
   selectedQuestionCount: number = 25;
   failedQuestions: number[] = [];

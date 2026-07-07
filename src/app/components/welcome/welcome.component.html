@@ -4,17 +4,15 @@
     <img src="assets/icon/radio.svg" alt="Radioterapia" class="logo" />
 
     <div class="form-group">
-      <select id="questionCount" [(ngModel)]="selectedQuestionCount">
-        <option [ngValue]="2">{{texts.WELCOME.questions[2]}}</option>
-        <option [ngValue]="5">{{texts.WELCOME.questions[5]}}</option>
-        <option [ngValue]="10">{{texts.WELCOME.questions[10]}}</option>
-        <option [ngValue]="25">{{texts.WELCOME.questions[25]}}</option>
-        <option [ngValue]="50">{{texts.WELCOME.questions[50]}}</option>
-        <option [ngValue]="110">{{texts.WELCOME.questions[110]}}</option>
-        <option [ngValue]="150">{{texts.WELCOME.questions[150]}}</option>
-        <option [ngValue]="200">{{texts.WELCOME.questions[200]}}</option>
-        <option [ngValue]="300">{{texts.WELCOME.questions[300]}}</option>
-      </select>
+      <ion-item lines="none">
+        <ion-select [(ngModel)]="selectedQuestionCount" interface="popover">
+          <ion-select-option
+            *ngFor="let option of questionCounts"
+            [value]="option.value">
+            {{ option.label }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
     </div>
 
     <ion-card class="progress-card">

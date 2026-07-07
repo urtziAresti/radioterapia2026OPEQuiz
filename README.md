@@ -15,7 +15,7 @@ paleta colores rosa-radio - azul-osaki  - oK
 mas ancho - OK
 sin card - OK
 titulo mejor estirado - Ok
-selector de preguntas bonito
+selector de numero de preguntas bonito
 espacio botones - OK
 
 -- instrucciones --
@@ -51,12 +51,7 @@ Crear archivo colors para variables colores - OK
 Color header segun tema Radio Comun o mix - OK 
 servicio envio mails - OK 
 warning compilacion - OK 
-
-
-traducciones a archivo - tradus
-
--data
--instrucciones
+traducciones a archivo - tradus - OK 
 
 
 - 100 OKK

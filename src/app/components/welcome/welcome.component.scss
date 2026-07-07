@@ -325,3 +325,12 @@ ion-card-header{
   display: flex;
   flex-direction: column;
 }
+
+ion-select {
+
+  label {
+    display: flex;
+    justify-content: center;
+  }
+  
+}
