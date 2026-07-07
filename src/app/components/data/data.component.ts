@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { addIcons } from 'ionicons';
 import { documentTextOutline,documentOutline } from 'ionicons/icons';
+import { I18nService } from '../../../assets/i18n/i18n.service';
 
 addIcons({
   'document-text-outline': documentTextOutline,
@@ -16,7 +17,8 @@ addIcons({
   imports: [IonicModule, CommonModule],
 })
 export class DataComponent {
-
+  private readonly i18n = inject(I18nService);
+  texts = this.i18n.texts;
   constructor() { }
 
   openFile(path: string): void {

@@ -9,7 +9,7 @@
     </ion-buttons>
 
     <ion-title class="theme-title">
-      Fuente de datos
+      {{texts.DATA.title}}
     </ion-title>
 
   </ion-toolbar>
@@ -22,14 +22,15 @@
     <ion-item button detail (click)="openPDF()">
       <ion-icon name="document-outline" slot="start"></ion-icon>
        <ion-label>
-        <h2>Preguntas</h2>
+        <h2>      {{texts.DATA.items.questions}}
+        </h2>
       </ion-label>
     </ion-item>
 
     <ion-item button detail (click)="openFile('assets/docs/respuestas.jpeg')">
       <ion-icon name="document-text-outline" slot="start"></ion-icon>
       <ion-label>
-        <h2>Respuestas</h2>
+        <h2>{{texts.DATA.items.answers}}</h2>
       </ion-label>
     </ion-item>
 

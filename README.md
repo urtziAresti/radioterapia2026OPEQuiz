@@ -51,7 +51,13 @@ Crear archivo colors para variables colores - OK
 Color header segun tema Radio Comun o mix - OK 
 servicio envio mails - OK 
 warning compilacion - OK 
+
+
 traducciones a archivo - tradus
+
+-data
+-instrucciones
+
 
 - 100 OKK
 

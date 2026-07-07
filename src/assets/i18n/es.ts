@@ -50,4 +50,31 @@ export const ES = {
       instructions: "Instrucciones",
     },
   },
+  DATA: {
+    title: "Fuente de datos",
+
+    items: {
+      questions: "Preguntas",
+      answers: "Respuestas",
+    },
+  },
+  INSTRUCTIONS: {
+    title: "Instrucciones",
+    test: {
+      first:
+        "1º El test cuenta con 300 preguntas de radioterapia y 200 comunes, todas en modo aleatorio.",
+      second:
+        "2º Cada vez que falles una pregunta, aparecerá de nuevo en el modo repaso.",
+    },
+  
+    install: {
+      title: "Puedes descargar la Web-App a la pantalla de inicio.",
+  
+      ios:
+        'IOS Safari:\nBotón Compartir, baja y selecciona "Añadir a pantalla de inicio".',
+  
+      android:
+        'Chrome Android:\nBotón de los 3 puntos, baja y selecciona "Añadir a pantalla de inicio".',
+    },
+  },
 };
