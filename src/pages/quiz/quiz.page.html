@@ -2,12 +2,10 @@
   <ion-toolbar [color]="toolbarColor">
 
     <ion-buttons slot="start">
-      <ion-back-button
-        defaultHref="/welcome"
-        text="">
+      <ion-back-button defaultHref="/welcome" text="">
       </ion-back-button>
     </ion-buttons>
-    <ion-title class="theme-title"> 
+    <ion-title class="theme-title">
       {{ toolbarTitle }}
     </ion-title>
   </ion-toolbar>
@@ -24,42 +22,34 @@
       </ion-chip>
     </div>
 
-    <div
-      style="
+    <div style="
         display: flex;
         justify-content: space-between;
         margin-bottom: 8px;
         align-items: center;
-      "
-    >
+      ">
       <ion-note class="step-text" *ngIf="resultsPage">
-        Pregunta {{ currentIndex + 1 }} de {{ questions.length }}
+        {{texts.QUIZ.progress.question}} {{ currentIndex + 1 }} {{texts.QUIZ.progress.of}} {{ questions.length }}
       </ion-note>
 
       <ion-badge color="success" class="ion-badge">
-        Correctas: {{ correctAnswers }}
+        {{texts.QUIZ.progress.correct}} : {{ correctAnswers }}
       </ion-badge>
     </div>
 
-    <ion-progress-bar
-      *ngIf="questions.length > 0"
-      color="secondary"
-      [value]="progress"
-    >
+    <ion-progress-bar *ngIf="questions.length > 0" color="secondary" [value]="progress">
     </ion-progress-bar>
   </div>
 
   <!-- 🔥 PREGUNTA -->
   <div *ngIf="currentIndex < questions.length" class="quiz-box">
     <ion-card class="question-card">
-      <ion-card-content
-        style="
+      <ion-card-content style="
           display: flex;
           justify-content: space-between;
           align-items: center;
           gap: 10px;
-        "
-      >
+        ">
         <h3 class="question">{{ questions[currentIndex].question }}</h3>
 
         <!-- 🪄 VARITA -->
@@ -68,13 +58,7 @@
 
     <!-- 🪄 MAGIC ANSWER -->
 
-    <ion-button
-      *ngIf="true"
-      class="robot-button"
-      fill="clear"
-      size="small"
-      (click)="useMagic(questions[currentIndex])"
-    >
+    <ion-button *ngIf="true" class="robot-button" fill="clear" size="small" (click)="useMagic(questions[currentIndex])">
       <img src="assets/icon/robot.svg" alt="IA" />
     </ion-button>
     <div *ngIf="magicAnswer" class="magic-answer-box ion-margin-bottom">
@@ -84,18 +68,14 @@
             <ion-icon name="sparkles-outline"></ion-icon>
 
             <div *ngIf="magicAnswer?.answer as answer">
-              <strong
-                >La IA cree que la respuesta es:<br />
-                {{ answer }}</strong
-              >
+              <strong>{{texts.QUIZ.magic.aiAnswer}}<br />
+                {{ answer }}</strong>
             </div>
           </div>
 
           <div class="razon" *ngIf="magicAnswer?.explanation as explanation">
-            <strong
-              >Razonamiento: <br />
-              {{ explanation }}</strong
-            >
+            <strong>{{texts.QUIZ.magic.reasoning}}: <br />
+              {{ explanation }}</strong>
           </div>
         </ion-card-content>
       </ion-card>
@@ -103,12 +83,8 @@
 
     <!-- 🔥 OPCIONES -->
     <div class="options-container">
-      <div
-        *ngFor="let opt of ['a', 'b', 'c', 'd']"
-        class="custom-option-button"
-        [ngClass]="getOptionColor(opt)"
-        (click)="answer(opt)"
-      >
+      <div *ngFor="let opt of ['a', 'b', 'c', 'd']" class="custom-option-button" [ngClass]="getOptionColor(opt)"
+        (click)="answer(opt)">
         <div class="option-letter">{{ opt.toUpperCase() }}</div>
 
         <div class="option-text">
@@ -119,32 +95,27 @@
   </div>
 
   <!-- 🔥 RESULTADOS -->
-  <div
-    *ngIf="currentIndex >= questions.length"
-    class="result-box ion-text-center ion-padding"
-  >
+  <div *ngIf="currentIndex >= questions.length" class="result-box ion-text-center ion-padding">
     <h2>¡{{ playerName || 'Aspirante' }}!</h2>
 
-    <p class="subtitle-result">Has finalizado el test.</p>
+    <p class="subtitle-result">{{texts.QUIZ.results.finished}}</p>
 
     <ion-card class="score-card">
       <ion-card-content>
-        <p>Aciertos totales</p>
+        <p>{{texts.QUIZ.results.totalHits}}</p>
 
         <h1>{{ correctAnswers }} / {{ questions.length }}</h1>
 
         <div class="percentage-bar">
-          <span class="percentage-text"> Puntuación final: </span>
+          <span class="percentage-text"> {{texts.QUIZ.results.finalScore}} </span>
 
-          <ion-badge
-            [color]="(correctAnswers/questions.length) >= 0.5 ? 'success' : 'danger'"
-          >
+          <ion-badge [color]="(correctAnswers/questions.length) >= 0.5 ? 'success' : 'danger'">
             {{ correctAnswers }}/{{ questions.length }}
           </ion-badge>
         </div>
 
         <div class="ion-margin-top">
-          <p><strong>Duración</strong></p>
+          <p><strong>{{texts.QUIZ.results.duration}}</strong></p>
           <ion-chip color="primary">
             <ion-icon name="time-outline"></ion-icon>
             <ion-label>{{ elapsedTime }}</ion-label>
@@ -153,14 +124,8 @@
       </ion-card-content>
     </ion-card>
 
-    <ion-button
-      expand="block"
-      shape="round"
-      color="primary"
-      class="ion-margin-top"
-      (click)="goToHome()"
-    >
-      Volver al Inicio
+    <ion-button expand="block" shape="round" color="primary" class="ion-margin-top" (click)="goToHome()">
+      {{texts.QUIZ.results.backHome}}
     </ion-button>
   </div>
 

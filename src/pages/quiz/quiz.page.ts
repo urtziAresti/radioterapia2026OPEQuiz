@@ -15,6 +15,7 @@ import { TimerService } from "../../services/timer.service";
 import { LogService } from "../../services/log.service";
 import { Question } from "../../interfaces/question";
 import { TEST_TYPE } from "../../app/components/welcome/welcome.component";
+import { I18nService } from "../../assets/i18n/i18n.service";
 
 
 addIcons({
@@ -31,8 +32,9 @@ addIcons({
   styleUrls: ["./quiz.page.scss"],
 })
 export class QuizPage implements OnInit, OnDestroy {
+  private readonly i18n = inject(I18nService);
+  texts = this.i18n.texts;
   private readonly OK_QUESTION_TIME = 1500;
-
   private quizService = inject(QuizService);
   private historyService = inject(HistoryService);
   private timerService = inject(TimerService);

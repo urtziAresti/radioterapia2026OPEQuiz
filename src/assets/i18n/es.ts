@@ -77,4 +77,25 @@ export const ES = {
         'Chrome Android:\nBotón de los 3 puntos, baja y selecciona "Añadir a pantalla de inicio".',
     },
   },
+  QUIZ: {
+    progress: {
+      question: "Pregunta",
+      of: "de",
+      correct: "Correctas",
+    },
+  
+    magic: {
+      aiAnswer: "La IA cree que la respuesta es:",
+      reasoning: "Razonamiento:",
+    },
+  
+    results: {
+      defaultPlayer: "Aspirante",
+      finished: "Has finalizado el test.",
+      totalHits: "Aciertos totales",
+      finalScore: "Puntuación final:",
+      duration: "Duración",
+      backHome: "Volver al Inicio",
+    },
+  },
 };
