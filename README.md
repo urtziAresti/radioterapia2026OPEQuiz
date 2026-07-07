@@ -10,14 +10,6 @@
 
 
 # rediseño
-
--- datos --
-paleta colores rosa-radio - azul-osaki 
-mas anchos
-sin card
-mejorar titulo
-
-
 -- fin quiz --
 mejorar nombre usuario
 mejorar textos
@@ -25,14 +17,16 @@ mejorar textos
 -- quiz --
 revisar bien espacios y letras
 
+rehacer iconos nuevos
+
+hacer componente de finish page
 
 Guardar resultados de la gente en storage de vercel 
 
 - 100 OKK
 
- # preguntas
-- Revisar respuestas de 100-200 
-- faltan 100 ultimas del temario comun
+# preguntas
+- Revisar preguntas y respuestas de 100-200 
 
 # groq IA
 

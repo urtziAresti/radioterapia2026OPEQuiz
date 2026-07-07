@@ -1,12 +1,11 @@
 export const ES = {
   LOGIN: {
     title: "Acceso al cuestionario",
-    appName: "RADIOTERAPIA OPE 2026",
+    appName: "OPE RADIOTERAPIA 2026",
     username: {
       label: "Usuario",
       placeholder: "Tu nombre de usuario",
     },
-
     code: {
       label: "Código",
       placeholder: "Código",
@@ -18,8 +17,7 @@ export const ES = {
     },
   },
   WELCOME: {
-    title: "Test de Radioterapia",
-
+    title: "OPE Radioterapia 2026",
     questions: {
       2: "2 preguntas",
       5: "5 preguntas",
@@ -40,12 +38,12 @@ export const ES = {
     },
 
     buttons: {
-      radio: "Radio",
-      common: "Comunes",
-      mixed: "Mixto 80/20 Radio-Comunes",
+      radio: "Radioterapia",
+      common: "Bateria Común",
+      mixed: "Mixto 80/20 Radio-B.Común",
       failed: "Repasar fallidas",
       suggestions: "Enviar sugerencias",
-      data: "Ver fuentes",
+      data: "Referencias",
       instructions: "Instrucciones",
     },
   },
@@ -64,13 +62,11 @@ export const ES = {
       second:
         "2º Cada vez que falles una pregunta, aparecerá de nuevo en el modo repaso.",
     },
-  
+
     install: {
       title: "Puedes descargar la Web-App a la pantalla de inicio.",
-  
       ios:
         'IOS Safari:\nBotón Compartir, baja y selecciona "Añadir a pantalla de inicio".',
-  
       android:
         'Chrome Android:\nBotón de los 3 puntos, baja y selecciona "Añadir a pantalla de inicio".',
     },
@@ -81,18 +77,18 @@ export const ES = {
       of: "de",
       correct: "Correctas",
     },
-  
+
     magic: {
       aiAnswer: "La IA cree que la respuesta es:",
       reasoning: "Razonamiento:",
     },
-  
+
     results: {
       defaultPlayer: "Aspirante",
       finished: "Has finalizado el test.",
       totalHits: "Aciertos totales",
       finalScore: "Puntuación final:",
-      duration: "Duración",
+      duration: "Tiempo",
       backHome: "Volver al Inicio",
     },
   },

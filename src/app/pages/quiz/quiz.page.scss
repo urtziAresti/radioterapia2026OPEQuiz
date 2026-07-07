@@ -127,11 +127,6 @@ ion-toolbar {
     font-weight: 700;
     color: #222;
   }
-
-  .subtitle-result {
-    color: #666;
-    margin-bottom: 25px;
-  }
 }
 
 .score-card {
@@ -152,21 +147,6 @@ ion-toolbar {
     font-weight: 800;
     color: #111;
     margin: 10px 0;
-  }
-
-  .percentage-bar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    border-top: 1px solid #f0f0f0;
-    padding-top: 15px;
-    margin-top: 10px;
-
-    .percentage-text {
-      font-weight: 600;
-      color: #444;
-    }
   }
 }
 

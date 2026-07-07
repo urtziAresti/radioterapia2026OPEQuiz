@@ -96,23 +96,12 @@
 
   <!-- 🔥 RESULTADOS -->
   <div *ngIf="currentIndex >= questions.length" class="result-box ion-text-center ion-padding">
-    <h2>¡{{ playerName || 'Aspirante' }}!</h2>
-
-    <p class="subtitle-result">{{texts.QUIZ.results.finished}}</p>
-
+    <h2>{{ playerName || 'Aspirante' }}</h2>
     <ion-card class="score-card">
       <ion-card-content>
         <p>{{texts.QUIZ.results.totalHits}}</p>
 
         <h1>{{ correctAnswers }} / {{ questions.length }}</h1>
-
-        <div class="percentage-bar">
-          <span class="percentage-text"> {{texts.QUIZ.results.finalScore}} </span>
-
-          <ion-badge [color]="(correctAnswers/questions.length) >= 0.5 ? 'success' : 'danger'">
-            {{ correctAnswers }}/{{ questions.length }}
-          </ion-badge>
-        </div>
 
         <div class="ion-margin-top">
           <p><strong>{{texts.QUIZ.results.duration}}</strong></p>
