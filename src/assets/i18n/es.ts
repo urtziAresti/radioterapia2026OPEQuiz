@@ -50,8 +50,7 @@ export const ES = {
     },
   },
   DATA: {
-    title: "Fuente de datos",
-
+    title: "Referencias",
     items: {
       questions: "Preguntas",
       answers: "Respuestas",

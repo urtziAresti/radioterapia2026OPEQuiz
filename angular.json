@@ -55,8 +55,7 @@
               "node_modules/@ionic/angular/css/structure.css",
               "node_modules/@ionic/angular/css/typography.css",
               "node_modules/@ionic/angular/css/display.css",
-              "src/global.scss",
-              "src/theme/variables.scss"
+              "src/global.scss"
             ],
             "scripts": [],
             "browser": "src/main.ts"
@@ -149,8 +148,7 @@
               "node_modules/@ionic/angular/css/structure.css",
               "node_modules/@ionic/angular/css/typography.css",
               "node_modules/@ionic/angular/css/display.css",
-              "src/global.scss",
-              "src/theme/variables.scss"
+              "src/global.scss"
             ],
             "scripts": []
           },

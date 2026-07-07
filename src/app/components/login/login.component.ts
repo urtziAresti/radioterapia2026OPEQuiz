@@ -6,10 +6,10 @@ import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
 import { addIcons } from 'ionicons';
 import { lockClosedOutline, logInOutline, personAddOutline } from 'ionicons/icons';
-import { LogService } from '../../../services/log.service';
+import { LogService } from '../../services/log.service';
 import { IonicModule } from '@ionic/angular';
 import { ToastController } from '@ionic/angular/standalone';
-import { MailService } from '../../../services/mail-service';
+import { MailService } from '../../services/mail-service';
 import { I18nService } from '../../../assets/i18n/i18n.service';
 
 addIcons({

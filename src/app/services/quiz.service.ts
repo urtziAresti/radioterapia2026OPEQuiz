@@ -1,12 +1,12 @@
 import { inject, Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { map, Observable } from "rxjs";
-import { RADIO_QUESTIONS } from "../data/radio-questions/radio_questions";
+import { RADIO_QUESTIONS } from "../../data/radio-questions/radio_questions";
 import { QuestionProgress } from "../interfaces/progress";
 import { HistoryService } from "./history.service";
-import { Question } from "../interfaces/question";
-import { COMMON_QUESTIONS } from "../data/common-questions/common_questions";
-import { TEST_TYPE } from "../app/components/welcome/welcome.component";
+import { Question } from "../../app/interfaces/question";
+import { COMMON_QUESTIONS } from "../../data/common-questions/common_questions";
+import { TEST_TYPE } from "../components/welcome/welcome.component";
 
 export interface MagicAnswer {
   answer: string;

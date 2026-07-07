@@ -9,13 +9,13 @@ import {
   timeOutline,
 } from "ionicons/icons";
 
-import { QuizService, MagicAnswer } from "../../services/quiz.service";
 import { HistoryService } from "../../services/history.service";
 import { TimerService } from "../../services/timer.service";
+import { MagicAnswer, QuizService } from "../../services/quiz.service";
+import { I18nService } from "../../../assets/i18n/i18n.service";
 import { LogService } from "../../services/log.service";
 import { Question } from "../../interfaces/question";
-import { TEST_TYPE } from "../../app/components/welcome/welcome.component";
-import { I18nService } from "../../assets/i18n/i18n.service";
+import { TEST_TYPE } from "../../components/welcome/welcome.component";
 
 
 addIcons({

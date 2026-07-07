@@ -120,36 +120,36 @@ export class HistoryService {
   saveQuestion(questionId: number, correct: boolean): void {
 
     const username = this.getUsername();
-  
+
     if (!username) {
       return;
     }
-  
+
     const history = this.getHistory();
-  
+
     const user = this.getUser(history, username);
-  
+
     const attempt = this.getCurrentAttempt(user);
-  
+
     const existingQuestion = attempt.questions.find(
       q => q.questionId === questionId
     );
-  
+
     if (existingQuestion) {
-  
+
       existingQuestion.correct = correct;
       existingQuestion.date = new Date().toISOString();
-  
+
     } else {
-  
+
       attempt.questions.push({
         questionId,
         correct,
         date: new Date().toISOString()
       });
-  
+
     }
-  
+
     this.saveHistory(history);
   }
 
@@ -190,46 +190,24 @@ export class HistoryService {
   getAnsweredQuestionsCount(): number {
 
     const username = this.getUsername();
-  
+
     if (!username) {
       return 0;
     }
-  
+
     const history = this.getHistory();
-  
+
     const user = history.find(u => u.user === username);
-  
+
     if (!user || !user.attempts.length) {
       return 0;
     }
-  
+
     const attempt = this.getCurrentAttempt(user);
-  
+
     return attempt.questions.length;
   }
 
-  /**
-   * Inicia un nuevo intento para el usuario actual.
-   */
-  startNewAttempt(): void {
-
-    const username = this.getUsername();
-
-    if (!username) {
-      return;
-    }
-
-    const history = this.getHistory();
-
-    const user = this.getUser(history, username);
-
-    user.attempts.push({
-      date: new Date().toISOString(),
-      questions: []
-    });
-
-    this.saveHistory(history);
-  }
 
   /**
    * Limpia el historial completo.
@@ -248,19 +226,19 @@ export class HistoryService {
   getAnsweredQuestionIds(): number[] {
 
     const username = this.getUsername();
-  
+
     if (!username) {
       return [];
     }
-  
+
     const history = this.getHistory();
-  
+
     const user = history.find(u => u.user === username);
-  
+
     if (!user) {
       return [];
     }
-  
+
     return user.attempts.flatMap(attempt =>
       attempt.questions.map(question => question.questionId)
     );

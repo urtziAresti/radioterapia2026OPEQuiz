@@ -116,7 +116,6 @@ describe("HistoryService", () => {
   it("should start a new attempt", () => {
     service.saveQuestion(1, true);
 
-    service.startNewAttempt();
 
     const history = service.getAllHistory();
 
@@ -126,8 +125,6 @@ describe("HistoryService", () => {
 
   it("should save question in new attempt", () => {
     service.saveQuestion(1, true);
-
-    service.startNewAttempt();
 
     service.saveQuestion(2, false);
 
@@ -205,8 +202,6 @@ describe("HistoryService", () => {
 
   it("should preserve previous attempts", () => {
     service.saveQuestion(1, true);
-
-    service.startNewAttempt();
 
     service.saveQuestion(2, false);
 

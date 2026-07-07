@@ -41,7 +41,7 @@ export const routes: Routes = [
     path: 'questions',
     canActivate: [authGuard],
     loadComponent: () =>
-      import('../pages/quiz/quiz.page').then((m) => m.QuizPage),
+      import('./pages/quiz/quiz.page').then((m) => m.QuizPage),
   },
 
   {

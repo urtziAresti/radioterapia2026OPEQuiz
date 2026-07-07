@@ -2,27 +2,23 @@
   <ion-toolbar color="primary">
 
     <ion-buttons slot="start">
-      <ion-back-button
-        defaultHref="/welcome"
-        text="">
+      <ion-back-button defaultHref="/welcome" text="">
       </ion-back-button>
     </ion-buttons>
 
     <ion-title class="theme-title">
       {{texts.DATA.title}}
     </ion-title>
-
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
 
   <ion-list inset="true">
-
     <ion-item button detail (click)="openPDF()">
       <ion-icon name="document-outline" slot="start"></ion-icon>
-       <ion-label>
-        <h2>      {{texts.DATA.items.questions}}
+      <ion-label color="secondary">
+        <h2> {{texts.DATA.items.questions}}
         </h2>
       </ion-label>
     </ion-item>
@@ -33,7 +29,6 @@
         <h2>{{texts.DATA.items.answers}}</h2>
       </ion-label>
     </ion-item>
-
   </ion-list>
 
 </ion-content>

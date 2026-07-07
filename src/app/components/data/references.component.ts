@@ -8,7 +8,6 @@ import { I18nService } from '../../../assets/i18n/i18n.service';
 addIcons({
   'document-text-outline': documentTextOutline,
   'document-outline': documentOutline,
-
 });
 @Component({
   selector: 'app-references',

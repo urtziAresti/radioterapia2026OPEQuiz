@@ -8,7 +8,7 @@ import { QuizService } from "./quiz.service";
 import { HistoryService } from "./history.service";
 import { RADIO_QUESTIONS } from "../data/radio-questions/radio_questions";
 import { COMMON_QUESTIONS } from "../data/common-questions/common_questions";
-import { Question } from "../interfaces/question";
+import { Question } from "../../app/interfaces/question";
 
 describe("QuizService", () => {
   let service: QuizService;

@@ -5,7 +5,7 @@ import { NgZone } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 
 import { LoginComponent } from './login.component';
-import { LogService } from '../../../services/log.service';
+import { LogService } from '../../services/log.service';
 
 describe('LoginComponent', () => {
   let fixture: ComponentFixture<LoginComponent>;

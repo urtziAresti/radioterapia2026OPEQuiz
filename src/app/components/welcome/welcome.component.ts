@@ -8,15 +8,15 @@ import {
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { NavigationEnd, Router } from "@angular/router";
-import { QuizService } from "../../../services/quiz.service";
-import { QuestionProgress } from "../../../interfaces/progress";
+import { QuizService } from "../../services/quiz.service";
+import { QuestionProgress } from "../../interfaces/progress";
 import { IonicModule } from "@ionic/angular";
-import { MailService } from "../../../services/mail-service";
+import { MailService } from "../../services/mail-service";
 import { I18nService } from "../../../assets/i18n/i18n.service";
 
 export enum TEST_TYPE {
   RADIO = "RADIO",
-  COMMON = "COMMON",  
+  COMMON = "COMMON",
   ALL = "ALL"
 }
 @Component({
@@ -61,7 +61,7 @@ export class WelcomeComponent implements OnInit {
       }
     });
   }
-  
+
   ngOnInit() {
     const session = localStorage.getItem("userSession");
     if (session) {
@@ -163,7 +163,7 @@ export class WelcomeComponent implements OnInit {
 
   startRepasoMode() {
     const failedIds = this.failedQuestions;
-    
+
     if (!failedIds.length) return;
 
     this.router.navigate(["/questions"], {
@@ -177,7 +177,7 @@ export class WelcomeComponent implements OnInit {
   viewData() {
     this.router.navigate(["/data"]);
   }
-  viewInstructions():void {
+  viewInstructions(): void {
     this.router.navigate(["/instructions"]);
   }
 }

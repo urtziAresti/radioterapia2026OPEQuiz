@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { NavigationEnd, Router } from "@angular/router";
 import { Subject } from "rxjs";
 import { TEST_TYPE, WelcomeComponent } from "./welcome.component";
-import { QuizService } from "../../../services/quiz.service";
+import { QuizService } from "../../services/quiz.service";
 
 describe("WelcomeComponent", () => {
   let component: WelcomeComponent;
