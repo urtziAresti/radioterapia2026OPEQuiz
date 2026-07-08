@@ -1,5 +1,4 @@
 <div class="result-box ion-text-center ion-padding">
-  <h2>{{ resultsData.playerName || 'Aspirante' }}</h2>
   <ion-card class="score-card">
     <ion-card-content>
       <div class="ion-margin-top">
@@ -8,13 +7,13 @@
           <img src="assets/gifs/congratulations.gif" alt="¡Felicidades!" class="celebration-gif" />
         </div>
         <!-- Mensaje si apruebas -->
-        <p
+        <p class="ion-text-center ion-text-bold"
           *ngIf="resultsData.correctAnswers / resultsData.totalQuestions >= 0.5 && resultsData.correctAnswers < resultsData.totalQuestions">
-          Aprobaste Buen trabajo. 💪
+          Aprobaste Buen trabajo. 
         </p>
         <!-- Mensaje si suspendes -->
         <p *ngIf="resultsData.correctAnswers / resultsData.totalQuestions < 0.5">
-          Penko Sigue dando caña! 🌟
+          <b>Penko Sigue dando caña! </b>
         </p>
       </div>
 

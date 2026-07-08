@@ -23,11 +23,8 @@ export class ResultsComponent  implements OnInit {
   constructor() { }
 
   ngOnInit() {
-
-    console.warn(this.resultsData)
-    debugger;
+    this.saveProgress();
   }
-
 
   saveProgress() {
     //TODO: Implement the logic to save the quiz progress using the StatsService

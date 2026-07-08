@@ -11,9 +11,6 @@
 
 
 # rediseño
--- fin quiz --
-mejorar nombre usuario
-mejorar textos
 
 -- quiz --
 revisar bien espacios y letras
