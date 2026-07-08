@@ -17,6 +17,8 @@ import { LogService } from "../../services/log.service";
 import { Question } from "../../interfaces/question";
 import { TEST_TYPE } from "../../components/welcome/welcome.component";
 import { StatsService } from "../../services/stats.service";
+import { ResultsComponent } from "../../components/results/results.component";
+import { ResultsData } from "../../interfaces/results-data";
 
 
 addIcons({
@@ -28,7 +30,7 @@ addIcons({
 @Component({
   selector: "app-quiz",
   standalone: true,
-  imports: [IonicModule, CommonModule],
+  imports: [IonicModule, CommonModule, ResultsComponent],
   templateUrl: "./quiz.page.html",
   styleUrls: ["./quiz.page.scss"],
 })
@@ -39,8 +41,6 @@ export class QuizPage implements OnInit, OnDestroy {
   private quizService = inject(QuizService);
   private historyService = inject(HistoryService);
   private timerService = inject(TimerService);
-  private statsService = inject(StatsService); 
-  private router = inject(Router);
   private route = inject(ActivatedRoute);
   private logService = inject(LogService);
 
@@ -48,9 +48,10 @@ export class QuizPage implements OnInit, OnDestroy {
   currentIndex = 0;
   correctAnswers = 0;
   count = 0;
-
+  quizFinished = true;
+  resultsData: ResultsData | null = null;
   playerName = "";
-  quiz_type : TEST_TYPE = TEST_TYPE.RADIO;
+  quiz_type: TEST_TYPE = TEST_TYPE.RADIO;
   TEST_TYPE = TEST_TYPE;
 
   mode: "normal" | "failed" = "normal";
@@ -75,8 +76,6 @@ export class QuizPage implements OnInit, OnDestroy {
 
   private answerLocked = false;
 
-  private quizFinished = false;
-
   private questionTimeout: any = null;
 
   constructor() {
@@ -92,7 +91,6 @@ export class QuizPage implements OnInit, OnDestroy {
       }
 
       if (params["quiz_type"]) {
-        
         this.quiz_type = params["quiz_type"];
       }
 
@@ -110,7 +108,10 @@ export class QuizPage implements OnInit, OnDestroy {
       this.mode = "normal";
       this.count = +params["count"];
       this.resetQuiz();
-      this.questions = this.quizService.getQuestions(this.quiz_type,this.count);
+      this.questions = this.quizService.getQuestions(
+        this.quiz_type,
+        this.count
+      );
     });
   }
 
@@ -161,9 +162,8 @@ export class QuizPage implements OnInit, OnDestroy {
 
     if (isCorrect) {
       this.correctAnswers++;
-        
+
       if (this.mode === "failed") {
-        
         this.failedIds = this.failedIds.filter(
           (id) => id !== currentQuestion.id
         );
@@ -208,7 +208,6 @@ export class QuizPage implements OnInit, OnDestroy {
 
     if (this.currentIndex >= this.questions.length) {
       this.finishQuiz();
-
       return;
     }
 
@@ -227,26 +226,16 @@ export class QuizPage implements OnInit, OnDestroy {
     if (this.quizFinished) {
       return;
     }
-
-this.saveProgress();
     this.quizFinished = true;
-
     this.timerService.stop();
-  }
-
-  saveProgress(){
-    //TODO: Implement the logic to save the quiz progress using the StatsService
-    const resultModel = {
+    this.resultsData = {
       playerName: this.playerName,
-      quizType: this.quiz_type,
+      quiz_type: this.quiz_type,
       correctAnswers: this.correctAnswers,
       totalQuestions: this.questions.length,
       elapsedTime: this.elapsedTime,
-      //more stats
     };
-    //this.statsService.uploadProgress(resultModel);
   }
-
   getOptionColor(optionKey: string): string {
     if (!this.isAnswered) {
       return this.selectedOption === optionKey ? "selected-option" : "";
@@ -265,16 +254,6 @@ this.saveProgress();
     return "disabled-option";
   }
 
-  goToHome(): void {
-    this.router.navigateByUrl("/", {
-      skipLocationChange: true
-    }).then(() => {
-      this.router.navigateByUrl("/welcome", {
-        replaceUrl: true
-      });
-    });
-  }
-
   useMagic(question: Question): void {
     if (this.loadingMagic) {
       return;
@@ -289,7 +268,6 @@ this.saveProgress();
     this.quizService.ask(question).subscribe({
       next: (answer) => {
         this.magicAnswer = answer;
-
         this.loadingMagic = false;
       },
 
@@ -310,27 +288,27 @@ this.saveProgress();
   get toolbarTitle(): string {
     switch (this.quiz_type) {
       case TEST_TYPE.RADIO:
-        return 'Radioterapia';
-  
+        return "Radioterapia";
+
       case TEST_TYPE.COMMON:
-        return 'Común';
-  
+        return "Común";
+
       case TEST_TYPE.ALL:
-        return 'Radioterapia/Común';
-  
+        return "Radioterapia/Común";
+
       default:
-        return 'Test';
+        return "Test";
     }
   }
 
-  get toolbarColor(): 'primary' | 'secondary' | 'tertiary' {
+  get toolbarColor(): "primary" | "secondary" | "tertiary" {
     switch (this.quiz_type) {
       case TEST_TYPE.RADIO:
-        return 'primary';
+        return "primary";
       case TEST_TYPE.COMMON:
-        return 'secondary';
+        return "secondary";
       case TEST_TYPE.ALL:
-        return 'tertiary';
+        return "tertiary";
     }
   }
 

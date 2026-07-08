@@ -48,7 +48,7 @@ export const routes: Routes = [
     path: 'data',
     canActivate: [authGuard],
     loadComponent: () =>
-      import('../app/components/data/references.component').then(
+      import('./components/references/references.component').then(
         (m) => m.ReferencesComponent
       ),
   },

@@ -1,0 +1,35 @@
+<div class="result-box ion-text-center ion-padding">
+  <h2>{{ resultsData.playerName || 'Aspirante' }}</h2>
+  <ion-card class="score-card">
+    <ion-card-content>
+      <div class="ion-margin-top">
+        <div *ngIf="resultsData.correctAnswers === resultsData.totalQuestions" class="perfect-score">
+          <p>¡Perfecto! Sacaste un 10. 🎉</p>
+          <img src="assets/gifs/congratulations.gif" alt="¡Felicidades!" class="celebration-gif" />
+        </div>
+        <!-- Mensaje si apruebas -->
+        <p
+          *ngIf="resultsData.correctAnswers / resultsData.totalQuestions >= 0.5 && resultsData.correctAnswers < resultsData.totalQuestions">
+          Aprobaste Buen trabajo. 💪
+        </p>
+        <!-- Mensaje si suspendes -->
+        <p *ngIf="resultsData.correctAnswers / resultsData.totalQuestions < 0.5">
+          Penko Sigue dando caña! 🌟
+        </p>
+      </div>
+
+      <h1>{{ resultsData.correctAnswers }} / {{ resultsData.totalQuestions }}</h1>
+      <div class="ion-margin-top">
+        <p><strong>{{texts.QUIZ.results.duration}}</strong></p>
+        <ion-chip color="primary">
+          <ion-icon name="time-outline"></ion-icon>
+          <ion-label>{{ resultsData.elapsedTime }}</ion-label>
+        </ion-chip>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-button expand="block" shape="round" color="primary" class="ion-margin-top" (click)="goToHome()">
+    {{texts.QUIZ.results.backHome}}
+  </ion-button>
+</div>

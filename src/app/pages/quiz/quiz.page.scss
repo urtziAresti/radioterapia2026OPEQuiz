@@ -105,50 +105,7 @@ ion-toolbar {
   cursor: not-allowed;
 }
 
-/* --- Pantalla Final --- */
-.result-box {
-  .trophy-wrapper {
-    background: #fff7e6;
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto 20px auto;
 
-    .trophy-icon {
-      font-size: 55px;
-      color: #ffc409;
-    }
-  }
-
-  h2 {
-    font-weight: 700;
-    color: #222;
-  }
-}
-
-.score-card {
-  background: #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.06);
-
-  p {
-    margin: 0;
-    color: #737373;
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-
-  h1 {
-    font-size: 2.8rem;
-    font-weight: 800;
-    color: #111;
-    margin: 10px 0;
-  }
-}
 
 .floating-next{
   position: absolute;

@@ -3,6 +3,7 @@
 
 # funcionales
 - FORZAR ACTUALIZACIONES(RECARGA) SI ESTA DESACTUALIZADO
+- MERGEAR USUARIOS 
 
 # features 
 - test y desplegar 
@@ -16,14 +17,11 @@ mejorar textos
 
 -- quiz --
 revisar bien espacios y letras
-
 rehacer iconos nuevos
-
 hacer componente de finish page
-
 Guardar resultados de la gente en storage de vercel 
 
-- 100 OKK
+- 100 comunes OKK
 
 # preguntas
 - Revisar preguntas y respuestas de 100-200 

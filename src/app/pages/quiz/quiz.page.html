@@ -21,7 +21,7 @@
         <ion-label class="timer-color">{{ elapsedTime }}</ion-label>
       </ion-chip>
     </div>
-
+    <!-- STATUS -->
     <div style="
         display: flex;
         justify-content: space-between;
@@ -36,7 +36,6 @@
         {{texts.QUIZ.progress.correct}} : {{ correctAnswers }}
       </ion-badge>
     </div>
-
     <ion-progress-bar *ngIf="questions.length > 0" color="secondary" [value]="progress">
     </ion-progress-bar>
   </div>
@@ -95,29 +94,10 @@
   </div>
 
   <!-- 🔥 RESULTADOS -->
-  <div *ngIf="currentIndex >= questions.length" class="result-box ion-text-center ion-padding">
-    <h2>{{ playerName || 'Aspirante' }}</h2>
-    <ion-card class="score-card">
-      <ion-card-content>
-        <p>{{texts.QUIZ.results.totalHits}}</p>
-
-        <h1>{{ correctAnswers }} / {{ questions.length }}</h1>
-
-        <div class="ion-margin-top">
-          <p><strong>{{texts.QUIZ.results.duration}}</strong></p>
-          <ion-chip color="primary">
-            <ion-icon name="time-outline"></ion-icon>
-            <ion-label>{{ elapsedTime }}</ion-label>
-          </ion-chip>
-        </div>
-      </ion-card-content>
-    </ion-card>
-
-    <ion-button expand="block" shape="round" color="primary" class="ion-margin-top" (click)="goToHome()">
-      {{texts.QUIZ.results.backHome}}
-    </ion-button>
-  </div>
-
+   <app-results *ngIf="resultsData" [resultsData]="resultsData">
+   </app-results>
+  
+  <!-- 🔥 BOTON SIOGUIENTE PREG -->
   <ion-fab class="floating-next" (click)="nextQuestion()" *ngIf="nextVisible">
     <ion-fab-button class="icon-size">
       <ion-icon name="chevron-forward-outline"></ion-icon>
