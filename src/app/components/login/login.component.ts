@@ -73,7 +73,8 @@ export class LoginComponent {
       if (respuesta && respuesta.ok) {
         localStorage.setItem('userSession', JSON.stringify({
           username: respuesta.username,
-          deviceId
+          deviceId,
+          timestamp: new Date().toISOString() // Agrega el timestamp en formato ISO
         }));
 
         this.ngZone.run(() => {

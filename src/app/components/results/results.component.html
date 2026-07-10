@@ -1,19 +1,24 @@
 <div class="result-box ion-text-center ion-padding">
   <ion-card class="score-card">
     <ion-card-content>
-      <div class="ion-margin-top">
+      <div >
         <div *ngIf="resultsData.correctAnswers === resultsData.totalQuestions" class="perfect-score">
-          <p>¡Perfecto! Sacaste un 10. 🎉</p>
-          <img src="assets/gifs/congratulations.gif" alt="¡Felicidades!" class="celebration-gif" />
+          <p class="ion-text-bold"><b>¡Perfecto! Mejor no se puede 🎉</b>
+            <img src="https://media1.tenor.com/m/cImAq1fQ7c4AAAAC/jean-claude-van-damme-dance.gif" alt="¡Felicidades!" class="celebration-gif" />
+          </p>
         </div>
         <!-- Mensaje si apruebas -->
         <p class="ion-text-center ion-text-bold"
           *ngIf="resultsData.correctAnswers / resultsData.totalQuestions >= 0.5 && resultsData.correctAnswers < resultsData.totalQuestions">
           Aprobaste Buen trabajo. 
+          <img src="https://media1.tenor.com/m/oH_Vy4CVANsAAAAd/ztute-dog.gif" alt="¡Felicidades!" class="celebration-gif" />
         </p>
+
+      
         <!-- Mensaje si suspendes -->
         <p *ngIf="resultsData.correctAnswers / resultsData.totalQuestions < 0.5">
           <b>Penko Sigue dando caña! </b>
+          <img src="https://media.tenor.com/I3WYELgcTVgAAAAj/cat-beats-cat-aggr-meme.gif" alt="¡Felicidades!" class="celebration-gif" />
         </p>
       </div>
 

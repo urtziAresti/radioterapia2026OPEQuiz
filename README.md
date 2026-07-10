@@ -14,9 +14,11 @@
 
 -- quiz --
 revisar bien espacios y letras
-rehacer iconos nuevos
-hacer componente de finish page
+
+
+# de todo 
 Guardar resultados de la gente en storage de vercel 
+
 
 - 100 comunes OKK
 
