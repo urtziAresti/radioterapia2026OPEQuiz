@@ -180,4 +180,7 @@ export class WelcomeComponent implements OnInit {
   viewInstructions(): void {
     this.router.navigate(["/instructions"]);
   }
+  viewPanel(): void { 
+    this.router.navigate(["/panel"]);
+  }     
 }

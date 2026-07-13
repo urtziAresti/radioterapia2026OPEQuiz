@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Usuarios</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-item>
+    <ion-input
+      [(ngModel)]="newUsername"
+      placeholder="Usuario">
+    </ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-input
+      [(ngModel)]="newCode"
+      placeholder="Código">
+    </ion-input>
+  </ion-item>
+
+  <ion-button
+    expand="block"
+    (click)="addUser()">
+    Crear usuario
+  </ion-button>
+
+  <ion-list>
+    <ion-item *ngFor="let user of users">
+      <ion-label>
+        <h2>{{ user.username }}</h2>
+        <p>{{ user.code }}</p>
+      </ion-label>
+
+      <ion-button
+        color="danger"
+        fill="clear"
+        slot="end"
+        (click)="deleteUser(user.username)">
+        Borrar
+      </ion-button>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

@@ -60,6 +60,19 @@ export const routes: Routes = [
         (m) => m.InstructionsComponent
       ),
   },
+  {
+    path: 'panel',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('../app/components/panel/panel.component').then(
+        (m) => m.PanelComponent
+      ),
+  },
+  {
+    path: 'users',
+    loadComponent: () =>
+      import('../app/components/panel/users/users.component').then(m => m.UsersComponent)
+  },
 
   {
     path: '**',

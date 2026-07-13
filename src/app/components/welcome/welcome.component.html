@@ -70,5 +70,9 @@
     <button class="btn-instructions" color="secondary" type="button" (click)="viewInstructions()">
       {{texts.WELCOME.buttons.instructions}}    
     </button>
+
+    <button class="btn-start" color="primary" *ngIf="['ADMIN'].includes(username)" type="button" (click)="viewPanel()">
+      PANEL     
+    </button>
   </div>
 </div>

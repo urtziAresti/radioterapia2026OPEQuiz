@@ -12,13 +12,8 @@
 
 # rediseño
 
--- quiz --
-revisar bien espacios y letras
-
-
 # de todo 
-Guardar resultados de la gente en storage de vercel 
-
+Guardar usuarios en vercel
 
 - 100 comunes OKK
 
