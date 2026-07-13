@@ -70,6 +70,7 @@ export const routes: Routes = [
   },
   {
     path: 'users',
+    canActivate: [authGuard],
     loadComponent: () =>
       import('../app/components/panel/users/users.component').then(m => m.UsersComponent)
   },

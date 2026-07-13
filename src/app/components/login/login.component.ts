@@ -71,11 +71,15 @@ export class LoginComponent {
       );
 
       if (respuesta && respuesta.ok) {
-        localStorage.setItem('userSession', JSON.stringify({
-          username: respuesta.username,
-          deviceId,
-          timestamp: new Date().toISOString() // Agrega el timestamp en formato ISO
-        }));
+        localStorage.setItem(
+          'userSession',
+          JSON.stringify({
+            username,
+            deviceId,
+            timestamp: new Date().toISOString(),
+            version: 2
+          })
+        );
 
         this.ngZone.run(() => {
           this.router.navigate(['/welcome']);
