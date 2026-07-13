@@ -5,6 +5,7 @@ import { firstValueFrom } from "rxjs";
 export interface User {
   username: string;
   code: string;
+  active : boolean;
 }
 
 @Injectable({
@@ -31,6 +32,15 @@ export class UserService {
   async deleteUser(username: string): Promise<void> {
     await firstValueFrom(
       this.http.delete(`${this.apiUrl}?username=${encodeURIComponent(username)}`)
+    );
+  }
+
+  async setActive(username: string, active: boolean): Promise<void> {
+    await firstValueFrom(
+      this.http.patch(this.apiUrl, {
+        username,
+        active
+      })
     );
   }
 }

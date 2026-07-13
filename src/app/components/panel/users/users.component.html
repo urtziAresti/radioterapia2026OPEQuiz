@@ -28,18 +28,24 @@
 
   <ion-list>
     <ion-item *ngFor="let user of users">
+
       <ion-label>
         <h2>{{ user.username }}</h2>
-        <p>{{ user.code }}</p>
+
+        <p>
+          Estado:
+          <strong>{{ user.active ? 'Activo' : 'Desactivado' }}</strong>
+        </p>
       </ion-label>
 
       <ion-button
-        color="danger"
+        [color]="user.active ? 'warning' : 'success'"
         fill="clear"
         slot="end"
-        (click)="deleteUser(user.username)">
-        Borrar
+        (click)="toggleUser(user)">
+        {{ user.active ? 'Desactivar' : 'Activar' }}
       </ion-button>
+
     </ion-item>
   </ion-list>
 

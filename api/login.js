@@ -1,70 +1,103 @@
-const fs = require('fs');
-const path = require('path');
+import bcrypt from "bcryptjs";
+import clientPromise from "../src/app/services/mongodb";
 
 // 🧠 Memoria volátil del servidor para trackear las sesiones por dispositivo
 const sesionesActivas = {};
 
-module.exports = function handler(req, res) {
-  // Configuración de CORS
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+export default async function handler(req, res) {
+  // CORS
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
-  if (req.method === 'OPTIONS') return res.status(200).end();
-  if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
+  if (req.method === "OPTIONS") return res.status(200).end();
+
+  if (req.method !== "POST") {
+    return res.status(405).json({ error: "Method not allowed" });
+  }
 
   try {
-    // Forzamos la extracción manual del body por seguridad
     let datos = req.body;
-    if (typeof req.body === 'string') {
-      datos = JSON.parse(req.body);
+
+    if (typeof datos === "string") {
+      datos = JSON.parse(datos);
     }
 
     const username = datos?.username?.trim();
     const code = datos?.code?.trim();
-    const deviceId = datos?.deviceId?.trim(); // 👈 Recibimos el identificador del dispositivo
+    const deviceId = datos?.deviceId?.trim();
 
-    // Validar que vengan todos los campos obligatorios
     if (!username || !code || !deviceId) {
-      return res.status(400).json({ ok: false, error: 'Falta usuario, código o ID de dispositivo' });
-    }
-
-    // 1. Validar las credenciales con tu JSON de usuarios
-    const filePath = path.join(process.cwd(), 'api', 'usuarios.json');
-    const fileData = fs.readFileSync(filePath, 'utf8');
-    const usuarios = JSON.parse(fileData);
-
-    const usuarioValido = usuarios.find(
-      u => u.username.toLowerCase() === username.toLowerCase() && 
-           u.code.toString().trim() === code
-    );
-
-    if (!usuarioValido) {
-      return res.status(401).json({ ok: false, error: 'Usuario o código incorrectos' });
-    }
-
-    // 2. 🚨 CONTROL DE SESIONES COMPARTIDAS
-    const usuarioKey = username.toLowerCase();
-
-    if (sesionesActivas[usuarioKey] && sesionesActivas[usuarioKey] !== deviceId) {
-      // Si la cuenta ya tiene un deviceId registrado y NO coincide con el actual, rebotamos la petición
-      return res.status(403).json({ 
-        ok: false, 
-        error: 'Esta cuenta ya está siendo utilizada en otro dispositivo.' 
+      return res.status(400).json({
+        ok: false,
+        error: "Falta usuario, código o ID de dispositivo",
       });
     }
 
-    // 3. Registrar o actualizar el dispositivo activo para este usuario
-    sesionesActivas[usuarioKey] = deviceId;
-    console.log('--- 📱 SESIONES ACTIVAS EN MEMORIA ---', sesionesActivas);
+    const client = await clientPromise;
 
-    return res.status(200).json({ 
-      ok: true, 
-      username: usuarioValido.username 
+    const db = client.db("users");
+    const users = db.collection("users");
+
+    const usuario = await users.findOne({
+      username: {
+        $regex: `^${username}$`,
+        $options: "i",
+      },
+    });
+
+    if (!usuario) {
+      return res.status(401).json({
+        ok: false,
+        error: "Usuario o código incorrectos",
+      });
+    }
+
+    // 🚫 Usuario desactivado
+    if (usuario.active === false) {
+      return res.status(403).json({
+        ok: false,
+        error: "Esta cuenta está desactivada.",
+      });
+    }
+
+    // 🔐 Comparar el código cifrado
+    const valido = await bcrypt.compare(code, usuario.code);
+
+    if (!valido) {
+      return res.status(401).json({
+        ok: false,
+        error: "Usuario o código incorrectos",
+      });
+    }
+
+    // 🚨 Control de sesiones
+    const usuarioKey = usuario.username.toLowerCase();
+
+    if (
+      sesionesActivas[usuarioKey] &&
+      sesionesActivas[usuarioKey] !== deviceId
+    ) {
+      return res.status(403).json({
+        ok: false,
+        error: "Esta cuenta ya está siendo utilizada en otro dispositivo.",
+      });
+    }
+
+    sesionesActivas[usuarioKey] = deviceId;
+
+    return res.status(200).json({
+      ok: true,
+      username: usuario.username,
     });
 
   } catch (err) {
-    console.error('Error grave en login:', err);
-    return res.status(500).json({ ok: false, error: err.message });
+    console.error("ERROR LOGIN");
+    console.error(err);
+
+    return res.status(500).json({
+      ok: false,
+      error: err.message,
+    });
   }
-};
+}

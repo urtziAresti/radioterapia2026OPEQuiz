@@ -39,7 +39,8 @@ export class UsersComponent implements OnInit {
 
     await this.userService.createUser({
       username: this.newUsername,
-      code: this.newCode
+      code: this.newCode,
+      active: true
     });
 
     this.newUsername = '';
@@ -50,6 +51,15 @@ export class UsersComponent implements OnInit {
 
   async deleteUser(username: string) {
     await this.userService.deleteUser(username);
+    await this.loadUsers();
+  }
+
+  async toggleUser(user: User) {
+    await this.userService.setActive(
+      user.username,
+      !user.active
+    );
+  
     await this.loadUsers();
   }
 }

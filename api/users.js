@@ -1,4 +1,5 @@
 import clientPromise from "../src/app/services/mongodb";
+import bcrypt from "bcryptjs";
 
 export default async function handler(req, res) {
   try {
@@ -15,34 +16,54 @@ export default async function handler(req, res) {
 
       case "POST": {
         const { username, code } = req.body;
-
+      
         if (!username || !code) {
           return res.status(400).json({
             success: false,
             error: "username y code son obligatorios",
           });
         }
-
+      
         const exists = await collection.findOne({
           $or: [{ username }, { code }],
         });
-
+      
         if (exists) {
           return res.status(409).json({
             success: false,
             error: "El usuario ya existe",
           });
         }
-
+      
+        const hashedCode = await bcrypt.hash(code, 10);
+      
         const result = await collection.insertOne({
           username,
-          code,
+          code: hashedCode,
+          active: true,
           createdAt: new Date(),
         });
-
+      
         return res.status(201).json({
           success: true,
           id: result.insertedId,
+        });
+      }
+      case "PATCH": {
+
+        const { username, active } = req.body;
+      
+        await collection.updateOne(
+          { username },
+          {
+            $set: {
+              active
+            }
+          }
+        );
+      
+        return res.status(200).json({
+          success: true
         });
       }
 
