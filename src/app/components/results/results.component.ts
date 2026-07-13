@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { ResultsData } from '../../interfaces/results-data';
+import { StatsService } from '../../services/stats.service';
 
 
 
@@ -17,6 +18,8 @@ export class ResultsComponent  implements OnInit {
   @Input() resultsData!: ResultsData;
   private readonly i18n = inject(I18nService);
   private readonly router = inject(Router);
+  private readonly statsService = inject(StatsService);
+
 
   texts = this.i18n.texts;
 
@@ -26,18 +29,18 @@ export class ResultsComponent  implements OnInit {
     this.saveProgress();
   }
 
-  saveProgress() {
+  async saveProgress() {
     //TODO: Implement the logic to save the quiz progress using the StatsService
-    const resultModel = {
+    const resultModel : ResultsData = {
       playerName: this.resultsData.playerName,
-      quizType: this.resultsData.quiz_type,
+      quiz_type: this.resultsData.quiz_type,
       correctAnswers: this.resultsData.correctAnswers,
       totalQuestions: this.resultsData.totalQuestions,
       elapsedTime: this.resultsData.elapsedTime,
     };
-    //this.statsService.uploadProgress(resultModel);
+    debugger;
+    await this.statsService.uploadProgress(resultModel)
   }
-
 
   goToHome(): void {
     this.router.navigateByUrl("/", {
