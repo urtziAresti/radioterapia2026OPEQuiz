@@ -13,7 +13,8 @@
 # rediseño
 
 # de todo 
-Guardar usuarios en vercel
+Evitar con BD doble login
+Guardar mejor y mas estadisticas
 
 - 100 comunes OKK
 
