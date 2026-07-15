@@ -17,6 +17,8 @@ Guardar mejor y mas estadisticas
 Pagina de preguntas/respuestas dudosas 
 Chat grupal 
 
+rematar test 
+
 - 100 comunes OKK
 
 # preguntas
