@@ -120,14 +120,6 @@ d) ${question.options.d}
   }
 
   getRadioQuestions(count: number): Question[] {
-
-
-    count = 1;
-
-    return RADIO_QUESTIONS.slice(0, 1);
-
-
-
     const answeredIds = new Set(this.history.getAnsweredQuestionIds());
 
     const remainingQuestions = RADIO_QUESTIONS.filter(
