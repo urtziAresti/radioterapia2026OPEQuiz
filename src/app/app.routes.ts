@@ -41,15 +41,15 @@ export const routes: Routes = [
     path: 'questions',
     canActivate: [authGuard],
     loadComponent: () =>
-      import('../pages/quiz/quiz.page').then((m) => m.QuizPage),
+      import('./pages/quiz/quiz.page').then((m) => m.QuizPage),
   },
 
   {
     path: 'data',
     canActivate: [authGuard],
     loadComponent: () =>
-      import('../app/components/data/data.component').then(
-        (m) => m.DataComponent
+      import('./components/references/references.component').then(
+        (m) => m.ReferencesComponent
       ),
   },
   {
@@ -59,6 +59,20 @@ export const routes: Routes = [
       import('../app/components/instructions/instructions.component').then(
         (m) => m.InstructionsComponent
       ),
+  },
+  {
+    path: 'panel',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('../app/components/panel/panel.component').then(
+        (m) => m.PanelComponent
+      ),
+  },
+  {
+    path: 'users',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('../app/components/panel/users/users.component').then(m => m.UsersComponent)
   },
 
   {

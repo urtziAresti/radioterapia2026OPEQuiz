@@ -3,6 +3,7 @@
 
 # funcionales
 - FORZAR ACTUALIZACIONES(RECARGA) SI ESTA DESACTUALIZADO
+- MERGEAR USUARIOS 
 
 # features 
 - test y desplegar 
@@ -10,44 +11,15 @@
 
 
 # rediseño
--- welcome page --
-paleta colores rosa-radio - azul-osaki
-mas ancho
-sin card
-titulo mejor estirado
-selector de preguntas bonito
-espacio botones
 
+# de todo 
+Evitar con BD doble login
+Guardar mejor y mas estadisticas
 
+- 100 comunes OKK
 
--- instrucciones --
-Mejorar texto
-Mejorar titulo 
-
-
--- datos --
-mas anchos
-sin card
-mejorar titulo
-
--- fin quiz --
-mejorar nombre usuario
-mejorar textos
-
-
--- de todo --
-unificar archivos iconos
-acabar de Pintar icono
-
-Color header segun tema Radio Comun o mix 
-unificar ion toolbar en componente
-
-
-- 100 OKK
-
- # preguntas
-- Revisar respuestas de 100-200 
-- faltan 100 ultimas del temario comun
+# preguntas
+- Revisar preguntas y respuestas de 100-200 
 
 # groq IA
 

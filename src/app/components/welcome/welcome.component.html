@@ -1,106 +1,78 @@
 <div class="welcome-container">
   <div class="welcome-card">
-    <h1>Test de Radioterapia</h1>
+    <h1>{{texts.WELCOME.title}}</h1>
     <img src="assets/icon/radio.svg" alt="Radioterapia" class="logo" />
+
     <div class="form-group">
-      <label for="questionCount">Número de preguntas:</label>
-      <select id="questionCount" [(ngModel)]="selectedQuestionCount">
-        <option [ngValue]="2">2 preguntas</option>
-        <option [ngValue]="5">5 preguntas</option>
-        <option [ngValue]="10">10 preguntas</option>
-        <option [ngValue]="25">25 preguntas</option>
-        <option [ngValue]="50">50 preguntas</option>
-        <option [ngValue]="110">110 preguntas</option>
-        <option [ngValue]="150">150 preguntas</option>
-        <option [ngValue]="200">200 preguntas</option>
-        <option [ngValue]="300">300 preguntas</option>
-      </select>
+      <ion-item lines="none">
+        <ion-select [(ngModel)]="selectedQuestionCount" interface="popover">
+          <ion-select-option
+            *ngFor="let option of questionCounts"
+            [value]="option.value">
+            {{ option.label }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
     </div>
 
     <ion-card class="progress-card">
       <ion-card-header>
-        <ion-card-title>📚 Progreso</ion-card-title>
+        <ion-card-title> {{texts.WELCOME.progress.title}}</ion-card-title>
         <ion-card-subtitle>
           {{ progress.answered }} de {{ progress.total }} preguntas
         </ion-card-subtitle>
       </ion-card-header>
-    
+
       <ion-card-content>
-    
-        <ion-progress-bar
-          [value]="progress.answered / progress.total">
+
+        <ion-progress-bar [value]="progress.answered / progress.total">
         </ion-progress-bar>
-    
+
         <div class="progress-info">
           <div>
             <h2>{{ progress.percentage }}%</h2>
-            <p>Completado</p>
+            <p>{{texts.WELCOME.progress.completed}}</p>
           </div>
-    
+
           <div>
             <h2>{{ progress.remaining }}</h2>
-            <p>Restantes</p>
+            <p>{{texts.WELCOME.progress.remaining}}</p>
           </div>
         </div>
-    
+
       </ion-card-content>
     </ion-card>
-    <button
-      class="btn-start"
-      [disabled]="!selectedQuestionCount"
-      (click)="startQuiz(TEST_TYPE.RADIO)"
-    >
-      Test Radio
+    <button class="btn-start" [disabled]="!selectedQuestionCount" (click)="startQuiz(TEST_TYPE.RADIO)">
+      {{texts.WELCOME.buttons.radio}}
     </button>
 
-    <button
-    class="btn-common"
-    [disabled]="!selectedQuestionCount"
-    (click)="startQuiz(TEST_TYPE.COMMON)"
-  >
-    Test Comunes
-  </button>
-
-
-  <button
-  class="btn-mix"
-  [disabled]="!selectedQuestionCount"
-  (click)="startQuiz(TEST_TYPE.ALL)"
->
-  Test Mixto 80/20 Radio-Comunes
-</button>
-
-    <button
-      class="btn-repaso"
-      *ngIf="areFailedQuestions"
-      (click)="startRepasoMode()">
-      Repasar fallidas ({{ failedCount }})
+    <button class="btn-common" [disabled]="!selectedQuestionCount" (click)="startQuiz(TEST_TYPE.COMMON)">
+      {{texts.WELCOME.buttons.common}}
     </button>
 
-    <button
-      *ngIf="['navis', 'ADMIN'].includes(username)"
-      class="btn-suggestions"
-      type="button"
-      (click)="sendSuggestionsMail()"
-    >
-      ENVIA SUGERENCIAS
+    <button class="btn-mix" [disabled]="!selectedQuestionCount" (click)="startQuiz(TEST_TYPE.ALL)">
+      {{texts.WELCOME.buttons.mixed}}
     </button>
 
+    <button class="btn-repaso" *ngIf="areFailedQuestions" (click)="startRepasoMode()">
+      {{texts.WELCOME.buttons.failed}} ({{ failedCount }})
+    </button>
 
-  <button
-    class="btn-data"
-    color="secondary"
-    type="button"
-    (click)="viewData()">
-    Ver fuentes
-  </button>
+    <button *ngIf="['navis', 'ADMIN'].includes(username)" class="btn-suggestions" type="button"
+      (click)="sendSuggestionsMail()">
+      {{texts.WELCOME.buttons.suggestions}}    
+     </button>
 
-  <button
-    class="btn-instructions"
-    color="secondary"
-    type="button"
-    (click)="viewInstructions()">
-    Instrucciones
-  </button>
+    <button class="btn-data" color="secondary" type="button" (click)="viewData()">
+      {{texts.WELCOME.buttons.data}}    
+    </button>
+
+    <button class="btn-instructions" color="secondary" type="button" (click)="viewInstructions()">
+      {{texts.WELCOME.buttons.instructions}}    
+    </button>
+
+    <button class="btn-start" color="primary" *ngIf="['ADMIN'].includes(username)" type="button" (click)="viewPanel()">
+      PANEL     
+    </button>
   </div>
 </div>

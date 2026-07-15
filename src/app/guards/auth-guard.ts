@@ -2,16 +2,46 @@ import { CanActivateFn, Router } from '@angular/router';
 import { inject } from '@angular/core';
 
 export const authGuard: CanActivateFn = () => {
+
   const router = inject(Router);
 
-  // 🔄 Leemos de localStorage la clave correcta 'userSession'
-  const userSession = localStorage.getItem('userSession');
+  const session = localStorage.getItem('userSession');
 
-  if (userSession) {
-    return true; // Permitir el paso si existe la sesión
+  if (!session) {
+    return router.createUrlTree(['/login']);
   }
 
-  // Si no hay sesión, rebota al login
-  router.navigate(['/login']);
-  return false;
+  try {
+
+    const user = JSON.parse(session);
+
+    // Obligar a volver a iniciar sesión con el nuevo sistema
+    if (user.version !== 2) {
+      localStorage.removeItem('userSession');
+      return router.createUrlTree(['/login']);
+    }
+
+    if (!user.username || !user.deviceId || !user.timestamp) {
+      localStorage.removeItem('userSession');
+      return router.createUrlTree(['/login']);
+    }
+
+    const hours =
+      (Date.now() - new Date(user.timestamp).getTime()) /
+      (1000 * 60 * 60);
+
+    if (hours > 48) {
+      localStorage.removeItem('userSession');
+      return router.createUrlTree(['/login']);
+    }
+
+    return true;
+
+  } catch {
+
+    localStorage.removeItem('userSession');
+    return router.createUrlTree(['/login']);
+
+  }
+
 };

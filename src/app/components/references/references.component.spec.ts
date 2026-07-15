@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { DataComponent } from "./data.component";
+import { ReferencesComponent } from "./references.component";
 
-describe("DataComponent", () => {
-  let component: DataComponent;
-  let fixture: ComponentFixture<DataComponent>;
+describe("ReferencesComponent", () => {
+  let component: ReferencesComponent;
+  let fixture: ComponentFixture<ReferencesComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DataComponent],
+      imports: [ReferencesComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(DataComponent);
+    fixture = TestBed.createComponent(ReferencesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

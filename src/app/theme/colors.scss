@@ -1,0 +1,70 @@
+:root {
+    /** Primary **/
+    --ion-color-primary: #a67aca;
+    --ion-color-primary-rgb: 166, 122, 202;
+    --ion-color-primary-contrast: #ffffff;
+    --ion-color-primary-contrast-rgb: 255, 255, 255;
+    --ion-color-primary-shade: #926bb2;
+    --ion-color-primary-tint: #b18bd2;
+  
+    /** Secondary **/
+    --ion-color-secondary: #3498db;
+    --ion-color-secondary-rgb: 52, 152, 219;
+    --ion-color-secondary-contrast: #ffffff;
+    --ion-color-secondary-contrast-rgb: 255, 255, 255;
+    --ion-color-secondary-shade: #2e86c1;
+    --ion-color-secondary-tint: #4aa3df;
+  
+    /** Tertiary **/
+    --ion-color-tertiary: #2ecc71;
+    --ion-color-tertiary-rgb: 46, 204, 113;
+    --ion-color-tertiary-contrast: #ffffff;
+    --ion-color-tertiary-contrast-rgb: 255, 255, 255;
+    --ion-color-tertiary-shade: #28b463;
+    --ion-color-tertiary-tint: #45d281;
+  
+    /** Success **/
+    --ion-color-success: #27ae60;
+    --ion-color-success-rgb: 39, 174, 96;
+    --ion-color-success-contrast: #ffffff;
+    --ion-color-success-contrast-rgb: 255, 255, 255;
+  
+    /** Warning **/
+    --ion-color-warning: #f39c12;
+    --ion-color-warning-rgb: 243, 156, 18;
+    --ion-color-warning-contrast: #ffffff;
+    --ion-color-warning-contrast-rgb: 255, 255, 255;
+  
+    /** Danger **/
+    --ion-color-danger: #e74c3c;
+    --ion-color-danger-rgb: 231, 76, 60;
+    --ion-color-danger-contrast: #ffffff;
+    --ion-color-danger-contrast-rgb: 255, 255, 255;
+  
+    /** Light **/
+    --ion-color-light: #f4f5f8;
+    --ion-color-light-rgb: 244, 245, 248;
+    --ion-color-light-contrast: #000000;
+    --ion-color-light-contrast-rgb: 0, 0, 0;
+  
+    /** Medium **/
+    --ion-color-medium: #92949c;
+    --ion-color-medium-rgb: 146, 148, 156;
+    --ion-color-medium-contrast: #ffffff;
+    --ion-color-medium-contrast-rgb: 255, 255, 255;
+  
+    /** Dark **/
+    --ion-color-dark: #222428;
+    --ion-color-dark-rgb: 34, 36, 40;
+    --ion-color-dark-contrast: #ffffff;
+    --ion-color-dark-contrast-rgb: 255, 255, 255;
+  
+    /** Fondo **/
+    --ion-background-color: #ffffff;
+    --ion-text-color: #000000;
+
+    /** custom **/
+    --ion-color-salmon: darksalmon;
+    --ion-color-darkcyan: darkcyan;
+
+  }

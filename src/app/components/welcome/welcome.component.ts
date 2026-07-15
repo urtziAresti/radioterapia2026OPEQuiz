@@ -4,19 +4,19 @@ import {
   inject,
   Output,
   OnInit,
-  OnDestroy,
 } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { NavigationEnd, Router } from "@angular/router";
-import { QuizService } from "../../../services/quiz.service";
-import { QuestionProgress } from "../../../interfaces/progress";
+import { QuizService } from "../../services/quiz.service";
+import { QuestionProgress } from "../../interfaces/progress";
 import { IonicModule } from "@ionic/angular";
-
+import { MailService } from "../../services/mail-service";
+import { I18nService } from "../../../assets/i18n/i18n.service";
 
 export enum TEST_TYPE {
   RADIO = "RADIO",
-  COMMON = "COMMON",  
+  COMMON = "COMMON",
   ALL = "ALL"
 }
 @Component({
@@ -27,11 +27,25 @@ export enum TEST_TYPE {
   styleUrls: ["./welcome.component.scss"],
 })
 export class WelcomeComponent implements OnInit {
+  private readonly i18n = inject(I18nService);
+  texts = this.i18n.texts;
+  questionCounts = [
+    { value: 2, label: this.texts.WELCOME.questions[2] },
+    { value: 5, label: this.texts.WELCOME.questions[5] },
+    { value: 10, label: this.texts.WELCOME.questions[10] },
+    { value: 25, label: this.texts.WELCOME.questions[25] },
+    { value: 50, label: this.texts.WELCOME.questions[50] },
+    { value: 110, label: this.texts.WELCOME.questions[110] },
+    { value: 150, label: this.texts.WELCOME.questions[150] },
+    { value: 200, label: this.texts.WELCOME.questions[200] },
+    { value: 300, label: this.texts.WELCOME.questions[300] },
+  ];
   username: string = "";
   selectedQuestionCount: number = 25;
   failedQuestions: number[] = [];
   private router = inject(Router);
   private quizService = inject(QuizService);
+  private mailService = inject(MailService);
   progress!: QuestionProgress;
   TEST_TYPE: typeof TEST_TYPE = TEST_TYPE;
 
@@ -47,7 +61,8 @@ export class WelcomeComponent implements OnInit {
       }
     });
   }
-  loadData() {
+
+  ngOnInit() {
     const session = localStorage.getItem("userSession");
     if (session) {
       const user = JSON.parse(session);
@@ -55,11 +70,10 @@ export class WelcomeComponent implements OnInit {
     }
 
     this.progress = this.quizService.getProgress();
-
     this.failedQuestions = this.getFailedQuestions();
   }
 
-  ngOnInit() {
+  loadData() {
     const session = localStorage.getItem("userSession");
     if (session) {
       const user = JSON.parse(session);
@@ -86,7 +100,6 @@ export class WelcomeComponent implements OnInit {
     }
 
     const currentUser = JSON.parse(session);
-
     const username = currentUser?.username;
 
     if (!username) {
@@ -145,19 +158,11 @@ export class WelcomeComponent implements OnInit {
   }
 
   sendSuggestionsMail() {
-    const email = "urtzi.aresti+OPEAPP@gmail.com";
-    const subject = encodeURIComponent("Sugerencias OPE - Test Radioterapia");
-    const body = encodeURIComponent(
-      `Hola,\n\nQuería enviar las siguientes sugerencias sobre el test:\n\n`
-    );
-
-    window.open(`mailto:${email}?subject=${subject}&body=${body}`, "_self");
+    this.mailService.sendSuggestionsMail();
   }
 
   startRepasoMode() {
     const failedIds = this.failedQuestions;
-
-    
 
     if (!failedIds.length) return;
 
@@ -172,7 +177,10 @@ export class WelcomeComponent implements OnInit {
   viewData() {
     this.router.navigate(["/data"]);
   }
-  viewInstructions():void {
+  viewInstructions(): void {
     this.router.navigate(["/instructions"]);
   }
+  viewPanel(): void { 
+    this.router.navigate(["/panel"]);
+  }     
 }

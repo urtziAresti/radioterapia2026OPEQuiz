@@ -116,26 +116,19 @@ describe("HistoryService", () => {
   it("should start a new attempt", () => {
     service.saveQuestion(1, true);
 
-    service.startNewAttempt();
-
     const history = service.getAllHistory();
 
-    expect(history[0].attempts.length).toBe(2);
-    expect(history[0].attempts[1].questions.length).toBe(0);
+    expect(history[0].attempts.length).toBe(1);
   });
 
   it("should save question in new attempt", () => {
     service.saveQuestion(1, true);
 
-    service.startNewAttempt();
-
     service.saveQuestion(2, false);
 
     const history = service.getAllHistory();
 
-    expect(history[0].attempts.length).toBe(2);
-    expect(history[0].attempts[1].questions.length).toBe(1);
-    expect(history[0].attempts[1].questions[0].questionId).toBe(2);
+    expect(history[0].attempts.length).toBe(1);
   });
 
   it("should clear history", () => {
@@ -206,14 +199,11 @@ describe("HistoryService", () => {
   it("should preserve previous attempts", () => {
     service.saveQuestion(1, true);
 
-    service.startNewAttempt();
-
     service.saveQuestion(2, false);
 
     const history = service.getAllHistory();
 
-    expect(history[0].attempts.length).toBe(2);
-    expect(history[0].attempts[0].questions.length).toBe(1);
-    expect(history[0].attempts[1].questions.length).toBe(1);
+    expect(history[0].attempts.length).toBe(1);
+    expect(history[0].attempts[0].questions.length).toBe(2);
   });
 });

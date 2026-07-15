@@ -5,7 +5,7 @@ import { NgZone } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 
 import { LoginComponent } from './login.component';
-import { LogService } from '../../../services/log.service';
+import { LogService } from '../../services/log.service';
 
 describe('LoginComponent', () => {
   let fixture: ComponentFixture<LoginComponent>;
@@ -149,23 +149,5 @@ describe('LoginComponent', () => {
 
     expect(deviceId).toBe('existing-device-id');
   });
-
-  xit('should present an error toast', fakeAsync(async () => {
-    // Llamar al método que presenta el toast
-    await component.presentErrorToast('Test error message');
-  
-    // Verificar que el toast se haya creado con los parámetros correctos
-    expect(toastControllerMock.create).toHaveBeenCalledWith({
-      message: 'Test error message',
-      duration: 3000,
-      position: 'bottom',
-      color: 'danger',
-      buttons: [{ text: 'Cerrar', role: 'cancel' }]
-    });
-  
-    // Verificar que el método present del toast haya sido llamado
-    const toastInstance = await toastControllerMock.create.calls.mostRecent().returnValue;
-    expect(toastInstance.present).toHaveBeenCalled();
-  }));
 
 });

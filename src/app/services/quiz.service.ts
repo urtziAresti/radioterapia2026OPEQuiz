@@ -1,12 +1,12 @@
 import { inject, Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { map, Observable } from "rxjs";
-import { RADIO_QUESTIONS } from "../data/radio-questions/radio_questions";
+import { RADIO_QUESTIONS } from "../../data/radio-questions/radio_questions";
 import { QuestionProgress } from "../interfaces/progress";
 import { HistoryService } from "./history.service";
-import { Question } from "../interfaces/question";
-import { COMMON_QUESTIONS } from "../data/common-questions/common_questions";
-import { TEST_TYPE } from "../app/components/welcome/welcome.component";
+import { Question } from "../../app/interfaces/question";
+import { COMMON_QUESTIONS } from "../../data/common-questions/common_questions";
+import { TEST_TYPE } from "../components/welcome/welcome.component";
 
 export interface MagicAnswer {
   answer: string;
@@ -88,7 +88,7 @@ d) ${question.options.d}
               if (json && ["a", "b", "c", "d"].includes(json.answer)) {
                 return json;
               }
-            } catch {}
+            } catch { }
 
             return {
               answer: "",
@@ -100,7 +100,7 @@ d) ${question.options.d}
       );
   }
 
-  getQuestions(quiz_type: TEST_TYPE, count: number):Question[] {
+  getQuestions(quiz_type: TEST_TYPE, count: number): Question[] {
     if (quiz_type === TEST_TYPE.RADIO) {
       return this.getRadioQuestions(count);
     }
@@ -113,18 +113,11 @@ d) ${question.options.d}
         ...this.getRadioQuestions(radioCount),
         ...this.getCommonQuestions(commonCount),
       ];
-
-      ;
-
       return this.shuffle(questions);
     }
 
     return this.getCommonQuestions(count);
   }
-
-  // =====================================
-  // QUESTIONS
-  // =====================================
 
   getRadioQuestions(count: number): Question[] {
     const answeredIds = new Set(this.history.getAnsweredQuestionIds());
@@ -133,9 +126,7 @@ d) ${question.options.d}
       (q) => !answeredIds.has(q.id)
     );
 
-    this.shuffle(remainingQuestions);
-
-    return remainingQuestions.slice(0, count);
+    return this.shuffle(remainingQuestions).slice(0, count);
   }
 
   getCommonQuestions(count: number): Question[] {
@@ -145,9 +136,7 @@ d) ${question.options.d}
       (q) => !answeredIds.has(q.id)
     );
 
-    this.shuffle(remainingQuestions);
-
-    return remainingQuestions.slice(0, count);
+    return this.shuffle(remainingQuestions).slice(0, count);
   }
 
   getQuestionsByIds(ids: number[]): Question[] {
@@ -171,17 +160,13 @@ d) ${question.options.d}
 
   private shuffle(array: Question[]): Question[] {
     const result = [...array];
-  
+
     for (let i = result.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [result[i], result[j]] = [result[j], result[i]];
     }
-  
     return result;
   }
-  // =====================================
-  // PROGRESO
-  // =====================================
 
   getProgress(): QuestionProgress {
     const answered = this.history.getAnsweredQuestionsCount();

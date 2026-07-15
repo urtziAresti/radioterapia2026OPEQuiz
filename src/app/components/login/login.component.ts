@@ -1,25 +1,16 @@
 import { Component, NgZone, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, JsonPipe } from '@angular/common';
 import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
-
-import {
-  IonContent,
-  IonHeader,
-  IonToolbar,
-  IonTitle,
-  IonItem,
-  IonInput,
-  IonButton,
-  IonIcon,
-  ToastController
-} from '@ionic/angular/standalone';
-
 import { addIcons } from 'ionicons';
 import { lockClosedOutline, logInOutline, personAddOutline } from 'ionicons/icons';
-import { LogService } from '../../../services/log.service';
+import { LogService } from '../../services/log.service';
+import { IonicModule } from '@ionic/angular';
+import { ToastController } from '@ionic/angular/standalone';
+import { MailService } from '../../services/mail-service';
+import { I18nService } from '../../../assets/i18n/i18n.service';
 
 addIcons({
   'lock-closed-outline': lockClosedOutline,
@@ -35,24 +26,20 @@ addIcons({
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    IonHeader,
-    IonToolbar,
-    IonTitle,
-    IonContent,
-    IonItem,
-    IonInput,
-    IonButton,
-    IonIcon
+    IonicModule
   ]
 })
 export class LoginComponent {
-
+  private readonly i18n = inject(I18nService);
+  texts = this.i18n.texts;
   private fb = inject(FormBuilder);
   private router = inject(Router);
   private http = inject(HttpClient);
   private ngZone = inject(NgZone);
   private toastController = inject(ToastController);
   private logService = inject(LogService);
+  private mailService = inject(MailService);
+
 
   loginForm = this.fb.group({
     username: ['', [Validators.required, Validators.minLength(3)]],
@@ -84,10 +71,15 @@ export class LoginComponent {
       );
 
       if (respuesta && respuesta.ok) {
-        localStorage.setItem('userSession', JSON.stringify({
-          username: respuesta.username,
-          deviceId
-        }));
+        localStorage.setItem(
+          'userSession',
+          JSON.stringify({
+            username,
+            deviceId,
+            timestamp: new Date().toISOString(),
+            version: 2
+          })
+        );
 
         this.ngZone.run(() => {
           this.router.navigate(['/welcome']);
@@ -127,17 +119,6 @@ export class LoginComponent {
   }
 
   register(){
-    const email = "urtzi.aresti+OPEAPP@gmail.com";
-    const subject = encodeURIComponent(
-      "Registro App - Test Radioterapia"
-    );
-    const body = encodeURIComponent(
-      `Hola,\n\nEl siguiente formulario es para registrarte:\n\n- Nombre y apellidos:\n- Usuario:\n- Contraseña:\n\n`
-    );
-  
-    window.open(
-      `mailto:${email}?subject=${subject}&body=${body}`,
-      "_self"
-    );
+    this.mailService.sendRegisterMail();
   }
 }

@@ -1,0 +1,6 @@
+{
+    "i18n-ally.localesPaths": [
+        "src/assets/i18n",
+        "coverage/app/src/assets/i18n"
+    ]
+}

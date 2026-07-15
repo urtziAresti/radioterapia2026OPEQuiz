@@ -1,4 +1,4 @@
-import { Question } from "../../interfaces/question";
+import { Question } from "../../app/interfaces/question";
 
 export const QUESTIONS_1_50: Question[] = [
   {
