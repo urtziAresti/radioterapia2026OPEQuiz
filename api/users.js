@@ -1,4 +1,4 @@
-import clientPromise from "../src/app/services/mongodb";
+import clientPromise from "../lib/mongodb.js";
 import bcrypt from "bcryptjs";
 
 export default async function handler(req, res) {
