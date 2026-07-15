@@ -1,10 +1,6 @@
 # Radioterapia Quiz PWA
 
 
-# funcionales
-- FORZAR ACTUALIZACIONES(RECARGA) SI ESTA DESACTUALIZADO
-- MERGEAR USUARIOS 
-
 # features 
 - test y desplegar 
 - TEMARIO COMUN - AÑADIR PREGUNTAS  150-200
@@ -12,9 +8,14 @@
 
 # rediseño
 
-# de todo 
-Evitar con BD doble login
+
+# funcionales
+Controlar error 500 login 
+Textos de placeholder del login
+Evitar con BD doble login , registrar device Id , boton para quitar device ID en panel (desvincular)
 Guardar mejor y mas estadisticas
+Pagina de preguntas/respuestas dudosas 
+Chat grupal 
 
 - 100 comunes OKK
 
