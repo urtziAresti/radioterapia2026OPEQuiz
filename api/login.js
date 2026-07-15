@@ -1,5 +1,5 @@
 import bcrypt from "bcryptjs";
-const clientPromise = require("../src/app/services/mongodb");
+import clientPromise from "../lib/mongodb.js";
 // 🧠 Memoria volátil del servidor para trackear las sesiones por dispositivo
 const sesionesActivas = {};
 
