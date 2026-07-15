@@ -1,4 +1,4 @@
-import clientPromise from "../lib/mongodb.js";
+const clientPromise = require("../src/app/services/mongodb");
 import bcrypt from "bcryptjs";
 
 export default async function handler(req, res) {
