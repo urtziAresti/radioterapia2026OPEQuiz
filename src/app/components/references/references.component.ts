@@ -23,10 +23,26 @@ export class ReferencesComponent {
   openFile(path: string): void {
     window.open(path, '_blank');
   }
-  openPDF(): void {
-    const fileUrl = new URL('https://radioterapia2026-ope.vercel.app/assets/docs/preguntasOK.pdf', document.baseURI).href;
-    const googleViewer = `https://docs.google.com/gview?embedded=true&url=${encodeURIComponent(fileUrl)}`;
-    window.open(googleViewer, '_blank');
+  openPDF(type: number): void {
+
+    switch (type) { 
+     
+      case 1:   
+      const fileUrl = new URL('https://radioterapia2026-ope.vercel.app/assets/docs/preguntasOK.pdf', document.baseURI).href;
+      const googleViewer = `https://docs.google.com/gview?embedded=true&url=${encodeURIComponent(fileUrl)}`;
+        window.open(googleViewer, '_blank');
+      break;
+
+
+      case 2:   
+      const fileUrl2 = new URL('https://radioterapia2026-ope.vercel.app/assets/docs/respuestas-UTS.pdf', document.baseURI).href;
+      const googleViewer2 = `https://docs.google.com/gview?embedded=true&url=${encodeURIComponent(fileUrl2)}`;
+        window.open(googleViewer2, '_blank');
+      break;
+      
+    }
+
+   
   }
 
 }

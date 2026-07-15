@@ -80,6 +80,14 @@
       </ion-card>
     </div>
 
+    <!-- 🪄 POSIBLE RESPONSE  -->
+    <div class="posible-answer ion-margin" *ngIf="showAdvise">
+      <img class="warning-icon" src="assets/icon/warning.svg" alt="IA" />
+      <ion-label class="warning-label">    
+          Esta pregunta tiene dos posibles respuestas, dichas por los sindicatos, las dos opciones serian validas.
+      </ion-label>
+    </div>
+
     <!-- 🔥 OPCIONES -->
     <div class="options-container">
       <div *ngFor="let opt of ['a', 'b', 'c', 'd']" class="custom-option-button" [ngClass]="getOptionColor(opt)"

@@ -105,6 +105,23 @@ ion-toolbar {
   cursor: not-allowed;
 }
 
+.posible-answer {
+  display: flex;
+  background-color: #ffff;
+  border: 2px solid #ad0d0d;
+  border-radius: 12px;
+
+  .warning-label{
+    margin: 1ch;
+  }
+  .warning-icon {
+    width: 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-bottom: auto;
+  }
+}
 
 
 .floating-next{

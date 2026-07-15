@@ -8,4 +8,5 @@ export interface Question {
       d: string;
     };
     correct: "a" | "b" | "c" | "d";
+    second_correct?: "a" | "b" | "c" | "d";
   }

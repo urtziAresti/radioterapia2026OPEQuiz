@@ -5,6 +5,12 @@
     border-radius: 12px;
     margin: 10px;
   }
+
+  .loading-spinner{
+    position: absolute;
+    height: 100vh;
+    z-index: 12;
+  }
   
   .logo-section {
     margin-bottom: 30px;

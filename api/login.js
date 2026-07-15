@@ -1,6 +1,5 @@
 import bcrypt from "bcryptjs";
 import clientPromise from "../lib/mongodb.js";
-// 🧠 Memoria volátil del servidor para trackear las sesiones por dispositivo
 const sesionesActivas = {};
 
 export default async function handler(req, res) {
@@ -34,7 +33,6 @@ export default async function handler(req, res) {
     }
 
     const client = await clientPromise;
-
     const db = client.db("users");
     const users = db.collection("users");
 
@@ -70,9 +68,7 @@ export default async function handler(req, res) {
       });
     }
 
-    // 🚨 Control de sesiones
     const usuarioKey = usuario.username.toLowerCase();
-
     if (
       sesionesActivas[usuarioKey] &&
       sesionesActivas[usuarioKey] !== deviceId

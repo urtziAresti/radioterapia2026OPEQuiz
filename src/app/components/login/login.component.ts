@@ -39,7 +39,7 @@ export class LoginComponent {
   private toastController = inject(ToastController);
   private logService = inject(LogService);
   private mailService = inject(MailService);
-
+  loadingSpinner = false;
 
   loginForm = this.fb.group({
     username: ['', [Validators.required, Validators.minLength(3)]],
@@ -58,6 +58,7 @@ export class LoginComponent {
   async onLogin() {
     if (this.loginForm.invalid) return;
 
+    this.loadingSpinner = true;
     const { username, code } = this.loginForm.value;
     const deviceId = this.getDeviceId();
 
@@ -71,6 +72,7 @@ export class LoginComponent {
       );
 
       if (respuesta && respuesta.ok) {
+        this.loadingSpinner = false;
         localStorage.setItem(
           'userSession',
           JSON.stringify({

@@ -38,7 +38,6 @@ export class ResultsComponent  implements OnInit {
       totalQuestions: this.resultsData.totalQuestions,
       elapsedTime: this.resultsData.elapsedTime,
     };
-    debugger;
     await this.statsService.uploadProgress(resultModel)
   }
 

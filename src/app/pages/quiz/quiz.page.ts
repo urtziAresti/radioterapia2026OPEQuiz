@@ -53,7 +53,7 @@ export class QuizPage implements OnInit, OnDestroy {
   playerName = "";
   quiz_type: TEST_TYPE = TEST_TYPE.RADIO;
   TEST_TYPE = TEST_TYPE;
-
+  showAdvise = false;
   mode: "normal" | "failed" = "normal";
 
   failedIds: number[] = [];
@@ -160,9 +160,13 @@ export class QuizPage implements OnInit, OnDestroy {
 
     this.isAnswered = true;
 
+    // Solo mostrar el aviso si la respuesta es correcta y hay una segunda respuesta correcta
+    if (currentQuestion.second_correct) {
+      this.showAdvise = true;
+    } 
+
     if (isCorrect) {
       this.correctAnswers++;
-
       if (this.mode === "failed") {
         this.failedIds = this.failedIds.filter(
           (id) => id !== currentQuestion.id
@@ -185,7 +189,14 @@ export class QuizPage implements OnInit, OnDestroy {
     if (this.questionTimeout) {
       clearTimeout(this.questionTimeout);
     }
-
+  
+    const currentQuestion = this.questions[this.currentIndex];
+  
+    if (this.isAnswered && currentQuestion.second_correct) {
+      this.nextVisible = true; 
+      return; 
+    }
+  
     this.questionTimeout = setTimeout(() => {
       this.nextQuestion();
     }, delay);
@@ -217,6 +228,8 @@ export class QuizPage implements OnInit, OnDestroy {
 
     this.answerLocked = false;
 
+    this.showAdvise = false;
+
     setTimeout(() => {
       this.navigationLocked = false;
     }, 100);
@@ -240,17 +253,20 @@ export class QuizPage implements OnInit, OnDestroy {
     if (!this.isAnswered) {
       return this.selectedOption === optionKey ? "selected-option" : "";
     }
-
+  
     const correct = this.questions[this.currentIndex].correct;
-
-    if (optionKey === correct) {
+    const secondCorrect = this.questions[this.currentIndex].second_correct;
+  
+    // Si la opción es la correcta o la segunda correcta, marcarla como "correct-option"
+    if (optionKey === correct || optionKey === secondCorrect) {
       return "correct-option";
     }
-
+  
+    // Si la opción seleccionada es incorrecta
     if (this.selectedOption === optionKey && optionKey !== correct) {
       return "incorrect-option";
     }
-
+  
     return "disabled-option";
   }
 

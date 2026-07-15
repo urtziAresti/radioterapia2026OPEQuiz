@@ -15,7 +15,7 @@
 <ion-content class="ion-padding">
 
   <ion-list inset="true">
-    <ion-item button detail (click)="openPDF()">
+    <ion-item button detail (click)="openPDF(1)">
       <ion-icon name="document-outline" slot="start"></ion-icon>
       <ion-label>
         <h2> {{texts.DATA.items.questions}}
@@ -27,6 +27,13 @@
       <ion-icon name="document-text-outline" slot="start"></ion-icon>
       <ion-label>
         <h2>{{texts.DATA.items.answers}}</h2>
+      </ion-label>
+    </ion-item>
+
+    <ion-item button detail (click)="openPDF(2)">
+      <ion-icon name="document-text-outline" slot="start"></ion-icon>
+      <ion-label>
+        <h2>{{texts.DATA.items.answers}}-UTS</h2>
       </ion-label>
     </ion-item>
   </ion-list>

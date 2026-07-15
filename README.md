@@ -10,16 +10,17 @@
 
 
 # funcionales
-Controlar error 500 login 
-Textos de placeholder del login
-Evitar con BD doble login , registrar device Id , boton para quitar device ID en panel (desvincular)
-Guardar mejor y mas estadisticas
 Pagina de preguntas/respuestas dudosas 
+Evitar con BD doble login , registrar device Id , boton para quitar device ID en panel (desvincular)
+Al hacer login guardar sessiones activas con device ID
+
+Mensajes memes solo para naro 
+
 Chat grupal 
 
-rematar test 
+Guardar mejor y mas estadisticas
 
-- 100 comunes OKK
+- 100 comunes OK
 
 # preguntas
 - Revisar preguntas y respuestas de 100-200 

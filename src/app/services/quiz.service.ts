@@ -120,6 +120,14 @@ d) ${question.options.d}
   }
 
   getRadioQuestions(count: number): Question[] {
+
+
+    count = 1;
+
+    return RADIO_QUESTIONS.slice(0, 1);
+
+
+
     const answeredIds = new Set(this.history.getAnsweredQuestionIds());
 
     const remainingQuestions = RADIO_QUESTIONS.filter(
@@ -150,7 +158,10 @@ d) ${question.options.d}
   }
 
   checkAnswer(question: Question, answer: string): boolean {
-    return question.correct === answer;
+    if (question.second_correct) {
+        return question.correct === answer || question.second_correct === answer;
+      }
+      return question.correct === answer;
   }
 
   private resetQuestions(): void {

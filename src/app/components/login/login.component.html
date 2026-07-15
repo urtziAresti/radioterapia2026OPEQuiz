@@ -7,6 +7,9 @@
 </ion-header>
 
 <ion-content class="ion-padding ion-text-center">
+
+  <ion-spinner *ngIf="loadingSpinner" color="secondary" class="loading-spinner" name="circular"></ion-spinner>
+
   <div class="login-container">
     <div class="logo-section">
       <ion-icon name="lock-closed-outline" color="primary" style="font-size: 64px;"></ion-icon>
@@ -22,7 +25,7 @@
           labelPlacement="floating" 
           type="text" 
           formControlName="username"
-          placeholder="texts.LOGIN.username.label">
+          [placeholder]="texts.LOGIN.username.label">
         </ion-input>
       </ion-item>
 
@@ -32,7 +35,7 @@
           labelPlacement="floating" 
           type="password" 
           formControlName="code"
-          placeholder="texts.LOGIN.code.placeholder">
+          [placeholder]="texts.LOGIN.code.placeholder">
         </ion-input>
       </ion-item>
 

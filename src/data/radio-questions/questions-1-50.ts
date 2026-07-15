@@ -10,7 +10,8 @@ export const QUESTIONS_1_50: Question[] = [
       c: "Para su correcta medida, hay que tener en cuenta el concepto de “equilibrio electrónico”.",
       d: "La ICRU recomienda utilizar las unidades de medida del Sistema Internacional, que es el Roentgen (R)."
     },
-    correct: "c"
+    correct: "c",
+    second_correct:"a"///??????
   },
   {
     id: 2,
