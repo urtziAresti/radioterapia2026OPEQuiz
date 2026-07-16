@@ -1,53 +1,46 @@
-
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
-
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/panel" text="">
-      </ion-back-button>
+      <ion-back-button defaultHref="/panel" text=""></ion-back-button>
     </ion-buttons>
-
-    <ion-title class="theme-title">
-      Estadisticas 
-    </ion-title>
+    <ion-title class="theme-title">Estadísticas</ion-title>
   </ion-toolbar>
 </ion-header>
 
-
 <ion-content class="ion-padding">
+  <div class="stats-container">
+    <h1>Estadísticas de Usuarios</h1>
 
+    <div *ngIf="loading" class="loading">
+      <p>Cargando estadísticas...</p>
+    </div>
 
-<div class="stats-container">
-  <h1>Estadísticas de Usuarios</h1>
+    <div *ngIf="!loading && userStats.length === 0" class="no-data">
+      <p>No hay estadísticas disponibles.</p>
+    </div>
 
-  <div *ngIf="loading" class="loading">
-    <p>Cargando estadísticas...</p>
-  </div>
-
-  <div *ngIf="!loading && userStats.length === 0" class="no-data">
-    <p>No hay estadísticas disponibles.</p>
-  </div>
-
-
-  <div *ngIf="!loading && userStats.length > 0" class="stats-list">
-    <table>
-      <thead>
-        <tr>
-          <th>Nombre</th>
-          <th>Respuestas Correctas</th>
-          <th>Preguntas Totales</th>
-          <th>Tiempo Transcurrido</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let stat of userStats">
-          <td>{{ stat.playerName }}</td>
-          <td>{{ stat.correctAnswers }}</td>
-          <td>{{ stat.totalQuestions }}</td>
-          <td>{{ stat.elapsedTime }}</td>
-        </tr>
-      </tbody>
-    </table>
+    <div *ngIf="!loading && userStats.length > 0" class="stats-list">
+      <!-- Contenedor con scroll lateral -->
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Respuestas Correctas</th>
+              <th>Preguntas Totales</th>
+              <th>Tiempo Transcurrido</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let stat of userStats">
+              <td>{{ stat.playerName }}</td>
+              <td>{{ stat.correctAnswers }}</td>
+              <td>{{ stat.totalQuestions }}</td>
+              <td>{{ stat.elapsedTime }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
       <!-- RESUMEN GENERAL -->
       <ion-card>
@@ -56,47 +49,38 @@
         </ion-card-header>
 
         <ion-card-content>
-
           <ion-grid>
-
             <ion-row>
-
               <ion-col size="12" sizeMd="4">
-                <strong>Numero usuarios:</strong><br>
+                <strong>Numero usuarios:</strong><br />
                 {{ totals.users }}
               </ion-col>
 
               <ion-col size="12" sizeMd="4">
-                <strong>Quizes:</strong><br>
+                <strong>Quizes:</strong><br />
                 {{ totals.quizzes }}
               </ion-col>
 
               <ion-col size="12" sizeMd="4">
-                <strong>Aciertos totales:</strong><br>
+                <strong>Aciertos totales:</strong><br />
                 {{ totals.correctAnswers }}
               </ion-col>
-
             </ion-row>
 
             <ion-row>
-
               <ion-col size="12" sizeMd="4">
-                <strong>Preguntas totales:</strong><br>
+                <strong>Preguntas totales:</strong><br />
                 {{ totals.totalQuestions }}
               </ion-col>
 
               <ion-col size="12" sizeMd="4">
-                <strong>Tiempo total:</strong><br>
+                <strong>Tiempo total:</strong><br />
                 {{ formatTime(totals.totalSeconds) }}
               </ion-col>
-
             </ion-row>
-
           </ion-grid>
-
         </ion-card-content>
       </ion-card>
+    </div>
   </div>
-</div>
-
 </ion-content>

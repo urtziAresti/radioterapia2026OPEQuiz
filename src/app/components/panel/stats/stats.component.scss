@@ -23,8 +23,9 @@
       width: 100%;
       border-collapse: collapse;
       min-width: 600px; /* Asegura que la tabla tenga un ancho mínimo */
-      
-      th, td {
+
+      th,
+      td {
         border: 1px solid #ddd;
         padding: 8px;
         text-align: center;
