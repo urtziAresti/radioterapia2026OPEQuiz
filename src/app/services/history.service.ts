@@ -47,7 +47,7 @@ export class HistoryService {
    */
   private getHistory(): UserHistory[] {
 
-    const raw = sessionStorage.getItem(this.STORAGE_KEY);
+    const raw = localStorage.getItem(this.STORAGE_KEY);
 
     if (!raw) {
       return [];
@@ -64,7 +64,7 @@ export class HistoryService {
    * Guarda el historial.
    */
   private saveHistory(history: UserHistory[]): void {
-    sessionStorage.setItem(
+    localStorage.setItem(
       this.STORAGE_KEY,
       JSON.stringify(history)
     );
@@ -213,7 +213,7 @@ export class HistoryService {
    * Limpia el historial completo.
    */
   clearHistory(): void {
-    sessionStorage.removeItem(this.STORAGE_KEY);
+    localStorage.removeItem(this.STORAGE_KEY);
   }
 
   /**

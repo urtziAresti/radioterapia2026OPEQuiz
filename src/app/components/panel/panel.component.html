@@ -1,3 +1,25 @@
-<ion-button expand="block" (click)="goToUsers()">
-  Gestionar usuarios
-</ion-button>
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/welcome" text="">
+      </ion-back-button>
+    </ion-buttons>
+
+    <ion-title class="theme-title">
+      PANEL 
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-button  expand="block" (click)="goToUsers()">
+    Gestionar usuarios
+  </ion-button>
+
+  <ion-button  expand="block" (click)="goToStats()">
+    Estadisticas
+  </ion-button>
+</ion-content>
+
+

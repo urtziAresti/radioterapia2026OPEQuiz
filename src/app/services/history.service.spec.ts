@@ -10,7 +10,7 @@ describe("HistoryService", () => {
     service = TestBed.inject(HistoryService);
 
     localStorage.clear();
-    sessionStorage.clear();
+    localStorage.clear();
 
     localStorage.setItem(
       "userSession",
@@ -22,7 +22,7 @@ describe("HistoryService", () => {
 
   afterEach(() => {
     localStorage.clear();
-    sessionStorage.clear();
+    localStorage.clear();
   });
 
   it("should be created", () => {
@@ -164,7 +164,7 @@ describe("HistoryService", () => {
   });
 
   it("should handle invalid history json", () => {
-    sessionStorage.setItem("quiz_history", "{");
+    localStorage.setItem("quiz_history", "{");
 
     expect(service.getAllHistory()).toEqual([]);
   });

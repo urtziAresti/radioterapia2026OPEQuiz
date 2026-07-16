@@ -173,9 +173,7 @@ d) ${question.options.d}
 
   getProgress(): QuestionProgress {
     const answered = this.history.getAnsweredQuestionsCount();
-
     const total = this.ALL_QUESTIONS.length;
-
     const remaining = Math.max(0, total - answered);
 
     return {

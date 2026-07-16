@@ -23,4 +23,9 @@ export class PanelComponent {
     this.router.navigate(['/users']);
   }
 
+  goToStats(): void {
+    this.router.navigate(['/stats']);
+  }
+  
+
 }

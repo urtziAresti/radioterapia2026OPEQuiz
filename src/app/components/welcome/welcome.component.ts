@@ -106,7 +106,7 @@ export class WelcomeComponent implements OnInit {
       return [];
     }
 
-    const raw = sessionStorage.getItem("quiz_history");
+    const raw = localStorage.getItem("quiz_history");
 
     if (!raw) {
       return [];

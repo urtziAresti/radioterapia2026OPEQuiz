@@ -1,0 +1,56 @@
+
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/panel" text="">
+      </ion-back-button>
+    </ion-buttons>
+
+    <ion-title class="theme-title">
+      Estadisticas 
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="ion-padding">
+
+
+  <div class="stats-container">
+    <h1>Estadísticas de Usuarios</h1>
+  
+    <div *ngIf="loading" class="loading">
+      <p>Cargando estadísticas...</p>
+    </div>
+  
+    <div *ngIf="!loading && userStats.length === 0" class="no-data">
+      <p>No hay estadísticas disponibles.</p>
+    </div>
+  
+    <div *ngIf="!loading && userStats.length > 0" class="stats-list">
+      <!-- Contenedor con scroll lateral -->
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Respuestas Correctas</th>
+              <th>Preguntas Totales</th>
+              <th>Tiempo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let stat of userStats">
+              <td>{{ stat.playerName }}</td>
+              <td>{{ stat.correctAnswers }}</td>
+              <td>{{ stat.totalQuestions }}</td>
+              <td>{{ stat.elapsedTime }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</ion-content>

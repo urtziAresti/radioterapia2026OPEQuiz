@@ -32,7 +32,7 @@ describe("WelcomeComponent", () => {
     });
 
     localStorage.clear();
-    sessionStorage.clear();
+    localStorage.clear();
 
     await TestBed.configureTestingModule({
       imports: [WelcomeComponent],
@@ -55,7 +55,7 @@ describe("WelcomeComponent", () => {
 
   afterEach(() => {
     localStorage.clear();
-    sessionStorage.clear();
+    localStorage.clear();
   });
 
   it("should create", () => {
@@ -152,7 +152,7 @@ describe("WelcomeComponent", () => {
       })
     );
 
-    sessionStorage.setItem(
+    localStorage.setItem(
       "quiz_history",
       JSON.stringify([
         {
@@ -173,7 +173,7 @@ describe("WelcomeComponent", () => {
       })
     );
 
-    sessionStorage.setItem(
+    localStorage.setItem(
       "quiz_history",
       JSON.stringify([
         {
@@ -207,7 +207,7 @@ describe("WelcomeComponent", () => {
       })
     );
 
-    sessionStorage.setItem(
+    localStorage.setItem(
       "quiz_history",
       JSON.stringify([
         {
@@ -321,7 +321,7 @@ describe("WelcomeComponent", () => {
       })
     );
 
-    sessionStorage.setItem(
+    localStorage.setItem(
       "quiz_history",
       JSON.stringify([
         {
