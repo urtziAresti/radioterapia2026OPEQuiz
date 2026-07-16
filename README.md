@@ -8,7 +8,7 @@
 ques
 # funcionales
 
-Pagina de preguntas/respuestas dudosas 
+Pagina estadisticas mas estilo
 
 Evitar con BD doble login , registrar device Id , boton para quitar device ID en panel (desvincular)
 

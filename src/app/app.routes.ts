@@ -3,6 +3,7 @@ import { authGuard } from './guards/auth-guard';
 import { loginGuard } from './guards/login.guard';
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { adminGuard } from './guards/admin-guard';
 
 const rootRedirect = () => {
   const router = inject(Router);
@@ -62,7 +63,7 @@ export const routes: Routes = [
   },
   {
     path: 'panel',
-    canActivate: [authGuard],
+    canActivate: [authGuard,adminGuard],
     loadComponent: () =>
       import('../app/components/panel/panel.component').then(
         (m) => m.PanelComponent
@@ -70,14 +71,14 @@ export const routes: Routes = [
   },
   {
     path: 'users',
-    canActivate: [authGuard],
+    canActivate: [authGuard,adminGuard],
     loadComponent: () =>
       import('../app/components/panel/users/users.component').then(m => m.UsersComponent)
   },
 
   {
     path: 'stats',
-    canActivate: [authGuard],
+    canActivate: [authGuard,adminGuard],
     loadComponent: () =>
       import('../app/components/panel/stats/stats.component').then(m => m.StatsComponent)
   },

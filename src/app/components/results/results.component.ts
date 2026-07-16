@@ -16,6 +16,8 @@ import { StatsService } from '../../services/stats.service';
 })
 export class ResultsComponent  implements OnInit {
   @Input() resultsData!: ResultsData;
+  @Input() userName!: string;
+
   private readonly i18n = inject(I18nService);
   private readonly router = inject(Router);
   private readonly statsService = inject(StatsService);
