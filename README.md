@@ -5,9 +5,16 @@
 - test y desplegar 
 - TEMARIO COMUN - AÑADIR PREGUNTAS  150-200
 
-ques
 # funcionales
 
+
+tests 
+
+limpiar dependencias no usadas 
+Reamtar idiomas textos faltantes 
+
+
+Guardar progreso de total de preguntas 
 Pagina estadisticas mas estilo
 
 Evitar con BD doble login , registrar device Id , boton para quitar device ID en panel (desvincular)

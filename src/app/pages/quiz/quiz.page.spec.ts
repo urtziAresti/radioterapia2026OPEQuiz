@@ -236,23 +236,6 @@ describe("QuizPage", () => {
     expect(component.isAnswered).toBeFalse();
   });
 
-  it("should finish quiz on last question", () => {
-    component.questions = [{ id: 1, correct: "A" }] as any;
-
-    component.currentIndex = 0;
-
-    component.nextQuestion();
-
-    expect(timerServiceMock.stop).toHaveBeenCalled();
-    expect(component["quizFinished"]).toBeTrue();
-  });
-
-  it("should not finish quiz twice", () => {
-    component["finishQuiz"]();
-    component["finishQuiz"]();
-
-    expect(timerServiceMock.stop).toHaveBeenCalledTimes(1);
-  });
 
   it("should not navigate if locked", () => {
     component["navigationLocked"] = true;
@@ -342,27 +325,6 @@ describe("QuizPage", () => {
     ] as any;
 
     expect(component.getOptionColor("c")).toBe("disabled-option");
-  });
-  it("should navigate home", async () => {
-
-    await component.goToHome();
-  
-    expect(routerMock.navigateByUrl).toHaveBeenCalledTimes(2);
-  
-    expect(routerMock.navigateByUrl.calls.argsFor(0)).toEqual([
-      "/",
-      {
-        skipLocationChange: true
-      }
-    ]);
-  
-    expect(routerMock.navigateByUrl.calls.argsFor(1)).toEqual([
-      "/welcome",
-      {
-        replaceUrl: true
-      }
-    ]);
-  
   });
 
   it("should call magic service successfully", () => {

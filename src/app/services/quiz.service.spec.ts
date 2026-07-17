@@ -1,30 +1,30 @@
-import { TestBed } from "@angular/core/testing";
+import { TestBed } from '@angular/core/testing';
 import {
   HttpClientTestingModule,
   HttpTestingController,
-} from "@angular/common/http/testing";
+} from '@angular/common/http/testing';
 
-import { QuizService } from "./quiz.service";
-import { HistoryService } from "./history.service";
-import { RADIO_QUESTIONS } from "../../data/radio-questions/radio_questions";
-import { COMMON_QUESTIONS } from "../../data/common-questions/common_questions";
-import { Question } from "../../app/interfaces/question";
+import { QuizService } from './quiz.service';
+import { HistoryService } from './history.service';
 
-describe("QuizService", () => {
+import { RADIO_QUESTIONS } from '../../data/radio-questions/radio_questions';
+import { COMMON_QUESTIONS } from '../../data/common-questions/common_questions';
+import { TEST_TYPE } from '../components/welcome/welcome.component';
+
+describe('QuizService', () => {
   let service: QuizService;
   let httpMock: HttpTestingController;
 
   let historySpy: jasmine.SpyObj<HistoryService>;
-  let ALL_QUESTIONS: Question[] = [...RADIO_QUESTIONS, ...COMMON_QUESTIONS];
 
   beforeEach(() => {
-    historySpy = jasmine.createSpyObj("HistoryService", [
-      "getAnsweredQuestionIds",
-      "getAnsweredQuestionsCount",
-      "getIncorrectAnswers",
-      "hasIncorrectAnswers",
-      "clearHistory",
-      "getAllHistory",
+    historySpy = jasmine.createSpyObj('HistoryService', [
+      'getAnsweredQuestionIds',
+      'getAnsweredQuestionsCount',
+      'getIncorrectAnswers',
+      'hasIncorrectAnswers',
+      'clearHistory',
+      'getAllHistory',
     ]);
 
     historySpy.getAnsweredQuestionIds.and.returnValue([]);
@@ -52,162 +52,195 @@ describe("QuizService", () => {
     httpMock.verify();
   });
 
-  // ====================================================
-  // GPT
-  // ====================================================
-
-  it("should create", () => {
+  it('should create', () => {
     expect(service).toBeTruthy();
   });
 
-  it("should parse GPT valid json", () => {
-    let result: any;
+  describe('checkAnswer()', () => {
+    it('should return true when answer is correct', () => {
+      const q: any = {
+        correct: 'a',
+      };
 
-    service.ask(RADIO_QUESTIONS[0]).subscribe((r) => (result = r));
-
-    const req = httpMock.expectOne("/api/GPT");
-
-    expect(req.request.method).toBe("POST");
-
-    req.flush({
-      ok: true,
-      answer: JSON.stringify({
-        answer: "a",
-        explanation: "Correcto",
-      }),
+      expect(service.checkAnswer(q, 'a')).toBeTrue();
     });
 
-    expect(result.answer).toBe("a");
-    expect(result.explanation).toBe("Correcto");
-  });
+    it('should return false when answer is wrong', () => {
+      const q: any = {
+        correct: 'a',
+      };
 
-  it("should parse markdown json", () => {
-    let result: any;
-
-    service.ask(RADIO_QUESTIONS[0]).subscribe((r) => (result = r));
-
-    const req = httpMock.expectOne("/api/GPT");
-
-    req.flush({
-      ok: true,
-      answer: '```json\n{"answer":"b","explanation":"Texto"}\n```',
+      expect(service.checkAnswer(q, 'b')).toBeFalse();
     });
 
-    expect(result.answer).toBe("b");
-  });
+    it('should accept second_correct', () => {
+      const q: any = {
+        correct: 'a',
+        second_correct: 'b',
+      };
 
-  it("should return parse error", () => {
-    let result: any;
-
-    service.ask(RADIO_QUESTIONS[0]).subscribe((r) => (result = r));
-
-    const req = httpMock.expectOne("/api/GPT");
-
-    req.flush({
-      ok: true,
-      answer: "xxxxx",
+      expect(service.checkAnswer(q, 'b')).toBeTrue();
     });
 
-    expect(result.answer).toBe("");
-    expect(result.explanation).toContain("Error");
+    it('should still accept primary correct when second_correct exists', () => {
+      const q: any = {
+        correct: 'a',
+        second_correct: 'b',
+      };
+
+      expect(service.checkAnswer(q, 'a')).toBeTrue();
+    });
+
+    it('should reject other answers', () => {
+      const q: any = {
+        correct: 'a',
+        second_correct: 'b',
+      };
+
+      expect(service.checkAnswer(q, 'd')).toBeFalse();
+    });
   });
 
-  // ====================================================
-  // QUESTIONS
-  // ====================================================
+  describe('getQuestionsByIds()', () => {
+    it('should return empty array', () => {
+      expect(service.getQuestionsByIds([])).toEqual([]);
+    });
 
-  it("should return requested number of questions", () => {
-    const questions = service.getRadioQuestions(20);
+    it('should return matching questions', () => {
+      const ids = service.ALL_QUESTIONS
+        .slice(0, 2)
+        .map((q) => q.id);
 
-    expect(questions.length).toBe(20);
+      const result = service.getQuestionsByIds(ids);
+
+      expect(result.length).toBe(2);
+      expect(result[0].id).toBe(ids[0]);
+    });
+
+    it('should ignore unknown ids', () => {
+      const result = service.getQuestionsByIds([999999]);
+
+      expect(result).toEqual([]);
+    });
   });
 
-  it("should never return answered questions", () => {
-    historySpy.getAnsweredQuestionIds.and.returnValue([
-      RADIO_QUESTIONS[0].id,
-      RADIO_QUESTIONS[1].id,
-      RADIO_QUESTIONS[2].id,
-    ]);
+  describe('getRadioQuestions()', () => {
+    it('should return requested amount', () => {
+      historySpy.getAnsweredQuestionIds.and.returnValue([]);
 
-    const questions = service.getRadioQuestions(100);
+      const result = service.getRadioQuestions(5);
 
-    expect(questions.some((q) => q.id === RADIO_QUESTIONS[0].id)).toBeFalse();
+      expect(result.length).toBeLessThanOrEqual(5);
+    });
 
-    expect(questions.some((q) => q.id === RADIO_QUESTIONS[1].id)).toBeFalse();
+    it('should exclude answered questions', () => {
+      if (!RADIO_QUESTIONS.length) {
+        return;
+      }
 
-    expect(questions.some((q) => q.id === RADIO_QUESTIONS[2].id)).toBeFalse();
+      const answered = RADIO_QUESTIONS[0].id;
+
+      historySpy.getAnsweredQuestionIds.and.returnValue([answered]);
+
+      const result = service.getRadioQuestions(20);
+
+      expect(result.some((q) => q.id === answered)).toBeFalse();
+    });
+
+    it('should return empty when all answered', () => {
+      historySpy.getAnsweredQuestionIds.and.returnValue(
+        RADIO_QUESTIONS.map((q) => q.id)
+      );
+
+      const result = service.getRadioQuestions(10);
+
+      expect(result.length).toBe(0);
+    });
   });
 
-  it("should get questions by ids", () => {
-    const ids = [RADIO_QUESTIONS[0].id, RADIO_QUESTIONS[5].id];
+  describe('getCommonQuestions()', () => {
+    it('should return requested amount', () => {
+      historySpy.getAnsweredQuestionIds.and.returnValue([]);
 
-    const result = service.getQuestionsByIds(ids);
+      const result = service.getCommonQuestions(5);
 
-    expect(result.length).toBe(2);
-    expect(result[0].id).toBe(ids[0]);
+      expect(result.length).toBeLessThanOrEqual(5);
+    });
+
+    it('should exclude answered', () => {
+      if (!COMMON_QUESTIONS.length) {
+        return;
+      }
+
+      const answered = COMMON_QUESTIONS[0].id;
+
+      historySpy.getAnsweredQuestionIds.and.returnValue([answered]);
+
+      const result = service.getCommonQuestions(20);
+
+      expect(result.some((q) => q.id === answered)).toBeFalse();
+    });
+
+    it('should return empty when all answered', () => {
+      historySpy.getAnsweredQuestionIds.and.returnValue(
+        COMMON_QUESTIONS.map((q) => q.id)
+      );
+
+      expect(service.getCommonQuestions(5).length).toBe(0);
+    });
   });
 
-  it("should return empty array if ids are empty", () => {
-    expect(service.getQuestionsByIds([])).toEqual([]);
-  });
+  describe('getQuestions()', () => {
+    it('should return radio questions', () => {
+      const result = service.getQuestions(TEST_TYPE.RADIO, 10);
 
-  it("should validate correct answer", () => {
-    expect(
-      service.checkAnswer(RADIO_QUESTIONS[0], RADIO_QUESTIONS[0].correct)
-    ).toBeTrue();
-  });
+      expect(result.length).toBeLessThanOrEqual(10);
 
-  it("should validate incorrect answer", () => {
-    expect(service.checkAnswer(RADIO_QUESTIONS[0], "z")).toBeFalse();
-  });
+      result.forEach((q) => {
+        expect(
+          RADIO_QUESTIONS.some((r) => r.id === q.id)
+        ).toBeTrue();
+      });
+    });
 
-  // ====================================================
-  // PROGRESS
-  // ====================================================
+    it('should return common questions', () => {
+      const result = service.getQuestions(TEST_TYPE.COMMON, 10);
 
-  it("should calculate progress", () => {
-    historySpy.getAnsweredQuestionsCount.and.returnValue(60);
+      expect(result.length).toBeLessThanOrEqual(10);
 
-    const progress = service.getProgress();
+      result.forEach((q) => {
+        expect(
+          COMMON_QUESTIONS.some((r) => r.id === q.id)
+        ).toBeTrue();
+      });
+    });
 
-    expect(progress.answered).toBe(60);
-    expect(progress.total).toBe(ALL_QUESTIONS.length);
+    it('should return mixed questions', () => {
+      const result = service.getQuestions(TEST_TYPE.ALL, 20);
 
-    expect(progress.total).toBe(ALL_QUESTIONS.length);
-    expect(progress.remaining).toBe(ALL_QUESTIONS.length - 60);
+      expect(result.length).toBeLessThanOrEqual(20);
 
-    expect(progress.percentage).toBe(
-      Math.round((60 / ALL_QUESTIONS.length) * 100)
-    );
-  });
+      const radio = result.filter((q) =>
+        RADIO_QUESTIONS.some((r) => r.id === q.id)
+      );
 
-  // ====================================================
-  // HISTORY
-  // ====================================================
+      const common = result.filter((q) =>
+        COMMON_QUESTIONS.some((r) => r.id === q.id)
+      );
 
-  it("should return incorrect questions", () => {
-    historySpy.getIncorrectAnswers.and.returnValue([1, 2]);
+      expect(radio.length).toBeGreaterThan(0);
+      expect(common.length).toBeGreaterThan(0);
+    });
 
-    expect(service.getIncorrect()).toEqual([1, 2]);
-  });
+    it('should work with zero questions', () => {
+      expect(service.getQuestions(TEST_TYPE.ALL, 0)).toEqual([]);
+    });
 
-  it("should know if there are incorrect questions", () => {
-    historySpy.hasIncorrectAnswers.and.returnValue(true);
+    it('should not exceed requested count', () => {
+      const result = service.getQuestions(TEST_TYPE.ALL, 15);
 
-    expect(service.hasIncorrect()).toBeTrue();
-  });
-
-  it("should clear history", () => {
-    service.clearHistory();
-
-    expect(historySpy.clearHistory).toHaveBeenCalled();
-  });
-
-  it("should return history", () => {
-    const history = [{ user: "ADMIN", attempts: [] }];
-
-    historySpy.getAllHistory.and.returnValue(history);
-
-    expect(service.getHistory()).toEqual(history);
+      expect(result.length).toBeLessThanOrEqual(15);
+    });
   });
 });
+

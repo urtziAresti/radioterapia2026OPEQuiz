@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { StatsService } from '../../../services/stats.service';
@@ -11,6 +11,7 @@ import { StatsService } from '../../../services/stats.service';
   imports: [CommonModule, IonicModule]
 })
 export class StatsComponent implements OnInit {
+  private statsService = inject(StatsService);
 
   userStats: any[] = [];
   loading = true;
@@ -22,8 +23,6 @@ export class StatsComponent implements OnInit {
     totalQuestions: 0,
     totalSeconds: 0
   };
-
-  constructor(private statsService: StatsService) {}
 
   ngOnInit(): void {
     this.fetchUserStats();

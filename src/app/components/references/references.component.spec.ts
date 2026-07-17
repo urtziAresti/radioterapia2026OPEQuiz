@@ -33,7 +33,7 @@ describe("ReferencesComponent", () => {
   it("should open pdf in Google Viewer", () => {
     spyOn(window, "open");
 
-    component.openPDF();
+    component.openPDF(1);
 
     const fileUrl = new URL(
       "https://radioterapia2026-ope.vercel.app/assets/docs/preguntasOK.pdf",
