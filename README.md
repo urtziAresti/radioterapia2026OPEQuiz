@@ -6,12 +6,7 @@
 - TEMARIO COMUN - AÑADIR PREGUNTAS  150-200
 
 # funcionales
-
-
-tests 
-
-limpiar dependencias no usadas 
-Reamtar idiomas textos faltantes 
+Rematar idiomas textos faltantes 
 
 
 Guardar progreso de total de preguntas 
