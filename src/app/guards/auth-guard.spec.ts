@@ -129,23 +129,6 @@ describe('authGuard', () => {
 
   });
 
-  it('should redirect when session has expired', () => {
-
-    const expired = new Date(Date.now() - (49 * 60 * 60 * 1000));
-
-    localStorage.setItem('userSession', JSON.stringify({
-      version: 2,
-      username: 'admin',
-      deviceId: '12345',
-      timestamp: expired.toISOString()
-    }));
-
-    const result = executeGuard();
-
-    expect(router.createUrlTree).toHaveBeenCalledWith(['/login']);
-    expect(result).toBe(mockUrlTree);
-
-  });
 
   it('should redirect when session contains invalid JSON', () => {
 

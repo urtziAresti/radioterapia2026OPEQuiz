@@ -26,15 +26,6 @@ export const authGuard: CanActivateFn = () => {
       return router.createUrlTree(['/login']);
     }
 
-    const hours =
-      (Date.now() - new Date(user.timestamp).getTime()) /
-      (1000 * 60 * 60);
-
-    if (hours > 48) {
-      localStorage.removeItem('userSession');
-      return router.createUrlTree(['/login']);
-    }
-
     return true;
 
   } catch {

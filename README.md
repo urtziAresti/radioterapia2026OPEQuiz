@@ -6,11 +6,15 @@
 - TEMARIO COMUN - AÑADIR PREGUNTAS  150-200
 
 # funcionales
-Rematar idiomas textos faltantes 
+Añadir porcentaje  de total de preguntas sobre respuestas 
+
+Tests
 
 
-Guardar progreso de total de preguntas 
 Pagina estadisticas mas estilo
+
+
+
 
 Evitar con BD doble login , registrar device Id , boton para quitar device ID en panel (desvincular)
 

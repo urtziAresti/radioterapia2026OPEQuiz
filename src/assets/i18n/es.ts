@@ -45,6 +45,7 @@ export const ES = {
       suggestions: "Enviar sugerencias",
       data: "Referencias",
       instructions: "Instrucciones",
+      panel : 'Panel'
     },
   },
   DATA: {
