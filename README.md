@@ -1,24 +1,27 @@
 # Radioterapia Quiz PWA
 
 
-# features 
-- test y desplegar 
-- TEMARIO COMUN - AÑADIR PREGUNTAS  150-200
+# TODOs List
 
 # funcionales
-Añadir porcentaje  de total de preguntas sobre respuestas 
-
-Tests
 
 
-Pagina estadisticas mas estilo
+ESTADISTICAS
 
-Evitar con BD doble login , registrar device Id , boton para quitar device ID en panel (desvincular)
+    Estadisticas por usuario
 
-Al hacer login guardar sessiones activas con device ID
+MEJORAR PROMP IA
 
-Mensajes memes solo para naro 
 
+USUARIOS
+    panel aparte para todos los usuarios 
+
+    Evitar con BD doble login , registrar device Id , boton para quitar device ID en panel (desvincular)
+
+    Al hacer login guardar sessiones activas con device ID
+
+
+# MAS
 Chat grupal 
 
 # preguntas
@@ -28,3 +31,10 @@ preguntas dudosas
 # groq IA
 
 https://console.groq.com
+
+
+# playwright e2e
+
+npx playwright test
+
+npx playwright test e2e/pages/welcome.page.ts

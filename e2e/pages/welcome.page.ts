@@ -8,7 +8,7 @@ export class WelcomePage {
   }
 
   async fillUsername(name: string) {
-    await this.page.getByLabel('Nombre').fill(name);
+    await this.page.getByLabel('username').fill(name);
   }
 
   async startQuiz() {
