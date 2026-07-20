@@ -11,7 +11,7 @@ export const COMMON_QUESTIONS_101_150: Question[] = [
       c: "Se formaliza por escrito y mediante uno de los siguientes procedimientos a elección de la persona que lo otorga: ante una notaría; ante la persona funcionaria o empleada pública encargada del Registro Vasco de Voluntades Anticipadas o del servicio de documentación de un centro sanitario de la Comunidad Autónoma del País Vasco; o ante dos testigos.",
       d: "Se formaliza por escrito y mediante uno de los siguientes procedimientos a elección de la persona que lo otorga: ante una notaría; ante la persona funcionaria o empleada pública encargada del Registro Vasco de Voluntades Anticipadas o del servicio de documentación de un centro sanitario de la Comunidad Autónoma del País Vasco; o ante tres testigos.",
     },
-    correct: "c",
+    correct: "b",
   },
   {
     id: 402,
@@ -35,7 +35,7 @@ export const COMMON_QUESTIONS_101_150: Question[] = [
       c: "La persona otorgante conserve su capacidad, su libertad de actuación y la posibilidad de expresarse de manera inequívoca.",
       d: "La persona otorgante conserve su capacidad, su libertad de actuación y la posibilidad de expresarse de manera inequívoca o a través de la persona interlocutora designada al efecto.",
     },
-    correct: "c",
+    correct: "b",
   },
   {
     id: 404,
@@ -131,7 +131,7 @@ export const COMMON_QUESTIONS_101_150: Question[] = [
       c: "Los datos serán suprimidos en el plazo máximo de un mes desde su captación, salvo cuando hubieran de ser conservados para acreditar la comisión de actos que atenten contra la integridad de personas, bienes o instalaciones.",
       d: "En el caso de que los datos hubieran de ser conservados más allá del plazo de un mes desde su captación para acreditar la comisión de actos que atenten contra la integridad de personas, bienes o instalaciones, deberán ser puestas a disposición de la autoridad competente en un plazo máximo de cuarenta y ocho horas desde que se tuviera conocimiento de la existencia de la grabación.",
     },
-    correct: "d",
+    correct: "c",
   },
   {
     id: 412,
