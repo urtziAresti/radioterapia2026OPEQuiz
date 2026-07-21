@@ -5,10 +5,12 @@
 
 # funcionales
 
-
 ESTADISTICAS
 
     Estadisticas por usuario
+
+
+REGISTRO DE USUARIOS SIN MAIL, automatico en panel de control de usuarios    
 
 MEJORAR PROMP IA
 
