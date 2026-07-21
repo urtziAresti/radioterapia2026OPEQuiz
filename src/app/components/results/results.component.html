@@ -4,21 +4,23 @@
       <div >
         <div *ngIf="resultsData.correctAnswers === resultsData.totalQuestions" class="perfect-score">
           <p class="ion-text-bold"><b *ngIf="['navis', 'ADMIN'].includes(userName)">¡Perfecto! Mejor no se puede 🎉</b>
-            <img src="https://media1.tenor.com/m/cImAq1fQ7c4AAAAC/jean-claude-van-damme-dance.gif" alt="¡Felicidades!" class="celebration-gif" />
           </p>
+          <img src="https://media1.tenor.com/m/cImAq1fQ7c4AAAAC/jean-claude-van-damme-dance.gif" alt="¡Felicidades!" class="celebration-gif" />
+
         </div>
         <!-- Mensaje si apruebas -->
         <p class="ion-text-center ion-text-bold"
           *ngIf="resultsData.correctAnswers / resultsData.totalQuestions >= 0.5 && resultsData.correctAnswers < resultsData.totalQuestions && ['navis', 'ADMIN'].includes(userName)">
           Aprobaste Buen trabajo. 
-          <img src="https://media1.tenor.com/m/oH_Vy4CVANsAAAAd/ztute-dog.gif" alt="¡Felicidades!" class="celebration-gif" />
         </p>
+        <img src="https://media1.tenor.com/m/oH_Vy4CVANsAAAAd/ztute-dog.gif" alt="¡Felicidades!" class="celebration-gif" />
 
         <!-- Mensaje si suspendes -->
         <p *ngIf="resultsData.correctAnswers / resultsData.totalQuestions < 0.5">
           <b *ngIf="['navis', 'ADMIN'].includes(userName)">Penko Sigue dando caña! </b>
-          <img src="https://media.tenor.com/I3WYELgcTVgAAAAj/cat-beats-cat-aggr-meme.gif" alt="¡Felicidades!" class="celebration-gif" />
         </p>
+        <img src="https://media.tenor.com/I3WYELgcTVgAAAAj/cat-beats-cat-aggr-meme.gif" alt="¡Felicidades!" class="celebration-gif" />
+
       </div>
 
       <h1>{{ resultsData.correctAnswers }} / {{ resultsData.totalQuestions }}</h1>

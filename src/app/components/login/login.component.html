@@ -1,58 +1,106 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
     <ion-title class="theme-title">
-    {{texts.LOGIN.title}}
+      {{texts.LOGIN.title}}
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding ion-text-center">
 
-  <ion-spinner *ngIf="loadingSpinner" color="secondary" class="loading-spinner" name="circular"></ion-spinner>
+  <ion-spinner
+    *ngIf="loadingSpinner"
+    color="secondary"
+    class="loading-spinner"
+    name="circular">
+  </ion-spinner>
 
   <div class="login-container">
+
     <div class="logo-section">
-      <ion-icon name="lock-closed-outline" color="primary" style="font-size: 64px;"></ion-icon>
-      <h2><b>    {{texts.LOGIN.appName}}
-      </b></h2>
+      <ion-icon
+        name="lock-closed-outline"
+        color="primary"
+        style="font-size: 64px;">
+      </ion-icon>
+
+      <h2>
+        <b>{{texts.LOGIN.appName}}</b>
+      </h2>
     </div>
 
-    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
-      
+    <form
+      [formGroup]="loginForm"
+      (ngSubmit)="onLogin()"
+      data-testid="login-form">
+
       <ion-item lines="full" class="ion-margin-bottom">
-        <ion-input 
-          [label]="texts.LOGIN.username.label" 
-          labelPlacement="floating" 
-          type="text" 
+
+        <ion-input
+          data-testid="username"
+          labelPlacement="floating"
+          [label]="texts.LOGIN.username.label"
+          type="text"
           formControlName="username"
           [placeholder]="texts.LOGIN.username.label">
         </ion-input>
+
       </ion-item>
 
       <ion-item lines="full" class="ion-margin-bottom">
-        <ion-input 
-          [label]="texts.LOGIN.code.label" 
-          labelPlacement="floating" 
-          type="password" 
+
+        <ion-input
+          data-testid="code"
+          labelPlacement="floating"
+          [label]="texts.LOGIN.code.label"
+          type="password"
           formControlName="code"
           [placeholder]="texts.LOGIN.code.placeholder">
         </ion-input>
+
       </ion-item>
 
       <div class="ion-padding-top">
-        <ion-button type="submit" expand="block" [disabled]="loginForm.invalid">
-        {{texts.LOGIN.buttons.login}}
-          <ion-icon slot="end" name="log-in-outline"></ion-icon>
+
+        <ion-button
+          data-testid="login-button"
+          type="submit"
+          expand="block"
+          [disabled]="loginForm.invalid">
+
+          {{texts.LOGIN.buttons.login}}
+
+          <ion-icon
+            slot="end"
+            name="log-in-outline">
+          </ion-icon>
+
         </ion-button>
+
       </div>
 
     </form>
 
     <div class="ion-padding-top">
-      <ion-button class="register-button" (click)="register()" type="form" expand="block" >
+
+      <ion-button
+        data-testid="register-button"
+        class="register-button"
+        type="button"
+        expand="block"
+        (click)="register()">
+
         {{texts.LOGIN.buttons.register}}
-        <ion-icon slot="end" name="person-add-outline"></ion-icon>
+
+        <ion-icon
+          slot="end"
+          name="person-add-outline">
+        </ion-icon>
+
       </ion-button>
+
     </div>
+
   </div>
+
 </ion-content>

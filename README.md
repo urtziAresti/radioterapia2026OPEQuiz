@@ -6,6 +6,11 @@
 # funcionales
 
 
+GIfs para todos
+
+texto solo para naro y admin
+
+
 REGISTRO DE USUARIOS SIN MAIL, automatico en panel de control de usuarios    
 
 

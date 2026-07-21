@@ -1,17 +1,38 @@
-import { Page } from '@playwright/test';
+import { expect, Page } from '@playwright/test';
 
 export class WelcomePage {
-  constructor(private page: Page) {}
 
-  async goto() {
-    await this.page.goto('/');
-  }
+    constructor(private page: Page) {}
 
-  async fillUsername(name: string) {
-    await this.page.getByLabel('username').fill(name);
-  }
+    async goto() {
+        await this.page.goto('/');
+    }
 
-  async startQuiz() {
-    await this.page.getByRole('button', { name: /comenzar/i }).click();
-  }
+    async startRadio() {
+
+      console.error(this.page.locator('.btn-start'));
+      debugger;
+        await this.page.locator('.btn-start').click();
+    }
+
+    async startCommon() {
+        await this.page.locator('.btn-common').click();
+    }
+
+    async startMixed() {
+        await this.page.locator('.btn-mix').click();
+    }
+
+    async goData() {
+        await this.page.locator('.btn-data').click();
+    }
+
+    async goInstructions() {
+        await this.page.locator('.btn-instructions').click();
+    }
+
+    async expectLoaded() {
+        await expect(this.page.locator('h1')).toBeVisible();
+    }
+
 }
