@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { StatsService } from '../../../services/stats.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-stats',
@@ -12,6 +13,7 @@ import { StatsService } from '../../../services/stats.service';
 })
 export class StatsComponent implements OnInit {
   private statsService = inject(StatsService);
+  private router = inject(Router);
 
   userStats: any[] = [];
   loading = true;
@@ -133,6 +135,14 @@ export class StatsComponent implements OnInit {
         this.loading = false;
       }
     );
+  }
+
+  openUserStats(username:string){
+    this.router.navigate(["/user-stats"], {
+      queryParams: {
+        userName: username
+      },
+    });
   }
 
   formatTime(totalSeconds: number): string {

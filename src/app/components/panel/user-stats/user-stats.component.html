@@ -1,0 +1,81 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/stats" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title class="theme-title">Estadísticas de {{ username }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="user-stats-container">
+    <h1 class="ion-text-center"><b>{{ username }}</b></h1>
+
+    <div *ngIf="loading" class="loading">
+      <p>Cargando estadísticas...</p>
+    </div>
+
+    <div *ngIf="!loading && userStats.length === 0" class="no-data">
+      <p>No hay estadísticas disponibles para este usuario.</p>
+    </div>
+
+    <div *ngIf="!loading && userStats.length > 0">
+      <!-- Resumen global del usuario -->
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Resumen Global</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col size="12" sizeMd="4">
+                <strong>Quizzes realizados:</strong><br />
+                {{ totals.quizzes }}
+              </ion-col>
+              <ion-col size="12" sizeMd="4">
+                <strong>Aciertos:</strong><br />
+                {{ totals.correctAnswers }}
+              </ion-col>
+
+              <ion-col size="12" sizeMd="4">
+                <strong>Fallos:</strong><br />
+                {{ totals.totalQuestions - totals.correctAnswers }} 
+              </ion-col>
+
+              <ion-col size="12" sizeMd="4">
+                <strong>Preguntas totales:</strong><br />
+                {{ totals.totalQuestions }}
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="12" sizeMd="4">
+                <strong>Porcentaje de aciertos:</strong><br />
+                {{ totals.percentage }}%
+              </ion-col>
+              <ion-col size="12" sizeMd="4">
+                <strong>Tiempo total:</strong><br />
+                {{ formatTime(totals.totalSeconds) }}
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+
+      <!-- Listado de estadísticas -->
+      <ion-list>
+        <ion-item *ngFor="let stat of userStats">
+          <ion-label>
+            <h2>Quiz: {{ stat.quiz_type }}</h2>
+            <p>
+              Respuestas Correctas: {{ stat.correctAnswers }} /
+              {{ stat.totalQuestions }} ({{ stat.percentage }}%)
+            </p>
+            <p>Preguntas Fallidas: {{ stat.failedQuestions }}</p>
+            <p>Tiempo: {{ stat.elapsedTime }}</p>
+            <p>Fecha: {{ stat.createdAt | date: 'short' }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
+</ion-content>

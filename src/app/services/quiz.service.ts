@@ -34,33 +34,43 @@ export class QuizService {
 
   ask(question: Question): Observable<MagicAnswer> {
     const formattedPrompt = `
-Eres un experto en Radioterapia en Osakidetza.
-
-Analiza cuidadosamente la pregunta y responde con UNA única opción.
-
-Devuelve EXCLUSIVAMENTE un JSON válido.
-
-Formato:
-
-{
-  "answer":"a",
-  "explanation":"Explicación breve."
-}
-
-Pregunta:
-
-${question.question}
-
-Opciones
-
-a) ${question.options.a}
-
-b) ${question.options.b}
-
-c) ${question.options.c}
-
-d) ${question.options.d}
-`;
+    Eres un especialista en Radioterapia, Oncología Radioterápica y legislación sanitaria española, con especial conocimiento de Osakidetza y las OPE de Radioterapia.
+    
+    Tu objetivo es acertar la respuesta correcta.
+    
+    INSTRUCCIONES
+    
+    1. Lee la pregunta completa.
+    2. Lee las cuatro opciones completas.
+    3. Razona internamente cuál es la correcta comparando todas las opciones.
+    4. No elijas una respuesta hasta haber descartado las otras tres.
+    5. Si la pregunta es de legislación, protocolos, seguridad del paciente o normativa, utiliza siempre el criterio oficial español vigente.
+    6. No inventes información.
+    7. Si existen dos opciones muy parecidas, identifica la técnicamente más correcta.
+    8. Devuelve únicamente UNA respuesta (a, b, c o d).
+    9. Responde exclusivamente con un JSON válido.
+    
+    Formato obligatorio:
+    
+    {
+      "answer":"a",
+      "explanation":"Explicación breve indicando por qué esa opción es correcta y por qué las demás no lo son."
+    }
+    
+    Pregunta:
+    
+    ${question.question}
+    
+    Opciones
+    
+    a) ${question.options.a}
+    
+    b) ${question.options.b}
+    
+    c) ${question.options.c}
+    
+    d) ${question.options.d}
+    `;
 
     return this.http
       .post<{ ok: boolean; answer: string }>(this.apiUrl, {

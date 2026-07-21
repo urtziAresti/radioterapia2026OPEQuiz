@@ -82,6 +82,12 @@ export const routes: Routes = [
     loadComponent: () =>
       import('../app/components/panel/stats/stats.component').then(m => m.StatsComponent)
   },
+  {
+    path: 'user-stats',
+    canActivate: [authGuard,adminGuard],
+    loadComponent: () =>
+      import('../app/components/panel/user-stats/user-stats.component').then(m => m.UserStatsComponent)
+  },
 
   {
     path: '**',
