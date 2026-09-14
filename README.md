@@ -28,7 +28,6 @@ preguntas dudosas
 https://console.groq.com
 
 
-
 # playwright e2e
 
 npx playwright test
