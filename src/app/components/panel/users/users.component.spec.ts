@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { UsersComponent } from './users.component';
-import { UserService, User } from '../../../services/users.service';
+import { User, UserService } from '../../../services/users.service';
 
 describe('UsersComponent', () => {
   let component: UsersComponent;
@@ -8,7 +8,7 @@ describe('UsersComponent', () => {
   let userService: jasmine.SpyObj<UserService>;
 
   beforeEach(async () => {
-    userService = jasmine.createSpyObj('UserService', [
+    userService = jasmine.createSpyObj<UserService>('UserService', [
       'getUsers',
       'createUser',
       'deleteUser',
@@ -34,8 +34,10 @@ describe('UsersComponent', () => {
     component = fixture.componentInstance;
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  describe('creation', () => {
+    it('should create', () => {
+      expect(component).toBeTruthy();
+    });
   });
 
   describe('ngOnInit()', () => {
@@ -52,13 +54,13 @@ describe('UsersComponent', () => {
 
       await component.ngOnInit();
 
-      expect(userService.getUsers).toHaveBeenCalled();
+      expect(userService.getUsers).toHaveBeenCalledTimes(1);
       expect(component.users).toEqual(users);
     });
   });
 
   describe('loadUsers()', () => {
-    it('should assign users', async () => {
+    it('should load and assign users', async () => {
       const users: User[] = [
         {
           username: 'pepe',
@@ -76,21 +78,28 @@ describe('UsersComponent', () => {
 
       await component.loadUsers();
 
-      expect(component.users.length).toBe(2);
+      expect(userService.getUsers).toHaveBeenCalledTimes(1);
       expect(component.users).toEqual(users);
     });
 
-    it('should support empty list', async () => {
+    it('should support an empty users list', async () => {
       userService.getUsers.and.resolveTo([]);
 
       await component.loadUsers();
 
       expect(component.users).toEqual([]);
     });
+
+    it('should call getUsers every time it is executed', async () => {
+      await component.loadUsers();
+      await component.loadUsers();
+
+      expect(userService.getUsers).toHaveBeenCalledTimes(2);
+    });
   });
 
   describe('addUser()', () => {
-    it('should create user', async () => {
+    it('should create a user with active true', async () => {
       component.newUsername = 'nuevo';
       component.newCode = '1234';
 
@@ -98,6 +107,7 @@ describe('UsersComponent', () => {
 
       await component.addUser();
 
+      expect(userService.createUser).toHaveBeenCalledTimes(1);
       expect(userService.createUser).toHaveBeenCalledWith({
         username: 'nuevo',
         code: '1234',
@@ -107,10 +117,10 @@ describe('UsersComponent', () => {
       expect(component.newUsername).toBe('');
       expect(component.newCode).toBe('');
 
-      expect(component.loadUsers).toHaveBeenCalled();
+      expect(component.loadUsers).toHaveBeenCalledTimes(1);
     });
 
-    it('should not create when username empty', async () => {
+    it('should not create a user when username is empty', async () => {
       component.newUsername = '';
       component.newCode = '1234';
 
@@ -119,7 +129,7 @@ describe('UsersComponent', () => {
       expect(userService.createUser).not.toHaveBeenCalled();
     });
 
-    it('should not create when code empty', async () => {
+    it('should not create a user when code is empty', async () => {
       component.newUsername = 'admin';
       component.newCode = '';
 
@@ -128,7 +138,7 @@ describe('UsersComponent', () => {
       expect(userService.createUser).not.toHaveBeenCalled();
     });
 
-    it('should not create when both empty', async () => {
+    it('should not create a user when username and code are empty', async () => {
       component.newUsername = '';
       component.newCode = '';
 
@@ -136,89 +146,103 @@ describe('UsersComponent', () => {
 
       expect(userService.createUser).not.toHaveBeenCalled();
     });
-  });
 
-  describe('deleteUser()', () => {
-    it('should delete and reload', async () => {
-      spyOn(component, 'loadUsers').and.resolveTo();
-
-      await component.deleteUser('admin');
-
-      expect(userService.deleteUser).toHaveBeenCalledWith('admin');
-      expect(component.loadUsers).toHaveBeenCalled();
-    });
-  });
-
-  describe('toggleUser()', () => {
-    it('should disable active user', async () => {
-      spyOn(component, 'loadUsers').and.resolveTo();
-
-      await component.toggleUser({
-        username: 'admin',
-        code: '',
-        active: true
-      });
-
-      expect(userService.setActive).toHaveBeenCalledWith(
-        'admin',
-        false
-      );
-
-      expect(component.loadUsers).toHaveBeenCalled();
-    });
-
-    it('should enable inactive user', async () => {
-      spyOn(component, 'loadUsers').and.resolveTo();
-
-      await component.toggleUser({
-        username: 'admin',
-        code: '',
-        active: false
-      });
-
-      expect(userService.setActive).toHaveBeenCalledWith(
-        'admin',
-        true
-      );
-
-      expect(component.loadUsers).toHaveBeenCalled();
-    });
-  });
-
-  describe('extra coverage', () => {
-    it('should keep users after load', async () => {
-      const users: User[] = [
-        {
-          username: 'u1',
-          code: '1',
-          active: true
-        }
-      ];
-
-      userService.getUsers.and.resolveTo(users);
-
-      await component.loadUsers();
-
-      expect(component.users[0].username).toBe('u1');
-    });
-
-    it('should call getUsers every load', async () => {
-      await component.loadUsers();
-      await component.loadUsers();
-
-      expect(userService.getUsers).toHaveBeenCalledTimes(2);
-    });
-
-    it('should clear inputs after add', async () => {
-      component.newUsername = 'abc';
-      component.newCode = '999';
+    it('should reload users after creating a user', async () => {
+      component.newUsername = 'nuevo';
+      component.newCode = '1234';
 
       spyOn(component, 'loadUsers').and.resolveTo();
 
       await component.addUser();
 
-      expect(component.newUsername).toEqual('');
-      expect(component.newCode).toEqual('');
+      expect(component.loadUsers).toHaveBeenCalledTimes(1);
+    });
+
+    it('should clear username and code after creating a user', async () => {
+      component.newUsername = 'nuevo';
+      component.newCode = '1234';
+
+      spyOn(component, 'loadUsers').and.resolveTo();
+
+      await component.addUser();
+
+      expect(component.newUsername).toBe('');
+      expect(component.newCode).toBe('');
+    });
+  });
+
+  describe('deleteUser()', () => {
+    it('should delete the specified user', async () => {
+      spyOn(component, 'loadUsers').and.resolveTo();
+
+      await component.deleteUser('admin');
+
+      expect(userService.deleteUser).toHaveBeenCalledTimes(1);
+      expect(userService.deleteUser).toHaveBeenCalledWith('admin');
+    });
+
+    it('should reload users after deleting a user', async () => {
+      spyOn(component, 'loadUsers').and.resolveTo();
+
+      await component.deleteUser('admin');
+
+      expect(component.loadUsers).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe('toggleUser()', () => {
+    it('should deactivate an active user', async () => {
+      const user: User = {
+        username: 'admin',
+        code: '1234',
+        active: true
+      };
+
+      spyOn(component, 'loadUsers').and.resolveTo();
+
+      await component.toggleUser(user);
+
+      expect(userService.setActive).toHaveBeenCalledTimes(1);
+      expect(userService.setActive).toHaveBeenCalledWith(
+        'admin',
+        false
+      );
+
+      expect(component.loadUsers).toHaveBeenCalledTimes(1);
+    });
+
+    it('should activate an inactive user', async () => {
+      const user: User = {
+        username: 'admin',
+        code: '1234',
+        active: false
+      };
+
+      spyOn(component, 'loadUsers').and.resolveTo();
+
+      await component.toggleUser(user);
+
+      expect(userService.setActive).toHaveBeenCalledTimes(1);
+      expect(userService.setActive).toHaveBeenCalledWith(
+        'admin',
+        true
+      );
+
+      expect(component.loadUsers).toHaveBeenCalledTimes(1);
+    });
+
+    it('should not modify the user object directly', async () => {
+      const user: User = {
+        username: 'admin',
+        code: '1234',
+        active: true
+      };
+
+      spyOn(component, 'loadUsers').and.resolveTo();
+
+      await component.toggleUser(user);
+
+      expect(user.active).toBeTrue();
     });
   });
 });

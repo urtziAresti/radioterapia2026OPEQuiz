@@ -37,49 +37,72 @@ export class UserStatsComponent implements OnInit {
     });
   }
 
-  fetchUserStats(): void {
-    this.loading = true;
-  
-    // Llamar al servicio para obtener todas las estadísticas
-    this.statsService.getUserStats().subscribe(
-      (response) => {
-        if (response.success) {
-          // Filtrar las estadísticas del usuario
-          this.userStats = response.data
-            .filter((stat: any) => stat.playerName === this.username)
-            .map((stat: any) => ({
-              ...stat,
-              failedQuestions: stat.totalQuestions - stat.correctAnswers, // Calcular preguntas fallidas
-            }));
-  
-          // Calcular el resumen global
-          this.totals.quizzes = this.userStats.length;
-          this.totals.correctAnswers = this.userStats.reduce(
-            (sum: number, stat: any) => sum + stat.correctAnswers,
-            0
+fetchUserStats(): void {
+  this.loading = true;
+
+  // Llamar al servicio para obtener todas las estadísticas
+  this.statsService.getUserStats().subscribe(
+    (response) => {
+      if (response.success) {
+        // Filtrar las estadísticas del usuario
+        this.userStats = response.data
+          .filter((stat: any) => stat.playerName === this.username)
+          .map((stat: any) => ({
+            ...stat,
+            failedQuestions: stat.totalQuestions - stat.correctAnswers,
+          }))
+          .sort(
+            (a: any, b: any) =>
+              new Date(b.createdAt).getTime() -
+              new Date(a.createdAt).getTime()
           );
-          this.totals.totalQuestions = this.userStats.reduce(
-            (sum: number, stat: any) => sum + stat.totalQuestions,
-            0
-          );
-          this.totals.totalSeconds = this.userStats.reduce((sum: number, stat: any) => {
-            const [minutes, seconds] = stat.elapsedTime.split(':').map(Number);
+
+        // Calcular el resumen global
+        this.totals.quizzes = this.userStats.length;
+
+        this.totals.correctAnswers = this.userStats.reduce(
+          (sum: number, stat: any) => sum + stat.correctAnswers,
+          0
+        );
+
+        this.totals.totalQuestions = this.userStats.reduce(
+          (sum: number, stat: any) => sum + stat.totalQuestions,
+          0
+        );
+
+        this.totals.totalSeconds = this.userStats.reduce(
+          (sum: number, stat: any) => {
+            const [minutes, seconds] = stat.elapsedTime
+              .split(':')
+              .map(Number);
+
             return sum + minutes * 60 + seconds;
-          }, 0);
-  
-          // Calcular el porcentaje de aciertos
-          this.totals.percentage = this.totals.totalQuestions
-            ? Math.round((this.totals.correctAnswers / this.totals.totalQuestions) * 100)
-            : 0;
-        }
-        this.loading = false;
-      },
-      (error) => {
-        console.error('Error al obtener las estadísticas:', error);
-        this.loading = false;
+          },
+          0
+        );
+
+        // Calcular el porcentaje de aciertos
+        this.totals.percentage = this.totals.totalQuestions
+          ? Math.round(
+              (this.totals.correctAnswers /
+                this.totals.totalQuestions) *
+                100
+            )
+          : 0;
       }
-    );
-  }
+
+      this.loading = false;
+    },
+    (error) => {
+      console.error(
+        'Error al obtener las estadísticas:',
+        error
+      );
+
+      this.loading = false;
+    }
+  );
+}
 
   formatTime(totalSeconds: number): string {
     const hours = Math.floor(totalSeconds / 3600);
