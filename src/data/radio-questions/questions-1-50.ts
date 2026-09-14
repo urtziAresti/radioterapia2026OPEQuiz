@@ -10,8 +10,7 @@ export const QUESTIONS_1_50: Question[] = [
       c: "Para su correcta medida, hay que tener en cuenta el concepto de “equilibrio electrónico”.",
       d: "La ICRU recomienda utilizar las unidades de medida del Sistema Internacional, que es el Roentgen (R)."
     },
-    correct: "c",
-    second_correct:"a"///??????
+    correct: "c"
   },
   {
     id: 2,
@@ -70,14 +69,15 @@ export const QUESTIONS_1_50: Question[] = [
   },
   {
     id: 7,
-    question: "En referencia a la contaminación radiactiva, NO es cierto que:",
+    question: "(IMPUGNABLE)En referencia a la contaminación radiactiva, NO es cierto que:",
     options: {
       a: "Es la presencia de material radiactivo en una materia, superficie o en una persona.",
       b: "Se realizarán controles de ausencia de contaminación siempre que se haya podido producir una contaminación.",
       c: "Cuando se detecta una contaminación radiactiva, el primer paso es la protección adecuada de la persona que realizará la descontaminación.",
       d: "Todo el material utilizado durante el proceso de descontaminación se gestionará como residuo radiactivo."
     },
-    correct: "c"
+    correct: "a",
+    second_correct:"c"///??????
   },
   {
     id: 8,
@@ -147,14 +147,15 @@ export const QUESTIONS_1_50: Question[] = [
   },
   {
     id: 14,
-    question: "Entre las recomendaciones para la TC de planificación de un tratamiento de cáncer de recto, NO se encuentra:",
+    question: "(IMPUGNABLE)Entre las recomendaciones para la TC de planificación de un tratamiento de cáncer de recto, NO se encuentra:",
     options: {
       a: "Aplicar enema rectal o supositorio de glicerina antes de su realización.",
       b: "Instruir al paciente en el protocolo sobre el vaciado de la vejiga.",
       c: "Utilizar un grosor de corte de 6-8 mm.",
       d: "Instruir al paciente en el protocolo sobre el vaciado del recto."
     },
-    correct: "c"
+    correct: "b",
+    second_correct:"c"
   },
   {
     id: 15,
@@ -213,7 +214,7 @@ export const QUESTIONS_1_50: Question[] = [
   },
   {
     id: 20,
-    question: "En el cáncer de pulmón de célula pequeña (estadio III), ¿cuál es la recomendación terapéutica general?",
+    question: "(IMPUGNABLE)En el cáncer de pulmón de célula pequeña (estadio III), ¿cuál es la recomendación terapéutica general?",
     options: {
       a: "Quimioterapia y radioterapia de forma concomitante.",
       b: "Radioterapia y cirugía neoadyuvante.",
@@ -473,7 +474,8 @@ export const QUESTIONS_1_50: Question[] = [
       c: "Es una dispersión inelástica en la que no se excita el átomo.",
       d: "Es una dispersión inelástica en la que se excita el átomo."
     },
-    correct: "b"
+    correct: "a",
+    second_correct:"b"
   },
   {
     id: 44,
@@ -551,7 +553,5 @@ export const QUESTIONS_1_50: Question[] = [
       d: "Todas las opciones son correctas.",
     },
     correct: "d",
-  },
-  
-  
+  }
 ];

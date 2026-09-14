@@ -260,7 +260,8 @@ export const QUESTIONS_251_300: Question[] = [
       c: "En el margen que se deja del CTV al PTV.",
       d: "Todas las opciones son correctas.",
     },
-    correct: "d",
+    correct: "a",
+    second_correct: "d",
   },
   {
     id: 273,
@@ -288,7 +289,7 @@ export const QUESTIONS_251_300: Question[] = [
   },
   {
     id: 275,
-    question: "En referencia a la angiografía-TC, es cierto que:",
+    question: "(IMPUGNABLE) En referencia a la angiografía-TC, es cierto que:",
     options: {
       a: "Es un procedimiento de imagen que no utiliza catéteres.",
       b: "Utiliza ondas de radiofrecuencia para obtener la imagen.",
@@ -296,6 +297,7 @@ export const QUESTIONS_251_300: Question[] = [
       d: "Todas las respuestas son correctas.",
     },
     correct: "c",
+    second_correct: "a",
   },
   {
     id: 276,
@@ -417,14 +419,15 @@ export const QUESTIONS_251_300: Question[] = [
   {
     id: 286,
     question:
-      "¿Qué ventajas tiene el uso de VMAT frente a la IMRT convencional en tratamiento de mama?",
+      "(IMPUGNABLE) ¿Qué ventajas tiene el uso de VMAT frente a la IMRT convencional en tratamiento de mama?",
     options: {
       a: "Reducción de movimientos que debe hacer la persona paciente.",
       b: "Reducción de las unidades monitor.",
       c: "Reducción del tiempo de tratamiento.",
       d: "La opción b) y c) son correctas.",
     },
-    correct: "c",
+    correct: "d",
+    second_correct: "c",
   },
   {
     id: 287,

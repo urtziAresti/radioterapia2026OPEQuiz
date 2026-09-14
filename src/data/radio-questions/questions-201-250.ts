@@ -106,7 +106,8 @@ export const QUESTIONS_201_250: Question[] = [
       c: "En un máximo de 2 horas.",
       d: "El tiempo no tiene una importancia significativa.",
     },
-    correct: "b",
+    correct: "a",
+    second_correct: "b",
   },
   {
     id: 210,

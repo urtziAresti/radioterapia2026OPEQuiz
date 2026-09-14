@@ -244,7 +244,8 @@ export const QUESTIONS_51_100: Question[] = [
       c: "Tratamiento de carcinoma de células escamosas.",
       d: "Tratamiento de melanomas uveales.",
     },
-    correct: "a",
+    correct: "d",
+    second_correct: "a"
   },
   {
     id: 72,
@@ -540,7 +541,8 @@ export const QUESTIONS_51_100: Question[] = [
       c: "Técnico/técnica especialista en radioterapia y administrativos/administrativas.",
       d: "Técnico/técnica especialista en radioterapia, médicos/médicas y administrativos/administrativas.",
     },
-    correct: "a",
+    correct: "d",
+    second_correct: "a"
   },
   {
     id: 97,

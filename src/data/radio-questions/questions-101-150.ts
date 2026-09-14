@@ -204,7 +204,7 @@ export const QUESTIONS_101_150: Question[] = [
   {
     id: 118,
     question:
-      "¿Cuál es la dosis utilizada para el tratamiento de urgencia en el síndrome de compresión medular?",
+      "(IMPUGNABLE)¿Cuál es la dosis utilizada para el tratamiento de urgencia en el síndrome de compresión medular?",
     options: {
       a: "10 fracciones de 3 Gy.",
       b: "5 fracciones de 4 Gy.",
@@ -438,7 +438,8 @@ export const QUESTIONS_101_150: Question[] = [
       c: "Su velocidad depende del medio por el que se transmita.",
       d: "Su energía solo depende de la frecuencia de la onda.",
     },
-    correct: "c",
+    correct: "d",
+    second_correct: "c",
   },
   {
     id: 138,
@@ -558,7 +559,8 @@ export const QUESTIONS_101_150: Question[] = [
       c: "La atenuación del haz por los átomos del medio.",
       d: "Todas las respuestas son correctas.",
     },
-    correct: "d",
+    correct: "a",
+    second_correct: "d",////////////////?????????????
   },
   {
     id: 148,
