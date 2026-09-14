@@ -59,7 +59,9 @@ export const ES = {
     title: "Instrucciones",
     test: {
       first:
-        "1º El test cuenta con 300 preguntas de radioterapia y 200 comunes, todas en modo aleatorio.",
+        "1º El test cuenta con 300 preguntas de radioterapia y 200 comunes, todas en modo aleatorio."+
+        "\n\n"+"Las respuestas de referencia son las de UTS, difiere de 9 preguntas del de CCOO" +
+        "\n\n"+"  ",
       second:
         "2º Cada vez que falles una pregunta, aparecerá de nuevo en el modo repaso.",
     },

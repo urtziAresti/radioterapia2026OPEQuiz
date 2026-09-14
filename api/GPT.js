@@ -53,7 +53,7 @@ module.exports = async function handler(req, res) {
     ];
 
     const response = await client.chat.completions.create({
-      model: 'llama-3.1-8b-instant',
+      model: 'qwen/qwen3-32b',
       messages
     });
 
