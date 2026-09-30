@@ -237,23 +237,23 @@ describe("WelcomeComponent", () => {
     expect(component.getFailedQuestions()).toEqual([2]);
   });
 
-  it("should emit config and navigate", () => {
+  it("should navigate with radio section", () => {
     spyOn(component.configSubmitted, "emit");
-
+  
     component.username = "urtzi";
-    component.selectedQuestionCount = 50;
-
+    component.selectedQuestionCount = 25;
+    component.questionMode = "sections";
+    component.radioSection = "101-150";
+  
     component.startQuiz(TEST_TYPE.RADIO);
-    expect(component.configSubmitted.emit).toHaveBeenCalledWith({
-      username: "urtzi",
-      count: 50,
-    });
-
+  
     expect(router.navigate).toHaveBeenCalledWith(["/questions"], {
       queryParams: {
         name: "urtzi",
-        count: 50,
+        count: 25,
         quiz_type: "RADIO",
+        quiz_mode: "sections",
+        secctions_quiz_value: "101-150",
       },
     });
   });

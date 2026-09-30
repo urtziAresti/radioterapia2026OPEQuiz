@@ -110,6 +110,38 @@ export class QuizService {
       );
   }
 
+  getQuestionsBySection(section: string, count: number): Question[] {
+    const [type, range] = section.split(":");
+    if (!range) {
+      return [];
+    }
+  
+    const [start, end] = range.split("-").map(Number);
+  
+    if (isNaN(start) || isNaN(end)) {
+      return [];
+    }
+  
+
+    let questions: Question[];
+  
+    if (type === "radio") {
+      questions = RADIO_QUESTIONS;
+    } else if (type === "common") {
+      questions = COMMON_QUESTIONS;
+    } else {
+      return [];
+    }
+  
+    const sectionQuestions = questions.filter(
+      (q, index) =>
+        index >= start - 1 &&
+        index <= end - 1 
+    );
+  
+    return this.shuffle(sectionQuestions.slice(0, count));
+  }
+
   getQuestions(quiz_type: TEST_TYPE, count: number): Question[] {
     if (quiz_type === TEST_TYPE.RADIO) {
       return this.getRadioQuestions(count);

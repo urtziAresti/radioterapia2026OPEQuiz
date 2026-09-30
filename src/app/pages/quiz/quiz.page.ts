@@ -16,7 +16,6 @@ import { I18nService } from "../../../assets/i18n/i18n.service";
 import { LogService } from "../../services/log.service";
 import { Question } from "../../interfaces/question";
 import { TEST_TYPE } from "../../components/welcome/welcome.component";
-import { StatsService } from "../../services/stats.service";
 import { ResultsComponent } from "../../components/results/results.component";
 import { ResultsData } from "../../interfaces/results-data";
 
@@ -89,25 +88,52 @@ export class QuizPage implements OnInit, OnDestroy {
       if (params["name"]) {
         this.playerName = params["name"];
       }
-
+    
       if (params["quiz_type"]) {
         this.quiz_type = params["quiz_type"];
       }
-
+    
+      // Quiz de preguntas falladas
       if (params["mode"] === "failed") {
         this.mode = "failed";
-
+    
         this.failedIds = JSON.parse(params["ids"] || "[]");
-
+    
         this.resetQuiz();
-
+    
         this.questions = this.quizService.getQuestionsByIds(this.failedIds);
+    
+        return;
+      }
+    
+      // Quiz normal
+      this.mode = "normal";
+    
+      this.count = +params["count"];
+    
+      const quizMode = params["quiz_mode"];
+      const sectionsQuizValue = params["secctions_quiz_value"];
+    
+      this.resetQuiz();
+    
+      // Quiz por secciones
+      if (quizMode === "sections" && sectionsQuizValue) {
+
+        const type = this.quiz_type === TEST_TYPE.RADIO
+          ? "radio"
+          : "common";
+
+        const section = `${type}:${sectionsQuizValue}`;
+
+        this.questions = this.quizService.getQuestionsBySection(
+          section,
+          this.count
+        );
 
         return;
       }
-      this.mode = "normal";
-      this.count = +params["count"];
-      this.resetQuiz();
+    
+      // Quiz aleatorio
       this.questions = this.quizService.getQuestions(
         this.quiz_type,
         this.count

@@ -1,9 +1,94 @@
 <div class="welcome-container">
   <div class="welcome-card">
     <h1>{{texts.WELCOME.title}}</h1>
+
     <img src="assets/icon/radio.svg" alt="Radioterapia" class="logo" />
 
-    <div class="form-group">
+    <!-- Selector de modo -->
+    <ion-segment [(ngModel)]="questionMode" class="quiz-mode-segment">
+
+      <ion-segment-button value="random">
+        <ion-label>Aleatorias</ion-label>
+      </ion-segment-button>
+    
+      <ion-segment-button value="sections">
+        <ion-label>Bloques 50</ion-label>
+      </ion-segment-button>
+    
+    </ion-segment>
+    
+    <!-- Selectores por secciones -->
+    <div
+      *ngIf="questionMode === 'sections'"
+      class="sections-container"
+    >
+    
+      <!-- Radioterapia -->
+      <ion-item lines="none">
+        <ion-label position="stacked" class="section-title">Radioterapia</ion-label>
+    
+        <ion-select
+          [(ngModel)]="radioSection"
+          interface="popover"
+          placeholder="Selecciona bloque"
+        >
+          <ion-select-option value="1-50">
+            1-50
+          </ion-select-option>
+    
+          <ion-select-option value="51-100">
+            51-100
+          </ion-select-option>
+    
+          <ion-select-option value="101-150">
+            101-150
+          </ion-select-option>
+    
+          <ion-select-option value="151-200">
+            151-200
+          </ion-select-option>
+    
+          <ion-select-option value="201-250">
+            201-250
+          </ion-select-option>
+    
+          <ion-select-option value="251-300">
+            251-300
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+    
+      <!-- Comunes -->
+      <ion-item lines="none">
+        <ion-label position="stacked" class="section-title">Comunes</ion-label>
+
+        <ion-select
+          [(ngModel)]="commonSection"
+          interface="popover"
+          placeholder="Selecciona bloque"
+        >
+          <ion-select-option value="1-50">
+            1-50
+          </ion-select-option>
+    
+          <ion-select-option value="51-100">
+            51-100
+          </ion-select-option>
+    
+          <ion-select-option value="101-150">
+            101-150
+          </ion-select-option>
+    
+          <ion-select-option value="151-200">
+            151-200
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+    
+    </div>
+
+    <!-- Número de preguntas: solo en modo Aleatorias -->
+    <div class="form-group" *ngIf="questionMode === 'random'">
       <ion-item lines="none">
         <ion-select [(ngModel)]="selectedQuestionCount" interface="popover">
           <ion-select-option
@@ -15,9 +100,16 @@
       </ion-item>
     </div>
 
+    <!-- Secciones: vacío por ahora -->
+    <div *ngIf="questionMode === 'sections'">
+    </div>
+
     <ion-card class="progress-card">
       <ion-card-header>
-        <ion-card-title> {{texts.WELCOME.progress.title}}</ion-card-title>
+        <ion-card-title>
+          {{texts.WELCOME.progress.title}}
+        </ion-card-title>
+
         <ion-card-subtitle>
           {{ progress.answered }} de {{ progress.total }} preguntas
         </ion-card-subtitle>
@@ -25,7 +117,8 @@
 
       <ion-card-content>
 
-        <ion-progress-bar [value]="progress.answered / progress.total">
+        <ion-progress-bar
+          [value]="progress.answered / progress.total">
         </ion-progress-bar>
 
         <div class="progress-info">
@@ -42,38 +135,67 @@
 
       </ion-card-content>
     </ion-card>
-    <button class="btn-start" [disabled]="!selectedQuestionCount" (click)="startQuiz(TEST_TYPE.RADIO)">
+
+    <button
+      class="btn-start"
+      [disabled]="!selectedQuestionCount"
+      (click)="startQuiz(TEST_TYPE.RADIO)">
       {{texts.WELCOME.buttons.radio}}
     </button>
 
-    <button class="btn-common" [disabled]="!selectedQuestionCount" (click)="startQuiz(TEST_TYPE.COMMON)">
+    <button
+      class="btn-common"
+      [disabled]="!selectedQuestionCount"
+      (click)="startQuiz(TEST_TYPE.COMMON)">
       {{texts.WELCOME.buttons.common}}
     </button>
 
-    <button class="btn-mix" [disabled]="!selectedQuestionCount" (click)="startQuiz(TEST_TYPE.ALL)">
+    <button
+      class="btn-mix"
+      [disabled]="!selectedQuestionCount"
+      (click)="startQuiz(TEST_TYPE.ALL)">
       {{texts.WELCOME.buttons.mixed}}
     </button>
 
-    <button class="btn-repaso" *ngIf="areFailedQuestions" (click)="startRepasoMode()">
+    <button
+      class="btn-repaso"
+      *ngIf="areFailedQuestions"
+      (click)="startRepasoMode()">
       {{texts.WELCOME.buttons.failed}} ({{ failedCount }})
     </button>
 
-    <button *ngIf="['navis', 'ADMIN'].includes(username)" class="btn-suggestions" type="button"
+    <button
+      *ngIf="['navis', 'ADMIN'].includes(username)"
+      class="btn-suggestions"
+      type="button"
       (click)="sendSuggestionsMail()">
-      {{texts.WELCOME.buttons.suggestions}}    
-     </button>
-
-    <button class="btn-data" color="secondary" type="button" (click)="viewData()">
-      {{texts.WELCOME.buttons.data}}    
+      {{texts.WELCOME.buttons.suggestions}}
     </button>
 
-    <button class="btn-instructions" color="secondary" type="button" (click)="viewInstructions()">
-      {{texts.WELCOME.buttons.instructions}}    
+    <button
+      class="btn-data"
+      color="secondary"
+      type="button"
+      (click)="viewData()">
+      {{texts.WELCOME.buttons.data}}
     </button>
 
-    <button class="btn-start" color="primary" *ngIf="['ADMIN'].includes(username)" type="button" (click)="viewPanel()">
-      {{texts.WELCOME.buttons.panel}}    
-     
+    <button
+      class="btn-instructions"
+      color="secondary"
+      type="button"
+      (click)="viewInstructions()">
+      {{texts.WELCOME.buttons.instructions}}
     </button>
+
+    <button
+      class="btn-start"
+      color="primary"
+      *ngIf="['ADMIN'].includes(username)"
+      type="button"
+      (click)="viewPanel()">
+      {{texts.WELCOME.buttons.panel}}
+    </button>
+
   </div>
 </div>

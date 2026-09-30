@@ -11,7 +11,6 @@ export class WelcomePage {
     async startRadio() {
 
       console.error(this.page.locator('.btn-start'));
-      debugger;
         await this.page.locator('.btn-start').click();
     }
 

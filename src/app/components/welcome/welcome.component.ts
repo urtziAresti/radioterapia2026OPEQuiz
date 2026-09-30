@@ -43,11 +43,15 @@ export class WelcomeComponent implements OnInit {
   username: string = "";
   selectedQuestionCount: number = 25;
   failedQuestions: number[] = [];
+  questionMode: 'random' | 'sections' = 'random';
+  radioSection: string = '';
+  commonSection: string = '';
   private router = inject(Router);
   private quizService = inject(QuizService);
   private mailService = inject(MailService);
   progress!: QuestionProgress;
   TEST_TYPE: typeof TEST_TYPE = TEST_TYPE;
+  
 
   @Output() configSubmitted = new EventEmitter<{
     username: string;
@@ -150,8 +154,21 @@ export class WelcomeComponent implements OnInit {
       this.router.navigate(["/questions"], {
         queryParams: {
           name: config.username,
-          count: config.count,
-          quiz_type: type
+      
+          count: this.questionMode === "sections"
+            ? 50
+            : config.count,
+      
+          quiz_type: type,
+      
+          quiz_mode: this.questionMode,
+      
+          secctions_quiz_value:
+            this.questionMode === "sections"
+              ? (type === TEST_TYPE.RADIO
+                  ? this.radioSection
+                  : this.commonSection)
+              : undefined
         },
       });
     }
