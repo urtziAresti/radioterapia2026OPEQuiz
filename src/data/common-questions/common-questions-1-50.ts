@@ -220,12 +220,12 @@ export const COMMON_QUESTIONS_1_50: Question[] = [
   {
     id: 319,
     question:
-      "Según dispone la Ley 16/2003, de 28 de mayo, de cohesión y calidad del Sistema Nacional de Salud, la exclusión de una técnica, tecnología o procedimiento actualmente incluido en la cartera de servicios se llevará a cabo cuando:",
+      "A los efectos de la ley 16/2003, de 28 de mayo, de cohesión y calidad del Sistema Nacional de Salud, la competencia profesional es: ",
     options: {
-      a: "Se evidencie su falta de eficacia, efectividad o eficiencia, o que el balance entre beneficio y riesgo sea significativamente desfavorable.",
-      b: "Requiera una formación para la que no exista la especialidad médica correspondiente.",
-      c: "Hayan cambiado las condiciones económicas de su implantación.",
-      d: "Todas las respuestas anteriores son correctas.",
+      a: "La acreditacion de formacion continuada a lo largo del desempeño de su carrera profesional.",
+      b: "La competencia acreditada por el titulo correspondiente acreditativo de la adquisicion de conocimientos requeridos para el desempeño del puesto designado",
+      c: "la aptitud del personal profesional sanotario para integrar y aplicar los conocimientos, habilidades y actitudes asociadas a las buenas practicas de su profesion para resolver los problemas que se le plantean",
+      d: "la superación del proceso selectivo oficial convocado por la autoridad competente para la adquisicion del vinculo estatuario con los servicios sanitarios",
     },
     correct: "c",
   },
