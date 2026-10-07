@@ -552,6 +552,6 @@ export const QUESTIONS_1_50: Question[] = [
       c: "Inmovilizadores termoplásticos corporales.",
       d: "Todas las opciones son correctas.",
     },
-    correct: "d",
+    correct: "a",
   }
 ];

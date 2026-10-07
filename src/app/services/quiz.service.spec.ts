@@ -25,6 +25,7 @@ describe('QuizService', () => {
       'hasIncorrectAnswers',
       'clearHistory',
       'getAllHistory',
+      'resetAvailableQuestions',
     ]);
 
     historySpy.getAnsweredQuestionIds.and.returnValue([]);
@@ -32,6 +33,7 @@ describe('QuizService', () => {
     historySpy.getIncorrectAnswers.and.returnValue([]);
     historySpy.hasIncorrectAnswers.and.returnValue(false);
     historySpy.getAllHistory.and.returnValue([]);
+    historySpy.resetAvailableQuestions.and.stub();
 
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
@@ -151,10 +153,10 @@ describe('QuizService', () => {
       historySpy.getAnsweredQuestionIds.and.returnValue(
         RADIO_QUESTIONS.map((q) => q.id)
       );
-
+    
       const result = service.getRadioQuestions(10);
-
-      expect(result.length).toBe(0);
+    
+      expect(result.length).toBe(10);
     });
   });
 
@@ -187,6 +189,10 @@ describe('QuizService', () => {
       );
 
       expect(service.getCommonQuestions(5).length).toBe(0);
+
+      expect(historySpy.resetAvailableQuestions).toHaveBeenCalledWith(
+        TEST_TYPE.COMMON
+      );
     });
   });
 
@@ -243,4 +249,3 @@ describe('QuizService', () => {
     });
   });
 });
-

@@ -202,8 +202,7 @@ export class QuizPage implements OnInit, OnDestroy {
     } else {
       this.nextVisible = true;
     }
-
-    this.historyService.saveQuestion(currentQuestion.id, isCorrect);
+    this.historyService.saveQuestion(currentQuestion.id, isCorrect,this.quiz_type );
 
     this.logService.log("ANSWER_SELECTED", {
       questionId: currentQuestion.id,

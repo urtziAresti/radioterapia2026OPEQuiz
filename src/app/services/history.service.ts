@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
+import { TEST_TYPE } from '../components/welcome/welcome.component';
 
 interface QuestionHistory {
   questionId: number;
   correct: boolean;
   date: string;
+  type: TEST_TYPE;
 }
 
 interface AttemptHistory {
@@ -117,7 +119,11 @@ export class HistoryService {
   /**
    * Guarda una pregunta respondida.
    */
-  saveQuestion(questionId: number, correct: boolean): void {
+  saveQuestion(
+    questionId: number,
+    correct: boolean,
+    type: TEST_TYPE
+  ): void {
 
     const username = this.getUsername();
 
@@ -139,12 +145,14 @@ export class HistoryService {
 
       existingQuestion.correct = correct;
       existingQuestion.date = new Date().toISOString();
+      existingQuestion.type = type;
 
     } else {
 
       attempt.questions.push({
         questionId,
         correct,
+        type,
         date: new Date().toISOString()
       });
 
@@ -186,7 +194,10 @@ export class HistoryService {
     return this.getIncorrectAnswers().length > 0;
   }
 
-
+  /**
+   * Devuelve el número de preguntas respondidas
+   * en el intento actual.
+   */
   getAnsweredQuestionsCount(): number {
 
     const username = this.getUsername();
@@ -208,7 +219,6 @@ export class HistoryService {
     return attempt.questions.length;
   }
 
-
   /**
    * Limpia el historial completo.
    */
@@ -223,6 +233,9 @@ export class HistoryService {
     return this.getHistory();
   }
 
+  /**
+   * Devuelve las preguntas respondidas.
+   */
   getAnsweredQuestionIds(): number[] {
 
     const username = this.getUsername();
@@ -242,6 +255,39 @@ export class HistoryService {
     return user.attempts.flatMap(attempt =>
       attempt.questions.map(question => question.questionId)
     );
+  }
+
+  /**
+   * Resetea las preguntas disponibles de Comunes o Radioterapia.
+   *
+   * common -> preguntas comunes
+   * radio  -> preguntas de radioterapia
+   */
+  resetAvailableQuestions(type: TEST_TYPE): void {
+
+    const username = this.getUsername();
+
+    if (!username) {
+      return;
+    }
+
+    const history = this.getHistory();
+
+    const user = history.find(u => u.user === username);
+
+    if (!user) {
+      return;
+    }
+
+    user.attempts.forEach(attempt => {
+
+      attempt.questions = attempt.questions.filter(
+        question => question.type !== type
+      );
+
+    });
+
+    this.saveHistory(history);
   }
 
 }

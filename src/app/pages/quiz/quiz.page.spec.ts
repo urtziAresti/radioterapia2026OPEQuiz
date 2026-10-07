@@ -51,23 +51,13 @@ describe("QuizPage", () => {
       log: jasmine.createSpy(),
     };
 
-    routerMock = {
-      navigate: jasmine.createSpy(),
-    };
-
     routerMock = jasmine.createSpyObj("Router", [
       "navigate",
-      "navigateByUrl"
-    ]);
+      "navigateByUrl",
+    ], {
+      events: of(new NavigationEnd(1, "/", "/")),
+    });
 
-    routerMock = jasmine.createSpyObj(
-      "Router",
-      ["navigate", "navigateByUrl"],
-      {
-        events: of(new NavigationEnd(1, "/", "/"))
-      }
-    );
-    
     routerMock.navigateByUrl.and.returnValue(Promise.resolve(true));
 
     await TestBed.configureTestingModule({
@@ -119,7 +109,11 @@ describe("QuizPage", () => {
     expect(component.isAnswered).toBeTrue();
     expect(component.correctAnswers).toBe(1);
 
-    expect(historyServiceMock.saveQuestion).toHaveBeenCalledWith(1, true);
+    expect(historyServiceMock.saveQuestion).toHaveBeenCalledWith(
+      1,
+      true,
+      "RADIO"
+    );
 
     expect(logServiceMock.log).toHaveBeenCalledWith(
       "ANSWER_SELECTED",
@@ -140,7 +134,11 @@ describe("QuizPage", () => {
     expect(component.isAnswered).toBeTrue();
     expect(component.nextVisible).toBeTrue();
 
-    expect(historyServiceMock.saveQuestion).toHaveBeenCalledWith(1, false);
+    expect(historyServiceMock.saveQuestion).toHaveBeenCalledWith(
+      1,
+      false,
+      "RADIO"
+    );
 
     expect(logServiceMock.log).toHaveBeenCalledWith(
       "ANSWER_SELECTED",
@@ -218,6 +216,7 @@ describe("QuizPage", () => {
 
     expect(component["slideError"]).toHaveBeenCalledWith(1500);
   });
+
   it("should move to next question", () => {
     component.questions = [
       { id: 1, correct: "A" },
@@ -235,7 +234,6 @@ describe("QuizPage", () => {
     expect(component.selectedOption).toBeNull();
     expect(component.isAnswered).toBeFalse();
   });
-
 
   it("should not navigate if locked", () => {
     component["navigationLocked"] = true;
@@ -450,5 +448,8 @@ describe("QuizPage", () => {
     expect(quizServiceMock.getQuestionsByIds)
       .toHaveBeenCalledWith([10, 20]);
   });
-
 });
+
+
+
+

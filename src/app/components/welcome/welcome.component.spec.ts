@@ -250,7 +250,7 @@ describe("WelcomeComponent", () => {
     expect(router.navigate).toHaveBeenCalledWith(["/questions"], {
       queryParams: {
         name: "urtzi",
-        count: 25,
+        count: 50,
         quiz_type: "RADIO",
         quiz_mode: "sections",
         secctions_quiz_value: "101-150",

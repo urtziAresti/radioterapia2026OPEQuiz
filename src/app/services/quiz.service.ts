@@ -162,22 +162,43 @@ export class QuizService {
   }
 
   getRadioQuestions(count: number): Question[] {
-    const answeredIds = new Set(this.history.getAnsweredQuestionIds());
+    let answeredIds = new Set(this.history.getAnsweredQuestionIds());
 
-    const remainingQuestions = RADIO_QUESTIONS.filter(
+    let remainingQuestions = RADIO_QUESTIONS.filter(
       (q) => !answeredIds.has(q.id)
     );
+
+    if (remainingQuestions.length === 0) {
+      this.history.resetAvailableQuestions(TEST_TYPE.RADIO);
+
+      answeredIds = new Set(this.history.getAnsweredQuestionIds());
+  
+      remainingQuestions = COMMON_QUESTIONS.filter(
+        (q) => !answeredIds.has(q.id)
+      );
+    }
 
     return this.shuffle(remainingQuestions).slice(0, count);
   }
 
   getCommonQuestions(count: number): Question[] {
-    const answeredIds = new Set(this.history.getAnsweredQuestionIds());
-
-    const remainingQuestions = COMMON_QUESTIONS.filter(
+  
+    let answeredIds = new Set(this.history.getAnsweredQuestionIds());
+  
+    let remainingQuestions = COMMON_QUESTIONS.filter(
       (q) => !answeredIds.has(q.id)
     );
+  
+    if (remainingQuestions.length === 0) {
+      this.history.resetAvailableQuestions(TEST_TYPE.COMMON);
 
+      answeredIds = new Set(this.history.getAnsweredQuestionIds());
+  
+      remainingQuestions = COMMON_QUESTIONS.filter(
+        (q) => !answeredIds.has(q.id)
+      );
+    }
+  
     return this.shuffle(remainingQuestions).slice(0, count);
   }
 
