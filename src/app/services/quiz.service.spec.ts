@@ -149,13 +149,14 @@ describe('QuizService', () => {
       expect(result.some((q) => q.id === answered)).toBeFalse();
     });
 
-    it('should return empty when all answered', () => {
+    it('should reset radio questions when all are answered', () => {
       historySpy.getAnsweredQuestionIds.and.returnValue(
         RADIO_QUESTIONS.map((q) => q.id)
       );
     
       const result = service.getRadioQuestions(10);
     
+      expect(historySpy.resetAvailableQuestions).toHaveBeenCalledWith(TEST_TYPE.RADIO);
       expect(result.length).toBe(10);
     });
   });
