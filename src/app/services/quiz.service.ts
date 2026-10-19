@@ -148,14 +148,12 @@ export class QuizService {
     }
 
     if (quiz_type === TEST_TYPE.ALL) {
-      const radioCount = Math.round(count * 0.8);
-      const commonCount = count - radioCount;
-
+     
       const questions = [
-        ...this.getRadioQuestions(radioCount),
-        ...this.getCommonQuestions(commonCount),
+        ...RADIO_QUESTIONS,
+        ...COMMON_QUESTIONS
       ];
-      return this.shuffle(questions);
+      return this.shuffle(questions).slice(0,count);
     }
 
     return this.getCommonQuestions(count);
@@ -164,9 +162,7 @@ export class QuizService {
   getRadioQuestions(count: number): Question[] {
     let answeredIds = new Set(this.history.getAnsweredQuestionIds());
 
-    let remainingQuestions = RADIO_QUESTIONS.filter(
-      (q) => !answeredIds.has(q.id)
-    );
+    let remainingQuestions = RADIO_QUESTIONS;
 
     if (remainingQuestions.length === 0) {
       this.history.resetAvailableQuestions(TEST_TYPE.RADIO);
@@ -185,9 +181,7 @@ export class QuizService {
   
     let answeredIds = new Set(this.history.getAnsweredQuestionIds());
   
-    let remainingQuestions = COMMON_QUESTIONS.filter(
-      (q) => !answeredIds.has(q.id)
-    );
+    let remainingQuestions = COMMON_QUESTIONS;
   
     if (remainingQuestions.length === 0) {
       this.history.resetAvailableQuestions(TEST_TYPE.COMMON);

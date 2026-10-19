@@ -39,6 +39,8 @@ export class WelcomeComponent implements OnInit {
     { value: 150, label: this.texts.WELCOME.questions[150] },
     { value: 200, label: this.texts.WELCOME.questions[200] },
     { value: 300, label: this.texts.WELCOME.questions[300] },
+    { value: 500, label: this.texts.WELCOME.questions[500] },
+
   ];
   username: string = "";
   selectedQuestionCount: number = 25;
@@ -160,9 +162,7 @@ export class WelcomeComponent implements OnInit {
             : config.count,
       
           quiz_type: type,
-      
           quiz_mode: this.questionMode,
-      
           secctions_quiz_value:
             this.questionMode === "sections"
               ? (type === TEST_TYPE.RADIO

@@ -28,6 +28,7 @@ export const ES = {
       150: "150 preguntas",
       200: "200 preguntas",
       300: "300 preguntas",
+      500: "500 preguntas"
     },
 
     progress: {

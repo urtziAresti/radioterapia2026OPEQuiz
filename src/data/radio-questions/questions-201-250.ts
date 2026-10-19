@@ -352,8 +352,8 @@ export const QUESTIONS_201_250: Question[] = [
       "Indica, de las siguientes opciones, cuál es un efecto adverso crónico en gliomas de bajo grado en adultos:",
     options: {
       a: "Náuseas.",
-      b: "Necrosis.",
-      c: "Exacerbación de los síntomas neurológicos.",
+      b: "Exacerbación de los síntomas neurológicos.",
+      c: "Necrosis.",
       d: "Todas las respuestas son correctas.",
     },
     correct: "c",
