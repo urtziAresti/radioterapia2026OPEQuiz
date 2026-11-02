@@ -4,4 +4,5 @@ export interface ResultsData {
     playerName: string;
     quiz_type: string;
     totalQuestions: number;
+    app_version: string;
   }

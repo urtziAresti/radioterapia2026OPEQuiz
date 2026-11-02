@@ -272,6 +272,7 @@ export class QuizPage implements OnInit, OnDestroy {
       correctAnswers: this.correctAnswers,
       totalQuestions: this.questions.length,
       elapsedTime: this.elapsedTime,
+      app_version: this.quizService.getAppVersion(),
     };
   }
   getOptionColor(optionKey: string): string {

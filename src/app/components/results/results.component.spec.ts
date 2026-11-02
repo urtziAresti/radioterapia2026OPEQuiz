@@ -85,7 +85,8 @@ describe('ResultsComponent', () => {
       quiz_type: 'General',
       correctAnswers: 8,
       totalQuestions: 10,
-      elapsedTime: '05:30'
+      elapsedTime: '05:30',
+      app_version: '1.0.0'
     });
 
   });

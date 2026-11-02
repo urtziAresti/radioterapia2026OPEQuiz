@@ -73,6 +73,7 @@
             <p>Preguntas Fallidas: {{ stat.failedQuestions }}</p>
             <p>Tiempo: {{ stat.elapsedTime }}</p>
             <p>Fecha: {{ stat.createdAt | date: 'medium' }}</p>
+            <p *ngIf="stat.app_version">Version app: {{ stat.app_version }}</p>
           </ion-label>
         </ion-item>
       </ion-list>

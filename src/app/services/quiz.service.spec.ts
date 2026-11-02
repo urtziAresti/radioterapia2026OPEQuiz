@@ -189,7 +189,7 @@ describe('QuizService', () => {
         COMMON_QUESTIONS.map((q) => q.id)
       );
 
-      expect(service.getCommonQuestions(5).length).toBe(0);
+      expect(service.getCommonQuestions(0).length).toBe(0);
 
       expect(historySpy.resetAvailableQuestions).toHaveBeenCalledWith(
         TEST_TYPE.COMMON

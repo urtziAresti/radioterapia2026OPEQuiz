@@ -7,6 +7,7 @@ import { HistoryService } from "./history.service";
 import { Question } from "../../app/interfaces/question";
 import { COMMON_QUESTIONS } from "../../data/common-questions/common_questions";
 import { TEST_TYPE } from "../components/welcome/welcome.component";
+import packageJson from '../../../package.json';
 
 export interface MagicAnswer {
   answer: string;
@@ -255,5 +256,8 @@ export class QuizService {
 
   getHistory() {
     return this.history.getAllHistory();
+  }
+  getAppVersion(): string { 
+    return packageJson.version;
   }
 }

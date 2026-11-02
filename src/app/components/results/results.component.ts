@@ -39,6 +39,7 @@ export class ResultsComponent  implements OnInit {
       correctAnswers: this.resultsData.correctAnswers,
       totalQuestions: this.resultsData.totalQuestions,
       elapsedTime: this.resultsData.elapsedTime,
+      app_version: this.resultsData.app_version
     };
     await this.statsService.uploadProgress(resultModel)
   }
