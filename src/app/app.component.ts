@@ -2,7 +2,6 @@ import { Component, inject } from '@angular/core';
 import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
 import { FooterComponent } from './components/footer/footer.component';
 import { CommonModule } from '@angular/common';
-
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 

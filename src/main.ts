@@ -17,8 +17,10 @@ import { IonicModule } from "@ionic/angular";
 import { importProvidersFrom, isDevMode } from "@angular/core";
 import { provideServiceWorker } from "@angular/service-worker";
 import { defineCustomElements } from "@ionic/pwa-elements/loader";
+import { inject } from '@vercel/analytics';
 
 defineCustomElements(window);
+inject();
 bootstrapApplication(AppComponent, {
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
