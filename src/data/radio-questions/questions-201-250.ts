@@ -523,7 +523,7 @@ export const QUESTIONS_201_250: Question[] = [
       c: "En el taller de moldes con la persona paciente presente, excepto de los moldes hechos con impresora 3D para tumores cutáneos.",
       d: "En el taller de moldes sin la persona paciente presente, incluso los moldes hechos con impresora 3D para tumores cutáneos.",
     },
-    correct: "c",
+    correct: "b",
   },
   {
     id: 245,

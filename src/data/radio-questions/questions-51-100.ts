@@ -244,8 +244,7 @@ export const QUESTIONS_51_100: Question[] = [
       c: "Tratamiento de carcinoma de células escamosas.",
       d: "Tratamiento de melanomas uveales.",
     },
-    correct: "d",
-    second_correct: "a"
+    correct: "d"
   },
   {
     id: 72,

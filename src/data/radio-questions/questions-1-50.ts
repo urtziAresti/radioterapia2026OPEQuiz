@@ -474,8 +474,7 @@ export const QUESTIONS_1_50: Question[] = [
       c: "Es una dispersión inelástica en la que no se excita el átomo.",
       d: "Es una dispersión inelástica en la que se excita el átomo."
     },
-    correct: "a",
-    second_correct:"b"
+    correct: "a"
   },
   {
     id: 44,

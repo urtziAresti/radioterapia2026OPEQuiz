@@ -438,8 +438,7 @@ export const QUESTIONS_101_150: Question[] = [
       c: "Su velocidad depende del medio por el que se transmita.",
       d: "Su energía solo depende de la frecuencia de la onda.",
     },
-    correct: "d",
-    second_correct: "c",
+    correct: "c"
   },
   {
     id: 138,
