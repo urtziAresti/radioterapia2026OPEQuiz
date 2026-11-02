@@ -20,7 +20,11 @@ import { defineCustomElements } from "@ionic/pwa-elements/loader";
 import { inject } from '@vercel/analytics';
 
 defineCustomElements(window);
-inject();
+
+// Initialize Vercel Analytics
+inject({
+  mode: isDevMode() ? 'development' : 'production'
+});
 bootstrapApplication(AppComponent, {
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
