@@ -75,28 +75,10 @@ describe('QuizService', () => {
       expect(service.checkAnswer(q, 'b')).toBeFalse();
     });
 
-    it('should accept second_correct', () => {
-      const q: any = {
-        correct: 'a',
-        second_correct: 'b',
-      };
-
-      expect(service.checkAnswer(q, 'b')).toBeTrue();
-    });
-
-    it('should still accept primary correct when second_correct exists', () => {
-      const q: any = {
-        correct: 'a',
-        second_correct: 'b',
-      };
-
-      expect(service.checkAnswer(q, 'a')).toBeTrue();
-    });
 
     it('should reject other answers', () => {
       const q: any = {
-        correct: 'a',
-        second_correct: 'b',
+        correct: 'a'
       };
 
       expect(service.checkAnswer(q, 'd')).toBeFalse();

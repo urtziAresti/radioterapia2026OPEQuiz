@@ -540,8 +540,7 @@ export const QUESTIONS_51_100: Question[] = [
       c: "Técnico/técnica especialista en radioterapia y administrativos/administrativas.",
       d: "Técnico/técnica especialista en radioterapia, médicos/médicas y administrativos/administrativas.",
     },
-    correct: "d",
-    second_correct: "a"
+    correct: "d"
   },
   {
     id: 97,

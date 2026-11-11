@@ -260,8 +260,7 @@ export const QUESTIONS_251_300: Question[] = [
       c: "En el margen que se deja del CTV al PTV.",
       d: "Todas las opciones son correctas.",
     },
-    correct: "a",
-    second_correct: "d",
+    correct: "a"
   },
   {
     id: 273,
@@ -297,7 +296,6 @@ export const QUESTIONS_251_300: Question[] = [
       d: "Todas las respuestas son correctas.",
     },
     correct: "c",
-    second_correct: "a",
   },
   {
     id: 276,
@@ -426,8 +424,7 @@ export const QUESTIONS_251_300: Question[] = [
       c: "Reducción del tiempo de tratamiento.",
       d: "La opción b) y c) son correctas.",
     },
-    correct: "d",
-    second_correct: "c",
+    correct: "d"
   },
   {
     id: 287,

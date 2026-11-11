@@ -76,8 +76,7 @@ export const QUESTIONS_1_50: Question[] = [
       c: "Cuando se detecta una contaminación radiactiva, el primer paso es la protección adecuada de la persona que realizará la descontaminación.",
       d: "Todo el material utilizado durante el proceso de descontaminación se gestionará como residuo radiactivo."
     },
-    correct: "a",
-    second_correct:"c"///??????
+    correct: "a"
   },
   {
     id: 8,
@@ -154,8 +153,7 @@ export const QUESTIONS_1_50: Question[] = [
       c: "Utilizar un grosor de corte de 6-8 mm.",
       d: "Instruir al paciente en el protocolo sobre el vaciado del recto."
     },
-    correct: "b",
-    second_correct:"c"
+    correct: "c"
   },
   {
     id: 15,
@@ -551,6 +549,6 @@ export const QUESTIONS_1_50: Question[] = [
       c: "Inmovilizadores termoplásticos corporales.",
       d: "Todas las opciones son correctas.",
     },
-    correct: "a",
+    correct: "d",
   }
 ];

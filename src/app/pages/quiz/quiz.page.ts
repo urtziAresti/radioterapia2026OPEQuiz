@@ -18,6 +18,7 @@ import { Question } from "../../interfaces/question";
 import { TEST_TYPE } from "../../components/welcome/welcome.component";
 import { ResultsComponent } from "../../components/results/results.component";
 import { ResultsData } from "../../interfaces/results-data";
+import { DataService } from "../../services/data.service";
 
 
 addIcons({
@@ -38,6 +39,7 @@ export class QuizPage implements OnInit, OnDestroy {
   texts = this.i18n.texts;
   private readonly OK_QUESTION_TIME = 1500;
   private quizService = inject(QuizService);
+  private dataService = inject(DataService);
   private historyService = inject(HistoryService);
   private timerService = inject(TimerService);
   private route = inject(ActivatedRoute);
@@ -185,11 +187,7 @@ export class QuizPage implements OnInit, OnDestroy {
     const isCorrect = this.quizService.checkAnswer(currentQuestion, option);
 
     this.isAnswered = true;
-
-    // Solo mostrar el aviso si la respuesta es correcta y hay una segunda respuesta correcta
-    if (currentQuestion.second_correct) {
-      this.showAdvise = true;
-    } 
+   
 
     if (isCorrect) {
       this.correctAnswers++;
@@ -214,10 +212,8 @@ export class QuizPage implements OnInit, OnDestroy {
     if (this.questionTimeout) {
       clearTimeout(this.questionTimeout);
     }
-  
-    const currentQuestion = this.questions[this.currentIndex];
-  
-    if (this.isAnswered && currentQuestion.second_correct) {
+    
+    if (this.isAnswered) {
       this.nextVisible = true; 
       return; 
     }
@@ -260,7 +256,7 @@ export class QuizPage implements OnInit, OnDestroy {
     }, 100);
   }
 
-  private finishQuiz(): void {
+  private async finishQuiz() {
     if (this.quizFinished) {
       return;
     }
@@ -273,7 +269,10 @@ export class QuizPage implements OnInit, OnDestroy {
       totalQuestions: this.questions.length,
       elapsedTime: this.elapsedTime,
       app_version: this.quizService.getAppVersion(),
+      data: await this.dataService.getDeviceInfo(),
     };
+    debugger;
+    console.warn(this.resultsData)
   }
   getOptionColor(optionKey: string): string {
     if (!this.isAnswered) {
@@ -281,10 +280,8 @@ export class QuizPage implements OnInit, OnDestroy {
     }
   
     const correct = this.questions[this.currentIndex].correct;
-    const secondCorrect = this.questions[this.currentIndex].second_correct;
-  
-    // Si la opción es la correcta o la segunda correcta, marcarla como "correct-option"
-    if (optionKey === correct || optionKey === secondCorrect) {
+
+    if (optionKey === correct) {
       return "correct-option";
     }
   

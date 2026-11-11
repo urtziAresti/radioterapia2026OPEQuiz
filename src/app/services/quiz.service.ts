@@ -208,9 +208,6 @@ export class QuizService {
   }
 
   checkAnswer(question: Question, answer: string): boolean {
-    if (question.second_correct) {
-        return question.correct === answer || question.second_correct === answer;
-      }
       return question.correct === answer;
   }
 
@@ -260,4 +257,11 @@ export class QuizService {
   getAppVersion(): string { 
     return packageJson.version;
   }
+
+
+
 }
+
+
+
+

@@ -558,8 +558,7 @@ export const QUESTIONS_101_150: Question[] = [
       c: "La atenuación del haz por los átomos del medio.",
       d: "Todas las respuestas son correctas.",
     },
-    correct: "a",
-    second_correct: "d",////////////////?????????????
+    correct: "a"
   },
   {
     id: 148,

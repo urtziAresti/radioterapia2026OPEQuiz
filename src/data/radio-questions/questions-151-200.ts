@@ -226,8 +226,7 @@ export const QUESTIONS_151_200: Question[] = [
       c: "Las opciones a) y b) son correctas.",
       d: "Ninguna opción es correcta.",
     },
-    correct: "b",
-    second_correct: "c"
+    correct: "b"
   },
   {
     id: 170,
@@ -251,8 +250,7 @@ export const QUESTIONS_151_200: Question[] = [
       c: "Elevación del miembro – presión directa – compresión arterial – inmovilización de fracturas – aplicación de un torniquete.",
       d: "Inmovilización de fracturas – elevación del miembro – presión directa – compresión arterial – aplicación de un torniquete.",
     },
-    correct: "b",
-    second_correct: "a"
+    correct: "b"
   },
   {
     id: 172,
