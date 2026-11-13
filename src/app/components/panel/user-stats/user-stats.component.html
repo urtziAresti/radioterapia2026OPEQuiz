@@ -1,60 +1,103 @@
 
-<ion-card *ngFor="let stat of sortedUserStats; let i = index">
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/stats" text=""></ion-back-button>
+    </ion-buttons>
 
-  <ion-card-header>
-    <ion-card-subtitle>
-      TEST {{ sortedUserStats.length - i }} ·
-      {{ stat.createdAt | date:'dd/MM/yyyy HH:mm' }}
-    </ion-card-subtitle>
+    <ion-title class="theme-title"> {{userStats[0]?.playerName}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<div class="stats-container">
 
-    <ion-card-title>
-      {{ stat.percentage ?? stat.score ?? 0 }}%
-    </ion-card-title>
-  </ion-card-header>
-
-  <ion-card-content>
-
-    <div class="test-result-grid">
-
-      <div class="test-result">
-        <span class="result-value">{{ stat.totalQuestions }}</span>
-        <span class="result-label">Preguntas</span>
-      </div>
-
-      <div class="test-result">
-        <span class="result-value">{{ stat.correctAnswers }}</span>
-        <span class="result-label">Aciertos</span>
-      </div>
-
-      <div class="test-result">
-        <span class="result-value">
-          {{ stat.totalQuestions - stat.correctAnswers }}
-        </span>
-        <span class="result-label">Fallos</span>
-      </div>
-
-      <div class="test-result">
-        <span class="result-value">
-          {{ stat.duration || stat.time || '--' }}
-        </span>
-        <span class="result-label">Duración</span>
-      </div>
-
+  <div class="stats-heading">
+    <div>
+      <h2>Historial de exámenes</h2>
+      <p>Seguimiento de tu progreso</p>
     </div>
-
-    <div class="test-progress">
-      <div
-        class="test-progress-fill"
-        [style.width]="(stat.percentage ?? stat.score ?? 0) + '%'">
-      </div>
+    <div class="total-badge">
+      {{ userStats.length }} tests
     </div>
+  </div>
 
-    <div class="test-footer">
-      <span>Resultado del examen</span>
-      <strong>
-        {{ stat.percentage ?? stat.score ?? 0 }}%
-      </strong>
-    </div>
+  <div class="stats-list">
 
-  </ion-card-content>
-</ion-card>
+    <ion-card *ngFor="let stat of sortedUserStats; let i = index"
+      class="test-card">
+
+      <ion-card-content>
+
+        <div class="card-header-row">
+
+          <div class="test-info">
+            <span class="test-number">
+              TEST {{ sortedUserStats.length - i }}
+            </span>
+
+            <span class="test-date">
+              {{ stat.createdAt | date:'dd/MM/yyyy HH:mm' }}
+            </span>
+          </div>
+
+          <div class="score-circle"
+            [ngClass]="{
+              'score-high': stat.percentage >= 80,
+              'score-medium': stat.percentage >= 50 && stat.percentage < 80,
+              'score-low': stat.percentage < 50
+            }">
+            {{ stat.percentage }}%
+          </div>
+
+        </div>
+
+        <div class="test-result-grid">
+
+          <div class="result-box questions-box">
+            <ion-icon name="document-text-outline"></ion-icon>
+            <span class="result-value">{{ stat.totalQuestions }}</span>
+            <span class="result-label">Preguntas</span>
+          </div>
+
+          <div class="result-box correct-box">
+            <ion-icon name="checkmark-circle-outline"></ion-icon>
+            <span class="result-value">{{ stat.correctAnswers }}</span>
+            <span class="result-label">Aciertos</span>
+          </div>
+
+          <div class="result-box failed-box">
+            <ion-icon name="close-circle-outline"></ion-icon>
+            <span class="result-value">{{ stat.failedQuestions }}</span>
+            <span class="result-label">Fallos</span>
+          </div>
+
+          <div class="result-box time-box">
+            <ion-icon name="time-outline"></ion-icon>
+            <span class="result-value">{{ stat.elapsedTime || '--' }}</span>
+            <span class="result-label">Duración</span>
+          </div>
+
+        </div>
+
+        <div class="progress-header">
+          <span>Rendimiento</span>
+          <strong>{{ stat.percentage }}%</strong>
+        </div>
+
+        <div class="test-progress">
+          <div
+            class="test-progress-fill"
+            [ngClass]="{
+              'progress-high': stat.percentage >= 80,
+              'progress-medium': stat.percentage >= 50 && stat.percentage < 80,
+              'progress-low': stat.percentage < 50
+            }"
+            [style.width]="stat.percentage + '%'">
+          </div>
+        </div>
+
+      </ion-card-content>
+
+    </ion-card>
+
+  </div>
+</div>

@@ -9,8 +9,19 @@ import {
 import { addIcons } from 'ionicons';
 import { phonePortraitOutline } from 'ionicons/icons';
 addIcons({
-  'lphone-portrait-outline': phonePortraitOutline
+  'document-text-outline': documentTextOutline,
+  'checkmark-circle-outline': checkmarkCircleOutline,
+  'close-circle-outline': closeCircleOutline,
+  'time-outline': timeOutline
 });
+
+
+import {
+  documentTextOutline,
+  checkmarkCircleOutline,
+  closeCircleOutline,
+  timeOutline
+} from 'ionicons/icons';
 
 @Component({
   selector: 'app-user-stats',
@@ -57,26 +68,38 @@ export class UserStatsComponent implements OnInit {
     this.loading = true;
 
     this.statsService.getUserStatsDetail(this.username).subscribe({
-      next: (response: any) => {
-        const stats: UserStatsDetail[] = Array.isArray(response)
-          ? response
-          : Array.isArray(response?.data)
-            ? response.data
-            : [];
+      
+next: (response: any) => {
 
-        this.userStats = stats.map(stat => ({
-          ...stat,
-          failedQuestions:
-            (Number(stat.totalQuestions) || 0) -
-            (Number(stat.correctAnswers) || 0)
-        }));
+  const stats: UserStatsDetail[] = Array.isArray(response)
+    ? response
+    : Array.isArray(response?.data)
+      ? response.data
+      : [];
 
-        this.calculateTotals();
-        this.loading = false;
+  this.userStats = stats.map(stat => {
 
-        console.log('DETALLE DEL USUARIO:', this.userStats);
-        console.log('TOTALES DEL USUARIO:', this.totals);
-      },
+    const totalQuestions = Number(stat.totalQuestions) || 0;
+    const correctAnswers = Number(stat.correctAnswers) || 0;
+
+    const percentage = totalQuestions > 0
+      ? Math.round((correctAnswers / totalQuestions) * 100)
+      : 0;
+
+    return {
+      ...stat,
+      percentage,
+      failedQuestions: Math.max(0, totalQuestions - correctAnswers)
+    };
+  });
+
+  this.calculateTotals();
+  this.loading = false;
+
+  console.log('DETALLE DEL USUARIO:', this.userStats);
+  console.log('TOTALES DEL USUARIO:', this.totals);
+},
+
 
       error: error => {
         console.error('Error al obtener las estadísticas:', error);

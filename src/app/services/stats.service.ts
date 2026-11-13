@@ -42,16 +42,11 @@ export interface UserStatsDetail {
   quiz_type: string;
   correctAnswers: number;
   totalQuestions: number;
-  failedQuestions?: number;
-  elapsedTime: string;
+  elapsedTime?: string;
   percentage: number;
+  failedQuestions?: number;
   createdAt: string;
-  app_version?: string;
-
-  data?: {
-    device?: DeviceInfo;
-    [key: string]: unknown;
-  };
+  [key: string]: any;
 }
 
 @Injectable({
