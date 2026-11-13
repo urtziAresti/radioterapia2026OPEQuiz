@@ -1,8 +1,12 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
-import { StatsService } from '../../../services/stats.service';
 import { Router } from '@angular/router';
+
+import {
+  StatsService,
+  UserStatsSummary
+} from '../../../services/stats.service';
 
 @Component({
   selector: 'app-stats',
@@ -12,10 +16,12 @@ import { Router } from '@angular/router';
   imports: [CommonModule, IonicModule]
 })
 export class StatsComponent implements OnInit {
+
   private statsService = inject(StatsService);
   private router = inject(Router);
 
-  userStats: any[] = [];
+  userStats: UserStatsSummary[] = [];
+
   loading = true;
 
   totals = {
@@ -33,131 +39,101 @@ export class StatsComponent implements OnInit {
   fetchUserStats(): void {
     this.loading = true;
 
-    this.statsService.getUserStats().subscribe(
-      (response) => {
+    this.statsService.getUserStats().subscribe({
+      next: (response: any) => {
+        console.log('RESPUESTA ESTADÍSTICAS:', response);
 
-        if (response.success) {
+        // Aceptar tanto un array como { success, data }
+        const stats: UserStatsSummary[] = Array.isArray(response)
+          ? response
+          : Array.isArray(response?.data)
+            ? response.data
+            : [];
 
-          const groupedStats = response.data.reduce((acc: any, stat: any) => {
+        // Eliminar registros sin nombre y normalizar nombres
+        this.userStats = stats
+          .filter(stat => !!stat?.playerName)
+          .map(stat => ({
+            ...stat,
+            playerName: stat.playerName.trim()
+          }));
 
-            if (!acc[stat.playerName]) {
-              acc[stat.playerName] = {
-                playerName: stat.playerName,
-                totalQuizzes: 0,
-                correctAnswers: 0,
-                totalQuestions: 0,
-                totalSeconds: 0,
-                lastPlayed: stat.createdAt
-              };
-            }
+        this.calculateTotals();
 
-            acc[stat.playerName].totalQuizzes++;
-            acc[stat.playerName].correctAnswers += stat.correctAnswers;
-            acc[stat.playerName].totalQuestions += stat.totalQuestions;
-
-            // Convertir MM:SS a segundos
-            const [minutes, seconds] = stat.elapsedTime
-              .split(':')
-              .map(Number);
-
-            acc[stat.playerName].totalSeconds +=
-              (minutes * 60) + seconds;
-
-            // Última partida
-            if (
-              new Date(stat.createdAt) >
-              new Date(acc[stat.playerName].lastPlayed)
-            ) {
-              acc[stat.playerName].lastPlayed = stat.createdAt;
-            }
-
-            return acc;
-
-          }, {});
-
-          this.userStats = Object.values(groupedStats).map((user: any) => {
-
-            const minutes = Math.floor(user.totalSeconds / 60);
-            const seconds = user.totalSeconds % 60;
-
-            return {
-              ...user,
-              percentage: user.totalQuestions
-                ? Math.round(
-                    (user.correctAnswers / user.totalQuestions) * 100
-                  )
-                : 0,
-              elapsedTime: `${minutes
-                .toString()
-                .padStart(2, '0')}:${seconds
-                .toString()
-                .padStart(2, '0')}`,
-              lastPlayed: new Date(user.lastPlayed).toLocaleString()
-            };
-
-          });
-
-          // Ordenar por aciertos (opcional)
-          this.userStats.sort(
-            (a: any, b: any) => b.correctAnswers - a.correctAnswers
-          );
-
-          // ======== TOTALES ========
-
-          this.totals.users = this.userStats.length;
-
-          this.totals.quizzes = this.userStats.reduce(
-            (sum: number, u: any) => sum + u.totalQuizzes,
-            0
-          );
-
-          this.totals.correctAnswers = this.userStats.reduce(
-            (sum: number, u: any) => sum + u.correctAnswers,
-            0
-          );
-
-          this.totals.totalQuestions = this.userStats.reduce(
-            (sum: number, u: any) => sum + u.totalQuestions,
-            0
-          );
-
-          this.totals.totalSeconds = this.userStats.reduce(
-            (sum: number, u: any) => sum + u.totalSeconds,
-            0
-          );
-
-        }
-
+        // IMPORTANTE: ocultar el indicador de carga
         this.loading = false;
+
+        console.log('USUARIOS MOSTRADOS:', this.userStats);
+        console.log('TOTALES GENERALES:', this.totals);
       },
-      (error) => {
-        console.error('Error al obtener las estadísticas:', error);
+
+      error: (error) => {
+        console.error('Error cargando estadísticas:', error);
+
+        this.userStats = [];
+        this.resetTotals();
         this.loading = false;
       }
-    );
+    });
   }
 
-  openUserStats(username:string){
-    this.router.navigate(["/user-stats"], {
+  private calculateTotals(): void {
+    this.totals = {
+      users: this.userStats.length,
+
+      quizzes: this.userStats.reduce(
+        (sum, stat) => sum + (Number(stat.totalTests) || 0),
+        0
+      ),
+
+      correctAnswers: this.userStats.reduce(
+        (sum, stat) => sum + (Number(stat.correctAnswers) || 0),
+        0
+      ),
+
+      totalQuestions: this.userStats.reduce(
+        (sum, stat) => sum + (Number(stat.totalQuestions) || 0),
+        0
+      ),
+
+      totalSeconds: this.userStats.reduce(
+        (sum, stat) => sum + (Number(stat.totalSeconds) || 0),
+        0
+      )
+    };
+  }
+
+  private resetTotals(): void {
+    this.totals = {
+      users: 0,
+      quizzes: 0,
+      correctAnswers: 0,
+      totalQuestions: 0,
+      totalSeconds: 0
+    };
+  }
+
+  openUserStats(username: string): void {
+    if (!username) {
+      return;
+    }
+
+    this.router.navigate(['/user-stats'], {
       queryParams: {
         userName: username
-      },
+      }
     });
   }
 
   formatTime(totalSeconds: number): string {
+    const secondsTotal = Number(totalSeconds) || 0;
 
-    const hours = Math.floor(totalSeconds / 3600);
-    const minutes = Math.floor((totalSeconds % 3600) / 60);
-    const seconds = totalSeconds % 60;
+    const hours = Math.floor(secondsTotal / 3600);
+    const minutes = Math.floor((secondsTotal % 3600) / 60);
+    const seconds = secondsTotal % 60;
 
-    return `${hours
+    return `${hours.toString().padStart(2, '0')}:${minutes
       .toString()
-      .padStart(2, '0')}:${minutes
-      .toString()
-      .padStart(2, '0')}:${seconds
-      .toString()
-      .padStart(2, '0')}`;
+      .padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
   }
-
 }

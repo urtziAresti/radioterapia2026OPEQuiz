@@ -20,7 +20,6 @@ export class DataService {
     // =====================================
 
     let uaData: any = null;
-debugger;
     try {
       if (nav.userAgentData) {
         uaData = {

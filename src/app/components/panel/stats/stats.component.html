@@ -3,31 +3,57 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/panel" text=""></ion-back-button>
     </ion-buttons>
+
     <ion-title class="theme-title">Estadísticas</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
   <div class="stats-container">
+
     <h1>Estadísticas de Usuarios</h1>
 
+    <!-- CARGANDO -->
     <div *ngIf="loading" class="loading">
+      <ion-spinner name="crescent"></ion-spinner>
       <p>Cargando estadísticas...</p>
     </div>
 
-    <div *ngIf="!loading && userStats.length === 0" class="no-data">
-      <p>No hay estadísticas disponibles.</p>
-    </div>
-
+    <!-- LISTADO DE USUARIOS -->
     <div *ngIf="!loading && userStats.length > 0" class="stats-list">
-      <!-- Listado de usuarios con estadísticas -->
+
       <ion-list>
-        <ion-item *ngFor="let stat of userStats" (click)="openUserStats(stat.playerName)">
+        <ion-list-header>
+          <ion-label>
+            Usuarios registrados ({{ userStats.length }})
+          </ion-label>
+        </ion-list-header>
+
+        <ion-item
+          *ngFor="let stat of userStats"
+          button
+          detail
+          (click)="openUserStats(stat.playerName)"
+        >
           <ion-label>
             <h2>{{ stat.playerName }}</h2>
+            <p>
+              {{ stat.totalTests }} tests ·
+              {{ stat.correctAnswers }} aciertos de
+              {{ stat.totalQuestions }} preguntas
+            </p>
           </ion-label>
         </ion-item>
       </ion-list>
+
+    </div>
+
+    <!-- SIN DATOS -->
+    <div
+      *ngIf="!loading && userStats.length === 0"
+      class="no-data"
+    >
+      <p>No hay estadísticas disponibles.</p>
     </div>
 
     <!-- RESUMEN GENERAL -->
@@ -38,36 +64,44 @@
 
       <ion-card-content>
         <ion-grid>
+
           <ion-row>
             <ion-col size="12" sizeMd="4">
-              <strong>Numero usuarios:</strong><br />
+              <strong>Número de usuarios:</strong>
+              <br />
               {{ totals.users }}
             </ion-col>
 
             <ion-col size="12" sizeMd="4">
-              <strong>Quizes:</strong><br />
+              <strong>Quizzes:</strong>
+              <br />
               {{ totals.quizzes }}
             </ion-col>
 
             <ion-col size="12" sizeMd="4">
-              <strong>Aciertos totales:</strong><br />
+              <strong>Aciertos totales:</strong>
+              <br />
               {{ totals.correctAnswers }}
             </ion-col>
           </ion-row>
 
           <ion-row>
             <ion-col size="12" sizeMd="4">
-              <strong>Preguntas totales:</strong><br />
+              <strong>Preguntas totales:</strong>
+              <br />
               {{ totals.totalQuestions }}
             </ion-col>
 
             <ion-col size="12" sizeMd="4">
-              <strong>Tiempo total:</strong><br />
+              <strong>Tiempo total:</strong>
+              <br />
               {{ formatTime(totals.totalSeconds) }}
             </ion-col>
           </ion-row>
+
         </ion-grid>
       </ion-card-content>
     </ion-card>
+
   </div>
 </ion-content>

@@ -188,7 +188,6 @@ export class QuizPage implements OnInit, OnDestroy {
 
     this.isAnswered = true;
    
-
     if (isCorrect) {
       this.correctAnswers++;
       if (this.mode === "failed") {
@@ -212,11 +211,7 @@ export class QuizPage implements OnInit, OnDestroy {
     if (this.questionTimeout) {
       clearTimeout(this.questionTimeout);
     }
-    
-    if (this.isAnswered) {
-      this.nextVisible = true; 
-      return; 
-    }
+  
   
     this.questionTimeout = setTimeout(() => {
       this.nextQuestion();
@@ -271,7 +266,6 @@ export class QuizPage implements OnInit, OnDestroy {
       app_version: this.quizService.getAppVersion(),
       data: await this.dataService.getDeviceInfo(),
     };
-    debugger;
     console.warn(this.resultsData)
   }
   getOptionColor(optionKey: string): string {

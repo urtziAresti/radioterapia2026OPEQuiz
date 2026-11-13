@@ -1,116 +1,204 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { StatsService } from '../../../services/stats.service';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
+import {
+  StatsService,
+  UserStatsDetail
+} from '../../../services/stats.service';
+import { addIcons } from 'ionicons';
+import { phonePortraitOutline } from 'ionicons/icons';
+addIcons({
+  'lphone-portrait-outline': phonePortraitOutline
+});
 
 @Component({
   selector: 'app-user-stats',
   templateUrl: './user-stats.component.html',
   styleUrls: ['./user-stats.component.scss'],
-  imports: [CommonModule, IonicModule],
+  standalone: true,
+  imports: [CommonModule, IonicModule]
 })
 export class UserStatsComponent implements OnInit {
+
   private statsService = inject(StatsService);
   private route = inject(ActivatedRoute);
 
-  userStats: any[] = []; // Estadísticas del usuario
-  username: string = ''; // Nombre del usuario
-  loading: boolean = true; // Indicador de carga
+  userStats: UserStatsDetail[] = [];
 
-  // Resumen global del usuario
+  username = '';
+
+  loading = true;
+
   totals = {
     quizzes: 0,
     correctAnswers: 0,
     totalQuestions: 0,
     totalSeconds: 0,
-    percentage: 0, // Porcentaje de aciertos
+    percentage: 0
   };
 
   ngOnInit(): void {
-    // Obtener el username desde los query params
-    this.route.queryParams.subscribe((params) => {
-      this.username = params['userName'];
-      if (this.username) {
+    this.route.queryParams.subscribe(params => {
+      const username = params['userName'];
+
+      if (username) {
+        this.username = username.trim();
         this.fetchUserStats();
+      } else {
+        this.userStats = [];
+        this.resetTotals();
+        this.loading = false;
       }
     });
   }
 
-fetchUserStats(): void {
-  this.loading = true;
+  fetchUserStats(): void {
+    this.loading = true;
 
-  // Llamar al servicio para obtener todas las estadísticas
-  this.statsService.getUserStats().subscribe(
-    (response) => {
-      if (response.success) {
-        // Filtrar las estadísticas del usuario
-        this.userStats = response.data
-          .filter((stat: any) => stat.playerName === this.username)
-          .map((stat: any) => ({
-            ...stat,
-            failedQuestions: stat.totalQuestions - stat.correctAnswers,
-          }))
-          .sort(
-            (a: any, b: any) =>
-              new Date(b.createdAt).getTime() -
-              new Date(a.createdAt).getTime()
-          );
+    this.statsService.getUserStatsDetail(this.username).subscribe({
+      next: (response: any) => {
+        const stats: UserStatsDetail[] = Array.isArray(response)
+          ? response
+          : Array.isArray(response?.data)
+            ? response.data
+            : [];
 
-        // Calcular el resumen global
-        this.totals.quizzes = this.userStats.length;
+        this.userStats = stats.map(stat => ({
+          ...stat,
+          failedQuestions:
+            (Number(stat.totalQuestions) || 0) -
+            (Number(stat.correctAnswers) || 0)
+        }));
 
-        this.totals.correctAnswers = this.userStats.reduce(
-          (sum: number, stat: any) => sum + stat.correctAnswers,
-          0
-        );
+        this.calculateTotals();
+        this.loading = false;
 
-        this.totals.totalQuestions = this.userStats.reduce(
-          (sum: number, stat: any) => sum + stat.totalQuestions,
-          0
-        );
+        console.log('DETALLE DEL USUARIO:', this.userStats);
+        console.log('TOTALES DEL USUARIO:', this.totals);
+      },
 
-        this.totals.totalSeconds = this.userStats.reduce(
-          (sum: number, stat: any) => {
-            const [minutes, seconds] = stat.elapsedTime
-              .split(':')
-              .map(Number);
+      error: error => {
+        console.error('Error al obtener las estadísticas:', error);
 
-            return sum + minutes * 60 + seconds;
-          },
-          0
-        );
-
-        // Calcular el porcentaje de aciertos
-        this.totals.percentage = this.totals.totalQuestions
-          ? Math.round(
-              (this.totals.correctAnswers /
-                this.totals.totalQuestions) *
-                100
-            )
-          : 0;
+        this.userStats = [];
+        this.resetTotals();
+        this.loading = false;
       }
+    });
+  }
 
-      this.loading = false;
-    },
-    (error) => {
-      console.error(
-        'Error al obtener las estadísticas:',
-        error
-      );
+  private calculateTotals(): void {
+    this.totals.quizzes = this.userStats.length;
 
-      this.loading = false;
+    this.totals.correctAnswers = this.userStats.reduce(
+      (sum, stat) => sum + (Number(stat.correctAnswers) || 0),
+      0
+    );
+
+    this.totals.totalQuestions = this.userStats.reduce(
+      (sum, stat) => sum + (Number(stat.totalQuestions) || 0),
+      0
+    );
+
+    this.totals.totalSeconds = this.userStats.reduce(
+      (sum, stat) => sum + this.parseElapsedTime(stat.elapsedTime),
+      0
+    );
+
+    this.totals.percentage = this.totals.totalQuestions
+      ? Math.round(
+          (this.totals.correctAnswers / this.totals.totalQuestions) * 100
+        )
+      : 0;
+  }
+
+  private parseElapsedTime(value: string | undefined): number {
+    if (!value) {
+      return 0;
     }
-  );
-}
+
+    const parts = value.split(':').map(Number);
+
+    if (parts.some(part => !Number.isFinite(part))) {
+      return 0;
+    }
+
+    if (parts.length === 3) {
+      const [hours, minutes, seconds] = parts;
+      return hours * 3600 + minutes * 60 + seconds;
+    }
+
+    if (parts.length === 2) {
+      const [minutes, seconds] = parts;
+      return minutes * 60 + seconds;
+    }
+
+    return 0;
+  }
+
+  private resetTotals(): void {
+    this.totals = {
+      quizzes: 0,
+      correctAnswers: 0,
+      totalQuestions: 0,
+      totalSeconds: 0,
+      percentage: 0
+    };
+  }
+
+  getObjectEntries(obj: any): Array<{ key: string; value: any }> {
+    if (!obj || typeof obj !== 'object') {
+      return [];
+    }
+
+    return Object.keys(obj).map(key => ({
+      key,
+      value: obj[key]
+    }));
+  }
 
   formatTime(totalSeconds: number): string {
-    const hours = Math.floor(totalSeconds / 3600);
-    const minutes = Math.floor((totalSeconds % 3600) / 60);
-    const seconds = totalSeconds % 60;
+    const secondsTotal = Number(totalSeconds) || 0;
+
+    const hours = Math.floor(secondsTotal / 3600);
+    const minutes = Math.floor((secondsTotal % 3600) / 60);
+    const seconds = secondsTotal % 60;
 
     return `${hours.toString().padStart(2, '0')}:${minutes
       .toString()
       .padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+  }
+
+  isObject(value: unknown): boolean {
+    return value !== null &&
+      typeof value === 'object' &&
+      !Array.isArray(value) &&
+      !(value instanceof Date);
+  }
+  
+  formatValue(value: unknown): string {
+    if (value === null || value === undefined) {
+      return '-';
+    }
+  
+    if (typeof value === 'object') {
+      return JSON.stringify(value, null, 2);
+    }
+  
+    return String(value);
+  }
+
+  isStatsArray(): boolean {
+    return Array.isArray(this.userStats);
+  }
+
+  get sortedUserStats(): UserStatsDetail[] {
+    return [...(this.userStats || [])].sort((a, b) => {
+      return (
+        new Date(b.createdAt).getTime() -
+        new Date(a.createdAt).getTime()
+      );
+    });
   }
 }
