@@ -1,0 +1,124 @@
+
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/welcome" text="">
+      </ion-back-button>
+    </ion-buttons>
+
+    <ion-title class="theme-title">
+      {{texts.SEARCHER.title}}
+    </ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="app-quiz-content ion-padding">
+
+  <!-- Buscador -->
+  <div class="search-container">
+
+    <ion-searchbar
+      class="custom-searchbar"
+      [value]="searchText"
+      (ionInput)="searchQuestions($event)"
+      placeholder="Buscar preguntas..."
+      searchIcon="search-outline"
+      clearIcon="close-circle-outline"
+      debounce="200"
+      animated="true">
+    </ion-searchbar>
+
+  </div>
+
+  <!-- Resultados -->
+  <div *ngIf="searchText.trim().length > 0">
+
+    <div class="results-header">
+
+      <span class="step-text">
+        Resultados de búsqueda
+      </span>
+
+      <ion-badge class="results-badge">
+        {{ filteredQuestions.length }}
+        {{ filteredQuestions.length === 1 ? 'pregunta' : 'preguntas' }}
+      </ion-badge>
+
+    </div>
+
+    <!-- Tarjetas -->
+    <div class="questions-container">
+
+      <ion-card
+        class="question-card"
+        (click)="openQuestion(question)"
+        *ngFor="let question of filteredQuestions; let i = index">
+
+        <ion-card-content>
+
+          <div class="question-header">
+
+            <ion-badge class="question-number">
+              #{{ question.id }}
+            </ion-badge>
+
+            <span class="question-index">
+              Resultado {{ i + 1 }}
+            </span>
+
+          </div>
+
+          <h3>
+            {{ question.question }}
+          </h3>
+
+        </ion-card-content>
+
+      </ion-card>
+
+    </div>
+
+    <!-- Sin resultados -->
+    <div
+      *ngIf="filteredQuestions.length === 0"
+      class="empty-state">
+
+      <div class="empty-icon">
+        <ion-icon name="search-outline"></ion-icon>
+      </div>
+
+      <h3>No se han encontrado preguntas</h3>
+
+      <p>
+        Prueba con otras palabras o modifica tu búsqueda.
+      </p>
+
+    </div>
+
+  </div>
+
+  <!-- Estado inicial -->
+  <div
+    *ngIf="searchText.trim().length === 0"
+    class="empty-state initial-state">
+
+    <div class="empty-icon">
+      <ion-icon name="search-outline"></ion-icon>
+    </div>
+
+    <h3>Buscador de preguntas</h3>
+
+    <p>
+      Introduce una palabra o frase para buscar entre todas
+      las preguntas de Radioterapia y Comunes.
+    </p>
+
+    <ion-chip class="info-chip">
+      <ion-icon name="library-outline"></ion-icon>
+      <ion-label>Batería de preguntas</ion-label>
+    </ion-chip>
+  </div>
+
+</ion-content>

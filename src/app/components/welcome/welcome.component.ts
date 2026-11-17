@@ -199,5 +199,8 @@ export class WelcomeComponent implements OnInit {
   }
   viewPanel(): void { 
     this.router.navigate(["/panel"]);
-  }     
+  }   
+  goToSearcher(){
+    this.router.navigate(["/searcher"]);
+  }  
 }

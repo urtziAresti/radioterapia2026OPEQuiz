@@ -70,6 +70,14 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'searcher',
+    canActivate: [authGuard,adminGuard],
+    loadComponent: () =>
+      import('../app/components/searcher/searcher.component').then(
+        (m) => m.SearcherComponent
+      ),
+  },
+  {
     path: 'users',
     canActivate: [authGuard,adminGuard],
     loadComponent: () =>

@@ -43,6 +43,7 @@ export const ES = {
       common: "Bateria Común",
       mixed: "Mixto 80/20 Radio-B.Común",
       failed: "Repasar fallidas",
+      searcher: "Buscar preguntas",
       suggestions: "Enviar sugerencias",
       data: "Referencias",
       instructions: "Instrucciones",
@@ -55,6 +56,11 @@ export const ES = {
       questions: "Preguntas",
       answers: "Respuestas",
     },
+  },
+
+  SEARCHER: {
+    title: "Buscador",
+   
   },
   INSTRUCTIONS: {
     title: "Instrucciones",

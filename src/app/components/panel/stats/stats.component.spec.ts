@@ -60,8 +60,7 @@ describe('StatsComponent', () => {
     statsServiceSpy.getUserStats.and.returnValue(
       of({
         success: true,
-        data: []
-      })
+        data: []})
     );
 
     fixture.detectChanges();

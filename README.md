@@ -33,3 +33,10 @@ https://console.groq.com
 npx playwright test
 
 npx playwright test e2e/pages/welcome.page.ts
+
+
+
+Datos de explorador mobile
+
+buscador de preguntas
+
