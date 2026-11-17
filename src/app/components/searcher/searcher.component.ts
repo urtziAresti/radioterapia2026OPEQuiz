@@ -6,7 +6,15 @@ import { FormsModule } from '@angular/forms';
 import { Question } from '../../interfaces/question';
 import { QuizService } from '../../services/quiz.service';
 import { Router } from '@angular/router';
+import { addIcons } from 'ionicons';
+import { searchOutline, closeCircleOutline,
+  libraryOutline } from 'ionicons/icons';
 
+addIcons({
+  'search-outline': searchOutline,
+  'close-circle-outline': closeCircleOutline,
+  'library-outline': libraryOutline
+});
 
 @Component({
   selector: 'app-searcher',

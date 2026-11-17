@@ -37,7 +37,6 @@ export const routes: Routes = [
         (m) => m.WelcomeComponent
       ),
   },
-
   {
     path: 'questions',
     canActivate: [authGuard],
@@ -71,7 +70,7 @@ export const routes: Routes = [
   },
   {
     path: 'searcher',
-    canActivate: [authGuard,adminGuard],
+    canActivate: [authGuard],
     loadComponent: () =>
       import('../app/components/searcher/searcher.component').then(
         (m) => m.SearcherComponent
